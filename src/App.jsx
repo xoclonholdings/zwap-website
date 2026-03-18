@@ -5,7 +5,8 @@ export default function App() {
   return (
     <div
       style={{
-        background: "#050505",
+        background:
+          "radial-gradient(circle at 70% 40%, rgba(90, 50, 180, 0.16), transparent 28%), #050505",
         color: "white",
         minHeight: "100vh",
         fontFamily: "Arial, sans-serif",
@@ -16,14 +17,14 @@ export default function App() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "24px 40px",
+          padding: "26px 48px",
         }}
       >
         <div>
           <img
             src={logo}
             alt="ZWAP logo"
-            style={{ width: "150px", height: "auto" }}
+            style={{ width: "170px", height: "auto" }}
           />
         </div>
 
@@ -76,32 +77,39 @@ export default function App() {
       <main
         style={{
           display: "grid",
-          gridTemplateColumns: "1.1fr 0.9fr",
+          gridTemplateColumns: "1.05fr 0.95fr",
           alignItems: "center",
-          minHeight: "calc(100vh - 90px)",
-          padding: "20px 40px 60px",
-          gap: "20px",
+          minHeight: "calc(100vh - 96px)",
+          padding: "0 48px 64px",
+          gap: "24px",
         }}
       >
-        <section style={{ maxWidth: "560px" }}>
+        <section style={{ maxWidth: "620px", paddingTop: "10px" }}>
           <h1
             style={{
-              fontSize: "64px",
-              lineHeight: "1.05",
-              margin: "0 0 20px 0",
-              fontWeight: 700,
+              fontSize: "72px",
+              lineHeight: "1.02",
+              margin: "0 0 22px 0",
+              fontWeight: 800,
+              color: "rgba(255,255,255,0.96)",
+              letterSpacing: "-1.8px",
             }}
           >
-            Most apps waste your time.
+            Most apps waste
             <br />
-            ZWAP turns it into rewards.
+            your time.
+            <br />
+            ZWAP turns it into
+            <br />
+            rewards.
           </h1>
 
           <p
             style={{
-              fontSize: "22px",
-              opacity: 0.85,
-              margin: "0 0 14px 0",
+              fontSize: "28px",
+              opacity: 0.95,
+              margin: "0 0 12px 0",
+              fontWeight: 600,
             }}
           >
             Move. Play. Swap. Shop.
@@ -109,11 +117,11 @@ export default function App() {
 
           <p
             style={{
-              fontSize: "18px",
+              fontSize: "19px",
               lineHeight: "1.5",
-              opacity: 0.65,
-              marginBottom: "28px",
-              maxWidth: "480px",
+              opacity: 0.72,
+              marginBottom: "30px",
+              maxWidth: "500px",
             }}
           >
             Earn from steps, games, and daily activity.
@@ -127,15 +135,15 @@ export default function App() {
               background: "white",
               color: "black",
               fontSize: "16px",
-              fontWeight: 600,
+              fontWeight: 700,
               cursor: "pointer",
-              marginBottom: "24px",
+              marginBottom: "28px",
             }}
           >
             Get Early Access
           </button>
 
-          <div style={{ display: "flex", gap: "16px", opacity: 0.8 }}>
+          <div style={{ display: "flex", gap: "16px", opacity: 0.82 }}>
             <span>X</span>
             <span>TikTok</span>
           </div>
@@ -152,7 +160,7 @@ export default function App() {
             src={bang}
             alt="ZWAP bang symbol"
             style={{
-              width: "360px",
+              width: "440px",
               maxWidth: "100%",
               height: "auto",
             }}
