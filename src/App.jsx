@@ -84,32 +84,34 @@ export default function App() {
           gap: "24px",
         }}
       >
-        <section style={{ maxWidth: "620px", paddingTop: "10px" }}>
+        {/* LEFT */}
+        <section
+          style={{
+            maxWidth: "540px",
+            paddingTop: "20px",
+          }}
+        >
           <h1
             style={{
-              fontSize: "72px",
-              lineHeight: "1.02",
-              margin: "0 0 22px 0",
-              fontWeight: 800,
-              color: "rgba(255,255,255,0.96)",
-              letterSpacing: "-1.8px",
+              fontSize: "56px",
+              lineHeight: "1.08",
+              margin: "0 0 20px 0",
+              fontWeight: 700,
+              color: "rgba(255,255,255,0.92)",
+              letterSpacing: "-1px",
             }}
           >
-            Most apps waste
+            Most apps waste your time.
             <br />
-            your time.
-            <br />
-            ZWAP turns it into
-            <br />
-            rewards.
+            ZWAP turns it into rewards.
           </h1>
 
           <p
             style={{
-              fontSize: "28px",
-              opacity: 0.95,
-              margin: "0 0 12px 0",
-              fontWeight: 600,
+              fontSize: "20px",
+              opacity: 0.9,
+              margin: "0 0 10px 0",
+              fontWeight: 500,
             }}
           >
             Move. Play. Swap. Shop.
@@ -117,11 +119,11 @@ export default function App() {
 
           <p
             style={{
-              fontSize: "19px",
+              fontSize: "16px",
               lineHeight: "1.5",
-              opacity: 0.72,
-              marginBottom: "30px",
-              maxWidth: "500px",
+              opacity: 0.65,
+              marginBottom: "26px",
+              maxWidth: "440px",
             }}
           >
             Earn from steps, games, and daily activity.
@@ -129,26 +131,27 @@ export default function App() {
 
           <button
             style={{
-              padding: "16px 28px",
-              borderRadius: "14px",
+              padding: "14px 24px",
+              borderRadius: "12px",
               border: "none",
               background: "white",
               color: "black",
-              fontSize: "16px",
-              fontWeight: 700,
+              fontSize: "15px",
+              fontWeight: 600,
               cursor: "pointer",
-              marginBottom: "28px",
+              marginBottom: "22px",
             }}
           >
             Get Early Access
           </button>
 
-          <div style={{ display: "flex", gap: "16px", opacity: 0.82 }}>
+          <div style={{ display: "flex", gap: "14px", opacity: 0.7 }}>
             <span>X</span>
             <span>TikTok</span>
           </div>
         </section>
 
+        {/* RIGHT */}
         <section
           style={{
             display: "flex",
@@ -160,7 +163,7 @@ export default function App() {
             src={bang}
             alt="ZWAP bang symbol"
             style={{
-              width: "440px",
+              width: "420px",
               maxWidth: "100%",
               height: "auto",
             }}
