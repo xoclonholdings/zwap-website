@@ -320,7 +320,7 @@ export default function App() {
             </a>
           </div>
 
-          <div>© ZWAP!LLC </div>
+          <div>© ZWAP LLC </div>
         </footer>
       </div>
     </div>
