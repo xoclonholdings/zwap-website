@@ -76,99 +76,102 @@ export default function App() {
 
       <main
         style={{
-          display: "grid",
-          gridTemplateColumns: "1.05fr 0.95fr",
+          display: "flex",
+          justifyContent: "center",
           alignItems: "center",
           minHeight: "calc(100vh - 96px)",
-          padding: "0 48px 64px",
-          gap: "24px",
+          padding: "0 24px 64px",
         }}
       >
-        {/* LEFT */}
-        <section
+        <div
           style={{
-            maxWidth: "540px",
-            paddingTop: "20px",
-          }}
-        >
-          <h1
-            style={{
-              fontSize: "56px",
-              lineHeight: "1.08",
-              margin: "0 0 20px 0",
-              fontWeight: 700,
-              color: "rgba(255,255,255,0.92)",
-              letterSpacing: "-1px",
-            }}
-          >
-            Most apps waste your time.
-            <br />
-            ZWAP turns it into rewards.
-          </h1>
-
-          <p
-            style={{
-              fontSize: "20px",
-              opacity: 0.9,
-              margin: "0 0 10px 0",
-              fontWeight: 500,
-            }}
-          >
-            Move. Play. Swap. Shop.
-          </p>
-
-          <p
-            style={{
-              fontSize: "16px",
-              lineHeight: "1.5",
-              opacity: 0.65,
-              marginBottom: "26px",
-              maxWidth: "440px",
-            }}
-          >
-            Earn from steps, games, and daily activity.
-          </p>
-
-          <button
-            style={{
-              padding: "14px 24px",
-              borderRadius: "12px",
-              border: "none",
-              background: "white",
-              color: "black",
-              fontSize: "15px",
-              fontWeight: 600,
-              cursor: "pointer",
-              marginBottom: "22px",
-            }}
-          >
-            Get Early Access
-          </button>
-
-          <div style={{ display: "flex", gap: "14px", opacity: 0.7 }}>
-            <span>X</span>
-            <span>TikTok</span>
-          </div>
-        </section>
-
-        {/* RIGHT */}
-        <section
-          style={{
-            display: "flex",
-            justifyContent: "center",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
             alignItems: "center",
+            width: "100%",
+            maxWidth: "1200px",
+            gap: "40px",
           }}
         >
-          <img
-            src={bang}
-            alt="ZWAP bang symbol"
+          <section
             style={{
-              width: "420px",
-              maxWidth: "100%",
-              height: "auto",
+              maxWidth: "520px",
             }}
-          />
-        </section>
+          >
+            <h1
+              style={{
+                fontSize: "56px",
+                lineHeight: "1.08",
+                margin: "0 0 20px 0",
+                fontWeight: 700,
+                color: "rgba(255,255,255,0.92)",
+                letterSpacing: "-1px",
+              }}
+            >
+              Most apps waste your time.
+              <br />
+              ZWAP turns it into rewards.
+            </h1>
+
+            <p
+              style={{
+                fontSize: "20px",
+                opacity: 0.9,
+                margin: "0 0 10px 0",
+              }}
+            >
+              Move. Play. Swap. Shop.
+            </p>
+
+            <p
+              style={{
+                fontSize: "16px",
+                opacity: 0.65,
+                marginBottom: "26px",
+                lineHeight: "1.5",
+              }}
+            >
+              Earn from steps, games, and daily activity.
+            </p>
+
+            <button
+              style={{
+                padding: "14px 24px",
+                borderRadius: "12px",
+                border: "none",
+                background: "white",
+                color: "black",
+                fontWeight: 600,
+                cursor: "pointer",
+                marginBottom: "20px",
+              }}
+            >
+              Get Early Access
+            </button>
+
+            <div style={{ display: "flex", gap: "14px", opacity: 0.7 }}>
+              <span>X</span>
+              <span>TikTok</span>
+            </div>
+          </section>
+
+          <section
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <img
+              src={bang}
+              alt="ZWAP bang"
+              style={{
+                width: "460px",
+                maxWidth: "100%",
+                height: "auto",
+              }}
+            />
+          </section>
+        </div>
       </main>
     </div>
   );
