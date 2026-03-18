@@ -7,41 +7,61 @@ export default function App() {
         background: "black",
         color: "white",
         minHeight: "100vh",
-        padding: "40px",
         display: "flex",
-        flexDirection: "column",
+        alignItems: "center",
         justifyContent: "center",
+        padding: "20px",
       }}
     >
-      <img
-        src={logo}
-        alt="ZWAP logo"
-        style={{ width: "220px", marginBottom: "20px" }}
-      />
-
-      <p style={{ fontSize: "20px", marginTop: "10px", opacity: 0.8 }}>
-        Move. Play. Swap. Shop.
-      </p>
-
-      <p style={{ marginTop: "20px", maxWidth: "420px", opacity: 0.65 }}>
-        Most apps waste your time. ZWAP turns it into rewards.
-      </p>
-
-      <button
+      <div
         style={{
-          marginTop: "30px",
-          padding: "15px 25px",
-          fontSize: "16px",
-          background: "white",
-          color: "black",
-          border: "none",
-          borderRadius: "10px",
-          cursor: "pointer",
-          width: "fit-content",
+          textAlign: "center",
+          maxWidth: "500px",
         }}
       >
-        Enter App
-      </button>
+        <img
+          src={logo}
+          alt="ZWAP logo"
+          style={{
+            width: "180px",
+            marginBottom: "20px",
+          }}
+        />
+
+        <h2
+          style={{
+            fontSize: "20px",
+            opacity: 0.8,
+            marginBottom: "10px",
+          }}
+        >
+          Move. Play. Swap. Shop.
+        </h2>
+
+        <p
+          style={{
+            opacity: 0.6,
+            lineHeight: "1.5",
+          }}
+        >
+          Most apps waste your time. ZWAP turns it into rewards.
+        </p>
+
+        <button
+          style={{
+            marginTop: "30px",
+            padding: "15px 30px",
+            fontSize: "16px",
+            background: "white",
+            color: "black",
+            border: "none",
+            borderRadius: "12px",
+            cursor: "pointer",
+          }}
+        >
+          Enter App
+        </button>
+      </div>
     </div>
   );
 }
