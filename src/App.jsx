@@ -62,13 +62,7 @@ export default function App() {
         color: "#F5F7FF",
         fontFamily:
           "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-        background: `
-          radial-gradient(circle at 78% 36%, rgba(84, 239, 238, 0.12), transparent 12%),
-          radial-gradient(circle at 66% 34%, rgba(255, 171, 74, 0.10), transparent 10%),
-          radial-gradient(circle at 70% 30%, rgba(207, 90, 255, 0.12), transparent 18%),
-          radial-gradient(circle at 18% 80%, rgba(61, 205, 255, 0.06), transparent 18%),
-          linear-gradient(180deg, #040409 0%, #080914 55%, #05060A 100%)
-        `,
+        background: "#040409",
       }}
     >
       <style>{`
@@ -79,15 +73,15 @@ export default function App() {
         }
 
         @keyframes pulseGlow {
-          0% { opacity: 0.75; transform: scale(1); }
+          0% { opacity: 0.72; transform: scale(1); }
           50% { opacity: 1; transform: scale(1.015); }
-          100% { opacity: 0.75; transform: scale(1); }
+          100% { opacity: 0.72; transform: scale(1); }
         }
 
         @keyframes twinkle {
-          0% { opacity: 0.45; transform: scale(0.9); }
+          0% { opacity: 0.4; transform: scale(0.92); }
           50% { opacity: 1; transform: scale(1.08); }
-          100% { opacity: 0.45; transform: scale(0.9); }
+          100% { opacity: 0.4; transform: scale(0.92); }
         }
 
         @keyframes shimmer {
@@ -113,6 +107,8 @@ export default function App() {
             alignItems: "center",
             justifyContent: "space-between",
             padding: "28px 0 18px",
+            position: "relative",
+            zIndex: 3,
           }}
         >
           <img
@@ -188,201 +184,241 @@ export default function App() {
         <main
           style={{
             flex: 1,
-            display: "grid",
-            gridTemplateColumns: "0.95fr 1.05fr",
+            position: "relative",
+            overflow: "hidden",
+            display: "flex",
             alignItems: "center",
-            gap: "30px",
-            padding: "8px 0 26px",
+            padding: "10px 0 28px",
           }}
         >
-          <section
+          {/* FULL HERO BACKGROUND SCENE */}
+          <div
             style={{
-              maxWidth: "545px",
-              paddingTop: "6px",
-              zIndex: 2,
-            }}
-          >
-            <h1
-              style={{
-                margin: "0 0 22px 0",
-                fontSize: "58px",
-                lineHeight: "1.06",
-                fontWeight: 400,
-                letterSpacing: "-1.4px",
-                color: "#F7F8FF",
-              }}
-            >
-              Most apps waste your time.
-              <br />
-              <span style={{ fontWeight: 700 }}>ZWAP!</span> turns it into rewards.
-            </h1>
-
-            <p
-              style={{
-                margin: "0 0 30px 0",
-                maxWidth: "430px",
-                fontSize: "18px",
-                lineHeight: "1.58",
-                color: "rgba(235, 239, 255, 0.74)",
-              }}
-            >
-              Earn from steps, games, and daily activity.
-            </p>
-
-            <button
-              style={{
-                padding: "17px 34px",
-                borderRadius: "999px",
-                border: "1px solid rgba(165, 103, 255, 0.72)",
-                background:
-                  "linear-gradient(180deg, rgba(13,15,30,0.92) 0%, rgba(8,10,22,0.96) 100%)",
-                color: "#F9FAFF",
-                fontSize: "17px",
-                fontWeight: 500,
-                cursor: "pointer",
-                animation: "shimmer 3s ease-in-out infinite",
-              }}
-            >
-              Get Early Access
-            </button>
-
-            <div
-              style={{
-                marginTop: "24px",
-                display: "flex",
-                alignItems: "center",
-                gap: "18px",
-                color: "rgba(245,247,255,0.94)",
-              }}
-            >
-              <a
-                href="#"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: "48px",
-                  height: "48px",
-                  borderRadius: "14px",
-                  border: "1px solid rgba(174, 132, 255, 0.22)",
-                  background: "rgba(255,255,255,0.02)",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                <XIcon />
-              </a>
-
-              <a
-                href="#"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: "48px",
-                  height: "48px",
-                  borderRadius: "14px",
-                  border: "1px solid rgba(174, 132, 255, 0.22)",
-                  background: "rgba(255,255,255,0.02)",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                <TikTokIcon />
-              </a>
-            </div>
-          </section>
-
-          <section
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              minHeight: "640px",
-              position: "relative",
+              position: "absolute",
+              inset: 0,
+              zIndex: 0,
               overflow: "hidden",
             }}
           >
             <div
               style={{
                 position: "absolute",
-                width: "620px",
-                height: "620px",
+                inset: 0,
+                background: `
+                  radial-gradient(circle at 72% 34%, rgba(208, 89, 255, 0.12), transparent 16%),
+                  radial-gradient(circle at 80% 34%, rgba(88, 240, 255, 0.10), transparent 14%),
+                  radial-gradient(circle at 62% 40%, rgba(255, 170, 76, 0.10), transparent 12%),
+                  radial-gradient(circle at 16% 72%, rgba(84, 224, 255, 0.05), transparent 18%),
+                  linear-gradient(180deg, #040409 0%, #080914 55%, #05060A 100%)
+                `,
+              }}
+            />
+
+            <div
+              style={{
+                position: "absolute",
+                right: "8%",
+                top: "8%",
+                width: "680px",
+                height: "680px",
                 borderRadius: "50%",
                 background:
                   "conic-gradient(from 210deg, #FFB056 0deg, #D24DFF 130deg, #63F3FF 275deg, #FFB056 360deg)",
                 WebkitMask:
-                  "radial-gradient(circle, transparent 71%, black 72%, black 75%, transparent 76%)",
+                  "radial-gradient(circle, transparent 71%, black 72%, black 74.5%, transparent 75.5%)",
                 mask:
-                  "radial-gradient(circle, transparent 71%, black 72%, black 75%, transparent 76%)",
+                  "radial-gradient(circle, transparent 71%, black 72%, black 74.5%, transparent 75.5%)",
                 opacity: 0.98,
                 animation: "pulseGlow 4.2s ease-in-out infinite",
-                filter: "blur(0.2px)",
               }}
             />
 
             <div
               style={{
                 position: "absolute",
+                right: "11%",
+                top: "15%",
                 width: "560px",
                 height: "560px",
                 borderRadius: "50%",
                 background:
-                  "radial-gradient(circle, rgba(203, 89, 255, 0.16) 0%, rgba(86, 221, 255, 0.10) 42%, transparent 72%)",
-                filter: "blur(24px)",
+                  "radial-gradient(circle, rgba(203, 89, 255, 0.15) 0%, rgba(86, 221, 255, 0.08) 42%, transparent 72%)",
+                filter: "blur(30px)",
               }}
             />
 
             <div
               style={{
                 position: "absolute",
-                bottom: "116px",
-                width: "700px",
-                height: "4px",
+                left: "18%",
+                right: "8%",
+                bottom: "120px",
+                height: "3px",
                 background:
-                  "linear-gradient(90deg, rgba(222, 78, 255, 0.82) 0%, rgba(255, 183, 92, 0.92) 28%, rgba(90, 241, 255, 0.88) 100%)",
+                  "linear-gradient(90deg, rgba(222, 78, 255, 0.72) 0%, rgba(255, 183, 92, 0.9) 26%, rgba(90, 241, 255, 0.88) 100%)",
                 boxShadow:
-                  "0 0 26px rgba(212, 82, 255, 0.24), 0 0 24px rgba(92, 240, 255, 0.18)",
-                opacity: 0.85,
+                  "0 0 26px rgba(212, 82, 255, 0.20), 0 0 24px rgba(92, 240, 255, 0.16)",
+                opacity: 0.72,
               }}
             />
 
             <div
               style={{
                 position: "absolute",
+                right: "14%",
                 bottom: "18px",
                 width: "520px",
                 height: "160px",
                 borderRadius: "50%",
                 background:
-                  "radial-gradient(ellipse at center, rgba(192, 86, 255, 0.18) 0%, rgba(88, 240, 255, 0.10) 34%, transparent 72%)",
+                  "radial-gradient(ellipse at center, rgba(192, 86, 255, 0.14) 0%, rgba(88, 240, 255, 0.08) 34%, transparent 72%)",
                 transform: "rotateX(72deg)",
                 filter: "blur(18px)",
-                opacity: 0.75,
+                opacity: 0.7,
               }}
             />
 
-            <Star style={{ top: "88px", left: "110px", fontSize: "16px" }} />
-            <Star style={{ top: "160px", right: "122px", fontSize: "18px" }} />
-            <Star style={{ bottom: "196px", left: "132px", fontSize: "20px" }} />
-            <Star style={{ bottom: "216px", right: "164px", fontSize: "16px" }} />
-            <Star style={{ top: "252px", left: "188px", fontSize: "14px" }} />
+            <Star style={{ top: "90px", left: "58%", fontSize: "16px" }} />
+            <Star style={{ top: "146px", right: "12%", fontSize: "18px" }} />
+            <Star style={{ bottom: "214px", right: "29%", fontSize: "22px" }} />
+            <Star style={{ bottom: "184px", right: "16%", fontSize: "16px" }} />
+            <Star style={{ top: "265px", right: "36%", fontSize: "14px" }} />
+          </div>
 
-            <img
-              src={bang}
-              alt="ZWAP! bang"
+          {/* CONTENT FLOATS ABOVE SCENE */}
+          <div
+            style={{
+              position: "relative",
+              zIndex: 2,
+              display: "grid",
+              gridTemplateColumns: "0.95fr 1.05fr",
+              alignItems: "center",
+              gap: "30px",
+              width: "100%",
+            }}
+          >
+            <section
               style={{
-                width: "360px",
-                maxWidth: "100%",
-                height: "auto",
-                position: "relative",
-                zIndex: 2,
-                animation: "floatBang 4.6s ease-in-out infinite",
-                filter:
-                  "drop-shadow(0 0 22px rgba(113, 111, 255, 0.30)) drop-shadow(0 0 32px rgba(214, 92, 255, 0.16))",
+                maxWidth: "545px",
+                paddingTop: "6px",
               }}
-            />
-          </section>
+            >
+              <h1
+                style={{
+                  margin: "0 0 22px 0",
+                  fontSize: "58px",
+                  lineHeight: "1.06",
+                  fontWeight: 400,
+                  letterSpacing: "-1.4px",
+                  color: "#F7F8FF",
+                }}
+              >
+                Most apps waste your time.
+                <br />
+                <span style={{ fontWeight: 700 }}>ZWAP!</span> turns it into rewards.
+              </h1>
+
+              <p
+                style={{
+                  margin: "0 0 30px 0",
+                  maxWidth: "430px",
+                  fontSize: "18px",
+                  lineHeight: "1.58",
+                  color: "rgba(235, 239, 255, 0.74)",
+                }}
+              >
+                Earn from steps, games, and daily activity.
+              </p>
+
+              <button
+                style={{
+                  padding: "17px 34px",
+                  borderRadius: "999px",
+                  border: "1px solid rgba(165, 103, 255, 0.72)",
+                  background:
+                    "linear-gradient(180deg, rgba(13,15,30,0.92) 0%, rgba(8,10,22,0.96) 100%)",
+                  color: "#F9FAFF",
+                  fontSize: "17px",
+                  fontWeight: 500,
+                  cursor: "pointer",
+                  animation: "shimmer 3s ease-in-out infinite",
+                }}
+              >
+                Get Early Access
+              </button>
+
+              <div
+                style={{
+                  marginTop: "24px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "18px",
+                  color: "rgba(245,247,255,0.94)",
+                }}
+              >
+                <a
+                  href="#"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "48px",
+                    height: "48px",
+                    borderRadius: "14px",
+                    border: "1px solid rgba(174, 132, 255, 0.22)",
+                    background: "rgba(255,255,255,0.02)",
+                    color: "inherit",
+                    textDecoration: "none",
+                  }}
+                >
+                  <XIcon />
+                </a>
+
+                <a
+                  href="#"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "48px",
+                    height: "48px",
+                    borderRadius: "14px",
+                    border: "1px solid rgba(174, 132, 255, 0.22)",
+                    background: "rgba(255,255,255,0.02)",
+                    color: "inherit",
+                    textDecoration: "none",
+                  }}
+                >
+                  <TikTokIcon />
+                </a>
+              </div>
+            </section>
+
+            <section
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                minHeight: "640px",
+                position: "relative",
+              }}
+            >
+              <img
+                src={bang}
+                alt="ZWAP! bang"
+                style={{
+                  width: "360px",
+                  maxWidth: "100%",
+                  height: "auto",
+                  position: "relative",
+                  zIndex: 2,
+                  animation: "floatBang 4.6s ease-in-out infinite",
+                  filter:
+                    "drop-shadow(0 0 22px rgba(113, 111, 255, 0.30)) drop-shadow(0 0 32px rgba(214, 92, 255, 0.16))",
+                }}
+              />
+            </section>
+          </div>
         </main>
 
         <footer
