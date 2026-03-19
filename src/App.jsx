@@ -336,14 +336,14 @@ export default function App() {
                 src={heroPhoneMockup}
                 alt="ZWAP! app hero mockup"
                 style={{
-                  width: "1180px", // 👈 bigger
-                  maxWidth: "none", // 👈 allows it to exceed container
+                  width: "1080px", // 
+                  maxWidth: "100%", // 
                   height: "auto",
                   display: "block",
-                  marginTop: "-40px",   // 👈 pushes UP (adds that top presence)
-                  marginBottom: "-40px", // 👈 pushes DOWN (adds bottom presence)
+                  marginTop: "-24px",   // 
+                  marginBottom: "-24px", // 
                   animation: "floatMockup 5.2s ease-in-out infinite",
-                  filter: "drop-shadow(0 0 32px rgba(130, 88, 255, 0.18))",
+                  filter: "drop-shadow(0 0 26px rgba(130, 88, 255, 0.12))",
                 }}
               />
             </section>
