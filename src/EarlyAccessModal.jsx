@@ -80,13 +80,22 @@ export default function EarlyAccessModal({
             }}
           />
 
-          <div style={{ flex: 1, paddingTop: "8px" }}>
+          <div
+            style={{
+              flex: 1,
+              paddingTop: "8px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center",
+            }}
+          >
             <div
               style={{
-                fontSize: "34px",
+                fontSize: "42px",
                 fontWeight: 900,
                 letterSpacing: "-0.03em",
-                lineHeight: "1.08",
+                lineHeight: "1.05",
                 marginBottom: "10px",
               }}
             >
@@ -107,9 +116,10 @@ export default function EarlyAccessModal({
             <p
               style={{
                 margin: 0,
-                fontSize: "16px",
+                fontSize: "17px",
                 lineHeight: "1.55",
                 color: "rgba(235,239,255,0.72)",
+                maxWidth: "500px",
               }}
             >
               Earn rewards from steps, games, and daily activity.
@@ -119,33 +129,10 @@ export default function EarlyAccessModal({
 
         <div
           style={{
-            marginTop: "8px",
-            marginBottom: "18px",
-            textAlign: "center",
-            fontSize: "24px",
-            fontWeight: 900,
-            letterSpacing: "-0.02em",
-          }}
-        >
-          Want to see{" "}
-          <span
-            style={{
-              background:
-                "linear-gradient(90deg, #66F2FF 0%, #7FD9FF 18%, #B486FF 55%, #FF67D4 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            ZWAP!
-          </span>{" "}
-          in action?
-        </div>
-
-        <div
-          style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
             gap: "18px",
+            marginTop: "10px",
           }}
         >
           <div
@@ -271,6 +258,29 @@ export default function EarlyAccessModal({
               Post on X
             </button>
           </div>
+        </div>
+
+        <div
+          style={{
+            marginTop: "22px",
+            textAlign: "center",
+            fontSize: "24px",
+            fontWeight: 900,
+            letterSpacing: "-0.02em",
+          }}
+        >
+          Want to see{" "}
+          <span
+            style={{
+              background:
+                "linear-gradient(90deg, #66F2FF 0%, #7FD9FF 18%, #B486FF 55%, #FF67D4 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            ZWAP!
+          </span>{" "}
+          in action?
         </div>
       </div>
     </div>
