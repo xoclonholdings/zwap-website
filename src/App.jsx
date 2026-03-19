@@ -3,11 +3,11 @@ import heroPhoneMockup from "./assets/hero_phone_mockup.png";
 
 function GooglePlayIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M3 2L14.5 12L3 22L3 2Z" fill="#00D1FF" />
-      <path d="M14.5 12L18 8.8L21 10.4C22 10.95 22 12.05 21 12.6L18 14.2L14.5 12Z" fill="#7C5CFF" />
-      <path d="M3 2L11.2 10.2L14.5 12L3 2Z" fill="#3DFF8F" />
-      <path d="M3 22L11.2 13.8L14.5 12L3 22Z" fill="#FF4FD8" />
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M3.2 2.8L13.9 12L3.2 21.2V2.8Z" fill="#00D1FF" />
+      <path d="M13.9 12L17.2 8.9L20.5 10.7C21.5 11.2 21.5 12.8 20.5 13.3L17.2 15.1L13.9 12Z" fill="#7C5CFF" />
+      <path d="M3.2 2.8L10.9 9.4L13.9 12L3.2 2.8Z" fill="#3DFF8F" />
+      <path d="M3.2 21.2L10.9 14.6L13.9 12L3.2 21.2Z" fill="#FF67D4" />
     </svg>
   );
 }
