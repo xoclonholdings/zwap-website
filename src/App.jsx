@@ -2,6 +2,7 @@ import { useState } from "react";
 import logo from "./assets/Zwap_logo_full.png";
 import googlePlayLogo from "./assets/google_play_logo.png";
 import heroPhoneMockup from "./assets/hero_phone_mockup.png";
+import bang from "./assets/Zwap_bang_3d.png";
 
 function AppleIcon() {
   return (
@@ -417,14 +418,101 @@ export default function App() {
             }}
           >
             <div
-              style={{
-                display: "flex",
-                alignItems: "flex-start",
-                justifyContent: "space-between",
-                gap: "16px",
-                marginBottom: "22px",
-              }}
-            >
+        style={{
+          position: "relative",
+          marginBottom: "28px",
+          paddingTop: "10px",
+        }}
+      >
+        {/* CLOSE BUTTON */}
+        <button
+          onClick={() => setIsModalOpen(false)}
+          style={{
+            position: "absolute",
+            top: "0px",
+            right: "0px",
+            border: "none",
+            background: "transparent",
+            color: "rgba(245,247,255,0.7)",
+            fontSize: "26px",
+            cursor: "pointer",
+          }}
+        >
+          ×
+        </button>
+      
+        {/* A — ZWAP BANG */}
+        <img
+          src={bang}
+          alt="ZWAP!"
+          style={{
+            width: "70px",
+            height: "auto",
+            marginBottom: "10px",
+            filter: "drop-shadow(0 0 18px rgba(130, 88, 255, 0.35))",
+          }}
+        />
+      
+        {/* B — TITLE */}
+        <h2
+          style={{
+            margin: 0,
+            fontSize: "34px",
+            fontWeight: 800,
+            letterSpacing: "-0.03em",
+            lineHeight: "1.1",
+          }}
+        >
+          What is{" "}
+          <span
+            style={{
+              background:
+                "linear-gradient(90deg, #66F2FF 0%, #7FD9FF 18%, #B486FF 55%, #FF67D4 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            ZWAP!
+          </span>
+        </h2>
+      
+        {/* DESCRIPTION */}
+        <p
+          style={{
+            margin: "12px 0 18px 0",
+            fontSize: "16px",
+            lineHeight: "1.6",
+            color: "rgba(235,239,255,0.72)",
+            maxWidth: "460px",
+          }}
+        >
+          Earn rewards from steps, games, and daily activity.
+          <br />
+          No gambling. No fluff. Just participation.
+        </p>
+      
+        {/* E — ACTION HEADER */}
+        <div
+          style={{
+            fontSize: "20px",
+            fontWeight: 800,
+            letterSpacing: "-0.01em",
+          }}
+        >
+          Want to see{" "}
+          <span
+            style={{
+              background:
+                "linear-gradient(90deg, #66F2FF 0%, #7FD9FF 18%, #B486FF 55%, #FF67D4 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            ZWAP!
+          </span>{" "}
+          in action?
+        </div>
+      </div>
               <div>
                 <h2
                   style={{
