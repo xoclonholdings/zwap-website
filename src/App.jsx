@@ -1,7 +1,7 @@
 import logo from "./assets/Zwap_logo_full.png";
 import googlePlayLogo from "./assets/google_play_logo.png";
 import heroPhoneMockup from "./assets/hero_phone_mockup.png";
-import EarlyAccessModal from "./components/EarlyAccessModal";
+import EarlyAccessModal from "./EarlyAccessModal";
 import bang from "./assets/Zwap_bang_3d.png";
 import React, { useState } from "react";
 
