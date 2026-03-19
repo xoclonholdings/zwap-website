@@ -340,8 +340,8 @@ export default function App() {
                   maxWidth: "100%", // 
                   height: "auto",
                   display: "block",
-                  marginTop: "-24px",   // 
-                  marginBottom: "-24px", // 
+                  marginTop: "-30px",   // 
+                  marginBottom: "-30px", // 
                   animation: "floatMockup 5.2s ease-in-out infinite",
                   filter: "drop-shadow(0 0 26px rgba(130, 88, 255, 0.12))",
                 }}
