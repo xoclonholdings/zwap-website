@@ -1,5 +1,5 @@
 import logo from "./assets/Zwap_logo_full.png";
-import bang from "./assets/Zwap_bang_3d.png";
+import heroPhoneMockup from "./assets/hero_phone_mockup.png";
 
 function GooglePlayIcon() {
   return (
@@ -38,7 +38,15 @@ function TikTokIcon() {
 
 function MailIcon() {
   return (
-    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" aria-hidden="true">
+    <svg
+      width="21"
+      height="21"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.9"
+      aria-hidden="true"
+    >
       <path d="M4 6h16v12H4z" />
       <path d="m4 8 8 6 8-6" />
     </svg>
@@ -51,7 +59,7 @@ function Star({ style }) {
       style={{
         position: "absolute",
         color: "#F8F9FF",
-        fontSize: "18px",
+        fontSize: "16px",
         lineHeight: 1,
         textShadow: "0 0 14px rgba(255,255,255,0.95)",
         animation: "twinkle 3.2s ease-in-out infinite",
@@ -80,18 +88,6 @@ export default function App() {
       }}
     >
       <style>{`
-        @keyframes pulseRing {
-          0% { transform: scale(1); opacity: 0.78; }
-          50% { transform: scale(1.02); opacity: 1; }
-          100% { transform: scale(1); opacity: 0.78; }
-        }
-
-        @keyframes pulseBang {
-          0% { transform: scale(1); opacity: 0.95; }
-          50% { transform: scale(1.018); opacity: 1; }
-          100% { transform: scale(1); opacity: 0.95; }
-        }
-
         @keyframes twinkle {
           0% { opacity: 0.35; transform: scale(0.92); }
           50% { opacity: 1; transform: scale(1.08); }
@@ -104,12 +100,10 @@ export default function App() {
           100% { box-shadow: 0 0 18px rgba(115, 88, 255, 0.25), 0 0 28px rgba(226, 74, 255, 0.10); }
         }
 
-        @keyframes logoSweep {
-          0% { transform: translateX(-140%) skewX(-20deg); opacity: 0; }
-          15% { opacity: 0.0; }
-          35% { opacity: 0.45; }
-          50% { opacity: 0.0; }
-          100% { transform: translateX(220%) skewX(-20deg); opacity: 0; }
+        @keyframes floatMockup {
+          0% { transform: translateY(0px); }
+          50% { transform: translateY(-8px); }
+          100% { transform: translateY(0px); }
         }
       `}</style>
 
@@ -128,7 +122,7 @@ export default function App() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            padding: "28px 0 18px",
+            padding: "28px 0 12px",
             position: "relative",
             zIndex: 3,
           }}
@@ -137,7 +131,7 @@ export default function App() {
             style={{
               position: "relative",
               width: "132px",
-              overflow: "hidden",
+              height: "58px",
             }}
           >
             <img
@@ -150,18 +144,9 @@ export default function App() {
                 display: "block",
               }}
             />
-            <div
-              style={{
-                position: "absolute",
-                top: 0,
-                bottom: 0,
-                width: "26px",
-                background:
-                  "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.0) 8%, rgba(255,255,255,0.45) 50%, rgba(255,255,255,0.0) 92%, transparent 100%)",
-                animation: "logoSweep 5.8s ease-in-out infinite",
-                pointerEvents: "none",
-              }}
-            />
+            <Star style={{ top: "-2px", left: "8px", fontSize: "12px" }} />
+            <Star style={{ top: "8px", right: "10px", fontSize: "10px", animationDelay: "0.8s" }} />
+            <Star style={{ bottom: "8px", right: "2px", fontSize: "12px", animationDelay: "1.4s" }} />
           </div>
 
           <nav
@@ -227,6 +212,19 @@ export default function App() {
           </nav>
         </header>
 
+        <div
+          style={{
+            height: "2px",
+            width: "100%",
+            margin: "0 0 10px 0",
+            background:
+              "linear-gradient(90deg, rgba(222, 78, 255, 0.38) 0%, rgba(255, 183, 92, 0.48) 28%, rgba(90, 241, 255, 0.46) 100%)",
+            boxShadow:
+              "0 0 16px rgba(212, 82, 255, 0.14), 0 0 14px rgba(92, 240, 255, 0.10)",
+            opacity: 0.72,
+          }}
+        />
+
         <main
           style={{
             flex: 1,
@@ -234,7 +232,7 @@ export default function App() {
             overflow: "hidden",
             display: "flex",
             alignItems: "center",
-            padding: "8px 0 22px",
+            padding: "12px 0 22px",
           }}
         >
           <div
@@ -257,76 +255,6 @@ export default function App() {
                 `,
               }}
             />
-
-            <div
-              style={{
-                position: "absolute",
-                right: "6%",
-                top: "6%",
-                width: "760px",
-                height: "760px",
-                borderRadius: "50%",
-                background:
-                  "conic-gradient(from 210deg, #FFB056 0deg, #D24DFF 130deg, #63F3FF 275deg, #FFB056 360deg)",
-                WebkitMask:
-                  "radial-gradient(circle, transparent 72%, black 73%, black 74.7%, transparent 75.6%)",
-                mask:
-                  "radial-gradient(circle, transparent 72%, black 73%, black 74.7%, transparent 75.6%)",
-                opacity: 0.92,
-                animation: "pulseRing 5.2s ease-in-out infinite",
-              }}
-            />
-
-            <div
-              style={{
-                position: "absolute",
-                right: "12%",
-                top: "14%",
-                width: "590px",
-                height: "590px",
-                borderRadius: "50%",
-                background:
-                  "radial-gradient(circle, rgba(203, 89, 255, 0.13) 0%, rgba(86, 221, 255, 0.07) 42%, transparent 72%)",
-                filter: "blur(34px)",
-              }}
-            />
-
-            <div
-              style={{
-                position: "absolute",
-                left: "20%",
-                right: "7%",
-                bottom: "116px",
-                height: "3px",
-                background:
-                  "linear-gradient(90deg, rgba(222, 78, 255, 0.72) 0%, rgba(255, 183, 92, 0.88) 26%, rgba(90, 241, 255, 0.86) 100%)",
-                boxShadow:
-                  "0 0 26px rgba(212, 82, 255, 0.18), 0 0 24px rgba(92, 240, 255, 0.14)",
-                opacity: 0.62,
-              }}
-            />
-
-            <div
-              style={{
-                position: "absolute",
-                right: "14%",
-                bottom: "24px",
-                width: "560px",
-                height: "170px",
-                borderRadius: "50%",
-                background:
-                  "radial-gradient(ellipse at center, rgba(192, 86, 255, 0.12) 0%, rgba(88, 240, 255, 0.06) 34%, transparent 72%)",
-                transform: "rotateX(72deg)",
-                filter: "blur(20px)",
-                opacity: 0.56,
-              }}
-            />
-
-            <Star style={{ top: "92px", left: "58%", fontSize: "16px" }} />
-            <Star style={{ top: "148px", right: "11%", fontSize: "18px" }} />
-            <Star style={{ bottom: "212px", right: "30%", fontSize: "22px" }} />
-            <Star style={{ bottom: "184px", right: "16%", fontSize: "16px" }} />
-            <Star style={{ top: "260px", right: "36%", fontSize: "14px" }} />
           </div>
 
           <div
@@ -334,7 +262,7 @@ export default function App() {
               position: "relative",
               zIndex: 2,
               display: "grid",
-              gridTemplateColumns: "0.95fr 1.05fr",
+              gridTemplateColumns: "0.92fr 1.08fr",
               alignItems: "center",
               gap: "24px",
               width: "100%",
@@ -359,12 +287,23 @@ export default function App() {
               >
                 Most apps waste your time.
                 <br />
-                <span style={{ fontWeight: 700 }}>ZWAP!</span> turns it into rewards.
+                <span
+                  style={{
+                    fontWeight: 700,
+                    background:
+                      "linear-gradient(90deg, #66F2FF 0%, #7FD9FF 18%, #B486FF 55%, #FF67D4 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  ZWAP!
+                </span>{" "}
+                turns it into rewards.
               </h1>
 
               <p
                 style={{
-                  margin: "0 0 28px 0",
+                  margin: "0 0 24px 0",
                   maxWidth: "420px",
                   fontSize: "18px",
                   lineHeight: "1.55",
@@ -393,7 +332,7 @@ export default function App() {
 
               <div
                 style={{
-                  marginTop: "24px",
+                  marginTop: "18px",
                   display: "flex",
                   alignItems: "center",
                   gap: "18px",
@@ -422,17 +361,15 @@ export default function App() {
               }}
             >
               <img
-                src={bang}
-                alt="ZWAP! bang"
+                src={heroPhoneMockup}
+                alt="ZWAP! app hero mockup"
                 style={{
-                  width: "330px",
+                  width: "760px",
                   maxWidth: "100%",
                   height: "auto",
-                  position: "relative",
-                  zIndex: 2,
-                  animation: "pulseBang 4.8s ease-in-out infinite",
-                  filter:
-                    "drop-shadow(0 0 20px rgba(113, 111, 255, 0.24)) drop-shadow(0 0 32px rgba(214, 92, 255, 0.12))",
+                  display: "block",
+                  animation: "floatMockup 5.2s ease-in-out infinite",
+                  filter: "drop-shadow(0 0 26px rgba(130, 88, 255, 0.12))",
                 }}
               />
             </section>
