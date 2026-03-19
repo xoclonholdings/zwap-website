@@ -29,7 +29,7 @@ export default function EarlyAccessModal({
           width: "100%",
           maxWidth: "760px",
           borderRadius: "28px",
-          padding: "30px 30px 28px",
+          padding: "30px",
           background: `
             radial-gradient(circle at 72% 34%, rgba(204, 91, 255, 0.10), transparent 16%),
             radial-gradient(circle at 82% 30%, rgba(88, 240, 255, 0.08), transparent 14%),
@@ -42,242 +42,188 @@ export default function EarlyAccessModal({
           color: "#F9FAFF",
         }}
       >
-        <div
+        {/* CLOSE */}
+        <button
+          onClick={onClose}
           style={{
-            position: "relative",
-            marginBottom: "18px",
+            position: "absolute",
+            top: "18px",
+            right: "22px",
+            border: "none",
+            background: "transparent",
+            color: "rgba(245,247,255,0.7)",
+            fontSize: "28px",
+            cursor: "pointer",
           }}
         >
-          <button
-            onClick={onClose}
-            style={{
-              position: "absolute",
-              top: "0px",
-              right: "0px",
-              border: "none",
-              background: "transparent",
-              color: "rgba(245,247,255,0.7)",
-              fontSize: "28px",
-              lineHeight: 1,
-              cursor: "pointer",
-            }}
-          >
-            ×
-          </button>
+          ×
+        </button>
 
-          <div
+        {/* A — BIG CENTERED BANG */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "14px",
+          }}
+        >
+          <img
+            src={bang}
+            alt="ZWAP!"
             style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "12px",
-              marginBottom: "10px",
-              paddingRight: "40px",
+              width: "88px",
+              height: "auto",
+              filter: "drop-shadow(0 0 22px rgba(130, 88, 255, 0.5))",
             }}
-          >
-            <img
-              src={bang}
-              alt="ZWAP!"
-              style={{
-                width: "58px",
-                height: "auto",
-                display: "block",
-                filter: "drop-shadow(0 0 18px rgba(130, 88, 255, 0.45))",
-              }}
-            />
-
-            <div
-              style={{
-                fontSize: "32px",
-                fontWeight: 900,
-                letterSpacing: "-0.02em",
-                background:
-                  "linear-gradient(90deg, #66F2FF 0%, #7FD9FF 18%, #B486FF 55%, #FF67D4 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              ZWAP!
-            </div>
-          </div>
-
-          <h2
-            style={{
-              margin: 0,
-              fontSize: "32px",
-              fontWeight: 800,
-              letterSpacing: "-0.03em",
-              lineHeight: "1.08",
-            }}
-          >
-            What is{" "}
-            <span
-              style={{
-                background:
-                  "linear-gradient(90deg, #66F2FF 0%, #7FD9FF 18%, #B486FF 55%, #FF67D4 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              ZWAP!
-            </span>
-            ?
-          </h2>
-
-          <p
-            style={{
-              margin: "12px 0 0 0",
-              fontSize: "16px",
-              lineHeight: "1.6",
-              color: "rgba(235,239,255,0.72)",
-              maxWidth: "560px",
-            }}
-          >
-            Earn rewards from steps, games, and daily activity.
-            <br />
-            No gambling. No fluff. Just participation.
-          </p>
+          />
         </div>
 
+        {/* B — TITLE */}
+        <h2
+          style={{
+            margin: 0,
+            fontSize: "34px",
+            fontWeight: 900,
+            letterSpacing: "-0.03em",
+            textAlign: "center",
+          }}
+        >
+          What is{" "}
+          <span
+            style={{
+              background:
+                "linear-gradient(90deg, #66F2FF 0%, #7FD9FF 18%, #B486FF 55%, #FF67D4 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            ZWAP!
+          </span>
+          ?
+        </h2>
+
+        {/* C — CLEAN SINGLE LINE */}
+        <p
+          style={{
+            margin: "12px 0 26px",
+            fontSize: "16px",
+            textAlign: "center",
+            color: "rgba(235,239,255,0.72)",
+          }}
+        >
+          Earn rewards from steps, games, and daily activity.
+        </p>
+
+        {/* TWO COLUMN */}
         <div
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
             gap: "18px",
-            alignItems: "stretch",
           }}
         >
+          {/* QUICK */}
           <div
             style={{
-              padding: "20px 18px",
+              padding: "20px",
               borderRadius: "22px",
               border: "1px solid rgba(255,255,255,0.08)",
               background: "rgba(255,255,255,0.03)",
-              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
             }}
           >
-            <div
-              style={{
-                fontSize: "18px",
-                fontWeight: 800,
-                marginBottom: "8px",
-              }}
-            >
+            <div style={{ fontWeight: 800, marginBottom: "8px" }}>
               Quick Access
             </div>
 
             <div
               style={{
-                fontSize: "15px",
-                lineHeight: "1.55",
+                fontSize: "14px",
+                marginBottom: "14px",
                 color: "rgba(235,239,255,0.7)",
-                marginBottom: "16px",
               }}
             >
-              Drop your email and we’ll send a private preview link.
+              Get a private preview link
             </div>
 
-            <div
+            <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email address"
               style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "10px",
+                width: "100%",
+                borderRadius: "999px",
+                padding: "14px",
+                marginBottom: "10px",
+                border: "1px solid rgba(255,255,255,0.12)",
+                background: "rgba(0,0,0,0.22)",
+                color: "#fff",
+              }}
+            />
+
+            <button
+              style={{
+                width: "100%",
+                padding: "14px",
+                borderRadius: "999px",
+                border: "1px solid rgba(165, 103, 255, 0.45)",
+                background:
+                  "linear-gradient(180deg, rgba(24,26,48,1) 0%, rgba(11,13,28,1) 100%)",
+                color: "#fff",
+                fontWeight: 700,
               }}
             >
-              <input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email address"
-                style={{
-                  width: "100%",
-                  borderRadius: "999px",
-                  border: "1px solid rgba(255,255,255,0.12)",
-                  background: "rgba(0,0,0,0.22)",
-                  color: "#F9FAFF",
-                  padding: "14px 18px",
-                  fontSize: "15px",
-                  outline: "none",
-                  boxSizing: "border-box",
-                }}
-              />
-
-              <button
-                style={{
-                  width: "100%",
-                  padding: "14px 18px",
-                  borderRadius: "999px",
-                  border: "1px solid rgba(165, 103, 255, 0.45)",
-                  background:
-                    "linear-gradient(180deg, rgba(24,26,48,1) 0%, rgba(11,13,28,1) 100%)",
-                  color: "#F9FAFF",
-                  fontWeight: 700,
-                  cursor: "pointer",
-                  boxShadow:
-                    "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 20px rgba(0,0,0,0.28)",
-                }}
-              >
-                Send Access Link
-              </button>
-            </div>
+              Send Access Link
+            </button>
           </div>
 
+          {/* INSTANT */}
           <div
             style={{
-              padding: "20px 18px",
+              padding: "20px",
               borderRadius: "22px",
               border: "1px solid rgba(255,255,255,0.08)",
               background: "rgba(255,255,255,0.03)",
-              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
             }}
           >
-            <div
-              style={{
-                fontSize: "18px",
-                fontWeight: 800,
-                marginBottom: "8px",
-              }}
-            >
+            <div style={{ fontWeight: 800, marginBottom: "8px" }}>
               Instant Access
             </div>
 
             <div
               style={{
-                fontSize: "15px",
-                lineHeight: "1.55",
+                fontSize: "14px",
+                marginBottom: "14px",
                 color: "rgba(235,239,255,0.7)",
-                marginBottom: "16px",
               }}
             >
-              Skip the wait. Post on X and unlock the preview instantly.
+              Post on X to unlock instantly
             </div>
 
             <button
               style={{
                 width: "100%",
-                marginTop: "44px",
-                padding: "14px 18px",
+                marginTop: "42px",
+                padding: "14px",
                 borderRadius: "999px",
                 border: "1px solid rgba(165, 103, 255, 0.45)",
                 background:
                   "linear-gradient(180deg, rgba(24,26,48,1) 0%, rgba(11,13,28,1) 100%)",
-                color: "#F9FAFF",
+                color: "#fff",
                 fontWeight: 700,
-                cursor: "pointer",
-                boxShadow:
-                  "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 20px rgba(0,0,0,0.28)",
               }}
             >
-              Post on X to Unlock Preview
+              Post on X
             </button>
           </div>
         </div>
 
+        {/* D — BIGGER ACTION LINE */}
         <div
           style={{
-            marginTop: "20px",
+            marginTop: "24px",
             textAlign: "center",
-            fontSize: "20px",
-            fontWeight: 800,
-            letterSpacing: "-0.01em",
+            fontSize: "22px",
+            fontWeight: 900,
           }}
         >
           Want to see{" "}
