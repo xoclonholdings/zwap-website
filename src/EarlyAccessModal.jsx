@@ -59,13 +59,13 @@ export default function EarlyAccessModal({
           ×
         </button>
 
+        {/* TOP ROW JUST FOR THE BANG */}
         <div
           style={{
             display: "flex",
             alignItems: "flex-start",
-            gap: "18px",
-            marginBottom: "18px",
-            paddingRight: "36px",
+            justifyContent: "flex-start",
+            marginBottom: "4px",
           }}
         >
           <img
@@ -75,56 +75,58 @@ export default function EarlyAccessModal({
               width: "108px",
               height: "auto",
               display: "block",
-              flexShrink: 0,
               filter: "drop-shadow(0 0 22px rgba(130, 88, 255, 0.5))",
             }}
           />
+        </div>
 
+        {/* CENTERED TITLE BLOCK */}
+        <div
+          style={{
+            textAlign: "center",
+            marginTop: "-54px",
+            marginBottom: "22px",
+            padding: "0 36px",
+          }}
+        >
           <div
             style={{
-              flex: 1,
-              paddingTop: "8px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center",
+              fontSize: "44px",
+              fontWeight: 900,
+              letterSpacing: "-0.04em",
+              lineHeight: "1.02",
+              marginBottom: "10px",
+              color: "#F8FAFF",
+              textShadow: "0 4px 20px rgba(0,0,0,0.35)",
             }}
           >
-            <div
+            What is{" "}
+            <span
               style={{
-                fontSize: "42px",
-                fontWeight: 900,
-                letterSpacing: "-0.03em",
-                lineHeight: "1.05",
-                marginBottom: "10px",
+                background:
+                  "linear-gradient(90deg, #66F2FF 0%, #7FD9FF 18%, #B486FF 55%, #FF67D4 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
               }}
             >
-              What is{" "}
-              <span
-                style={{
-                  background:
-                    "linear-gradient(90deg, #66F2FF 0%, #7FD9FF 18%, #B486FF 55%, #FF67D4 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                ZWAP!
-              </span>
-              ?
-            </div>
-
-            <p
-              style={{
-                margin: 0,
-                fontSize: "17px",
-                lineHeight: "1.55",
-                color: "rgba(235,239,255,0.72)",
-                maxWidth: "500px",
-              }}
-            >
-              Earn rewards from steps, games, and daily activity.
-            </p>
+              ZWAP!
+            </span>
+            ?
           </div>
+
+          <p
+            style={{
+              margin: 0,
+              fontSize: "17px",
+              lineHeight: "1.55",
+              color: "rgba(235,239,255,0.82)",
+              maxWidth: "520px",
+              marginInline: "auto",
+              textShadow: "0 2px 10px rgba(0,0,0,0.25)",
+            }}
+          >
+            Earn rewards from steps, games, and daily activity.
+          </p>
         </div>
 
         <div
@@ -132,7 +134,7 @@ export default function EarlyAccessModal({
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
             gap: "18px",
-            marginTop: "10px",
+            marginTop: "6px",
           }}
         >
           <div
@@ -141,14 +143,16 @@ export default function EarlyAccessModal({
               borderRadius: "22px",
               border: "1px solid rgba(255,255,255,0.08)",
               background: "rgba(255,255,255,0.03)",
+              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
             }}
           >
             <div
               style={{
                 fontWeight: 800,
-                fontSize: "20px",
+                fontSize: "22px",
                 marginBottom: "8px",
                 textAlign: "center",
+                textShadow: "0 2px 10px rgba(0,0,0,0.28)",
               }}
             >
               Quick Access
@@ -158,7 +162,7 @@ export default function EarlyAccessModal({
               style={{
                 fontSize: "14px",
                 marginBottom: "14px",
-                color: "rgba(235,239,255,0.7)",
+                color: "rgba(235,239,255,0.78)",
                 textAlign: "center",
                 lineHeight: "1.5",
               }}
@@ -183,6 +187,7 @@ export default function EarlyAccessModal({
                 outline: "none",
                 fontSize: "15px",
                 lineHeight: 1.2,
+                boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
               }}
             />
 
@@ -212,14 +217,16 @@ export default function EarlyAccessModal({
               borderRadius: "22px",
               border: "1px solid rgba(255,255,255,0.08)",
               background: "rgba(255,255,255,0.03)",
+              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
             }}
           >
             <div
               style={{
                 fontWeight: 800,
-                fontSize: "20px",
+                fontSize: "22px",
                 marginBottom: "8px",
                 textAlign: "center",
+                textShadow: "0 2px 10px rgba(0,0,0,0.28)",
               }}
             >
               Instant Access
@@ -229,7 +236,7 @@ export default function EarlyAccessModal({
               style={{
                 fontSize: "14px",
                 marginBottom: "14px",
-                color: "rgba(235,239,255,0.7)",
+                color: "rgba(235,239,255,0.78)",
                 textAlign: "center",
                 lineHeight: "1.5",
               }}
@@ -264,9 +271,11 @@ export default function EarlyAccessModal({
           style={{
             marginTop: "22px",
             textAlign: "center",
-            fontSize: "24px",
+            fontSize: "26px",
             fontWeight: 900,
-            letterSpacing: "-0.02em",
+            letterSpacing: "-0.03em",
+            color: "#F8FAFF",
+            textShadow: "0 4px 20px rgba(0,0,0,0.35)",
           }}
         >
           Want to see{" "}
