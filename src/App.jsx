@@ -1,84 +1,46 @@
 import logo from "./assets/Zwap_logo_full.png";
+import googlePlayLogo from "./assets/google_play_logo.png";
 import heroPhoneMockup from "./assets/hero_phone_mockup.png";
 
-function GooglePlayIcon() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 512 512" aria-hidden="true">
-      {/* Left triangle */}
-      <path d="M64 32L320 256L64 480V32Z" fill="#00D1FF" />
-
-      {/* Top right */}
-      <path d="M320 256L384 192L448 224C472 236 472 276 448 288L384 320L320 256Z" fill="#7C5CFF" />
-
-      {/* Bottom right */}
-      <path d="M64 480L224 320L320 256L64 480Z" fill="#FF67D4" />
-
-      {/* Top connector */}
-      <path d="M64 32L224 192L320 256L64 32Z" fill="#3DFF8F" />
-    </svg>
-  );
-}
+/* ---------- ICONS ---------- */
 
 function AppleIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
       <path d="M16.7 12.9c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.7-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 6.9 1.1 9 .7 1 1.6 2.2 2.8 2.1 1.1 0 1.6-.7 3-.7 1.4 0 1.8.7 3 .7 1.2 0 2-.1 2.7-1.1.8-1 1.2-2 1.2-2.1-.1 0-2.3-.9-2.3-5.1ZM14.5 6.4c.6-.7 1-1.7.9-2.6-.9 0-2 .6-2.6 1.3-.6.6-1.1 1.6-1 2.5 1 .1 2-.5 2.7-1.2Z" />
     </svg>
   );
 }
 
-function XIcon() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M18.9 2H22l-6.8 7.7L23 22h-6.1l-4.8-6.3L6.5 22H3.4l7.3-8.3L1.2 2h6.2l4.3 5.7L18.9 2Zm-1.1 18h1.7L6.3 3.9H4.5L17.8 20Z" />
-    </svg>
-  );
-}
+/* ---------- BUTTON STYLE (REAL 3D) ---------- */
 
-function TikTokIcon() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M19.6 8.8c-1.5-.1-2.8-.9-3.6-2.1v7.6c0 3.2-2.6 5.7-5.7 5.7s-5.7-2.6-5.7-5.7 2.6-5.7 5.7-5.7c.3 0 .6 0 .9.1v3c-.3-.1-.6-.2-.9-.2-1.5 0-2.7 1.2-2.7 2.7S8.8 17 10.3 17s2.7-1.2 2.7-2.7V2h3c.2 1.8 1.7 3.2 3.6 3.4v3.4Z" />
-    </svg>
-  );
-}
+const button3D = {
+  display: "flex",
+  alignItems: "center",
+  gap: "10px",
+  padding: "12px 22px",
+  borderRadius: "999px",
+  fontWeight: 600,
+  fontSize: "16px",
+  color: "#F9FAFF",
+  cursor: "pointer",
 
-function MailIcon() {
-  return (
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.9"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <rect x="3" y="5" width="18" height="14" rx="2" ry="2" />
-      <path d="M4 7l8 6 8-6" />
-    </svg>
-  );
-}
+  background:
+    "linear-gradient(180deg, #1d2147 0%, #0c0f25 100%)",
 
-function Star({ style }) {
-  return (
-    <div
-      style={{
-        position: "absolute",
-        color: "#F8F9FF",
-        fontSize: "14px",
-        lineHeight: 1,
-        textShadow: "0 0 12px rgba(255,255,255,0.95)",
-        animation: "twinkle 3s ease-in-out infinite",
-        ...style,
-      }}
-    >
-      ✦
-    </div>
-  );
-}
+  border: "2px solid rgba(150,120,255,0.7)",
+
+  boxShadow: `
+    0 6px 18px rgba(0,0,0,0.6),
+    0 0 14px rgba(130,90,255,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.18),
+    inset 0 -3px 6px rgba(0,0,0,0.7)
+  `,
+
+  transition: "all 0.15s ease",
+};
+
+/* ---------- APP ---------- */
 
 export default function App() {
   return (
@@ -86,331 +48,150 @@ export default function App() {
       style={{
         minHeight: "100vh",
         color: "#F5F7FF",
-        fontFamily:
-          "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-        background: `
-          radial-gradient(circle at 72% 34%, rgba(204, 91, 255, 0.10), transparent 16%),
-          radial-gradient(circle at 82% 30%, rgba(88, 240, 255, 0.08), transparent 14%),
-          radial-gradient(circle at 60% 36%, rgba(255, 176, 86, 0.06), transparent 12%),
-          linear-gradient(180deg, #030308 0%, #080913 58%, #04050A 100%)
-        `,
+        fontFamily: "Inter, system-ui, sans-serif",
+        background:
+          "linear-gradient(180deg, #030308 0%, #080913 60%, #04050A 100%)",
       }}
     >
-      <style>{`
-        @keyframes twinkle {
-          0% { opacity: 0.35; transform: scale(0.92); }
-          50% { opacity: 1; transform: scale(1.08); }
-          100% { opacity: 0.35; transform: scale(0.92); }
-        }
-
-        @keyframes shimmer {
-          0% { box-shadow: 0 0 18px rgba(115, 88, 255, 0.25), 0 0 28px rgba(226, 74, 255, 0.10); }
-          50% { box-shadow: 0 0 26px rgba(115, 88, 255, 0.35), 0 0 40px rgba(226, 74, 255, 0.16); }
-          100% { box-shadow: 0 0 18px rgba(115, 88, 255, 0.25), 0 0 28px rgba(226, 74, 255, 0.10); }
-        }
-
-        @keyframes floatMockup {
-          0% { transform: translateY(0px); }
-          50% { transform: translateY(-8px); }
-          100% { transform: translateY(0px); }
-        }
-      `}</style>
-
-      <div
+      {/* HEADER */}
+      <header
         style={{
-          width: "100%",
-          minHeight: "100vh",
           display: "flex",
-          flexDirection: "column",
-          padding: "0 42px",
-          boxSizing: "border-box",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "28px 40px 10px",
         }}
       >
-        <header
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            padding: "28px 0 12px",
-            position: "relative",
-            zIndex: 3,
-          }}
-        >
-          <div
-            style={{
-              position: "relative",
-              width: "132px",
-              height: "58px",
-            }}
+        <img src={logo} style={{ width: 120 }} />
+
+        <nav style={{ display: "flex", gap: 28, alignItems: "center" }}>
+          <span>ABOUT</span>
+          <span>FEATURES</span>
+          <span>DOWNLOAD</span>
+
+          {/* GOOGLE */}
+          <button
+            style={button3D}
+            onMouseDown={(e) => press(e)}
+            onMouseUp={(e) => release(e)}
+            onMouseLeave={(e) => release(e)}
           >
             <img
-              src={logo}
-              alt="ZWAP!"
-              style={{
-                width: "132px",
-                height: "auto",
-                objectFit: "contain",
-                display: "block",
-              }}
+              src={googlePlayLogo}
+              style={{ width: 22, height: 22 }}
             />
-            <Star style={{ top: "-2px", left: "8px", fontSize: "12px" }} />
-            <Star style={{ top: "8px", right: "10px", fontSize: "10px", animationDelay: "0.8s" }} />
-            <Star style={{ bottom: "8px", right: "2px", fontSize: "12px", animationDelay: "1.4s" }} />
-          </div>
+            Google Play
+          </button>
 
-          <nav
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "38px",
-              fontSize: "17px",
-              fontWeight: 600,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-            }}
+          {/* APPLE */}
+          <button
+            style={button3D}
+            onMouseDown={(e) => press(e)}
+            onMouseUp={(e) => release(e)}
+            onMouseLeave={(e) => release(e)}
           >
-            <a href="#" style={{ color: "#F5F7FF", textDecoration: "none" }}>
-              About
-            </a>
-            <a href="#" style={{ color: "#F5F7FF", textDecoration: "none" }}>
-              Features
-            </a>
-            <a href="#" style={{ color: "#F5F7FF", textDecoration: "none" }}>
-              Download
-            </a>
+            <AppleIcon />
+            App Store
+          </button>
+        </nav>
+      </header>
 
+      {/* LINE */}
+      <div
+        style={{
+          height: 2,
+          marginLeft: 150,
+          marginRight: 40,
+          background: "linear-gradient(90deg,#ff4fd8,#6cf0ff)",
+          opacity: 0.6,
+        }}
+      />
+
+      {/* MAIN */}
+      <div style={{ display: "flex", padding: "60px 40px" }}>
+        {/* LEFT */}
+        <div style={{ maxWidth: 520 }}>
+          <h1 style={{ fontSize: 50, fontWeight: 300 }}>
+            Most apps waste your time.
+            <br />
+            <span
+              style={{
+                fontWeight: 700,
+                background:
+                  "linear-gradient(90deg,#66F2FF,#B486FF,#FF67D4)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              ZWAP!
+            </span>{" "}
+            turns it into rewards.
+          </h1>
+
+          <p style={{ opacity: 0.7, marginTop: 16 }}>
+            It’s giving...smarter not harder.
+          </p>
+
+          {/* CTA */}
+          <div style={{ marginTop: 24 }}>
             <button
               style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "11px",
-                padding: "13px 24px",
-                borderRadius: "999px",
-                border: "1px solid rgba(174, 132, 255, 0.42)",
-                background: "rgba(255,255,255,0.025)",
-                color: "#FFFFFF",
-                cursor: "pointer",
-                fontSize: "17px",
-                fontWeight: 500,
-                boxShadow: "0 0 24px rgba(110, 90, 255, 0.08)",
+                ...button3D,
+                padding: "16px 34px",
+                fontSize: "18px",
+                fontWeight: 800,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                background:
+                  "linear-gradient(180deg,#2a2f75 0%,#0d1030 100%)",
+                boxShadow: `
+                  0 8px 22px rgba(0,0,0,0.7),
+                  0 0 18px rgba(150,100,255,0.35),
+                  inset 0 2px 0 rgba(255,255,255,0.25),
+                  inset 0 -4px 8px rgba(0,0,0,0.8)
+                `,
               }}
+              onMouseDown={(e) => press(e)}
+              onMouseUp={(e) => release(e)}
+              onMouseLeave={(e) => release(e)}
             >
-              <GooglePlayIcon />
-              Google Play
+              Lock In. Early.
             </button>
 
-            <button
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "11px",
-                padding: "13px 24px",
-                borderRadius: "999px",
-                border: "1px solid rgba(174, 132, 255, 0.42)",
-                background: "rgba(255,255,255,0.025)",
-                color: "#FFFFFF",
-                cursor: "pointer",
-                fontSize: "17px",
-                fontWeight: 500,
-                boxShadow: "0 0 24px rgba(110, 90, 255, 0.08)",
-              }}
-            >
-              <AppleIcon />
-              App Store
-            </button>
-          </nav>
-        </header>
+            {/* SOCIAL */}
+            <div style={{ display: "flex", gap: 24, marginTop: 16 }}>
+              <span style={{ fontSize: 22 }}>X</span>
+              <span style={{ fontSize: 22 }}>♪</span>
+              <span style={{ fontSize: 22 }}>✉</span>
+            </div>
+          </div>
+        </div>
 
-        <div
-          style={{
-            height: "2px",
-            width: "calc(100% - 170px)",
-            marginLeft: "170px",
-            marginBottom: "10px",
-            background:
-              "linear-gradient(90deg, rgba(222, 78, 255, 0.38) 0%, rgba(255, 183, 92, 0.48) 28%, rgba(90, 241, 255, 0.46) 100%)",
-            boxShadow:
-              "0 0 16px rgba(212, 82, 255, 0.14), 0 0 14px rgba(92, 240, 255, 0.10)",
-            opacity: 0.72,
-          }}
-        />
-
-        <main
-          style={{
-            flex: 1,
-            position: "relative",
-            overflow: "hidden",
-            display: "flex",
-            alignItems: "center",
-            padding: "12px 0 22px",
-          }}
-        >
-          <div
+        {/* RIGHT */}
+        <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
+          <img
+            src={heroPhoneMockup}
             style={{
-              position: "relative",
-              zIndex: 2,
-              display: "grid",
-              gridTemplateColumns: "0.78fr 1.22fr",
-              alignItems: "center",
-              gap: "32px",
-              width: "100%",
+              width: 1000,
+              marginTop: -30,
+              marginBottom: -30,
             }}
-          >
-            <section
-              style={{
-                maxWidth: "560px",
-                paddingTop: "6px",
-                paddingLeft: "12px",
-              }}
-            >
-              <h1
-                style={{
-                  margin: "0 0 18px 0",
-                  fontSize: "54px",
-                  lineHeight: "1.08",
-                  fontWeight: 300,
-                  letterSpacing: "-1px",
-                  color: "#F7F8FF",
-                }}
-              >
-                Most apps waste your time.
-                <br />
-                <span
-                  style={{
-                    fontWeight: 700,
-                    background:
-                      "linear-gradient(90deg, #66F2FF 0%, #7FD9FF 18%, #B486FF 55%, #FF67D4 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                  }}
-                >
-                  ZWAP!
-                </span>{" "}
-                turns it into rewards.
-              </h1>
-
-              <p
-                style={{
-                  margin: "0 0 26px 0",
-                  maxWidth: "430px",
-                  fontSize: "18px",
-                  lineHeight: "1.55",
-                  color: "rgba(235, 239, 255, 0.74)",
-                }}
-              >
-                It’s giving...smarter not harder.
-              </p>
-
-                <div
-                  style={{
-                    display: "inline-flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    marginTop: "6px",
-                  }}
-                >
-                  <button
-                    style={{
-                      padding: "17px 36px",
-                      borderRadius: "999px",
-                      border: "2px solid rgba(165, 103, 255, 0.78)",
-                      background:
-                        "linear-gradient(180deg, rgba(14,16,30,0.94) 0%, rgba(8,10,22,0.98) 100%)",
-                      color: "#F9FAFF",
-                      fontSize: "18px",
-                      fontWeight: 700,
-                      letterSpacing: "0.03em",
-                      cursor: "pointer",
-                      animation: "shimmer 3s ease-in-out infinite",
-                      minWidth: "230px",
-                    }}
-                  >
-                    Lock In. Early.
-                  </button>
-                
-                  <div
-                    style={{
-                      marginTop: "16px",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "24px",
-                      width: "100%",
-                      color: "rgba(245,247,255,0.94)",
-                    }}
-                  >
-                    <a
-                      href="#"
-                      style={{ color: "inherit", textDecoration: "none", display: "inline-flex" }}
-                    >
-                      <XIcon />
-                    </a>
-                    <a
-                      href="#"
-                      style={{ color: "inherit", textDecoration: "none", display: "inline-flex" }}
-                    >
-                      <TikTokIcon />
-                    </a>
-                    <a
-                      href="#"
-                      style={{ color: "inherit", textDecoration: "none", display: "inline-flex" }}
-                    >
-                      <MailIcon />
-                    </a>
-                  </div>
-                </div>
-            </section>
-
-            <section
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                minHeight: "650px",
-                position: "relative",
-              }}
-            >
-              <img
-                src={heroPhoneMockup}
-                alt="ZWAP! app hero mockup"
-                style={{
-                  width: "1080px", // 
-                  maxWidth: "100%", // 
-                  height: "auto",
-                  display: "block",
-                  marginTop: "-30px",   // 
-                  marginBottom: "-30px", // 
-                  animation: "floatMockup 5.2s ease-in-out infinite",
-                  filter: "drop-shadow(0 0 26px rgba(130, 88, 255, 0.12))",
-                }}
-              />
-            </section>
-          </div>
-        </main>
-
-        <footer
-          style={{
-            padding: "18px 0 26px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            borderTop: "1px solid rgba(255,255,255,0.06)",
-            color: "rgba(236, 240, 255, 0.72)",
-            fontSize: "15px",
-          }}
-        >
-          <div style={{ display: "flex", gap: "22px" }}>
-            <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
-              Privacy Policy
-            </a>
-            <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
-              Terms of Service
-            </a>
-          </div>
-
-          <div>© 2026 ZWAP!™. All rights reserved. Owned by ZWAP LLC.</div>
-        </footer>
+          />
+        </div>
       </div>
     </div>
   );
+}
+
+/* ---------- BUTTON PRESS ---------- */
+
+function press(e) {
+  e.currentTarget.style.transform = "translateY(2px)";
+  e.currentTarget.style.boxShadow =
+    "inset 0 3px 8px rgba(0,0,0,0.9)";
+}
+
+function release(e) {
+  e.currentTarget.style.transform = "translateY(0)";
+  e.currentTarget.style.boxShadow = button3D.boxShadow;
 }
