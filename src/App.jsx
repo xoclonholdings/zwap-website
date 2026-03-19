@@ -233,9 +233,9 @@ export default function App() {
               position: "relative",
               zIndex: 2,
               display: "grid",
-              gridTemplateColumns: "0.9fr 1.1fr",
+              gridTemplateColumns: "0.78fr 1.22fr",
               alignItems: "center",
-              gap: "24px",
+              gap: "32px",
               width: "100%",
             }}
           >
