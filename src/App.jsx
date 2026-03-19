@@ -1,6 +1,9 @@
 import logo from "./assets/Zwap_logo_full.png";
 import googlePlayLogo from "./assets/google_play_logo.png";
 import heroPhoneMockup from "./assets/hero_phone_mockup.png";
+import EarlyAccessModal from "./components/EarlyAccessModal";
+import bang from "./assets/Zwap_bang_3d.png";
+import React, { useState } from "react";
 
 function AppleIcon() {
   return (
@@ -64,6 +67,9 @@ function Star({ style }) {
 }
 
 export default function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  
   return (
     <div
       style={{
@@ -302,6 +308,7 @@ export default function App() {
                 }}
               >
                 <button
+                  onClick={() => setIsModalOpen(true)}
                   style={{
                     padding: "17px 36px",
                     borderRadius: "999px",
@@ -402,6 +409,13 @@ export default function App() {
 
           <div>© 2026 ZWAP!™. All rights reserved. Owned by ZWAP LLC.</div>
         </footer>
+        <EarlyAccessModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          email={email}
+          setEmail={setEmail}
+          bang={bang}
+        />
       </div>
     </div>
   );
