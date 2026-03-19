@@ -38,9 +38,19 @@ function TikTokIcon() {
 
 function MailIcon() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" aria-hidden="true">
-      <path d="M4 6h16v12H4z" />
-      <path d="m4 8 8 6 8-6" />
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.9"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <rect x="3" y="5" width="18" height="14" rx="2" ry="2" />
+      <path d="M4 7l8 6 8-6" />
     </svg>
   );
 }
@@ -284,43 +294,64 @@ export default function App() {
                 It’s giving...smarter not harder.
               </p>
 
-              <button
-                style={{
-                  padding: "17px 36px",
-                  borderRadius: "999px",
-                  border: "2px solid rgba(165, 103, 255, 0.78)",
-                  background:
-                    "linear-gradient(180deg, rgba(14,16,30,0.94) 0%, rgba(8,10,22,0.98) 100%)",
-                  color: "#F9FAFF",
-                  fontSize: "18px",
-                  fontWeight: 700,
-                  letterSpacing: "0.03em",
-                  cursor: "pointer",
-                  animation: "shimmer 3s ease-in-out infinite",
-                }}
-              >
-                Lock In. Early.
-              </button>
-
-              <div
-                style={{
-                  marginTop: "20px",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "26px",
-                  color: "rgba(245,247,255,0.94)",
-                }}
-              >
-                <a href="#" style={{ color: "inherit", textDecoration: "none", display: "inline-flex" }}>
-                  <XIcon />
-                </a>
-                <a href="#" style={{ color: "inherit", textDecoration: "none", display: "inline-flex" }}>
-                  <TikTokIcon />
-                </a>
-                <a href="#" style={{ color: "inherit", textDecoration: "none", display: "inline-flex" }}>
-                  <MailIcon />
-                </a>
-              </div>
+                <div
+                  style={{
+                    display: "inline-flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    marginTop: "6px",
+                  }}
+                >
+                  <button
+                    style={{
+                      padding: "17px 36px",
+                      borderRadius: "999px",
+                      border: "2px solid rgba(165, 103, 255, 0.78)",
+                      background:
+                        "linear-gradient(180deg, rgba(14,16,30,0.94) 0%, rgba(8,10,22,0.98) 100%)",
+                      color: "#F9FAFF",
+                      fontSize: "18px",
+                      fontWeight: 700,
+                      letterSpacing: "0.03em",
+                      cursor: "pointer",
+                      animation: "shimmer 3s ease-in-out infinite",
+                      minWidth: "230px",
+                    }}
+                  >
+                    Lock In. Early.
+                  </button>
+                
+                  <div
+                    style={{
+                      marginTop: "16px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "24px",
+                      width: "100%",
+                      color: "rgba(245,247,255,0.94)",
+                    }}
+                  >
+                    <a
+                      href="#"
+                      style={{ color: "inherit", textDecoration: "none", display: "inline-flex" }}
+                    >
+                      <XIcon />
+                    </a>
+                    <a
+                      href="#"
+                      style={{ color: "inherit", textDecoration: "none", display: "inline-flex" }}
+                    >
+                      <TikTokIcon />
+                    </a>
+                    <a
+                      href="#"
+                      style={{ color: "inherit", textDecoration: "none", display: "inline-flex" }}
+                    >
+                      <MailIcon />
+                    </a>
+                  </div>
+                </div>
             </section>
 
             <section
