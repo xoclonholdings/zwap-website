@@ -22,7 +22,7 @@ function AppleIcon() {
 
 function XIcon() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M18.9 2H22l-6.8 7.7L23 22h-6.1l-4.8-6.3L6.5 22H3.4l7.3-8.3L1.2 2h6.2l4.3 5.7L18.9 2Zm-1.1 18h1.7L6.3 3.9H4.5L17.8 20Z" />
     </svg>
   );
@@ -30,8 +30,17 @@ function XIcon() {
 
 function TikTokIcon() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M19.6 8.8c-1.5-.1-2.8-.9-3.6-2.1v7.6c0 3.2-2.6 5.7-5.7 5.7s-5.7-2.6-5.7-5.7 2.6-5.7 5.7-5.7c.3 0 .6 0 .9.1v3c-.3-.1-.6-.2-.9-.2-1.5 0-2.7 1.2-2.7 2.7S8.8 17 10.3 17s2.7-1.2 2.7-2.7V2h3c.2 1.8 1.7 3.2 3.6 3.4v3.4Z" />
+    </svg>
+  );
+}
+
+function MailIcon() {
+  return (
+    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" aria-hidden="true">
+      <path d="M4 6h16v12H4z" />
+      <path d="m4 8 8 6 8-6" />
     </svg>
   );
 }
@@ -62,43 +71,56 @@ export default function App() {
         color: "#F5F7FF",
         fontFamily:
           "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-        background: "#040409",
+        background: `
+          radial-gradient(circle at 74% 28%, rgba(214, 92, 255, 0.11), transparent 16%),
+          radial-gradient(circle at 84% 30%, rgba(88, 240, 255, 0.10), transparent 14%),
+          radial-gradient(circle at 64% 36%, rgba(255, 176, 86, 0.08), transparent 12%),
+          linear-gradient(180deg, #030308 0%, #080913 58%, #04050A 100%)
+        `,
       }}
     >
       <style>{`
-        @keyframes floatBang {
-          0% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
-          100% { transform: translateY(0px); }
+        @keyframes pulseRing {
+          0% { transform: scale(1); opacity: 0.78; }
+          50% { transform: scale(1.02); opacity: 1; }
+          100% { transform: scale(1); opacity: 0.78; }
         }
 
-        @keyframes pulseGlow {
-          0% { opacity: 0.72; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.015); }
-          100% { opacity: 0.72; transform: scale(1); }
+        @keyframes pulseBang {
+          0% { transform: scale(1); opacity: 0.95; }
+          50% { transform: scale(1.018); opacity: 1; }
+          100% { transform: scale(1); opacity: 0.95; }
         }
 
         @keyframes twinkle {
-          0% { opacity: 0.4; transform: scale(0.92); }
+          0% { opacity: 0.35; transform: scale(0.92); }
           50% { opacity: 1; transform: scale(1.08); }
-          100% { opacity: 0.4; transform: scale(0.92); }
+          100% { opacity: 0.35; transform: scale(0.92); }
         }
 
         @keyframes shimmer {
-          0% { box-shadow: 0 0 18px rgba(115, 88, 255, 0.28), 0 0 28px rgba(226, 74, 255, 0.10); }
-          50% { box-shadow: 0 0 26px rgba(115, 88, 255, 0.38), 0 0 38px rgba(226, 74, 255, 0.18); }
-          100% { box-shadow: 0 0 18px rgba(115, 88, 255, 0.28), 0 0 28px rgba(226, 74, 255, 0.10); }
+          0% { box-shadow: 0 0 18px rgba(115, 88, 255, 0.25), 0 0 28px rgba(226, 74, 255, 0.10); }
+          50% { box-shadow: 0 0 26px rgba(115, 88, 255, 0.35), 0 0 40px rgba(226, 74, 255, 0.16); }
+          100% { box-shadow: 0 0 18px rgba(115, 88, 255, 0.25), 0 0 28px rgba(226, 74, 255, 0.10); }
+        }
+
+        @keyframes logoSweep {
+          0% { transform: translateX(-140%) skewX(-20deg); opacity: 0; }
+          15% { opacity: 0.0; }
+          35% { opacity: 0.45; }
+          50% { opacity: 0.0; }
+          100% { transform: translateX(220%) skewX(-20deg); opacity: 0; }
         }
       `}</style>
 
       <div
         style={{
-          maxWidth: "1440px",
-          margin: "0 auto",
+          width: "100%",
           minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
           padding: "0 42px",
+          boxSizing: "border-box",
         }}
       >
         <header
@@ -111,42 +133,64 @@ export default function App() {
             zIndex: 3,
           }}
         >
-          <img
-            src={logo}
-            alt="ZWAP!"
+          <div
             style={{
-              width: "118px",
-              height: "auto",
-              objectFit: "contain",
+              position: "relative",
+              width: "132px",
+              overflow: "hidden",
             }}
-          />
+          >
+            <img
+              src={logo}
+              alt="ZWAP!"
+              style={{
+                width: "132px",
+                height: "auto",
+                objectFit: "contain",
+                display: "block",
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                bottom: 0,
+                width: "26px",
+                background:
+                  "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.0) 8%, rgba(255,255,255,0.45) 50%, rgba(255,255,255,0.0) 92%, transparent 100%)",
+                animation: "logoSweep 5.8s ease-in-out infinite",
+                pointerEvents: "none",
+              }}
+            />
+          </div>
 
           <nav
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "34px",
-              fontSize: "18px",
-              fontWeight: 500,
-              letterSpacing: "-0.2px",
+              gap: "38px",
+              fontSize: "17px",
+              fontWeight: 600,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
             }}
           >
             <a href="#" style={{ color: "#F5F7FF", textDecoration: "none" }}>
               About
             </a>
             <a href="#" style={{ color: "#F5F7FF", textDecoration: "none" }}>
-              Download
+              Features
             </a>
             <a href="#" style={{ color: "#F5F7FF", textDecoration: "none" }}>
-              Contact
+              Download
             </a>
 
             <button
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "10px",
-                padding: "13px 22px",
+                gap: "11px",
+                padding: "13px 24px",
                 borderRadius: "999px",
                 border: "1px solid rgba(174, 132, 255, 0.42)",
                 background: "rgba(255,255,255,0.025)",
@@ -154,6 +198,7 @@ export default function App() {
                 cursor: "pointer",
                 fontSize: "17px",
                 fontWeight: 500,
+                boxShadow: "0 0 24px rgba(110, 90, 255, 0.08)",
               }}
             >
               <GooglePlayIcon />
@@ -164,8 +209,8 @@ export default function App() {
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "10px",
-                padding: "13px 22px",
+                gap: "11px",
+                padding: "13px 24px",
                 borderRadius: "999px",
                 border: "1px solid rgba(174, 132, 255, 0.42)",
                 background: "rgba(255,255,255,0.025)",
@@ -173,6 +218,7 @@ export default function App() {
                 cursor: "pointer",
                 fontSize: "17px",
                 fontWeight: 500,
+                boxShadow: "0 0 24px rgba(110, 90, 255, 0.08)",
               }}
             >
               <AppleIcon />
@@ -188,10 +234,9 @@ export default function App() {
             overflow: "hidden",
             display: "flex",
             alignItems: "center",
-            padding: "10px 0 28px",
+            padding: "8px 0 22px",
           }}
         >
-          {/* FULL HERO BACKGROUND SCENE */}
           <div
             style={{
               position: "absolute",
@@ -205,11 +250,10 @@ export default function App() {
                 position: "absolute",
                 inset: 0,
                 background: `
-                  radial-gradient(circle at 72% 34%, rgba(208, 89, 255, 0.12), transparent 16%),
-                  radial-gradient(circle at 80% 34%, rgba(88, 240, 255, 0.10), transparent 14%),
-                  radial-gradient(circle at 62% 40%, rgba(255, 170, 76, 0.10), transparent 12%),
-                  radial-gradient(circle at 16% 72%, rgba(84, 224, 255, 0.05), transparent 18%),
-                  linear-gradient(180deg, #040409 0%, #080914 55%, #05060A 100%)
+                  radial-gradient(circle at 72% 32%, rgba(204, 91, 255, 0.10), transparent 16%),
+                  radial-gradient(circle at 82% 30%, rgba(88, 240, 255, 0.08), transparent 14%),
+                  radial-gradient(circle at 60% 36%, rgba(255, 176, 86, 0.07), transparent 12%),
+                  linear-gradient(180deg, rgba(4,4,9,0) 0%, rgba(8,9,19,0.08) 100%)
                 `,
               }}
             />
@@ -217,48 +261,48 @@ export default function App() {
             <div
               style={{
                 position: "absolute",
-                right: "8%",
-                top: "8%",
-                width: "680px",
-                height: "680px",
+                right: "6%",
+                top: "6%",
+                width: "760px",
+                height: "760px",
                 borderRadius: "50%",
                 background:
                   "conic-gradient(from 210deg, #FFB056 0deg, #D24DFF 130deg, #63F3FF 275deg, #FFB056 360deg)",
                 WebkitMask:
-                  "radial-gradient(circle, transparent 71%, black 72%, black 74.5%, transparent 75.5%)",
+                  "radial-gradient(circle, transparent 72%, black 73%, black 74.7%, transparent 75.6%)",
                 mask:
-                  "radial-gradient(circle, transparent 71%, black 72%, black 74.5%, transparent 75.5%)",
-                opacity: 0.98,
-                animation: "pulseGlow 4.2s ease-in-out infinite",
+                  "radial-gradient(circle, transparent 72%, black 73%, black 74.7%, transparent 75.6%)",
+                opacity: 0.92,
+                animation: "pulseRing 5.2s ease-in-out infinite",
               }}
             />
 
             <div
               style={{
                 position: "absolute",
-                right: "11%",
-                top: "15%",
-                width: "560px",
-                height: "560px",
+                right: "12%",
+                top: "14%",
+                width: "590px",
+                height: "590px",
                 borderRadius: "50%",
                 background:
-                  "radial-gradient(circle, rgba(203, 89, 255, 0.15) 0%, rgba(86, 221, 255, 0.08) 42%, transparent 72%)",
-                filter: "blur(30px)",
+                  "radial-gradient(circle, rgba(203, 89, 255, 0.13) 0%, rgba(86, 221, 255, 0.07) 42%, transparent 72%)",
+                filter: "blur(34px)",
               }}
             />
 
             <div
               style={{
                 position: "absolute",
-                left: "18%",
-                right: "8%",
-                bottom: "120px",
+                left: "20%",
+                right: "7%",
+                bottom: "116px",
                 height: "3px",
                 background:
-                  "linear-gradient(90deg, rgba(222, 78, 255, 0.72) 0%, rgba(255, 183, 92, 0.9) 26%, rgba(90, 241, 255, 0.88) 100%)",
+                  "linear-gradient(90deg, rgba(222, 78, 255, 0.72) 0%, rgba(255, 183, 92, 0.88) 26%, rgba(90, 241, 255, 0.86) 100%)",
                 boxShadow:
-                  "0 0 26px rgba(212, 82, 255, 0.20), 0 0 24px rgba(92, 240, 255, 0.16)",
-                opacity: 0.72,
+                  "0 0 26px rgba(212, 82, 255, 0.18), 0 0 24px rgba(92, 240, 255, 0.14)",
+                opacity: 0.62,
               }}
             />
 
@@ -266,26 +310,25 @@ export default function App() {
               style={{
                 position: "absolute",
                 right: "14%",
-                bottom: "18px",
-                width: "520px",
-                height: "160px",
+                bottom: "24px",
+                width: "560px",
+                height: "170px",
                 borderRadius: "50%",
                 background:
-                  "radial-gradient(ellipse at center, rgba(192, 86, 255, 0.14) 0%, rgba(88, 240, 255, 0.08) 34%, transparent 72%)",
+                  "radial-gradient(ellipse at center, rgba(192, 86, 255, 0.12) 0%, rgba(88, 240, 255, 0.06) 34%, transparent 72%)",
                 transform: "rotateX(72deg)",
-                filter: "blur(18px)",
-                opacity: 0.7,
+                filter: "blur(20px)",
+                opacity: 0.56,
               }}
             />
 
-            <Star style={{ top: "90px", left: "58%", fontSize: "16px" }} />
-            <Star style={{ top: "146px", right: "12%", fontSize: "18px" }} />
-            <Star style={{ bottom: "214px", right: "29%", fontSize: "22px" }} />
+            <Star style={{ top: "92px", left: "58%", fontSize: "16px" }} />
+            <Star style={{ top: "148px", right: "11%", fontSize: "18px" }} />
+            <Star style={{ bottom: "212px", right: "30%", fontSize: "22px" }} />
             <Star style={{ bottom: "184px", right: "16%", fontSize: "16px" }} />
-            <Star style={{ top: "265px", right: "36%", fontSize: "14px" }} />
+            <Star style={{ top: "260px", right: "36%", fontSize: "14px" }} />
           </div>
 
-          {/* CONTENT FLOATS ABOVE SCENE */}
           <div
             style={{
               position: "relative",
@@ -293,23 +336,24 @@ export default function App() {
               display: "grid",
               gridTemplateColumns: "0.95fr 1.05fr",
               alignItems: "center",
-              gap: "30px",
+              gap: "24px",
               width: "100%",
             }}
           >
             <section
               style={{
-                maxWidth: "545px",
+                maxWidth: "520px",
                 paddingTop: "6px",
+                paddingLeft: "12px",
               }}
             >
               <h1
                 style={{
-                  margin: "0 0 22px 0",
-                  fontSize: "58px",
-                  lineHeight: "1.06",
+                  margin: "0 0 18px 0",
+                  fontSize: "56px",
+                  lineHeight: "1.08",
                   fontWeight: 400,
-                  letterSpacing: "-1.4px",
+                  letterSpacing: "-1.3px",
                   color: "#F7F8FF",
                 }}
               >
@@ -320,23 +364,23 @@ export default function App() {
 
               <p
                 style={{
-                  margin: "0 0 30px 0",
-                  maxWidth: "430px",
+                  margin: "0 0 28px 0",
+                  maxWidth: "420px",
                   fontSize: "18px",
-                  lineHeight: "1.58",
+                  lineHeight: "1.55",
                   color: "rgba(235, 239, 255, 0.74)",
                 }}
               >
-                Earn from steps, games, and daily activity.
+                Earn rewards just for doing your daily do.
               </p>
 
               <button
                 style={{
-                  padding: "17px 34px",
+                  padding: "16px 34px",
                   borderRadius: "999px",
                   border: "1px solid rgba(165, 103, 255, 0.72)",
                   background:
-                    "linear-gradient(180deg, rgba(13,15,30,0.92) 0%, rgba(8,10,22,0.96) 100%)",
+                    "linear-gradient(180deg, rgba(14,16,30,0.92) 0%, rgba(8,10,22,0.96) 100%)",
                   color: "#F9FAFF",
                   fontSize: "17px",
                   fontWeight: 500,
@@ -356,40 +400,14 @@ export default function App() {
                   color: "rgba(245,247,255,0.94)",
                 }}
               >
-                <a
-                  href="#"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: "48px",
-                    height: "48px",
-                    borderRadius: "14px",
-                    border: "1px solid rgba(174, 132, 255, 0.22)",
-                    background: "rgba(255,255,255,0.02)",
-                    color: "inherit",
-                    textDecoration: "none",
-                  }}
-                >
+                <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
                   <XIcon />
                 </a>
-
-                <a
-                  href="#"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: "48px",
-                    height: "48px",
-                    borderRadius: "14px",
-                    border: "1px solid rgba(174, 132, 255, 0.22)",
-                    background: "rgba(255,255,255,0.02)",
-                    color: "inherit",
-                    textDecoration: "none",
-                  }}
-                >
+                <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
                   <TikTokIcon />
+                </a>
+                <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
+                  <MailIcon />
                 </a>
               </div>
             </section>
@@ -399,7 +417,7 @@ export default function App() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                minHeight: "640px",
+                minHeight: "650px",
                 position: "relative",
               }}
             >
@@ -407,14 +425,14 @@ export default function App() {
                 src={bang}
                 alt="ZWAP! bang"
                 style={{
-                  width: "360px",
+                  width: "330px",
                   maxWidth: "100%",
                   height: "auto",
                   position: "relative",
                   zIndex: 2,
-                  animation: "floatBang 4.6s ease-in-out infinite",
+                  animation: "pulseBang 4.8s ease-in-out infinite",
                   filter:
-                    "drop-shadow(0 0 22px rgba(113, 111, 255, 0.30)) drop-shadow(0 0 32px rgba(214, 92, 255, 0.16))",
+                    "drop-shadow(0 0 20px rgba(113, 111, 255, 0.24)) drop-shadow(0 0 32px rgba(214, 92, 255, 0.12))",
                 }}
               />
             </section>
@@ -439,12 +457,9 @@ export default function App() {
             <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
               Terms of Service
             </a>
-            <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
-              Contact
-            </a>
           </div>
 
-          <div>© ZWAP!</div>
+          <div>© 2026 ZWAP!™. All rights reserved. Owned by ZWAP LLC.</div>
         </footer>
       </div>
     </div>
