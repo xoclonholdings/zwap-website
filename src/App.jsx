@@ -4,6 +4,13 @@ import EarlyAccessModal from "./EarlyAccessModal.jsx";
 import LandingHeader from "./LandingHeader";
 import bang from "./assets/Zwap_bang_3d.png";
 
+import AboutPage from "./AboutPage";
+import FeaturesPage from "./FeaturesPage";
+import DownloadPage from "./DownloadPage";
+import GooglePlay from "./GooglePlay";
+import AppleStore from "./AppleStore";
+import MailingListDatabase from "./MailingListDatabase";
+
 function XIcon() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -42,6 +49,36 @@ function MailIcon() {
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
+  const [activePage, setActivePage] = useState("home");
+
+  if (activePage === "about") {
+    return (
+      <AboutPage
+        onBack={() => setActivePage("home")}
+        onLockIn={() => setIsModalOpen(true)}
+      />
+    );
+  }
+
+  if (activePage === "features") {
+    return <FeaturesPage onBack={() => setActivePage("home")} />;
+  }
+
+  if (activePage === "download") {
+    return <DownloadPage onBack={() => setActivePage("home")} />;
+  }
+
+  if (activePage === "google-play") {
+    return <GooglePlay />;
+  }
+
+  if (activePage === "apple-store") {
+    return <AppleStore />;
+  }
+
+  if (activePage === "mailing-list") {
+    return <MailingListDatabase onBack={() => setActivePage("home")} />;
+  }
 
   return (
     <div
@@ -150,7 +187,7 @@ export default function App() {
                 maxWidth: "320px",
               }}
             >
-              It’s giving...earn smarter not harder.
+              It’s giving...smarter not harder.
             </p>
 
             <button
@@ -270,7 +307,7 @@ export default function App() {
               maxWidth: "280px",
             }}
           >
-            © 2026 ZWAP!™ owned by ZWAP LLC. All rights reserved. 
+            © 2026 ZWAP!™. All rights reserved. Owned by ZWAP LLC.
           </div>
         </footer>
 
