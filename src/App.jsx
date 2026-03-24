@@ -307,7 +307,7 @@ export default function App() {
               maxWidth: "280px",
             }}
           >
-            © 2026 ZWAP!™. All rights reserved. Owned by ZWAP LLC.
+            © 2026 ZWAP!™ owned by ZWAP LLC. All rights reserved. 
           </div>
         </footer>
 
