@@ -1,21 +1,12 @@
-import logo from "./assets/Zwap_logo_full.png";
-import googlePlayLogo from "./assets/google_play_logo.PNG";
+import React, { useState } from "react";
 import heroPhoneMockup from "./assets/hero_phone_mockup.png";
 import EarlyAccessModal from "./EarlyAccessModal.jsx";
+import LandingHeader from "./LandingHeader";
 import bang from "./assets/Zwap_bang_3d.png";
-import React, { useState } from "react";
-
-function AppleIcon() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M16.7 12.9c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.7-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 6.9 1.1 9 .7 1 1.6 2.2 2.8 2.1 1.1 0 1.6-.7 3-.7 1.4 0 1.8.7 3 .7 1.2 0 2-.1 2.7-1.1.8-1 1.2-2 1.2-2.1-.1 0-2.3-.9-2.3-5.1ZM14.5 6.4c.6-.7 1-1.7.9-2.6-.9 0-2 .6-2.6 1.3-.6.6-1.1 1.6-1 2.5 1 .1 2-.5 2.7-1.2Z" />
-    </svg>
-  );
-}
 
 function XIcon() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M18.9 2H22l-6.8 7.7L23 22h-6.1l-4.8-6.3L6.5 22H3.4l7.3-8.3L1.2 2h6.2l4.3 5.7L18.9 2Zm-1.1 18h1.7L6.3 3.9H4.5L17.8 20Z" />
     </svg>
   );
@@ -23,7 +14,7 @@ function XIcon() {
 
 function TikTokIcon() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M19.6 8.8c-1.5-.1-2.8-.9-3.6-2.1v7.6c0 3.2-2.6 5.7-5.7 5.7s-5.7-2.6-5.7-5.7 2.6-5.7 5.7-5.7c.3 0 .6 0 .9.1v3c-.3-.1-.6-.2-.9-.2-1.5 0-2.7 1.2-2.7 2.7S8.8 17 10.3 17s2.7-1.2 2.7-2.7V2h3c.2 1.8 1.7 3.2 3.6 3.4v3.4Z" />
     </svg>
   );
@@ -32,8 +23,8 @@ function TikTokIcon() {
 function MailIcon() {
   return (
     <svg
-      width="22"
-      height="22"
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -48,41 +39,26 @@ function MailIcon() {
   );
 }
 
-function Star({ style }) {
-  return (
-    <div
-      style={{
-        position: "absolute",
-        color: "#F8F9FF",
-        fontSize: "14px",
-        lineHeight: 1,
-        textShadow: "0 0 12px rgba(255,255,255,0.95)",
-        animation: "twinkle 3s ease-in-out infinite",
-        ...style,
-      }}
-    >
-      ✦
-    </div>
-  );
-}
-
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
-  
+
   return (
     <div
       style={{
-        minHeight: "100vh",
-        color: "#F5F7FF",
-        fontFamily:
-          "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+        minHeight: "100dvh",
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
         background: `
           radial-gradient(circle at 72% 34%, rgba(204, 91, 255, 0.10), transparent 16%),
           radial-gradient(circle at 82% 30%, rgba(88, 240, 255, 0.08), transparent 14%),
           radial-gradient(circle at 60% 36%, rgba(255, 176, 86, 0.06), transparent 12%),
           linear-gradient(180deg, #030308 0%, #080913 58%, #04050A 100%)
         `,
+        color: "#F5F7FF",
+        fontFamily:
+          "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
       }}
     >
       <style>{`
@@ -108,297 +84,177 @@ export default function App() {
       <div
         style={{
           width: "100%",
-          minHeight: "100vh",
+          maxWidth: "430px",
+          minHeight: "100dvh",
+          padding:
+            "calc(env(safe-area-inset-top, 0px) + 14px) 16px calc(env(safe-area-inset-bottom, 0px) + 24px)",
+          boxSizing: "border-box",
           display: "flex",
           flexDirection: "column",
-          padding: "0 42px",
-          boxSizing: "border-box",
+          position: "relative",
         }}
       >
-        <header
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            padding: "28px 0 12px",
-            position: "relative",
-            zIndex: 3,
-          }}
-        >
-          <div
-            style={{
-              position: "relative",
-              width: "132px",
-              height: "58px",
-            }}
-          >
-            <img
-              src={logo}
-              alt="ZWAP!"
-              style={{
-                width: "132px",
-                height: "auto",
-                objectFit: "contain",
-                display: "block",
-              }}
-            />
-            <Star style={{ top: "-2px", left: "8px", fontSize: "12px" }} />
-            <Star style={{ top: "8px", right: "10px", fontSize: "10px", animationDelay: "0.8s" }} />
-            <Star style={{ bottom: "8px", right: "2px", fontSize: "12px", animationDelay: "1.4s" }} />
-          </div>
-
-          <nav
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "38px",
-              fontSize: "17px",
-              fontWeight: 600,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-            }}
-          >
-            <a href="#" style={{ color: "#F5F7FF", textDecoration: "none" }}>
-              About
-            </a>
-            <a href="#" style={{ color: "#F5F7FF", textDecoration: "none" }}>
-              Features
-            </a>
-            <a href="#" style={{ color: "#F5F7FF", textDecoration: "none" }}>
-              Download
-            </a>
-
-            <button
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "11px",
-                padding: "13px 24px",
-                borderRadius: "999px",
-                border: "1px solid rgba(174, 132, 255, 0.42)",
-                background: "rgba(255,255,255,0.025)",
-                color: "#FFFFFF",
-                cursor: "pointer",
-                fontSize: "17px",
-                fontWeight: 500,
-                boxShadow: "0 0 24px rgba(110, 90, 255, 0.08)",
-              }}
-            >
-              <img
-                src={googlePlayLogo}
-                alt="Google Play"
-                style={{
-                  width: "22px",
-                  height: "22px",
-                  objectFit: "contain",
-                  display: "block",
-                }}
-              />
-              Google Play
-            </button>
-
-            <button
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "11px",
-                padding: "13px 24px",
-                borderRadius: "999px",
-                border: "1px solid rgba(174, 132, 255, 0.42)",
-                background: "rgba(255,255,255,0.025)",
-                color: "#FFFFFF",
-                cursor: "pointer",
-                fontSize: "17px",
-                fontWeight: 500,
-                boxShadow: "0 0 24px rgba(110, 90, 255, 0.08)",
-              }}
-            >
-              <AppleIcon />
-              App Store
-            </button>
-          </nav>
-        </header>
-
-        <div
-          style={{
-            height: "2px",
-            width: "calc(100% - 170px)",
-            marginLeft: "170px",
-            marginBottom: "10px",
-            background:
-              "linear-gradient(90deg, rgba(222, 78, 255, 0.38) 0%, rgba(255, 183, 92, 0.48) 28%, rgba(90, 241, 255, 0.46) 100%)",
-            boxShadow:
-              "0 0 16px rgba(212, 82, 255, 0.14), 0 0 14px rgba(92, 240, 255, 0.10)",
-            opacity: 0.72,
-          }}
-        />
+        <LandingHeader />
 
         <main
           style={{
             flex: 1,
-            position: "relative",
-            overflow: "hidden",
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
-            padding: "12px 0 22px",
+            textAlign: "center",
+            paddingTop: "4px",
           }}
         >
-          <div
+          <section
             style={{
-              position: "relative",
-              zIndex: 2,
-              display: "grid",
-              gridTemplateColumns: "0.78fr 1.22fr",
-              alignItems: "center",
-              gap: "32px",
               width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            <section
+            <h1
               style={{
-                maxWidth: "560px",
-                paddingTop: "6px",
-                paddingLeft: "12px",
+                margin: "0 0 16px 0",
+                fontSize: "clamp(44px, 15vw, 72px)",
+                lineHeight: 0.98,
+                fontWeight: 300,
+                letterSpacing: "-0.04em",
+                color: "#F7F8FF",
+                maxWidth: "100%",
               }}
             >
-              <h1
+              Most apps waste your time.
+              <br />
+              <span
                 style={{
-                  margin: "0 0 18px 0",
-                  fontSize: "54px",
-                  lineHeight: "1.08",
-                  fontWeight: 300,
-                  letterSpacing: "-1px",
-                  color: "#F7F8FF",
+                  fontWeight: 800,
+                  background:
+                    "linear-gradient(90deg, #66F2FF 0%, #7FD9FF 18%, #B486FF 55%, #FF67D4 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
                 }}
               >
-                Most apps waste your time.
-                <br />
-                <span
-                  style={{
-                    fontWeight: 700,
-                    background:
-                      "linear-gradient(90deg, #66F2FF 0%, #7FD9FF 18%, #B486FF 55%, #FF67D4 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                  }}
-                >
-                  ZWAP!
-                </span>{" "}
-                turns it into rewards.
-              </h1>
+                ZWAP!
+              </span>{" "}
+              turns it into rewards.
+            </h1>
 
-              <p
-                style={{
-                  margin: "0 0 26px 0",
-                  maxWidth: "430px",
-                  fontSize: "18px",
-                  lineHeight: "1.55",
-                  color: "rgba(235, 239, 255, 0.74)",
-                }}
-              >
-                It’s giving...smarter not harder.
-              </p>
-
-              <div
-                style={{
-                  display: "inline-flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  marginTop: "6px",
-                }}
-              >
-                <button
-                  onClick={() => setIsModalOpen(true)}
-                  style={{
-                    padding: "17px 36px",
-                    borderRadius: "999px",
-                    border: "2px solid rgba(165, 103, 255, 0.78)",
-                    background:
-                      "linear-gradient(180deg, rgba(14,16,30,0.94) 0%, rgba(8,10,22,0.98) 100%)",
-                    color: "#F9FAFF",
-                    fontSize: "18px",
-                    fontWeight: 700,
-                    letterSpacing: "0.03em",
-                    cursor: "pointer",
-                    animation: "shimmer 3s ease-in-out infinite",
-                    minWidth: "230px",
-                  }}
-                >
-                  Lock In. Early.
-                </button>
-
-                <div
-                  style={{
-                    marginTop: "16px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    gap: "24px",
-                    width: "100%",
-                    color: "rgba(245,247,255,0.94)",
-                  }}
-                >
-                  <a
-                    href="#"
-                    style={{ color: "inherit", textDecoration: "none", display: "inline-flex" }}
-                  >
-                    <XIcon />
-                  </a>
-                  <a
-                    href="#"
-                    style={{ color: "inherit", textDecoration: "none", display: "inline-flex" }}
-                  >
-                    <TikTokIcon />
-                  </a>
-                  <a
-                    href="#"
-                    style={{ color: "inherit", textDecoration: "none", display: "inline-flex" }}
-                  >
-                    <MailIcon />
-                  </a>
-                </div>
-              </div>
-            </section>
-
-            <section
+            <p
               style={{
+                margin: "0 0 22px 0",
+                fontSize: "clamp(16px, 4.4vw, 19px)",
+                lineHeight: 1.45,
+                color: "rgba(235, 239, 255, 0.74)",
+                maxWidth: "320px",
+              }}
+            >
+              It’s giving...smarter not harder.
+            </p>
+
+            <button
+              onClick={() => setIsModalOpen(true)}
+              style={{
+                padding: "16px 28px",
+                borderRadius: "999px",
+                border: "2px solid rgba(165, 103, 255, 0.78)",
+                background:
+                  "linear-gradient(180deg, rgba(14,16,30,0.94) 0%, rgba(8,10,22,0.98) 100%)",
+                color: "#F9FAFF",
+                fontSize: "clamp(17px, 4.8vw, 20px)",
+                fontWeight: 800,
+                letterSpacing: "0.02em",
+                cursor: "pointer",
+                animation: "shimmer 3s ease-in-out infinite",
+                width: "100%",
+                maxWidth: "290px",
+                boxShadow:
+                  "inset 0 1px 0 rgba(255,255,255,0.08), 0 10px 26px rgba(73, 44, 162, 0.28)",
+              }}
+            >
+              Lock In. Early.
+            </button>
+
+            <div
+              style={{
+                marginTop: "16px",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                minHeight: "650px",
-                position: "relative",
+                gap: "26px",
+                width: "100%",
+                color: "rgba(245,247,255,0.94)",
               }}
             >
-              <img
-                src={heroPhoneMockup}
-                alt="ZWAP! app hero mockup"
-                style={{
-                  width: "1080px",
-                  maxWidth: "100%",
-                  height: "auto",
-                  display: "block",
-                  marginTop: "-30px",
-                  marginBottom: "-30px",
-                  animation: "floatMockup 5.2s ease-in-out infinite",
-                  filter: "drop-shadow(0 0 26px rgba(130, 88, 255, 0.12))",
-                }}
-              />
-            </section>
-          </div>
+              <a
+                href="#"
+                style={{ color: "inherit", textDecoration: "none", display: "inline-flex" }}
+              >
+                <XIcon />
+              </a>
+              <a
+                href="#"
+                style={{ color: "inherit", textDecoration: "none", display: "inline-flex" }}
+              >
+                <TikTokIcon />
+              </a>
+              <a
+                href="#"
+                style={{ color: "inherit", textDecoration: "none", display: "inline-flex" }}
+              >
+                <MailIcon />
+              </a>
+            </div>
+          </section>
+
+          <section
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: "28px",
+              marginBottom: "10px",
+            }}
+          >
+            <img
+              src={heroPhoneMockup}
+              alt="ZWAP! app hero mockup"
+              style={{
+                width: "100%",
+                maxWidth: "365px",
+                height: "auto",
+                display: "block",
+                animation: "floatMockup 5.2s ease-in-out infinite",
+                filter: "drop-shadow(0 0 26px rgba(130, 88, 255, 0.14))",
+              }}
+            />
+          </section>
         </main>
 
         <footer
           style={{
-            padding: "18px 0 26px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
+            marginTop: "8px",
+            paddingTop: "18px",
             borderTop: "1px solid rgba(255,255,255,0.06)",
             color: "rgba(236, 240, 255, 0.72)",
-            fontSize: "15px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "12px",
+            textAlign: "center",
           }}
         >
-          <div style={{ display: "flex", gap: "22px" }}>
+          <div
+            style={{
+              display: "flex",
+              gap: "18px",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              fontSize: "14px",
+            }}
+          >
             <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
               Privacy Policy
             </a>
@@ -407,8 +263,17 @@ export default function App() {
             </a>
           </div>
 
-          <div>© 2026 ZWAP!™. All rights reserved. Owned by ZWAP LLC.</div>
+          <div
+            style={{
+              fontSize: "14px",
+              lineHeight: 1.5,
+              maxWidth: "280px",
+            }}
+          >
+            © 2026 ZWAP!™ owned by ZWAP LLC. All rights reserved. 
+          </div>
         </footer>
+
         <EarlyAccessModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
