@@ -150,7 +150,7 @@ export default function App() {
                 maxWidth: "320px",
               }}
             >
-              It’s giving...smarter not harder.
+              It’s giving...earn smarter not harder.
             </p>
 
             <button
