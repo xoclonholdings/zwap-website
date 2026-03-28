@@ -64,7 +64,7 @@ export default function App() {
   if (activePage === "features") {
     return <FeaturesPage onBack={() => setActivePage("home")} />;
   }
-  
+
   if (activePage === "partners") {
     return <PartnersPage onBack={() => setActivePage("home")} />;
   }
@@ -86,24 +86,169 @@ export default function App() {
   }
 
   return (
-    <div
-      style={{
-        minHeight: "100dvh",
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        background: `
-          radial-gradient(circle at 72% 34%, rgba(204, 91, 255, 0.10), transparent 16%),
-          radial-gradient(circle at 82% 30%, rgba(88, 240, 255, 0.08), transparent 14%),
-          radial-gradient(circle at 60% 36%, rgba(255, 176, 86, 0.06), transparent 12%),
-          linear-gradient(180deg, #030308 0%, #080913 58%, #04050A 100%)
-        `,
-        color: "#F5F7FF",
-        fontFamily:
-          "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-      }}
-    >
+    <div className="landing-shell">
       <style>{`
+        :root {
+          color-scheme: dark;
+        }
+
+        * {
+          box-sizing: border-box;
+        }
+
+        .landing-shell {
+          min-height: 100dvh;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          color: #F5F7FF;
+          font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          background:
+            radial-gradient(circle at 72% 34%, rgba(204, 91, 255, 0.10), transparent 16%),
+            radial-gradient(circle at 82% 30%, rgba(88, 240, 255, 0.08), transparent 14%),
+            radial-gradient(circle at 60% 36%, rgba(255, 176, 86, 0.06), transparent 12%),
+            linear-gradient(180deg, #030308 0%, #080913 58%, #04050A 100%);
+        }
+
+        .landing-app {
+          width: 100%;
+          max-width: 100%;
+          min-height: 100dvh;
+          padding:
+            calc(env(safe-area-inset-top, 0px) + 14px)
+            16px
+            calc(env(safe-area-inset-bottom, 0px) + 24px);
+          display: flex;
+          flex-direction: column;
+          position: relative;
+        }
+
+        .landing-main {
+          flex: 1;
+          display: grid;
+          grid-template-columns: 1fr;
+          align-items: center;
+          gap: 28px;
+          padding-top: 6px;
+        }
+
+        .landing-copy {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+
+        .landing-title {
+          margin: 0 0 16px 0;
+          font-size: clamp(42px, 14vw, 72px);
+          line-height: 0.98;
+          font-weight: 300;
+          letter-spacing: -0.04em;
+          color: #F7F8FF;
+          max-width: 100%;
+        }
+
+        .landing-title-accent {
+          font-weight: 800;
+          background: linear-gradient(90deg, #66F2FF 0%, #7FD9FF 18%, #B486FF 55%, #FF67D4 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .landing-sub {
+          margin: 0 0 22px 0;
+          max-width: 320px;
+          font-size: clamp(16px, 4.4vw, 19px);
+          line-height: 1.45;
+          color: rgba(235, 239, 255, 0.74);
+        }
+
+        .landing-cta {
+          width: 100%;
+          max-width: 290px;
+          padding: 16px 28px;
+          border-radius: 999px;
+          border: 2px solid rgba(165, 103, 255, 0.78);
+          background: linear-gradient(180deg, rgba(14,16,30,0.94) 0%, rgba(8,10,22,0.98) 100%);
+          color: #F9FAFF;
+          font-size: clamp(17px, 4.8vw, 20px);
+          font-weight: 800;
+          letter-spacing: 0.02em;
+          cursor: pointer;
+          animation: shimmer 3s ease-in-out infinite;
+          box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.08),
+            0 10px 26px rgba(73, 44, 162, 0.28);
+        }
+
+        .landing-socials {
+          margin-top: 16px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 26px;
+          width: 100%;
+          color: rgba(245,247,255,0.94);
+        }
+
+        .landing-socials a {
+          color: inherit;
+          text-decoration: none;
+          display: inline-flex;
+        }
+
+        .landing-visual {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 8px;
+          margin-bottom: 10px;
+        }
+
+        .landing-visual img {
+          width: 100%;
+          max-width: 365px;
+          height: auto;
+          display: block;
+          animation: floatMockup 5.2s ease-in-out infinite;
+          filter: drop-shadow(0 0 26px rgba(130, 88, 255, 0.14));
+        }
+
+        .landing-footer {
+          margin-top: 8px;
+          padding-top: 18px;
+          border-top: 1px solid rgba(255,255,255,0.06);
+          color: rgba(236, 240, 255, 0.72);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+          text-align: center;
+        }
+
+        .landing-footer-links {
+          display: flex;
+          gap: 18px;
+          flex-wrap: wrap;
+          justify-content: center;
+          font-size: 14px;
+        }
+
+        .landing-footer-links a {
+          color: inherit;
+          text-decoration: none;
+        }
+
+        .landing-footer-copy {
+          font-size: 14px;
+          line-height: 1.5;
+          max-width: 280px;
+        }
+
         @keyframes twinkle {
           0% { opacity: 0.35; transform: scale(0.92); }
           50% { opacity: 1; transform: scale(1.08); }
@@ -121,198 +266,156 @@ export default function App() {
           50% { transform: translateY(-8px); }
           100% { transform: translateY(0px); }
         }
+
+        @media (min-width: 768px) {
+          .landing-app {
+            max-width: 900px;
+            padding:
+              calc(env(safe-area-inset-top, 0px) + 18px)
+              24px
+              calc(env(safe-area-inset-bottom, 0px) + 28px);
+          }
+
+          .landing-main {
+            gap: 34px;
+          }
+
+          .landing-title {
+            font-size: clamp(54px, 9vw, 84px);
+            max-width: 720px;
+          }
+
+          .landing-sub {
+            max-width: 420px;
+            font-size: 19px;
+          }
+
+          .landing-visual img {
+            max-width: 500px;
+          }
+
+          .landing-footer-copy {
+            max-width: 420px;
+          }
+        }
+
+        @media (min-width: 1100px) {
+          .landing-app {
+            max-width: 1200px;
+            padding:
+              calc(env(safe-area-inset-top, 0px) + 24px)
+              32px
+              calc(env(safe-area-inset-bottom, 0px) + 28px);
+          }
+
+          .landing-main {
+            grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+            gap: 44px;
+            padding-top: 18px;
+          }
+
+          .landing-copy {
+            align-items: flex-start;
+            text-align: left;
+          }
+
+          .landing-title {
+            font-size: clamp(64px, 6.6vw, 112px);
+            max-width: 680px;
+          }
+
+          .landing-sub {
+            max-width: 460px;
+            font-size: 22px;
+          }
+
+          .landing-cta {
+            max-width: 320px;
+            font-size: 21px;
+          }
+
+          .landing-socials {
+            justify-content: flex-start;
+          }
+
+          .landing-visual {
+            margin-top: 0;
+            margin-bottom: 0;
+          }
+
+          .landing-visual img {
+            max-width: 620px;
+          }
+
+          .landing-footer {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+          }
+
+          .landing-footer-copy {
+            text-align: right;
+          }
+        }
       `}</style>
 
-      <div
-        style={{
-          width: "100%",
-          maxWidth: "430px",
-          minHeight: "100dvh",
-          padding:
-            "calc(env(safe-area-inset-top, 0px) + 14px) 16px calc(env(safe-area-inset-bottom, 0px) + 24px)",
-          boxSizing: "border-box",
-          display: "flex",
-          flexDirection: "column",
-          position: "relative",
-        }}
-      >
-        <LandingHeader />
+      <div className="landing-app">
+        <LandingHeader
+          onAbout={() => setActivePage("about")}
+          onFeatures={() => setActivePage("features")}
+          onDownload={() => setActivePage("download")}
+          onPartners={() => setActivePage("partners")}
+          onGooglePlay={() => setActivePage("google-play")}
+          onAppleStore={() => setActivePage("apple-store")}
+        />
 
-        <main
-          style={{
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-            paddingTop: "4px",
-          }}
-        >
-          <section
-            style={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <h1
-              style={{
-                margin: "0 0 16px 0",
-                fontSize: "clamp(44px, 15vw, 72px)",
-                lineHeight: 0.98,
-                fontWeight: 300,
-                letterSpacing: "-0.04em",
-                color: "#F7F8FF",
-                maxWidth: "100%",
-              }}
-            >
+        <main className="landing-main">
+          <section className="landing-copy">
+            <h1 className="landing-title">
               Most apps waste your time.
               <br />
-              <span
-                style={{
-                  fontWeight: 800,
-                  background:
-                    "linear-gradient(90deg, #66F2FF 0%, #7FD9FF 18%, #B486FF 55%, #FF67D4 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                ZWAP!
-              </span>{" "}
-              turns it into rewards.
+              <span className="landing-title-accent">ZWAP!</span> turns it into rewards.
             </h1>
 
-            <p
-              style={{
-                margin: "0 0 22px 0",
-                fontSize: "clamp(16px, 4.4vw, 19px)",
-                lineHeight: 1.45,
-                color: "rgba(235, 239, 255, 0.74)",
-                maxWidth: "320px",
-              }}
-            >
-              It’s giving...smarter not harder.
-            </p>
+            <p className="landing-sub">It’s giving...smarter not harder.</p>
 
             <button
+              className="landing-cta"
               onClick={() => setIsModalOpen(true)}
-              style={{
-                padding: "16px 28px",
-                borderRadius: "999px",
-                border: "2px solid rgba(165, 103, 255, 0.78)",
-                background:
-                  "linear-gradient(180deg, rgba(14,16,30,0.94) 0%, rgba(8,10,22,0.98) 100%)",
-                color: "#F9FAFF",
-                fontSize: "clamp(17px, 4.8vw, 20px)",
-                fontWeight: 800,
-                letterSpacing: "0.02em",
-                cursor: "pointer",
-                animation: "shimmer 3s ease-in-out infinite",
-                width: "100%",
-                maxWidth: "290px",
-                boxShadow:
-                  "inset 0 1px 0 rgba(255,255,255,0.08), 0 10px 26px rgba(73, 44, 162, 0.28)",
-              }}
             >
               Lock In. Early.
             </button>
 
-            <div
-              style={{
-                marginTop: "16px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "26px",
-                width: "100%",
-                color: "rgba(245,247,255,0.94)",
-              }}
-            >
-              <a
-                href="#"
-                style={{ color: "inherit", textDecoration: "none", display: "inline-flex" }}
-              >
+            <div className="landing-socials">
+              <a href="#" aria-label="X">
                 <XIcon />
               </a>
-              <a
-                href="#"
-                style={{ color: "inherit", textDecoration: "none", display: "inline-flex" }}
-              >
+              <a href="#" aria-label="TikTok">
                 <TikTokIcon />
               </a>
-              <a
-                href="#"
-                style={{ color: "inherit", textDecoration: "none", display: "inline-flex" }}
-              >
+              <a href="#" aria-label="Email">
                 <MailIcon />
               </a>
             </div>
           </section>
 
-          <section
-            style={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginTop: "28px",
-              marginBottom: "10px",
-            }}
-          >
+          <section className="landing-visual">
             <img
               src={heroPhoneMockup}
               alt="ZWAP! app hero mockup"
-              style={{
-                width: "100%",
-                maxWidth: "365px",
-                height: "auto",
-                display: "block",
-                animation: "floatMockup 5.2s ease-in-out infinite",
-                filter: "drop-shadow(0 0 26px rgba(130, 88, 255, 0.14))",
-              }}
             />
           </section>
         </main>
 
-        <footer
-          style={{
-            marginTop: "8px",
-            paddingTop: "18px",
-            borderTop: "1px solid rgba(255,255,255,0.06)",
-            color: "rgba(236, 240, 255, 0.72)",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "12px",
-            textAlign: "center",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              gap: "18px",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              fontSize: "14px",
-            }}
-          >
-            <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
-              Privacy Policy
-            </a>
-            <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
-              Terms of Service
-            </a>
+        <footer className="landing-footer">
+          <div className="landing-footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
           </div>
 
-          <div
-            style={{
-              fontSize: "14px",
-              lineHeight: 1.5,
-              maxWidth: "280px",
-            }}
-          >
-            © 2026 ZWAP!™ owned by ZWAP LLC. All rights reserved. 
+          <div className="landing-footer-copy">
+            © 2026 ZWAP!™ owned by ZWAP LLC. All rights reserved.
           </div>
         </footer>
 
