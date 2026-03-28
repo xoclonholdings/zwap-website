@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import bang from "./assets/Zwap_bang_3d.png";
-import zwapCoin from "./assets/ZWAP Bang Coin Variant.png";
-import zPtsCoin from "./assets/Transparent Z Coin.png";
-
+import zwapCoin from "./assets/zwap_bang_coin.jpeg";
+import zPtsCoin from "./assets/zpts_z_coin.jpeg";
 function GradientText({ children }) {
   return (
     <span
