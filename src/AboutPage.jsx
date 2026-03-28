@@ -193,7 +193,7 @@ export default function AboutPage({ onBack, onLockIn }) {
     },
     {
       title: "PLAY",
-      desc: "Play games like zCube and zTrivia to earn rewards, stack ZWAP!, and build up zPts through active participation.",
+      desc: "Play games like zSlots and zTrivia to earn rewards, stack ZWAP!, and build up zPts through active participation.",
       accent: accents.purple,
     },
     {
