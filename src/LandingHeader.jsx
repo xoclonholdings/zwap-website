@@ -28,7 +28,47 @@ function Star({ style }) {
   );
 }
 
-export default function LandingHeader() {
+export default function LandingHeader({
+  onAbout,
+  onFeatures,
+  onDownload,
+  onPartners,
+  onGooglePlay,
+  onAppleStore,
+}) {
+  const linkStyle = {
+    color: "#F5F7FF",
+    textDecoration: "none",
+    background: "transparent",
+    border: "none",
+    padding: 0,
+    cursor: "pointer",
+    fontSize: "12px",
+    fontWeight: 700,
+    letterSpacing: "0.08em",
+    textTransform: "uppercase",
+  };
+
+  const storeButtonStyle = {
+    flex: 1,
+    minWidth: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "8px",
+    padding: "11px 12px",
+    borderRadius: "999px",
+    border: "1px solid rgba(174, 132, 255, 0.42)",
+    background:
+      "linear-gradient(180deg, rgba(18,20,38,0.92) 0%, rgba(10,12,26,0.98) 100%)",
+    color: "#FFFFFF",
+    cursor: "pointer",
+    fontSize: "14px",
+    fontWeight: 700,
+    boxShadow:
+      "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 20px rgba(0,0,0,0.22)",
+  };
+
   return (
     <>
       <header
@@ -75,20 +115,22 @@ export default function LandingHeader() {
               display: "flex",
               alignItems: "center",
               justifyContent: "flex-end",
-              gap: "18px",
+              gap: "14px",
               flexWrap: "wrap",
-              fontSize: "12px",
-              fontWeight: 700,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
             }}
           >
-            <a href="#" style={{ color: "#F5F7FF", textDecoration: "none" }}>
+            <button onClick={onAbout} style={linkStyle}>
               About
-            </a>
-            <a href="#" style={{ color: "#F5F7FF", textDecoration: "none" }}>
+            </button>
+            <button onClick={onFeatures} style={linkStyle}>
               Features
-            </a>
+            </button>
+            <button onClick={onDownload} style={linkStyle}>
+              Download
+            </button>
+            <button onClick={onPartners} style={linkStyle}>
+              Partners
+            </button>
           </nav>
         </div>
 
@@ -99,27 +141,7 @@ export default function LandingHeader() {
             width: "100%",
           }}
         >
-          <button
-            style={{
-              flex: 1,
-              minWidth: 0,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "8px",
-              padding: "11px 12px",
-              borderRadius: "999px",
-              border: "1px solid rgba(174, 132, 255, 0.42)",
-              background:
-                "linear-gradient(180deg, rgba(18,20,38,0.92) 0%, rgba(10,12,26,0.98) 100%)",
-              color: "#FFFFFF",
-              cursor: "pointer",
-              fontSize: "14px",
-              fontWeight: 700,
-              boxShadow:
-                "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 20px rgba(0,0,0,0.22)",
-            }}
-          >
+          <button onClick={onGooglePlay} style={storeButtonStyle}>
             <img
               src={googlePlayLogo}
               alt="Google Play"
@@ -133,27 +155,7 @@ export default function LandingHeader() {
             <span>Google Play</span>
           </button>
 
-          <button
-            style={{
-              flex: 1,
-              minWidth: 0,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "8px",
-              padding: "11px 12px",
-              borderRadius: "999px",
-              border: "1px solid rgba(174, 132, 255, 0.42)",
-              background:
-                "linear-gradient(180deg, rgba(18,20,38,0.92) 0%, rgba(10,12,26,0.98) 100%)",
-              color: "#FFFFFF",
-              cursor: "pointer",
-              fontSize: "14px",
-              fontWeight: 700,
-              boxShadow:
-                "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 20px rgba(0,0,0,0.22)",
-            }}
-          >
+          <button onClick={onAppleStore} style={storeButtonStyle}>
             <AppleIcon />
             <span>App Store</span>
           </button>
