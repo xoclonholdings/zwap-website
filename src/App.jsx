@@ -127,6 +127,17 @@ export default function App() {
   const [mailSubject, setMailSubject] = useState("Hello ZWAP!");
   const [mailMessage, setMailMessage] = useState("");
 
+  const trackClick = (label) => {
+    console.log("CLICK:", label);
+
+    if (window.gtag) {
+      window.gtag("event", "click", {
+        event_category: "Landing Social",
+        event_label: label,
+      });
+    }
+  };
+
   if (activePage === "about") {
     return (
       <AboutPage
@@ -215,14 +226,29 @@ export default function App() {
           text-align: center;
         }
 
-        .landing-title {
-          margin: 0 0 16px 0;
-          font-size: clamp(42px, 14vw, 72px);
+        .landing-title-wrap {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .landing-title-top {
+          margin: 0;
+          font-size: clamp(40px, 13vw, 68px);
           line-height: 0.98;
           font-weight: 300;
           letter-spacing: -0.04em;
           color: #F7F8FF;
-          max-width: 100%;
+        }
+
+        .landing-title-bottom {
+          margin: 6px 0 0 0;
+          font-size: clamp(40px, 13vw, 68px);
+          line-height: 0.98;
+          font-weight: 400;
+          letter-spacing: -0.04em;
+          color: #F7F8FF;
         }
 
         .landing-title-accent {
@@ -234,11 +260,19 @@ export default function App() {
         }
 
         .landing-sub {
-          margin: 0 0 22px 0;
-          max-width: 320px;
+          margin: 18px 0 22px 0;
+          max-width: 360px;
           font-size: clamp(16px, 4.4vw, 19px);
           line-height: 1.45;
           color: rgba(235, 239, 255, 0.74);
+          font-style: italic;
+        }
+
+        .landing-cta-group {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
         }
 
         .landing-cta {
@@ -265,7 +299,7 @@ export default function App() {
           justify-content: center;
           align-items: center;
           gap: 26px;
-          width: 100%;
+          width: auto;
           color: rgba(245,247,255,0.94);
         }
 
@@ -455,12 +489,6 @@ export default function App() {
             0 10px 26px rgba(73, 44, 162, 0.28);
         }
 
-        @keyframes twinkle {
-          0% { opacity: 0.35; transform: scale(0.92); }
-          50% { opacity: 1; transform: scale(1.08); }
-          100% { opacity: 0.35; transform: scale(0.92); }
-        }
-
         @keyframes shimmer {
           0% { box-shadow: 0 0 18px rgba(115, 88, 255, 0.25), 0 0 28px rgba(226, 74, 255, 0.10); }
           50% { box-shadow: 0 0 26px rgba(115, 88, 255, 0.35), 0 0 40px rgba(226, 74, 255, 0.16); }
@@ -486,9 +514,9 @@ export default function App() {
             gap: 34px;
           }
 
-          .landing-title {
-            font-size: clamp(54px, 9vw, 84px);
-            max-width: 720px;
+          .landing-title-top,
+          .landing-title-bottom {
+            font-size: clamp(52px, 8.6vw, 84px);
           }
 
           .landing-sub {
@@ -525,9 +553,14 @@ export default function App() {
             text-align: left;
           }
 
-          .landing-title {
-            font-size: clamp(64px, 6.6vw, 112px);
-            max-width: 680px;
+          .landing-title-wrap {
+            align-items: flex-start;
+          }
+
+          .landing-title-top,
+          .landing-title-bottom {
+            font-size: clamp(62px, 6.4vw, 108px);
+            max-width: 700px;
           }
 
           .landing-sub {
@@ -538,6 +571,10 @@ export default function App() {
           .landing-cta {
             max-width: 320px;
             font-size: 21px;
+          }
+
+          .landing-cta-group {
+            align-items: center;
           }
 
           .landing-socials {
@@ -578,53 +615,60 @@ export default function App() {
 
         <main className="landing-main">
           <section className="landing-copy">
-            <h1 className="landing-title">
-              Most apps waste your time.
-              <br />
-              <span className="landing-title-accent">ZWAP!</span> turns it into rewards.
-            </h1>
+            <div className="landing-title-wrap">
+              <h1 className="landing-title-top">Most apps waste your time.</h1>
+              <h2 className="landing-title-bottom">
+                <span className="landing-title-accent">ZWAP!</span> turns it into rewards.
+              </h2>
+            </div>
 
             <p className="landing-sub">It’s giving...earn smarter not harder.</p>
 
-            <button
-              className="landing-cta"
-              onClick={() => setIsModalOpen(true)}
-            >
-              Lock In. Early.
-            </button>
-
-            <div className="landing-socials">
-              <a
-                href="https://x.com/ZWAP_Online"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="X"
-              >
-                <XIcon />
-              </a>
-
-              <a
-                href="#"
-                aria-label="TikTok"
-              >
-                <TikTokIcon />
-              </a>
-
+            <div className="landing-cta-group">
               <button
-                type="button"
-                onClick={() => setIsMailOpen(true)}
-                aria-label="Email"
+                className="landing-cta"
+                onClick={() => setIsModalOpen(true)}
               >
-                <MailIcon />
+                Lock In. Early.
               </button>
+
+              <div className="landing-socials">
+                <a
+                  href="https://x.com/ZWAP_Online"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="X"
+                  onClick={() => trackClick("X")}
+                >
+                  <XIcon />
+                </a>
+
+                <a
+                  href="https://www.tiktok.com/@zwap_online?_t=ZS-8xkQk1Fq1gV&_r=1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="TikTok"
+                  onClick={() => trackClick("TikTok")}
+                >
+                  <TikTokIcon />
+                </a>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    trackClick("Email");
+                    setIsMailOpen(true);
+                  }}
+                  aria-label="Email"
+                >
+                  <MailIcon />
+                </button>
+              </div>
             </div>
           </section>
 
           <section className="landing-visual">
-            <img
-              src={heroPhoneMockup}
-              alt="ZWAP! app hero mockup"
-            />
+            <img src={heroPhoneMockup} alt="ZWAP! app hero mockup" />
           </section>
         </main>
 
