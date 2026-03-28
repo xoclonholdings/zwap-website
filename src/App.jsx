@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import heroPhoneMockup from "./assets/hero_phone_mockup.png";
 import EarlyAccessModal from "./EarlyAccessModal.jsx";
 import LandingHeader from "./LandingHeader";
@@ -47,10 +47,85 @@ function MailIcon() {
   );
 }
 
+function MailModal({
+  isOpen,
+  onClose,
+  subject,
+  setSubject,
+  message,
+  setMessage,
+}) {
+  const mailtoHref = useMemo(() => {
+    const to = "app@zwap.online";
+    const encodedSubject = encodeURIComponent(subject);
+    const encodedBody = encodeURIComponent(message);
+    return `mailto:${to}?subject=${encodedSubject}&body=${encodedBody}`;
+  }, [subject, message]);
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="mail-modal-overlay" onClick={onClose}>
+      <div
+        className="mail-modal-card"
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Contact ZWAP"
+      >
+        <div className="mail-modal-head">
+          <div className="mail-modal-title">Contact ZWAP!</div>
+          <button className="mail-close" onClick={onClose} aria-label="Close email modal">
+            ×
+          </button>
+        </div>
+
+        <div className="mail-field">
+          <label className="mail-label">To</label>
+          <input className="mail-input readonly" value="app@zwap.online" readOnly />
+        </div>
+
+        <div className="mail-field">
+          <label className="mail-label">Subject</label>
+          <input
+            className="mail-input"
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            placeholder="What can we help with?"
+          />
+        </div>
+
+        <div className="mail-field">
+          <label className="mail-label">Message</label>
+          <textarea
+            className="mail-textarea"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Write your message here..."
+          />
+        </div>
+
+        <div className="mail-actions">
+          <button className="mail-secondary" onClick={onClose}>
+            Cancel
+          </button>
+          <a className="mail-primary" href={mailtoHref}>
+            Open Mail App
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [activePage, setActivePage] = useState("home");
+
+  const [isMailOpen, setIsMailOpen] = useState(false);
+  const [mailSubject, setMailSubject] = useState("Hello ZWAP!");
+  const [mailMessage, setMailMessage] = useState("");
 
   if (activePage === "about") {
     return (
@@ -194,10 +269,17 @@ export default function App() {
           color: rgba(245,247,255,0.94);
         }
 
-        .landing-socials a {
+        .landing-socials a,
+        .landing-socials button {
           color: inherit;
           text-decoration: none;
           display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          background: none;
+          border: none;
+          padding: 0;
+          cursor: pointer;
         }
 
         .landing-visual {
@@ -247,6 +329,130 @@ export default function App() {
           font-size: 14px;
           line-height: 1.5;
           max-width: 280px;
+        }
+
+        .mail-modal-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(1, 2, 8, 0.76);
+          backdrop-filter: blur(8px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+          z-index: 9999;
+        }
+
+        .mail-modal-card {
+          width: 100%;
+          max-width: 460px;
+          border-radius: 24px;
+          border: 1px solid rgba(174, 132, 255, 0.24);
+          background:
+            radial-gradient(circle at 72% 24%, rgba(122, 91, 255, 0.10), transparent 24%),
+            linear-gradient(180deg, rgba(12,14,28,0.96) 0%, rgba(8,10,20,0.98) 100%);
+          box-shadow:
+            0 20px 60px rgba(0,0,0,0.42),
+            0 0 30px rgba(103, 78, 255, 0.12);
+          padding: 20px;
+        }
+
+        .mail-modal-head {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          margin-bottom: 18px;
+        }
+
+        .mail-modal-title {
+          font-size: 24px;
+          line-height: 1.05;
+          font-weight: 900;
+          letter-spacing: -0.03em;
+          color: #F7F8FF;
+        }
+
+        .mail-close {
+          border: none;
+          background: transparent;
+          color: rgba(245,247,255,0.82);
+          font-size: 32px;
+          line-height: 1;
+          cursor: pointer;
+          padding: 0;
+        }
+
+        .mail-field {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          margin-bottom: 14px;
+        }
+
+        .mail-label {
+          font-size: 13px;
+          font-weight: 800;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: rgba(245,247,255,0.62);
+        }
+
+        .mail-input,
+        .mail-textarea {
+          width: 100%;
+          border-radius: 16px;
+          border: 1px solid rgba(174, 132, 255, 0.24);
+          background: rgba(255,255,255,0.04);
+          color: #F5F7FF;
+          padding: 14px 16px;
+          font-size: 15px;
+          outline: none;
+        }
+
+        .mail-input.readonly {
+          color: rgba(245,247,255,0.88);
+        }
+
+        .mail-textarea {
+          min-height: 120px;
+          resize: vertical;
+          line-height: 1.5;
+        }
+
+        .mail-actions {
+          display: flex;
+          gap: 12px;
+          margin-top: 8px;
+        }
+
+        .mail-secondary,
+        .mail-primary {
+          flex: 1;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 52px;
+          border-radius: 999px;
+          font-size: 15px;
+          font-weight: 800;
+          text-decoration: none;
+          cursor: pointer;
+        }
+
+        .mail-secondary {
+          border: 1px solid rgba(255,255,255,0.14);
+          background: rgba(255,255,255,0.04);
+          color: rgba(245,247,255,0.88);
+        }
+
+        .mail-primary {
+          border: 2px solid rgba(165, 103, 255, 0.78);
+          background: linear-gradient(180deg, rgba(14,16,30,0.94) 0%, rgba(8,10,22,0.98) 100%);
+          color: #F9FAFF;
+          box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.08),
+            0 10px 26px rgba(73, 44, 162, 0.28);
         }
 
         @keyframes twinkle {
@@ -335,7 +541,7 @@ export default function App() {
           }
 
           .landing-socials {
-            justify-content: flex-start;
+            justify-content: center;
           }
 
           .landing-visual {
@@ -388,15 +594,29 @@ export default function App() {
             </button>
 
             <div className="landing-socials">
-              <a href="#" aria-label="X">
+              <a
+                href="https://x.com/ZWAP_Online"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="X"
+              >
                 <XIcon />
               </a>
-              <a href="#" aria-label="TikTok">
+
+              <a
+                href="#"
+                aria-label="TikTok"
+              >
                 <TikTokIcon />
               </a>
-              <a href="#" aria-label="Email">
+
+              <button
+                type="button"
+                onClick={() => setIsMailOpen(true)}
+                aria-label="Email"
+              >
                 <MailIcon />
-              </a>
+              </button>
             </div>
           </section>
 
@@ -425,6 +645,15 @@ export default function App() {
           email={email}
           setEmail={setEmail}
           bang={bang}
+        />
+
+        <MailModal
+          isOpen={isMailOpen}
+          onClose={() => setIsMailOpen(false)}
+          subject={mailSubject}
+          setSubject={setMailSubject}
+          message={mailMessage}
+          setMessage={setMailMessage}
         />
       </div>
     </div>
