@@ -378,7 +378,7 @@ export default function App() {
               <span className="landing-title-accent">ZWAP!</span> turns it into rewards.
             </h1>
 
-            <p className="landing-sub">It’s giving...smarter not harder.</p>
+            <p className="landing-sub">It’s giving...earn smarter not harder.</p>
 
             <button
               className="landing-cta"
