@@ -6,6 +6,7 @@ import bang from "./assets/Zwap_bang_3d.png";
 
 import AboutPage from "./AboutPage";
 import FeaturesPage from "./FeaturesPage";
+import PartnersPage from "./PartnersPage";
 import DownloadPage from "./DownloadPage";
 import GooglePlay from "./GooglePlay";
 import AppleStore from "./AppleStore";
@@ -62,6 +63,10 @@ export default function App() {
 
   if (activePage === "features") {
     return <FeaturesPage onBack={() => setActivePage("home")} />;
+  }
+  
+  if (activePage === "partners") {
+    return <PartnersPage onBack={() => setActivePage("home")} />;
   }
 
   if (activePage === "download") {
