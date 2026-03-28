@@ -235,18 +235,18 @@ export default function App() {
 
         .landing-title-top {
           margin: 0;
-          font-size: clamp(40px, 13vw, 68px);
-          line-height: 0.98;
-          font-weight: 300;
+          font-size: clamp(36px, 11.5vw, 62px);
+          line-height: 1.02;
+          font-weight: 400;
           letter-spacing: -0.04em;
           color: #F7F8FF;
         }
 
         .landing-title-bottom {
-          margin: 6px 0 0 0;
-          font-size: clamp(40px, 13vw, 68px);
-          line-height: 0.98;
-          font-weight: 400;
+          margin: 12px 0 0 0;
+          font-size: clamp(42px, 13vw, 68px);
+          line-height: 1.02;
+          font-weight: 700;
           letter-spacing: -0.04em;
           color: #F7F8FF;
         }
@@ -514,9 +514,13 @@ export default function App() {
             gap: 34px;
           }
 
-          .landing-title-top,
+          .landing-title-top {
+            font-size: clamp(48px, 7.8vw, 74px);
+          }
+
           .landing-title-bottom {
-            font-size: clamp(52px, 8.6vw, 84px);
+            font-size: clamp(54px, 8.6vw, 84px);
+            margin-top: 18px;
           }
 
           .landing-sub {
@@ -549,22 +553,26 @@ export default function App() {
           }
 
           .landing-copy {
-            align-items: flex-start;
-            text-align: left;
+            align-items: center;
+            text-align: center;
           }
 
           .landing-title-wrap {
-            align-items: flex-start;
+            align-items: center;
           }
 
-          .landing-title-top,
+          .landing-title-top {
+            font-size: clamp(56px, 5.2vw, 84px);
+          }
+
           .landing-title-bottom {
-            font-size: clamp(62px, 6.4vw, 108px);
-            max-width: 700px;
+            font-size: clamp(64px, 6vw, 96px);
+            margin-top: 24px;
+            max-width: 760px;
           }
 
           .landing-sub {
-            max-width: 460px;
+            max-width: 500px;
             font-size: 22px;
           }
 
