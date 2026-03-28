@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import bang from "./assets/Zwap_bang_3d.png";
+import zwapCoin from "./assets/ZWAP Bang Coin Variant.png";
+import zPtsCoin from "./assets/Transparent Z Coin.png";
 
 function GradientText({ children }) {
   return (
@@ -9,6 +11,7 @@ function GradientText({ children }) {
           "linear-gradient(90deg, #66F2FF 0%, #7FD9FF 18%, #B486FF 55%, #FF67D4 100%)",
         WebkitBackgroundClip: "text",
         WebkitTextFillColor: "transparent",
+        backgroundClip: "text",
       }}
     >
       {children}
@@ -38,7 +41,7 @@ function GlassCard({ children, style = {} }) {
   return (
     <div
       style={{
-        borderRadius: "26px",
+        borderRadius: "28px",
         border: "1px solid rgba(255,255,255,0.08)",
         background:
           "radial-gradient(circle at 80% 18%, rgba(180,134,255,0.12), transparent 28%), rgba(255,255,255,0.035)",
@@ -53,7 +56,15 @@ function GlassCard({ children, style = {} }) {
   );
 }
 
-function CurrencyCard({ title, desc, accent, reverse = false }) {
+function CurrencyCard({
+  title,
+  desc,
+  accent,
+  coinSrc,
+  coinAlt,
+  reverse = false,
+  isDesktop = false,
+}) {
   const background = reverse
     ? "linear-gradient(135deg, rgba(255,103,212,0.10) 0%, rgba(180,134,255,0.10) 48%, rgba(102,242,255,0.08) 100%)"
     : "linear-gradient(135deg, rgba(102,242,255,0.10) 0%, rgba(121,175,255,0.10) 48%, rgba(180,134,255,0.08) 100%)";
@@ -61,21 +72,55 @@ function CurrencyCard({ title, desc, accent, reverse = false }) {
   return (
     <div
       style={{
-        borderRadius: "24px",
+        borderRadius: "26px",
         border: `1px solid ${accent.border}`,
         background,
         boxShadow: `0 0 28px ${accent.glow}`,
-        padding: "22px 20px",
-        minHeight: "100%",
+        padding: isDesktop ? "24px 22px" : "22px 18px",
+        minHeight: isDesktop ? "100%" : "unset",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        textAlign: "center",
+        overflow: "hidden",
       }}
     >
       <div
         style={{
-          fontSize: "26px",
+          width: isDesktop ? "108px" : "92px",
+          height: isDesktop ? "108px" : "92px",
+          borderRadius: "999px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginBottom: "14px",
+          background: "rgba(255,255,255,0.04)",
+          boxShadow: `0 0 26px ${accent.glow}`,
+          flexShrink: 0,
+        }}
+      >
+        <img
+          src={coinSrc}
+          alt={coinAlt}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "contain",
+            filter: reverse
+              ? "drop-shadow(0 0 18px rgba(255,103,212,0.22))"
+              : "drop-shadow(0 0 18px rgba(103,242,255,0.22))",
+          }}
+        />
+      </div>
+
+      <div
+        style={{
+          fontSize: isDesktop ? "30px" : "26px",
           fontWeight: 900,
           letterSpacing: "-0.02em",
           marginBottom: "10px",
           color: accent.text,
+          lineHeight: 1.05,
         }}
       >
         {title}
@@ -83,9 +128,10 @@ function CurrencyCard({ title, desc, accent, reverse = false }) {
 
       <div
         style={{
-          fontSize: "15px",
+          fontSize: isDesktop ? "17px" : "15px",
           lineHeight: 1.7,
-          color: "rgba(235,239,255,0.8)",
+          color: "rgba(235,239,255,0.82)",
+          maxWidth: "34rem",
         }}
       >
         {desc}
@@ -192,6 +238,8 @@ export default function AboutPage({ onBack, onLockIn }) {
             ? "32px 28px 36px"
             : "calc(env(safe-area-inset-top, 0px) + 14px) 16px calc(env(safe-area-inset-bottom, 0px) + 28px)",
           boxSizing: "border-box",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         <div
@@ -312,7 +360,7 @@ export default function AboutPage({ onBack, onLockIn }) {
             <div
               style={{
                 fontSize: isDesktop ? "20px" : "15px",
-                lineHeight: isDesktop ? 1.7 : 1.7,
+                lineHeight: 1.7,
                 color: "rgba(235,239,255,0.76)",
                 maxWidth: isDesktop ? "860px" : "unset",
                 marginInline: "auto",
@@ -433,19 +481,27 @@ export default function AboutPage({ onBack, onLockIn }) {
             style={{
               display: "grid",
               gridTemplateColumns: isDesktop ? "1fr 1fr" : "1fr",
-              gap: "14px",
+              gap: isDesktop ? "18px" : "14px",
+              alignItems: "stretch",
             }}
           >
             <CurrencyCard
               title="ZWAP!"
               desc="The main reward token inside the ecosystem. Earn it through movement, games, and participation, then use it across the ZWAP! experience."
               accent={accents.cyan}
+              coinSrc={zwapCoin}
+              coinAlt="ZWAP coin"
+              isDesktop={isDesktop}
             />
+
             <CurrencyCard
               title="zPts"
               desc="Loyalty-style points earned through gameplay and engagement. They deepen the loop, support retention, and reward active users."
               accent={accents.pink}
+              coinSrc={zPtsCoin}
+              coinAlt="zPts coin"
               reverse
+              isDesktop={isDesktop}
             />
           </div>
         </section>
@@ -453,65 +509,75 @@ export default function AboutPage({ onBack, onLockIn }) {
         <section
           style={{
             marginBottom: "28px",
-            maxWidth: "980px",
-            marginInline: "auto",
+            display: "flex",
+            justifyContent: "center",
           }}
         >
-          <GlassCard
+          <button
+            onClick={onLockIn}
             style={{
-              textAlign: "center",
-              padding: isDesktop ? "30px 32px" : "22px 20px",
+              padding: "15px 28px",
+              borderRadius: "999px",
+              border: "2px solid rgba(165, 103, 255, 0.78)",
+              background:
+                "linear-gradient(180deg, rgba(14,16,30,0.94) 0%, rgba(8,10,22,0.98) 100%)",
+              color: "#F9FAFF",
+              fontSize: isDesktop ? "19px" : "17px",
+              fontWeight: 800,
+              letterSpacing: "0.02em",
+              cursor: "pointer",
+              width: "100%",
+              maxWidth: "270px",
+              boxShadow:
+                "inset 0 1px 0 rgba(255,255,255,0.08), 0 10px 26px rgba(73, 44, 162, 0.28)",
             }}
           >
-            <div
-              style={{
-                fontSize: isDesktop ? "42px" : "24px",
-                lineHeight: 1.08,
-                fontWeight: 900,
-                letterSpacing: "-0.03em",
-                marginBottom: "10px",
-                color: "#F9FBFF",
-              }}
-            >
-              Built for the future.
-            </div>
-
-            <p
-              style={{
-                margin: "0 auto 18px",
-                maxWidth: isDesktop ? "760px" : "320px",
-                fontSize: isDesktop ? "20px" : "15px",
-                lineHeight: isDesktop ? 1.7 : 1.65,
-                color: "rgba(235,239,255,0.76)",
-              }}
-            >
-              ZWAP! is built around user-owned value, ecosystem participation, and
-              a reward loop that feels natural instead of forced.
-            </p>
-
-            <button
-              onClick={onLockIn}
-              style={{
-                padding: "15px 28px",
-                borderRadius: "999px",
-                border: "2px solid rgba(165, 103, 255, 0.78)",
-                background:
-                  "linear-gradient(180deg, rgba(14,16,30,0.94) 0%, rgba(8,10,22,0.98) 100%)",
-                color: "#F9FAFF",
-                fontSize: isDesktop ? "19px" : "17px",
-                fontWeight: 800,
-                letterSpacing: "0.02em",
-                cursor: "pointer",
-                width: "100%",
-                maxWidth: "270px",
-                boxShadow:
-                  "inset 0 1px 0 rgba(255,255,255,0.08), 0 10px 26px rgba(73, 44, 162, 0.28)",
-              }}
-            >
-              Lock In. Early.
-            </button>
-          </GlassCard>
+            Lock In. Early.
+          </button>
         </section>
+
+        <footer
+          style={{
+            marginTop: "8px",
+            paddingTop: "18px",
+            borderTop: "1px solid rgba(255,255,255,0.06)",
+            color: "rgba(236, 240, 255, 0.72)",
+            display: "flex",
+            flexDirection: isDesktop ? "row" : "column",
+            alignItems: "center",
+            justifyContent: isDesktop ? "space-between" : "center",
+            gap: "12px",
+            textAlign: isDesktop ? "left" : "center",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              gap: "18px",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              fontSize: "14px",
+            }}
+          >
+            <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
+              Privacy Policy
+            </a>
+            <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
+              Terms of Service
+            </a>
+          </div>
+
+          <div
+            style={{
+              fontSize: "14px",
+              lineHeight: 1.5,
+              maxWidth: isDesktop ? "420px" : "280px",
+              textAlign: isDesktop ? "right" : "center",
+            }}
+          >
+            © 2026 ZWAP!™ owned by ZWAP LLC. All rights reserved.
+          </div>
+        </footer>
       </div>
     </div>
   );
