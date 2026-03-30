@@ -1,53 +1,7 @@
 import React, { useEffect, useState } from "react";
-
-const coreModes = [
-  { id: "move", label: "MOVE" },
-  { id: "play", label: "PLAY" },
-  { id: "swap", label: "SWAP" },
-  { id: "shop", label: "SHOP" },
-];
-
-const systemModes = [
-  { id: "world", label: "WORLD" },
-  { id: "profile", label: "PROFILE" },
-  { id: "audio", label: "AUDIO" },
-  { id: "learn", label: "LEARN" },
-];
-
-const modeContent = {
-  move: {
-    title: "MOVE",
-    description: "Turn real-world movement into rewards. Build streaks. Earn daily.",
-  },
-  play: {
-    title: "PLAY",
-    description: "Play games. Earn ZWAP. Submit your own.",
-  },
-  swap: {
-    title: "SWAP",
-    description: "Exchange assets seamlessly through integrated liquidity.",
-  },
-  shop: {
-    title: "SHOP",
-    description: "Spend rewards on digital and real-world items.",
-  },
-  world: {
-    title: "WORLD",
-    description: "See live activity. Feel presence. React in real time.",
-  },
-  profile: {
-    title: "PROFILE",
-    description: "Your identity. Your badges. Your progression.",
-  },
-  audio: {
-    title: "AUDIO",
-    description: "Soundtrack your experience. Connect and control playback.",
-  },
-  learn: {
-    title: "LEARN",
-    description: "Understand the system. Unlock deeper value.",
-  },
-};
+import { coreModes, systemModes, modeContent } from "./FeaturesData";
+import ModeRail from "./ModeRail";
+import ModePanel from "./ModePanel";
 
 export default function FeaturesPage({ onBack }) {
   const [activeMode, setActiveMode] = useState("move");
@@ -65,218 +19,230 @@ export default function FeaturesPage({ onBack }) {
   }, []);
 
   return (
-    <div style={styles.page}>
-      <button onClick={onBack} style={styles.back}>
-        ← Back
-      </button>
-
-      <h1 style={styles.title}>Features</h1>
-
-      {isDesktop ? (
-        <div style={styles.desktopLayout}>
-          <div style={styles.leftRail}>
-            {systemModes.map((mode) => (
-              <button
-                key={mode.id}
-                onClick={() => setActiveMode(mode.id)}
-                style={{
-                  ...styles.button,
-                  ...(activeMode === mode.id ? styles.active : {}),
-                }}
-              >
-                {mode.label}
-              </button>
-            ))}
-          </div>
-
-          <div style={styles.panel}>
-            <div style={styles.overlay}>
-              <h2 style={styles.overlayTitle}>{modeContent[activeMode].title}</h2>
-              <p style={styles.overlayText}>{modeContent[activeMode].description}</p>
-            </div>
-          </div>
-
-          <div style={styles.rightRail}>
-            {coreModes.map((mode) => (
-              <button
-                key={mode.id}
-                onClick={() => setActiveMode(mode.id)}
-                style={{
-                  ...styles.button,
-                  ...(activeMode === mode.id ? styles.active : {}),
-                }}
-              >
-                {mode.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      ) : (
-        <div style={styles.mobileLayout}>
-          <div style={styles.row}>
-            {systemModes.map((mode) => (
-              <button
-                key={mode.id}
-                onClick={() => setActiveMode(mode.id)}
-                style={{
-                  ...styles.button,
-                  ...(activeMode === mode.id ? styles.active : {}),
-                }}
-              >
-                {mode.label}
-              </button>
-            ))}
-          </div>
-
-          <div style={styles.panel}>
-            <div style={styles.overlay}>
-              <h2 style={styles.overlayTitle}>{modeContent[activeMode].title}</h2>
-              <p style={styles.overlayText}>{modeContent[activeMode].description}</p>
-            </div>
-          </div>
-
-          <div style={styles.row}>
-            {coreModes.map((mode) => (
-              <button
-                key={mode.id}
-                onClick={() => setActiveMode(mode.id)}
-                style={{
-                  ...styles.button,
-                  ...(activeMode === mode.id ? styles.active : {}),
-                }}
-              >
-                {mode.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <footer
+    <div
+      style={{
+        minHeight: "100dvh",
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        background: `
+          radial-gradient(circle at 72% 22%, rgba(204, 91, 255, 0.10), transparent 16%),
+          radial-gradient(circle at 18% 28%, rgba(88, 240, 255, 0.08), transparent 14%),
+          radial-gradient(circle at 55% 62%, rgba(255, 176, 86, 0.05), transparent 12%),
+          linear-gradient(180deg, #030308 0%, #080913 58%, #04050A 100%)
+        `,
+        color: "#F5F7FF",
+        fontFamily:
+          "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      }}
+    >
+      <div
         style={{
-          marginTop: "22px",
-          paddingTop: "18px",
-          borderTop: "1px solid rgba(255,255,255,0.06)",
-          color: "rgba(236, 240, 255, 0.72)",
+          width: "100%",
+          maxWidth: isDesktop ? "1240px" : "430px",
+          minHeight: "100dvh",
+          padding: isDesktop
+            ? "32px 28px 36px"
+            : "calc(env(safe-area-inset-top, 0px) + 14px) 16px calc(env(safe-area-inset-bottom, 0px) + 28px)",
+          boxSizing: "border-box",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
-          gap: "12px",
-          textAlign: "center",
         }}
       >
         <div
           style={{
             display: "flex",
-            gap: "18px",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            fontSize: "14px",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginBottom: isDesktop ? "26px" : "18px",
           }}
         >
-          <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
-            Privacy Policy
-          </a>
-          <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
-            Terms of Service
-          </a>
+          <button
+            onClick={onBack}
+            style={{
+              border: "none",
+              background: "transparent",
+              color: "rgba(245,247,255,0.76)",
+              fontSize: isDesktop ? "17px" : "15px",
+              fontWeight: 700,
+              cursor: "pointer",
+              padding: 0,
+            }}
+          >
+            ← Back
+          </button>
+
+          <div
+            style={{
+              fontSize: isDesktop ? "14px" : "13px",
+              fontWeight: 800,
+              letterSpacing: "0.16em",
+              textTransform: "uppercase",
+              color: "rgba(245,247,255,0.56)",
+            }}
+          >
+            Features
+          </div>
+
+          <div style={{ width: isDesktop ? "60px" : "48px" }} />
         </div>
 
-        <div
+        <section
           style={{
-            fontSize: "14px",
-            lineHeight: 1.5,
-            maxWidth: "420px",
+            textAlign: "center",
+            marginBottom: isDesktop ? "30px" : "22px",
+            maxWidth: "980px",
+            marginInline: "auto",
           }}
         >
-          © 2026 ZWAP!™ owned by ZWAP LLC. All rights reserved.
-        </div>
-      </footer>
+          <div
+            style={{
+              borderRadius: "26px",
+              border: "1px solid rgba(255,255,255,0.08)",
+              background:
+                "radial-gradient(circle at 80% 18%, rgba(180,134,255,0.12), transparent 28%), rgba(255,255,255,0.035)",
+              boxShadow:
+                "0 0 0 1px rgba(255,255,255,0.02) inset, 0 12px 36px rgba(0,0,0,0.18)",
+              padding: isDesktop ? "30px 30px" : "24px 20px",
+            }}
+          >
+            <div
+              style={{
+                fontSize: isDesktop ? "clamp(44px, 5vw, 66px)" : "clamp(30px, 9vw, 42px)",
+                lineHeight: 1.02,
+                fontWeight: 900,
+                letterSpacing: "-0.04em",
+                marginBottom: "12px",
+                color: "#F8FAFF",
+              }}
+            >
+              Features
+            </div>
+
+            <p
+              style={{
+                margin: "0 auto",
+                maxWidth: isDesktop ? "820px" : "320px",
+                fontSize: isDesktop ? "20px" : "15px",
+                lineHeight: 1.7,
+                color: "rgba(235,239,255,0.78)",
+              }}
+            >
+              Explore the modes and systems that make up the ZWAP experience.
+            </p>
+          </div>
+        </section>
+
+        {isDesktop ? (
+          <section
+            style={{
+              display: "grid",
+              gridTemplateColumns: "160px minmax(0, 1fr) 160px",
+              gap: "20px",
+              alignItems: "center",
+              marginBottom: "22px",
+              flex: 1,
+            }}
+          >
+            <div>
+              <ModeRail
+                modes={systemModes}
+                activeMode={activeMode}
+                setActiveMode={setActiveMode}
+                direction="vertical"
+              />
+            </div>
+
+            <div>
+              <ModePanel activeMode={activeMode} modeContent={modeContent} />
+            </div>
+
+            <div>
+              <ModeRail
+                modes={coreModes}
+                activeMode={activeMode}
+                setActiveMode={setActiveMode}
+                direction="vertical"
+              />
+            </div>
+          </section>
+        ) : (
+          <section
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+              marginBottom: "22px",
+              flex: 1,
+            }}
+          >
+            <div>
+              <ModeRail
+                modes={systemModes}
+                activeMode={activeMode}
+                setActiveMode={setActiveMode}
+                direction="horizontal"
+              />
+            </div>
+
+            <div>
+              <ModePanel activeMode={activeMode} modeContent={modeContent} />
+            </div>
+
+            <div>
+              <ModeRail
+                modes={coreModes}
+                activeMode={activeMode}
+                setActiveMode={setActiveMode}
+                direction="horizontal"
+              />
+            </div>
+          </section>
+        )}
+
+        <footer
+          style={{
+            marginTop: "22px",
+            paddingTop: "18px",
+            borderTop: "1px solid rgba(255,255,255,0.06)",
+            color: "rgba(236, 240, 255, 0.72)",
+            display: "flex",
+            flexDirection: isDesktop ? "row" : "column",
+            alignItems: "center",
+            justifyContent: isDesktop ? "space-between" : "center",
+            gap: "12px",
+            textAlign: isDesktop ? "left" : "center",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              gap: "18px",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              fontSize: "14px",
+            }}
+          >
+            <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
+              Privacy Policy
+            </a>
+            <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
+              Terms of Service
+            </a>
+          </div>
+
+          <div
+            style={{
+              fontSize: "14px",
+              lineHeight: 1.5,
+              maxWidth: isDesktop ? "420px" : "280px",
+              textAlign: isDesktop ? "right" : "center",
+            }}
+          >
+            © 2026 ZWAP!™ owned by ZWAP LLC. All rights reserved.
+          </div>
+        </footer>
+      </div>
     </div>
   );
 }
-
-const styles = {
-  page: {
-    padding: 20,
-    color: "white",
-    minHeight: "100vh",
-  },
-
-  back: {
-    marginBottom: 10,
-  },
-
-  title: {
-    marginBottom: 20,
-  },
-
-  desktopLayout: {
-    display: "grid",
-    gridTemplateColumns: "120px 1fr 120px",
-    gap: 20,
-    alignItems: "center",
-  },
-
-  mobileLayout: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 20,
-  },
-
-  leftRail: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 10,
-  },
-
-  rightRail: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 10,
-  },
-
-  row: {
-    display: "flex",
-    justifyContent: "space-between",
-    gap: 10,
-  },
-
-  button: {
-    padding: "10px 12px",
-    borderRadius: 8,
-    border: "1px solid rgba(255,255,255,0.2)",
-    background: "transparent",
-    color: "white",
-    cursor: "pointer",
-    flex: 1,
-  },
-
-  active: {
-    background: "rgba(120, 90, 255, 0.4)",
-    border: "1px solid rgba(120, 90, 255, 0.8)",
-  },
-
-  panel: {
-    height: 220,
-    borderRadius: 16,
-    border: "1px solid rgba(255,255,255,0.15)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    position: "relative",
-  },
-
-  overlay: {
-    textAlign: "center",
-    padding: 20,
-  },
-
-  overlayTitle: {
-    marginBottom: 10,
-  },
-
-  overlayText: {
-    opacity: 0.8,
-  },
-};
