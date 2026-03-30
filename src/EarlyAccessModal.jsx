@@ -7,6 +7,15 @@ export default function EarlyAccessModal({
 }) {
   if (!isOpen) return null;
 
+  const tweetText = encodeURIComponent(
+    "ZWAP! is live. Move. Play. Swap. Shop. Earn rewards with ZWAP! https://zwap.online"
+  );
+
+  const tweetUrl = `https://x.com/intent/tweet?text=${tweetText}`;
+
+  const isDesktop =
+    typeof window !== "undefined" ? window.innerWidth >= 900 : false;
+
   return (
     <div
       onClick={onClose}
@@ -20,7 +29,7 @@ export default function EarlyAccessModal({
         alignItems: "center",
         justifyContent: "center",
         zIndex: 999,
-        padding: "24px",
+        padding: isDesktop ? "24px" : "16px",
       }}
     >
       <div
@@ -29,8 +38,10 @@ export default function EarlyAccessModal({
           position: "relative",
           width: "100%",
           maxWidth: "780px",
+          maxHeight: "92dvh",
+          overflowY: "auto",
           borderRadius: "28px",
-          padding: "30px",
+          padding: isDesktop ? "30px" : "22px 18px 24px",
           background: `
             radial-gradient(circle at 72% 34%, rgba(204, 91, 255, 0.10), transparent 16%),
             radial-gradient(circle at 82% 30%, rgba(88, 240, 255, 0.08), transparent 14%),
@@ -47,99 +58,106 @@ export default function EarlyAccessModal({
           onClick={onClose}
           style={{
             position: "absolute",
-            top: "18px",
-            right: "22px",
+            top: isDesktop ? "18px" : "14px",
+            right: isDesktop ? "22px" : "18px",
             border: "none",
             background: "transparent",
             color: "rgba(245,247,255,0.7)",
-            fontSize: "28px",
+            fontSize: isDesktop ? "28px" : "32px",
             cursor: "pointer",
+            zIndex: 2,
           }}
         >
           ×
         </button>
 
-        {/* TOP ROW JUST FOR THE BANG */}
         <div
           style={{
             display: "flex",
-            alignItems: "flex-start",
-            justifyContent: "flex-start",
-            marginBottom: "4px",
-          }}
-        >
-          <img
-            src={bang}
-            alt="ZWAP!"
-            style={{
-              width: "108px",
-              height: "auto",
-              display: "block",
-              filter: "drop-shadow(0 0 22px rgba(130, 88, 255, 0.5))",
-            }}
-          />
-        </div>
-
-        {/* CENTERED TITLE BLOCK */}
-        <div
-          style={{
+            flexDirection: "column",
+            alignItems: "center",
             textAlign: "center",
-            marginTop: "-54px",
-            marginBottom: "22px",
-            padding: "0 36px",
           }}
         >
           <div
             style={{
-              fontSize: "44px",
-              fontWeight: 900,
-              letterSpacing: "-0.04em",
-              lineHeight: "1.02",
-              marginBottom: "10px",
-              color: "#F8FAFF",
-              textShadow: "0 4px 20px rgba(0,0,0,0.35)",
+              width: isDesktop ? "108px" : "88px",
+              marginBottom: isDesktop ? "14px" : "16px",
+              marginTop: isDesktop ? "0" : "6px",
+              flexShrink: 0,
             }}
           >
-            What is{" "}
-            <span
+            <img
+              src={bang}
+              alt="ZWAP!"
               style={{
-                background:
-                  "linear-gradient(90deg, #66F2FF 0%, #7FD9FF 18%, #B486FF 55%, #FF67D4 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
+                width: "100%",
+                height: "auto",
+                display: "block",
+                filter: "drop-shadow(0 0 22px rgba(130, 88, 255, 0.5))",
               }}
-            >
-              ZWAP!
-            </span>
-            ?
+            />
           </div>
 
-          <p
+          <div
             style={{
-              margin: 0,
-              fontSize: "17px",
-              lineHeight: "1.55",
-              color: "rgba(235,239,255,0.82)",
-              maxWidth: "520px",
-              marginInline: "auto",
-              textShadow: "0 2px 10px rgba(0,0,0,0.25)",
+              marginBottom: isDesktop ? "22px" : "18px",
+              padding: isDesktop ? "0 36px" : "0 6px",
+              width: "100%",
             }}
           >
-            Earn rewards from steps, games, and daily activity.
-          </p>
+            <div
+              style={{
+                fontSize: isDesktop ? "44px" : "clamp(34px, 10vw, 42px)",
+                fontWeight: 900,
+                letterSpacing: "-0.04em",
+                lineHeight: "1.02",
+                marginBottom: "10px",
+                color: "#F8FAFF",
+                textShadow: "0 4px 20px rgba(0,0,0,0.35)",
+              }}
+            >
+              What is{" "}
+              <span
+                style={{
+                  background:
+                    "linear-gradient(90deg, #66F2FF 0%, #7FD9FF 18%, #B486FF 55%, #FF67D4 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                ZWAP!
+              </span>
+              ?
+            </div>
+
+            <p
+              style={{
+                margin: 0,
+                fontSize: isDesktop ? "17px" : "16px",
+                lineHeight: "1.55",
+                color: "rgba(235,239,255,0.82)",
+                maxWidth: "520px",
+                marginInline: "auto",
+                textShadow: "0 2px 10px rgba(0,0,0,0.25)",
+              }}
+            >
+              Earn rewards from steps, games, and daily activity.
+            </p>
+          </div>
         </div>
 
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "18px",
+            gridTemplateColumns: isDesktop ? "1fr 1fr" : "1fr",
+            gap: isDesktop ? "18px" : "14px",
             marginTop: "6px",
           }}
         >
           <div
             style={{
-              padding: "20px",
+              padding: isDesktop ? "20px" : "18px",
               borderRadius: "22px",
               border: "1px solid rgba(255,255,255,0.08)",
               background: "rgba(255,255,255,0.03)",
@@ -149,7 +167,7 @@ export default function EarlyAccessModal({
             <div
               style={{
                 fontWeight: 800,
-                fontSize: "22px",
+                fontSize: isDesktop ? "22px" : "20px",
                 marginBottom: "8px",
                 textAlign: "center",
                 textShadow: "0 2px 10px rgba(0,0,0,0.28)",
@@ -213,7 +231,7 @@ export default function EarlyAccessModal({
 
           <div
             style={{
-              padding: "20px",
+              padding: isDesktop ? "20px" : "18px",
               borderRadius: "22px",
               border: "1px solid rgba(255,255,255,0.08)",
               background: "rgba(255,255,255,0.03)",
@@ -223,7 +241,7 @@ export default function EarlyAccessModal({
             <div
               style={{
                 fontWeight: 800,
-                fontSize: "22px",
+                fontSize: isDesktop ? "22px" : "20px",
                 marginBottom: "8px",
                 textAlign: "center",
                 textShadow: "0 2px 10px rgba(0,0,0,0.28)",
@@ -244,9 +262,12 @@ export default function EarlyAccessModal({
               Post on X to unlock instantly
             </div>
 
-            <div style={{ height: "48px" }} />
+            <div style={{ height: isDesktop ? "48px" : "0px" }} />
 
-            <button
+            <a
+              href={tweetUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 width: "100%",
                 boxSizing: "border-box",
@@ -260,22 +281,27 @@ export default function EarlyAccessModal({
                 cursor: "pointer",
                 boxShadow:
                   "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 20px rgba(0,0,0,0.28)",
+                textDecoration: "none",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
               Post on X
-            </button>
+            </a>
           </div>
         </div>
 
         <div
           style={{
-            marginTop: "22px",
+            marginTop: isDesktop ? "22px" : "18px",
             textAlign: "center",
-            fontSize: "26px",
+            fontSize: isDesktop ? "26px" : "clamp(24px, 7vw, 30px)",
             fontWeight: 900,
             letterSpacing: "-0.03em",
             color: "#F8FAFF",
             textShadow: "0 4px 20px rgba(0,0,0,0.35)",
+            padding: isDesktop ? "0" : "0 8px",
           }}
         >
           Want to see{" "}
