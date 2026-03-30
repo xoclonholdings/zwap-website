@@ -235,7 +235,7 @@ function TierCard({ checked, onToggle, title, desc, glow }) {
   );
 }
 
-export default function SponsorsForm() {
+export default function SponsorsForm({ recipientEmail = "app@zwap.online" }) {
   const [formData, setFormData] = useState({
     name: "",
     role: "",
@@ -272,7 +272,34 @@ export default function SponsorsForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Sponsor form submission:", { ...formData, tiers });
+  
+    const payload = {
+      recipientEmail,
+      ...formData,
+      tiers,
+    };
+  
+    console.log("Sponsor form submitted:", payload);
+  
+    // Reset form after submit
+    setFormData({
+      name: "",
+      role: "",
+      company: "",
+      website: "",
+      email: "",
+      industry: "",
+      goals: "",
+      placement: "",
+      budget: "",
+      ctaGoal: "",
+      assets: "",
+      analytics: "",
+      customPackage: "",
+      notes: "",
+    });
+  
+    setTiers([]);
   };
 
   const tierGlow = {
