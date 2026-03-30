@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const coreModes = [
   { id: "move", label: "MOVE" },
@@ -51,6 +51,18 @@ const modeContent = {
 
 export default function FeaturesPage({ onBack }) {
   const [activeMode, setActiveMode] = useState("move");
+  const [isDesktop, setIsDesktop] = useState(
+    typeof window !== "undefined" ? window.innerWidth >= 768 : false
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div style={styles.page}>
@@ -60,104 +72,129 @@ export default function FeaturesPage({ onBack }) {
 
       <h1 style={styles.title}>Features</h1>
 
-      {/* DESKTOP */}
-      <div style={styles.desktopLayout}>
-        {/* LEFT (SYSTEM) */}
-        <div style={styles.leftRail}>
-          {systemModes.map((mode) => (
-            <button
-              key={mode.id}
-              onClick={() => setActiveMode(mode.id)}
-              style={{
-                ...styles.button,
-                ...(activeMode === mode.id ? styles.active : {}),
-              }}
-            >
-              {mode.label}
-            </button>
-          ))}
-        </div>
+      {isDesktop ? (
+        <div style={styles.desktopLayout}>
+          <div style={styles.leftRail}>
+            {systemModes.map((mode) => (
+              <button
+                key={mode.id}
+                onClick={() => setActiveMode(mode.id)}
+                style={{
+                  ...styles.button,
+                  ...(activeMode === mode.id ? styles.active : {}),
+                }}
+              >
+                {mode.label}
+              </button>
+            ))}
+          </div>
 
-        {/* CENTER PANEL */}
-        <div style={styles.panel}>
-          <div style={styles.overlay}>
-            <h2 style={styles.overlayTitle}>
-              {modeContent[activeMode].title}
-            </h2>
-            <p style={styles.overlayText}>
-              {modeContent[activeMode].description}
-            </p>
+          <div style={styles.panel}>
+            <div style={styles.overlay}>
+              <h2 style={styles.overlayTitle}>{modeContent[activeMode].title}</h2>
+              <p style={styles.overlayText}>{modeContent[activeMode].description}</p>
+            </div>
+          </div>
+
+          <div style={styles.rightRail}>
+            {coreModes.map((mode) => (
+              <button
+                key={mode.id}
+                onClick={() => setActiveMode(mode.id)}
+                style={{
+                  ...styles.button,
+                  ...(activeMode === mode.id ? styles.active : {}),
+                }}
+              >
+                {mode.label}
+              </button>
+            ))}
           </div>
         </div>
+      ) : (
+        <div style={styles.mobileLayout}>
+          <div style={styles.row}>
+            {systemModes.map((mode) => (
+              <button
+                key={mode.id}
+                onClick={() => setActiveMode(mode.id)}
+                style={{
+                  ...styles.button,
+                  ...(activeMode === mode.id ? styles.active : {}),
+                }}
+              >
+                {mode.label}
+              </button>
+            ))}
+          </div>
 
-        {/* RIGHT (CORE) */}
-        <div style={styles.rightRail}>
-          {coreModes.map((mode) => (
-            <button
-              key={mode.id}
-              onClick={() => setActiveMode(mode.id)}
-              style={{
-                ...styles.button,
-                ...(activeMode === mode.id ? styles.active : {}),
-              }}
-            >
-              {mode.label}
-            </button>
-          ))}
-        </div>
-      </div>
+          <div style={styles.panel}>
+            <div style={styles.overlay}>
+              <h2 style={styles.overlayTitle}>{modeContent[activeMode].title}</h2>
+              <p style={styles.overlayText}>{modeContent[activeMode].description}</p>
+            </div>
+          </div>
 
-      {/* MOBILE */}
-      <div style={styles.mobileLayout}>
-        {/* TOP (SYSTEM) */}
-        <div style={styles.row}>
-          {systemModes.map((mode) => (
-            <button
-              key={mode.id}
-              onClick={() => setActiveMode(mode.id)}
-              style={{
-                ...styles.button,
-                ...(activeMode === mode.id ? styles.active : {}),
-              }}
-            >
-              {mode.label}
-            </button>
-          ))}
-        </div>
-
-        {/* CENTER */}
-        <div style={styles.panel}>
-          <div style={styles.overlay}>
-            <h2 style={styles.overlayTitle}>
-              {modeContent[activeMode].title}
-            </h2>
-            <p style={styles.overlayText}>
-              {modeContent[activeMode].description}
-            </p>
+          <div style={styles.row}>
+            {coreModes.map((mode) => (
+              <button
+                key={mode.id}
+                onClick={() => setActiveMode(mode.id)}
+                style={{
+                  ...styles.button,
+                  ...(activeMode === mode.id ? styles.active : {}),
+                }}
+              >
+                {mode.label}
+              </button>
+            ))}
           </div>
         </div>
+      )}
 
-        {/* BOTTOM (CORE) */}
-        <div style={styles.row}>
-          {coreModes.map((mode) => (
-            <button
-              key={mode.id}
-              onClick={() => setActiveMode(mode.id)}
-              style={{
-                ...styles.button,
-                ...(activeMode === mode.id ? styles.active : {}),
-              }}
-            >
-              {mode.label}
-            </button>
-          ))}
+      <footer
+        style={{
+          marginTop: "22px",
+          paddingTop: "18px",
+          borderTop: "1px solid rgba(255,255,255,0.06)",
+          color: "rgba(236, 240, 255, 0.72)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "12px",
+          textAlign: "center",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            gap: "18px",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            fontSize: "14px",
+          }}
+        >
+          <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
+            Privacy Policy
+          </a>
+          <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
+            Terms of Service
+          </a>
         </div>
-      </div>
+
+        <div
+          style={{
+            fontSize: "14px",
+            lineHeight: 1.5,
+            maxWidth: "420px",
+          }}
+        >
+          © 2026 ZWAP!™ owned by ZWAP LLC. All rights reserved.
+        </div>
+      </footer>
     </div>
   );
 }
-
-/* ---------------- STYLES ---------------- */
 
 const styles = {
   page: {
@@ -175,7 +212,10 @@ const styles = {
   },
 
   desktopLayout: {
-    display: "none",
+    display: "grid",
+    gridTemplateColumns: "120px 1fr 120px",
+    gap: 20,
+    alignItems: "center",
   },
 
   mobileLayout: {
@@ -240,24 +280,3 @@ const styles = {
     opacity: 0.8,
   },
 };
-
-/* ---------------- RESPONSIVE ---------------- */
-
-if (typeof window !== "undefined") {
-  const styleSheet = document.createElement("style");
-  styleSheet.innerHTML = `
-    @media (min-width: 768px) {
-      .desktopLayout {
-        display: grid !important;
-        grid-template-columns: 120px 1fr 120px;
-        gap: 20px;
-        align-items: center;
-      }
-
-      .mobileLayout {
-        display: none !important;
-      }
-    }
-  `;
-  document.head.appendChild(styleSheet);
-}
