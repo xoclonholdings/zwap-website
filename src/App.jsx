@@ -139,13 +139,23 @@ export default function App() {
   };
 
   if (activePage === "about") {
-    return (
+  return (
+    <>
       <AboutPage
         onBack={() => setActivePage("home")}
         onLockIn={() => setIsModalOpen(true)}
       />
-    );
-  }
+
+      <EarlyAccessModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        email={email}
+        setEmail={setEmail}
+        bang={bang}
+      />
+    </>
+  );
+}
 
   if (activePage === "features") {
     return <FeaturesPage onBack={() => setActivePage("home")} />;
