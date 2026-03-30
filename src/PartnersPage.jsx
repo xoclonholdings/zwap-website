@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SponsorsForm from "./SponsorsForm";
 import SponsorFormModal from "./SponsorFormModal";
 import { whyPartner, partnershipLanes, bestFit } from "./PartnersPage.data";
@@ -260,6 +260,10 @@ export default function PartnersPage({ onBack }) {
 
     return () => clearInterval(fitTimer);
   }, []);
+  
+  const activeWhy = whyPartner[whyIndex];
+  const activeLane = partnershipLanes[laneIndex];
+  const activeFit = bestFit[fitIndex];
 
   return (
     <div
