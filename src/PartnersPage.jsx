@@ -261,10 +261,6 @@ export default function PartnersPage({ onBack }) {
     return () => clearInterval(fitTimer);
   }, []);
 
-  const activeWhy = whyPartner[whyIndex];
-  const activeLane = partnershipLanes[laneIndex];
-  const activeFit = bestFit[fitIndex];
-
   return (
     <div
       style={{
