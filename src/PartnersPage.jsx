@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import SponsorsForm from "./SponsorsForm";
 import { whyPartner, partnershipLanes, bestFit } from "./PartnersPage.data";
+import SponsorFormModal from "./SponsorFormModal";
+import SponsorsForm from "./SponsorsForm";
 
 function GradientText({ children }) {
   return (
