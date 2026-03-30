@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import React, { useEffect, useState } from "react";
+import SponsorsForm from "./SponsorsForm";
 
 function GradientText({ children }) {
   return (
