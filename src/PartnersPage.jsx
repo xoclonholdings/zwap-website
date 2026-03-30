@@ -670,7 +670,7 @@ export default function PartnersPage({ onBack }) {
           onClose={() => setIsSponsorFormOpen(false)}
           isDesktop={isDesktop}
         >
-          <SponsorsForm />
+        <SponsorsForm recipientEmail="app@zwap.online" />
         </SponsorFormModal>
       </div>
     </div>
