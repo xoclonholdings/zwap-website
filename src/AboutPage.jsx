@@ -250,7 +250,7 @@ export default function AboutPage({ onBack, onLockIn }) {
           }}
         >
           <button
-            onClick={onLockIn}
+            onClick={onBack}
             style={{
               border: "none",
               background: "transparent",
