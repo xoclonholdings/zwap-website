@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function GradientText({ children }) {
   return (
@@ -641,75 +642,47 @@ export default function PartnersPage({ onBack }) {
         </section>
 
         <section
-          style={{
-            maxWidth: "980px",
-            marginInline: "auto",
-            width: "100%",
-          }}
-        >
-          <GlassCard
             style={{
-              textAlign: "center",
-              padding: isDesktop ? "30px 30px" : "22px 18px",
+              maxWidth: "980px",
+              marginInline: "auto",
+              width: "100%",
             }}
           >
-            <div
+            <GlassCard
               style={{
-                fontSize: isDesktop ? "40px" : "24px",
-                lineHeight: 1.08,
-                fontWeight: 900,
-                letterSpacing: "-0.03em",
-                marginBottom: "10px",
-                color: "#F8FAFF",
+                textAlign: "center",
+                padding: isDesktop ? "30px 30px" : "22px 18px",
               }}
             >
-              Interested in partnering?
-            </div>
-
-            <p
-              style={{
-                margin: "0 auto 18px",
-                maxWidth: isDesktop ? "760px" : "310px",
-                fontSize: isDesktop ? "18px" : "15px",
-                lineHeight: 1.7,
-                color: "rgba(235,239,255,0.76)",
-              }}
-            >
-              Use the sponsor interest form to tell us who you are, what you
-              represent, and how you’d like to work with ZWAP!
-            </p>
-
-            <button
-              type="button"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "15px 28px",
-                borderRadius: "999px",
-                border: "2px solid rgba(165, 103, 255, 0.78)",
-                background:
-                  "linear-gradient(180deg, rgba(14,16,30,0.94) 0%, rgba(8,10,22,0.98) 100%)",
-                color: "#F9FAFF",
-                fontSize: isDesktop ? "18px" : "17px",
-                fontWeight: 800,
-                letterSpacing: "0.02em",
-                cursor: "pointer",
-                width: "100%",
-                maxWidth: isDesktop ? "360px" : "100%",
-                marginInline: "auto",
-                textDecoration: "none",
-                boxShadow:
-                  "inset 0 1px 0 rgba(255,255,255,0.08), 0 10px 26px rgba(73, 44, 162, 0.28)",
-              }}
-              onClick={() => {
-                console.log("Sponsor form placeholder");
-              }}
-            >
-              Open Sponsor Form
-            </button>
-          </GlassCard>
-        </section>
+              <div
+                style={{
+                  fontSize: isDesktop ? "40px" : "24px",
+                  lineHeight: 1.08,
+                  fontWeight: 900,
+                  letterSpacing: "-0.03em",
+                  marginBottom: "10px",
+                  color: "#F8FAFF",
+                }}
+              >
+                Interested in partnering?
+              </div>
+          
+              <p
+                style={{
+                  margin: "0 auto 22px",
+                  maxWidth: isDesktop ? "760px" : "310px",
+                  fontSize: isDesktop ? "18px" : "15px",
+                  lineHeight: 1.7,
+                  color: "rgba(235,239,255,0.76)",
+                }}
+              >
+                Use the sponsor interest form to tell us who you are, what you
+                represent, and how you’d like to work with ZWAP!
+              </p>
+          
+              <SponsorsForm />
+            </GlassCard>
+          </section>
 
         <footer
           style={{
