@@ -227,7 +227,8 @@ export default function PartnersPage({ onBack }) {
   const [whyIndex, setWhyIndex] = useState(0);
   const [laneIndex, setLaneIndex] = useState(0);
   const [fitIndex, setFitIndex] = useState(0);
-
+  const [isSponsorFormOpen, setIsSponsorFormOpen] = useState(false);
+  
   useEffect(() => {
     const handleResize = () => {
       setIsDesktop(window.innerWidth >= 1024);
