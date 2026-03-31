@@ -39,10 +39,10 @@ export default function FeaturesPage({ onBack }) {
       <div
         style={{
           width: "100%",
-          maxWidth: isDesktop ? "1320px" : "430px",
+          maxWidth: isDesktop ? "1440px" : "430px",
           minHeight: "100dvh",
           padding: isDesktop
-            ? "32px 28px 36px"
+            ? "28px 24px 34px"
             : "calc(env(safe-area-inset-top, 0px) + 14px) 16px calc(env(safe-area-inset-bottom, 0px) + 28px)",
           boxSizing: "border-box",
           display: "flex",
@@ -91,12 +91,12 @@ export default function FeaturesPage({ onBack }) {
           <section
             style={{
               display: "grid",
-              gridTemplateColumns: "150px minmax(0, 1fr) 150px",
-              gap: "18px",
+              gridTemplateColumns: "120px minmax(780px, 1fr) 120px",
+              gap: "16px",
               alignItems: "stretch",
               marginBottom: "18px",
               flex: 1,
-              minHeight: "0",
+              minHeight: 0,
             }}
           >
             <div
@@ -116,8 +116,8 @@ export default function FeaturesPage({ onBack }) {
 
             <div
               style={{
-                display: "flex",
-                alignItems: "stretch",
+                width: "100%",
+                minWidth: 0,
               }}
             >
               <ModePanel activeMode={activeMode} modeContent={modeContent} />
@@ -143,12 +143,17 @@ export default function FeaturesPage({ onBack }) {
             style={{
               display: "flex",
               flexDirection: "column",
-              gap: "16px",
+              gap: "14px",
               marginBottom: "18px",
               flex: 1,
             }}
           >
-            <div>
+            <div
+              style={{
+                width: "100%",
+                overflow: "hidden",
+              }}
+            >
               <ModeRail
                 modes={systemModes}
                 activeMode={activeMode}
@@ -161,7 +166,12 @@ export default function FeaturesPage({ onBack }) {
               <ModePanel activeMode={activeMode} modeContent={modeContent} />
             </div>
 
-            <div>
+            <div
+              style={{
+                width: "100%",
+                overflow: "hidden",
+              }}
+            >
               <ModeRail
                 modes={coreModes}
                 activeMode={activeMode}
@@ -185,7 +195,7 @@ export default function FeaturesPage({ onBack }) {
             marginInline: "auto",
           }}
         >
-          Explore the modes and systems that make up the ZWAP experience.
+          Explore the modes and systems that make up the ZWAP! experience.
         </div>
 
         <footer
