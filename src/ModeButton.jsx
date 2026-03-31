@@ -10,25 +10,28 @@ export default function ModeButton({
     <button
       onClick={onClick}
       style={{
-        minHeight: "56px",
-        padding: "14px 16px",
-        borderRadius: 14,
+        minHeight: "50px",
+        padding: "12px 14px",
+        borderRadius: 16,
         border: active
-          ? "1px solid rgba(120, 90, 255, 0.9)"
-          : "1px solid rgba(255,255,255,0.18)",
+          ? "1px solid rgba(126, 96, 255, 0.95)"
+          : "1px solid rgba(255,255,255,0.14)",
         background: active
-          ? "linear-gradient(180deg, rgba(108,82,255,0.65), rgba(82,58,210,0.58))"
-          : "rgba(255,255,255,0.03)",
+          ? "linear-gradient(180deg, rgba(108,82,255,0.72), rgba(78,56,210,0.62))"
+          : "linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015))",
         color: "#FFFFFF",
         cursor: "pointer",
         width: fullWidth ? "100%" : "auto",
         flex: fullWidth ? "unset" : 1,
         fontWeight: 800,
-        fontSize: "clamp(14px, 1.4vw, 16px)",
+        fontSize: "clamp(13px, 1.2vw, 15px)",
         letterSpacing: "0.05em",
-        boxShadow: active ? "0 0 20px rgba(120, 90, 255, 0.22)" : "none",
-        transition: "all 180ms ease",
         textAlign: "center",
+        boxShadow: active
+          ? "0 0 18px rgba(120, 90, 255, 0.24), inset 0 1px 0 rgba(255,255,255,0.12)"
+          : "inset 0 1px 0 rgba(255,255,255,0.04)",
+        transition: "all 180ms ease",
+        whiteSpace: "nowrap",
       }}
     >
       {label}
