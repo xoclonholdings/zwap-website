@@ -14,10 +14,12 @@ export default function ModeRail({
       style={{
         display: "flex",
         flexDirection: isVertical ? "column" : "row",
-        gap: isVertical ? 14 : 12,
+        gap: isVertical ? 12 : 10,
         justifyContent: isVertical ? "center" : "space-between",
+        alignItems: "stretch",
         width: "100%",
         height: isVertical ? "100%" : "auto",
+        flexWrap: isVertical ? "nowrap" : "nowrap",
       }}
     >
       {modes.map((mode) => (
