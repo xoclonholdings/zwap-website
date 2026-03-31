@@ -5,7 +5,7 @@ export default function ModeRail({
   modes = [],
   activeMode,
   setActiveMode,
-  direction = "vertical", // "vertical" | "horizontal"
+  direction = "vertical",
 }) {
   const isVertical = direction === "vertical";
 
@@ -14,8 +14,10 @@ export default function ModeRail({
       style={{
         display: "flex",
         flexDirection: isVertical ? "column" : "row",
-        gap: 10,
-        justifyContent: isVertical ? "flex-start" : "space-between",
+        gap: isVertical ? 14 : 12,
+        justifyContent: isVertical ? "center" : "space-between",
+        width: "100%",
+        height: isVertical ? "100%" : "auto",
       }}
     >
       {modes.map((mode) => (
