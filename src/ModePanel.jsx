@@ -6,7 +6,7 @@ export default function ModePanel({ activeMode, modeContent }) {
   return (
     <div
       style={{
-        height: "clamp(320px, 55vh, 520px)", // ⬅️ taller responsive console
+        height: "clamp(340px, 58vh, 560px)",
         borderRadius: 22,
         border: "1px solid rgba(120, 90, 255, 0.25)",
         position: "relative",
@@ -16,32 +16,39 @@ export default function ModePanel({ activeMode, modeContent }) {
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "flex-end", // ⬅️ pushes overlay to bottom
+        justifyContent: "flex-end",
       }}
     >
-      {/* BOTTOM OVERLAY */}
       <div
         style={{
           width: "100%",
-          padding: "20px 18px",
+          padding: "18px 16px",
+          boxSizing: "border-box",
           backdropFilter: "blur(14px)",
+          WebkitBackdropFilter: "blur(14px)",
           background:
-            "linear-gradient(180deg, rgba(10,10,20,0.2), rgba(10,10,20,0.85))",
+            "linear-gradient(180deg, rgba(10,10,20,0.18), rgba(10,10,20,0.88))",
           borderTop: "1px solid rgba(255,255,255,0.06)",
+          display: "flex",
+          justifyContent: "center",
         }}
       >
         <div
           style={{
-            maxWidth: 520,
-            margin: "0 auto",
+            width: "100%",
+            maxWidth: "540px",
             textAlign: "center",
+            margin: "0 auto",
           }}
         >
           <h2
             style={{
-              marginBottom: 6,
+              margin: "0 0 8px 0",
               fontWeight: 800,
               letterSpacing: "0.04em",
+              fontSize: "clamp(28px, 4vw, 40px)",
+              lineHeight: 1.05,
+              color: "#F8FAFF",
             }}
           >
             {content.title}
@@ -49,9 +56,14 @@ export default function ModePanel({ activeMode, modeContent }) {
 
           <p
             style={{
-              opacity: 0.8,
-              fontSize: "0.95rem",
-              lineHeight: 1.5,
+              margin: 0,
+              opacity: 0.88,
+              fontSize: "clamp(15px, 2vw, 18px)",
+              lineHeight: 1.55,
+              color: "rgba(235,239,255,0.9)",
+              maxWidth: "100%",
+              overflowWrap: "break-word",
+              wordBreak: "normal",
             }}
           >
             {content.description}
@@ -61,8 +73,6 @@ export default function ModePanel({ activeMode, modeContent }) {
     </div>
   );
 }
-
-/* -------- glow system -------- */
 
 function getGlow(mode) {
   switch (mode) {
