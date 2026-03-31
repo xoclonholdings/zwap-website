@@ -39,7 +39,7 @@ export default function FeaturesPage({ onBack }) {
       <div
         style={{
           width: "100%",
-          maxWidth: isDesktop ? "1240px" : "430px",
+          maxWidth: isDesktop ? "1320px" : "430px",
           minHeight: "100dvh",
           padding: isDesktop
             ? "32px 28px 36px"
@@ -91,17 +91,19 @@ export default function FeaturesPage({ onBack }) {
           <section
             style={{
               display: "grid",
-              gridTemplateColumns: "160px minmax(0, 1fr) 160px",
-              gap: "20px",
+              gridTemplateColumns: "150px minmax(0, 1fr) 150px",
+              gap: "18px",
               alignItems: "stretch",
               marginBottom: "18px",
               flex: 1,
+              minHeight: "0",
             }}
           >
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
+                justifyContent: "center",
               }}
             >
               <ModeRail
@@ -112,7 +114,12 @@ export default function FeaturesPage({ onBack }) {
               />
             </div>
 
-            <div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "stretch",
+              }}
+            >
               <ModePanel activeMode={activeMode} modeContent={modeContent} />
             </div>
 
@@ -120,6 +127,7 @@ export default function FeaturesPage({ onBack }) {
               style={{
                 display: "flex",
                 alignItems: "center",
+                justifyContent: "center",
               }}
             >
               <ModeRail
@@ -166,13 +174,14 @@ export default function FeaturesPage({ onBack }) {
 
         <div
           style={{
-            marginTop: "2px",
+            marginTop: "4px",
             marginBottom: "18px",
             textAlign: "center",
-            fontSize: isDesktop ? "17px" : "14px",
-            lineHeight: 1.65,
-            color: "rgba(235,239,255,0.66)",
-            maxWidth: isDesktop ? "760px" : "320px",
+            fontSize: isDesktop ? "20px" : "18px",
+            fontWeight: 700,
+            lineHeight: 1.55,
+            color: "rgba(235,239,255,0.82)",
+            maxWidth: isDesktop ? "860px" : "340px",
             marginInline: "auto",
           }}
         >
