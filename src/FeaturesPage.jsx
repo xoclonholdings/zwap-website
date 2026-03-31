@@ -54,7 +54,7 @@ export default function FeaturesPage({ onBack }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            marginBottom: isDesktop ? "26px" : "18px",
+            marginBottom: isDesktop ? "18px" : "14px",
           }}
         >
           <button
@@ -87,64 +87,23 @@ export default function FeaturesPage({ onBack }) {
           <div style={{ width: isDesktop ? "60px" : "48px" }} />
         </div>
 
-        <section
-          style={{
-            textAlign: "center",
-            marginBottom: isDesktop ? "30px" : "22px",
-            maxWidth: "980px",
-            marginInline: "auto",
-          }}
-        >
-          <div
-            style={{
-              borderRadius: "26px",
-              border: "1px solid rgba(255,255,255,0.08)",
-              background:
-                "radial-gradient(circle at 80% 18%, rgba(180,134,255,0.12), transparent 28%), rgba(255,255,255,0.035)",
-              boxShadow:
-                "0 0 0 1px rgba(255,255,255,0.02) inset, 0 12px 36px rgba(0,0,0,0.18)",
-              padding: isDesktop ? "30px 30px" : "24px 20px",
-            }}
-          >
-            <div
-              style={{
-                fontSize: isDesktop ? "clamp(44px, 5vw, 66px)" : "clamp(30px, 9vw, 42px)",
-                lineHeight: 1.02,
-                fontWeight: 900,
-                letterSpacing: "-0.04em",
-                marginBottom: "12px",
-                color: "#F8FAFF",
-              }}
-            >
-              Features
-            </div>
-
-            <p
-              style={{
-                margin: "0 auto",
-                maxWidth: isDesktop ? "820px" : "320px",
-                fontSize: isDesktop ? "20px" : "15px",
-                lineHeight: 1.7,
-                color: "rgba(235,239,255,0.78)",
-              }}
-            >
-              Explore the modes and systems that make up the ZWAP experience.
-            </p>
-          </div>
-        </section>
-
         {isDesktop ? (
           <section
             style={{
               display: "grid",
               gridTemplateColumns: "160px minmax(0, 1fr) 160px",
               gap: "20px",
-              alignItems: "center",
-              marginBottom: "22px",
+              alignItems: "stretch",
+              marginBottom: "18px",
               flex: 1,
             }}
           >
-            <div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
               <ModeRail
                 modes={systemModes}
                 activeMode={activeMode}
@@ -157,7 +116,12 @@ export default function FeaturesPage({ onBack }) {
               <ModePanel activeMode={activeMode} modeContent={modeContent} />
             </div>
 
-            <div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
               <ModeRail
                 modes={coreModes}
                 activeMode={activeMode}
@@ -171,8 +135,8 @@ export default function FeaturesPage({ onBack }) {
             style={{
               display: "flex",
               flexDirection: "column",
-              gap: "20px",
-              marginBottom: "22px",
+              gap: "16px",
+              marginBottom: "18px",
               flex: 1,
             }}
           >
@@ -200,9 +164,24 @@ export default function FeaturesPage({ onBack }) {
           </section>
         )}
 
+        <div
+          style={{
+            marginTop: "2px",
+            marginBottom: "18px",
+            textAlign: "center",
+            fontSize: isDesktop ? "17px" : "14px",
+            lineHeight: 1.65,
+            color: "rgba(235,239,255,0.66)",
+            maxWidth: isDesktop ? "760px" : "320px",
+            marginInline: "auto",
+          }}
+        >
+          Explore the modes and systems that make up the ZWAP experience.
+        </div>
+
         <footer
           style={{
-            marginTop: "22px",
+            marginTop: "8px",
             paddingTop: "18px",
             borderTop: "1px solid rgba(255,255,255,0.06)",
             color: "rgba(236, 240, 255, 0.72)",
