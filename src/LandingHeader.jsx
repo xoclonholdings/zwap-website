@@ -36,6 +36,9 @@ export default function LandingHeader({
   onGooglePlay,
   onAppleStore,
 }) {
+  const isDesktop =
+    typeof window !== "undefined" ? window.innerWidth >= 768 : false;
+
   const linkStyle = {
     color: "#F5F7FF",
     textDecoration: "none",
@@ -47,6 +50,9 @@ export default function LandingHeader({
     fontWeight: 700,
     letterSpacing: "0.08em",
     textTransform: "uppercase",
+    textAlign: isDesktop ? "right" : "center",
+    width: "100%",
+    whiteSpace: "nowrap",
   };
 
   const storeButtonStyle = {
@@ -84,7 +90,7 @@ export default function LandingHeader({
         <div
           style={{
             display: "flex",
-            alignItems: "center",
+            alignItems: "flex-start",
             justifyContent: "space-between",
             gap: "12px",
           }}
@@ -92,7 +98,7 @@ export default function LandingHeader({
           <div
             style={{
               position: "relative",
-              width: "104px",
+              width: isDesktop ? "104px" : "96px",
               flexShrink: 0,
             }}
           >
@@ -111,13 +117,25 @@ export default function LandingHeader({
           </div>
 
           <nav
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-end",
-              gap: "14px",
-              flexWrap: "wrap",
-            }}
+            style={
+              isDesktop
+                ? {
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-end",
+                    gap: "14px",
+                    flexWrap: "wrap",
+                  }
+                : {
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    gap: "10px 14px",
+                    justifyItems: "stretch",
+                    alignItems: "center",
+                    width: "100%",
+                    maxWidth: "270px",
+                  }
+            }
           >
             <button onClick={onAbout} style={linkStyle}>
               About
