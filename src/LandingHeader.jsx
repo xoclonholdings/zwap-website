@@ -31,7 +31,7 @@ function Star({ style }) {
 export default function LandingHeader({
   onAbout,
   onFeatures,
-  onDownload,
+  onPreview,
   onPartners,
   onGooglePlay,
   onAppleStore,
@@ -125,8 +125,8 @@ export default function LandingHeader({
             <button onClick={onFeatures} style={linkStyle}>
               Features
             </button>
-            <button onClick={onDownload} style={linkStyle}>
-              Download
+            <button onClick={onPreview} style={linkStyle}>
+              Preview
             </button>
             <button onClick={onPartners} style={linkStyle}>
               Partners
