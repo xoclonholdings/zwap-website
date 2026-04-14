@@ -6,6 +6,7 @@ import bang from "./assets/Zwap_bang_3d.png";
 
 import AboutPage from "./AboutPage";
 import FeaturesPage from "./FeaturesPage";
+import PreviewPage from "./preview/PreviewPage";
 import PartnersPage from "./PartnersPage";
 import DownloadPage from "./DownloadPage";
 import GooglePlay from "./GooglePlay";
@@ -122,6 +123,8 @@ export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [activePage, setActivePage] = useState("home");
+  const [previewUnlocked, setPreviewUnlocked] = useState(false);
+  const [pendingPage, setPendingPage] = useState(null);
 
   const [isMailOpen, setIsMailOpen] = useState(false);
   const [mailSubject, setMailSubject] = useState("Hello ZWAP!");
@@ -138,27 +141,67 @@ export default function App() {
     }
   };
 
-  if (activePage === "about") {
-  return (
-    <>
-      <AboutPage
-        onBack={() => setActivePage("home")}
-        onLockIn={() => setIsModalOpen(true)}
-      />
+  const openEarlyAccessModal = (targetPage = null) => {
+    setPendingPage(targetPage);
+    setIsModalOpen(true);
+  };
 
-      <EarlyAccessModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        email={email}
-        setEmail={setEmail}
-        bang={bang}
-      />
-    </>
-  );
-}
+  const closeEarlyAccessModal = () => {
+    setIsModalOpen(false);
+    setPendingPage(null);
+  };
+
+  const unlockPreviewAndEnter = () => {
+    setPreviewUnlocked(true);
+    setIsModalOpen(false);
+    setActivePage("preview");
+    setPendingPage(null);
+  };
+
+  if (activePage === "about") {
+    return (
+      <>
+        <AboutPage
+          onBack={() => setActivePage("home")}
+          onLockIn={() => openEarlyAccessModal("preview")}
+        />
+
+        <EarlyAccessModal
+          isOpen={isModalOpen}
+          onClose={closeEarlyAccessModal}
+          email={email}
+          setEmail={setEmail}
+          bang={bang}
+          onUnlockPreview={unlockPreviewAndEnter}
+          pendingPage={pendingPage}
+        />
+      </>
+    );
+  }
 
   if (activePage === "features") {
     return <FeaturesPage onBack={() => setActivePage("home")} />;
+  }
+
+  if (activePage === "preview") {
+    return (
+      <>
+        <PreviewPage
+          onBack={() => setActivePage("home")}
+          onLockIn={() => openEarlyAccessModal("preview")}
+        />
+
+        <EarlyAccessModal
+          isOpen={isModalOpen}
+          onClose={closeEarlyAccessModal}
+          email={email}
+          setEmail={setEmail}
+          bang={bang}
+          onUnlockPreview={unlockPreviewAndEnter}
+          pendingPage={pendingPage}
+        />
+      </>
+    );
   }
 
   if (activePage === "partners") {
@@ -625,7 +668,13 @@ export default function App() {
         <LandingHeader
           onAbout={() => setActivePage("about")}
           onFeatures={() => setActivePage("features")}
-          onDownload={() => setActivePage("download")}
+          onPreview={() => {
+            if (previewUnlocked) {
+              setActivePage("preview");
+            } else {
+              openEarlyAccessModal("preview");
+            }
+          }}
           onPartners={() => setActivePage("partners")}
           onGooglePlay={() => setActivePage("google-play")}
           onAppleStore={() => setActivePage("apple-store")}
@@ -645,7 +694,7 @@ export default function App() {
             <div className="landing-cta-group">
               <button
                 className="landing-cta"
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => openEarlyAccessModal("preview")}
               >
                 Lock In. Early.
               </button>
@@ -703,10 +752,12 @@ export default function App() {
 
         <EarlyAccessModal
           isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
+          onClose={closeEarlyAccessModal}
           email={email}
           setEmail={setEmail}
           bang={bang}
+          onUnlockPreview={unlockPreviewAndEnter}
+          pendingPage={pendingPage}
         />
 
         <MailModal
