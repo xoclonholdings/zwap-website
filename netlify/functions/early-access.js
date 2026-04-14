@@ -94,9 +94,20 @@ exports.handler = async (event) => {
             <div style="font-size:15px; line-height:1.6;">${referralLink}</div>
           </div>
 
-          <p style="margin:0 0 16px; font-size:15px; line-height:1.7; color:rgba(245,247,255,0.82);">
-            Successful referrals reserve rewards before launch. Those rewards activate when the system opens.
-          </p>
+          <div style="margin:24px 0; padding:18px; border-radius:18px; background:rgba(103,242,255,0.04); border:1px solid rgba(103,242,255,0.12);">
+            <div style="font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(245,247,255,0.58); margin-bottom:10px;">
+              Referral rewards
+            </div>
+            <p style="margin:0 0 10px; font-size:15px; line-height:1.7; color:rgba(245,247,255,0.86);">
+              Each successful referral reserves <strong>5 ZWAP</strong> before launch.
+            </p>
+            <p style="margin:0 0 10px; font-size:15px; line-height:1.7; color:rgba(245,247,255,0.86);">
+              You can reserve up to <strong>25 ZWAP</strong> through referrals.
+            </p>
+            <p style="margin:0; font-size:15px; line-height:1.7; color:rgba(245,247,255,0.78);">
+              These rewards activate when ZWAP opens and you complete onboarding.
+            </p>
+          </div>
 
           ${
             referredBy
