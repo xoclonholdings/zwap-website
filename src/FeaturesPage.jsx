@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { coreModes, systemModes, modeContent } from "./FeaturesData";
-import ModeRail from "./ModeRail";
-import ModePanel from "./ModePanel";
+import { coreModes, systemModes, modeContent } from "./mode/FeaturesData";
+import ModeRail from "./mode/ModeRail";
+import ModePanel from "./mode/ModePanel";
 
 export default function FeaturesPage({ onBack }) {
   const [activeMode, setActiveMode] = useState("move");
