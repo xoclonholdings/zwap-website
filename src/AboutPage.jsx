@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import bang from "./assets/Zwap_bang_3d.png";
 import zwapCoin from "./assets/zwap_bang_coin.PNG";
 import zPtsCoin from "./assets/zpts_z_coin.PNG";
+
 function GradientText({ children }) {
   return (
     <span
@@ -188,23 +189,23 @@ export default function AboutPage({ onBack, onLockIn }) {
   const modes = [
     {
       title: "MOVE",
-      desc: "Walk and earn ZWAP! through the step-based side of the ecosystem. The more you move, the more momentum you build.",
+      desc: "Walk and build progression through real-world movement. The more you move, the more momentum you create inside ZWAP.",
       accent: accents.cyan,
     },
     {
       title: "PLAY",
-      desc: "Play games like zSlots and zTrivia to earn rewards, stack ZWAP!, and build up zPts through active participation.",
+      desc: "Play games, stay engaged, and turn participation into progression through skill, consistency, and return behavior.",
       accent: accents.purple,
     },
     {
-      title: "SWAP",
-      desc: "Exchange value across the ecosystem through a clean and simple experience designed for motion, utility, and flow.",
-      accent: accents.blue,
+      title: "SHOP",
+      desc: "Use what you earn on curated products, digital drops, and ecosystem-based offers designed to make rewards feel useful.",
+      accent: accents.pink,
     },
     {
-      title: "SHOP",
-      desc: "Use what you earn on curated products, digital drops, and ecosystem-based offers inside the ZWAP! experience.",
-      accent: accents.pink,
+      title: "SWAP",
+      desc: "Exchange unlocked value through a cleaner, guided experience built to keep utility and flow at the center.",
+      accent: accents.blue,
     },
   ];
 
@@ -302,7 +303,9 @@ export default function AboutPage({ onBack, onLockIn }) {
           <h1
             style={{
               margin: "0 0 14px",
-              fontSize: isDesktop ? "clamp(44px, 5vw, 66px)" : "clamp(34px, 10vw, 48px)",
+              fontSize: isDesktop
+                ? "clamp(44px, 5vw, 66px)"
+                : "clamp(34px, 10vw, 48px)",
               lineHeight: 1.02,
               fontWeight: 900,
               letterSpacing: "-0.04em",
@@ -314,17 +317,29 @@ export default function AboutPage({ onBack, onLockIn }) {
 
           <p
             style={{
-              margin: "0 auto",
+              margin: "0 auto 14px",
               maxWidth: isDesktop ? "860px" : "330px",
               fontSize: isDesktop ? "23px" : "16px",
               lineHeight: isDesktop ? 1.55 : 1.65,
               color: "rgba(235,239,255,0.8)",
             }}
           >
-            ZWAP! turns movement, play, and everyday participation into rewards
-            inside a culture-first ecosystem built for real people, not just
-            crypto natives.
+            ZWAP! is a behavior-based reward ecosystem that turns movement,
+            play, and everyday participation into measurable progression and
+            controlled digital value.
           </p>
+
+          <div
+            style={{
+              fontSize: isDesktop ? "20px" : "15px",
+              fontWeight: 800,
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+              color: "rgba(235,239,255,0.78)",
+            }}
+          >
+            Move. Play. Earn today.
+          </div>
         </section>
 
         <section
@@ -366,8 +381,8 @@ export default function AboutPage({ onBack, onLockIn }) {
               }}
             >
               Most platforms are built to keep you scrolling, tapping, and
-              spending without returning anything meaningful. ZWAP! flips that by
-              rewarding actions that already fit into daily life.
+              spending without returning anything meaningful. ZWAP! flips that
+              by rewarding actions that already fit into daily life.
             </div>
           </GlassCard>
         </section>
@@ -486,7 +501,7 @@ export default function AboutPage({ onBack, onLockIn }) {
           >
             <CurrencyCard
               title="ZWAP!"
-              desc="The main reward token inside the ecosystem. Earn it through movement, games, and participation, then use it across the ZWAP! experience."
+              desc="The utility layer of the ecosystem, used across rewards, spending, and future exchange."
               accent={accents.cyan}
               coinSrc={zwapCoin}
               coinAlt="ZWAP coin"
@@ -495,13 +510,45 @@ export default function AboutPage({ onBack, onLockIn }) {
 
             <CurrencyCard
               title="zPts"
-              desc="Loyalty-style points earned through gameplay and engagement. They deepen the loop, support retention, and reward active users."
+              desc="The progression layer earned through activity, engagement, and consistency before value is unlocked."
               accent={accents.pink}
               coinSrc={zPtsCoin}
               coinAlt="zPts coin"
               reverse
               isDesktop={isDesktop}
             />
+          </div>
+        </section>
+
+        <section
+          style={{
+            marginBottom: "14px",
+            textAlign: "center",
+          }}
+        >
+          <div
+            style={{
+              fontSize: isDesktop ? "18px" : "14px",
+              fontWeight: 800,
+              lineHeight: 1.6,
+              color: "rgba(235,239,255,0.76)",
+              maxWidth: isDesktop ? "780px" : "320px",
+              margin: "0 auto",
+            }}
+          >
+            <span
+              style={{
+                display: "block",
+                marginBottom: "6px",
+                color: "#F8FAFF",
+              }}
+            >
+              Move. Play. Swap. Shop.
+            </span>
+            <span style={{ color: "rgba(235,239,255,0.62)" }}>
+              ZWAP is rolling out in phases, with more systems unlocking over
+              time.
+            </span>
           </div>
         </section>
 
