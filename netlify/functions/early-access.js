@@ -2,8 +2,16 @@ const { Resend } = require("resend");
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 function buildReferralCode(email) {
-  const base = email.split("@")[0].replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
+  const base = email
+    .split("@")[0]
+    .replace(/[^a-zA-Z0-9]/g, "")
+    .toUpperCase();
+
   const suffix = Math.random().toString(36).slice(2, 6).toUpperCase();
   return `ZWAP-${base.slice(0, 6)}${suffix}`;
 }
@@ -12,24 +20,54 @@ exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return {
       statusCode: 405,
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ error: "Method not allowed" }),
+    };
+  }
+
+  if (!process.env.RESEND_API_KEY) {
+    return {
+      statusCode: 500,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ error: "Missing RESEND_API_KEY" }),
     };
   }
 
   try {
     const body = JSON.parse(event.body || "{}");
+
     const email = String(body.email || "").trim().toLowerCase();
     const referredBy = String(body.referredBy || "").trim();
+    const existingReferralCode = String(body.referralCode || "").trim();
 
     if (!email) {
       return {
         statusCode: 400,
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ error: "Email is required" }),
       };
     }
 
-    const referralCode = buildReferralCode(email);
-    const referralLink = `https://zwap.online/?ref=${encodeURIComponent(referralCode)}`;
+    if (!isValidEmail(email)) {
+      return {
+        statusCode: 400,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ error: "Invalid email address" }),
+      };
+    }
+
+    const referralCode = existingReferralCode || buildReferralCode(email);
+    const referralLink = `https://zwap.online/?ref=${encodeURIComponent(
+      referralCode
+    )}`;
 
     const subject = "You’re in early. ZWAP!";
 
@@ -37,6 +75,7 @@ exports.handler = async (event) => {
       <div style="font-family: Inter, Arial, sans-serif; background:#04050A; color:#F5F7FF; padding:32px;">
         <div style="max-width:640px; margin:0 auto; background:linear-gradient(180deg, rgba(8,10,22,0.96), rgba(4,5,10,1)); border:1px solid rgba(165,103,255,0.22); border-radius:24px; padding:32px;">
           <h1 style="margin:0 0 12px; font-size:36px; line-height:1.05;">You’re locked in early.</h1>
+
           <p style="margin:0 0 20px; font-size:16px; line-height:1.6; color:rgba(245,247,255,0.82);">
             You now have early access to ZWAP! Preview.
           </p>
@@ -74,7 +113,7 @@ exports.handler = async (event) => {
       </div>
     `;
 
-    await resend.emails.send({
+    const resendResponse = await resend.emails.send({
       from: "ZWAP! <app@zwap.online>",
       to: email,
       subject,
@@ -83,12 +122,16 @@ exports.handler = async (event) => {
 
     return {
       statusCode: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         success: true,
         email,
         referralCode,
         referralLink,
         referredBy: referredBy || null,
+        resendId: resendResponse?.data?.id || null,
       }),
     };
   } catch (error) {
@@ -96,6 +139,9 @@ exports.handler = async (event) => {
 
     return {
       statusCode: 500,
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         error: "Failed to process early access request",
       }),
