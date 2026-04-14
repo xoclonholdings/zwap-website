@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 export default function EarlyAccessModal({
   isOpen,
   onClose,
@@ -8,6 +10,9 @@ export default function EarlyAccessModal({
   onInstantAccess,
   pendingPage,
 }) {
+  const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
   if (!isOpen) return null;
 
   const tweetText = encodeURIComponent(
@@ -19,15 +24,6 @@ export default function EarlyAccessModal({
   const isDesktop =
     typeof window !== "undefined" ? window.innerWidth >= 900 : false;
 
-  const handleEmailAccess = () => {
-    if (!email.trim()) return;
-    if (onSubmitAccess) onSubmitAccess();
-  };
-
-  const handleInstantAccess = () => {
-    if (onInstantAccess) onInstantAccess();
-  };
-
   const titleText =
     pendingPage === "preview" ? "Unlock Preview" : "Lock In Early";
 
@@ -35,6 +31,58 @@ export default function EarlyAccessModal({
     pendingPage === "preview"
       ? "Enter early and step into the first live preview of ZWAP."
       : "Secure your spot before the system opens.";
+
+  const handleEmailAccess = async () => {
+    const cleanEmail = email.trim();
+    if (!cleanEmail || loading) return;
+
+    setLoading(true);
+    setSuccessMessage("");
+
+    try {
+      const referredBy = localStorage.getItem("zwap_referred_by") || "";
+
+      const response = await fetch("/.netlify/functions/early-access", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: cleanEmail,
+          referredBy,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send early access email.");
+      }
+
+      if (data.referralCode) {
+        localStorage.setItem("zwap_referral_code", data.referralCode);
+      }
+
+      if (data.referredBy) {
+        localStorage.setItem("zwap_referred_by", data.referredBy);
+      }
+
+      setSuccessMessage("Check your email for your referral link.");
+
+      if (onSubmitAccess) {
+        onSubmitAccess();
+      }
+    } catch (error) {
+      console.error("Early access modal error:", error);
+      alert("Something went wrong. Try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleInstantAccess = () => {
+    if (onInstantAccess) onInstantAccess();
+  };
 
   return (
     <div
@@ -214,6 +262,7 @@ export default function EarlyAccessModal({
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email address"
               type="email"
+              disabled={loading}
               style={{
                 width: "100%",
                 boxSizing: "border-box",
@@ -228,11 +277,13 @@ export default function EarlyAccessModal({
                 fontSize: "15px",
                 lineHeight: 1.2,
                 boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
+                opacity: loading ? 0.7 : 1,
               }}
             />
 
             <button
               onClick={handleEmailAccess}
+              disabled={loading}
               style={{
                 width: "100%",
                 boxSizing: "border-box",
@@ -243,13 +294,28 @@ export default function EarlyAccessModal({
                   "linear-gradient(180deg, rgba(24,26,48,1) 0%, rgba(11,13,28,1) 100%)",
                 color: "#fff",
                 fontWeight: 700,
-                cursor: "pointer",
+                cursor: loading ? "default" : "pointer",
                 boxShadow:
                   "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 20px rgba(0,0,0,0.28)",
+                opacity: loading ? 0.7 : 1,
               }}
             >
-              Unlock Preview
+              {loading ? "Sending..." : "Unlock Preview"}
             </button>
+
+            {successMessage ? (
+              <div
+                style={{
+                  marginTop: "12px",
+                  fontSize: "13px",
+                  lineHeight: "1.5",
+                  color: "rgba(103,242,255,0.88)",
+                  textAlign: "center",
+                }}
+              >
+                {successMessage}
+              </div>
+            ) : null}
           </div>
 
           <div
