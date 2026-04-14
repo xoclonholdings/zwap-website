@@ -4,17 +4,38 @@ export default function EarlyAccessModal({
   email,
   setEmail,
   bang,
+  onUnlockPreview,
+  pendingPage,
 }) {
   if (!isOpen) return null;
 
   const tweetText = encodeURIComponent(
-    "ZWAP! is live. Move. Play. Swap. Shop. Earn rewards with ZWAP! https://zwap.online"
+    "ZWAP! is live. Move. Play. Earn Today. https://zwap.online"
   );
 
   const tweetUrl = `https://x.com/intent/tweet?text=${tweetText}`;
 
   const isDesktop =
     typeof window !== "undefined" ? window.innerWidth >= 900 : false;
+
+  const handleEmailAccess = () => {
+    if (!email.trim()) return;
+
+    if (pendingPage === "preview" && onUnlockPreview) {
+      onUnlockPreview();
+      return;
+    }
+
+    onClose();
+  };
+
+  const handleInstantAccess = () => {
+    if (pendingPage === "preview" && onUnlockPreview) {
+      onUnlockPreview();
+    } else {
+      onClose();
+    }
+  };
 
   return (
     <div
@@ -54,6 +75,7 @@ export default function EarlyAccessModal({
           color: "#F9FAFF",
         }}
       >
+        {/* CLOSE */}
         <button
           onClick={onClose}
           style={{
@@ -71,6 +93,7 @@ export default function EarlyAccessModal({
           ×
         </button>
 
+        {/* HEADER */}
         <div
           style={{
             display: "flex",
@@ -83,8 +106,6 @@ export default function EarlyAccessModal({
             style={{
               width: isDesktop ? "108px" : "88px",
               marginBottom: isDesktop ? "14px" : "16px",
-              marginTop: isDesktop ? "0" : "6px",
-              flexShrink: 0,
             }}
           >
             <img
@@ -92,29 +113,18 @@ export default function EarlyAccessModal({
               alt="ZWAP!"
               style={{
                 width: "100%",
-                height: "auto",
-                display: "block",
                 filter: "drop-shadow(0 0 22px rgba(130, 88, 255, 0.5))",
               }}
             />
           </div>
 
-          <div
-            style={{
-              marginBottom: isDesktop ? "22px" : "18px",
-              padding: isDesktop ? "0 36px" : "0 6px",
-              width: "100%",
-            }}
-          >
+          <div style={{ marginBottom: isDesktop ? "22px" : "18px" }}>
             <div
               style={{
                 fontSize: isDesktop ? "44px" : "clamp(34px, 10vw, 42px)",
                 fontWeight: 900,
                 letterSpacing: "-0.04em",
-                lineHeight: "1.02",
                 marginBottom: "10px",
-                color: "#F8FAFF",
-                textShadow: "0 4px 20px rgba(0,0,0,0.35)",
               }}
             >
               What is{" "}
@@ -135,131 +145,48 @@ export default function EarlyAccessModal({
               style={{
                 margin: 0,
                 fontSize: isDesktop ? "17px" : "16px",
-                lineHeight: "1.55",
                 color: "rgba(235,239,255,0.82)",
-                maxWidth: "520px",
-                marginInline: "auto",
-                textShadow: "0 2px 10px rgba(0,0,0,0.25)",
               }}
             >
-              Earn rewards from steps, games, and daily activity.
+              Move. Play. Earn Today.
             </p>
           </div>
         </div>
 
+        {/* OPTIONS */}
         <div
           style={{
             display: "grid",
             gridTemplateColumns: isDesktop ? "1fr 1fr" : "1fr",
             gap: isDesktop ? "18px" : "14px",
-            marginTop: "6px",
           }}
         >
-          <div
-            style={{
-              padding: isDesktop ? "20px" : "18px",
-              borderRadius: "22px",
-              border: "1px solid rgba(255,255,255,0.08)",
-              background: "rgba(255,255,255,0.03)",
-              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
-            }}
-          >
-            <div
-              style={{
-                fontWeight: 800,
-                fontSize: isDesktop ? "22px" : "20px",
-                marginBottom: "8px",
-                textAlign: "center",
-                textShadow: "0 2px 10px rgba(0,0,0,0.28)",
-              }}
-            >
-              Quick Access
-            </div>
+          {/* EMAIL */}
+          <div style={cardStyle(isDesktop)}>
+            <div style={cardTitle(isDesktop)}>Early Access</div>
 
-            <div
-              style={{
-                fontSize: "14px",
-                marginBottom: "14px",
-                color: "rgba(235,239,255,0.78)",
-                textAlign: "center",
-                lineHeight: "1.5",
-              }}
-            >
-              Get a private preview link
+            <div style={cardSub}>
+              Get early access to V1
             </div>
 
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email address"
-              style={{
-                width: "100%",
-                boxSizing: "border-box",
-                display: "block",
-                borderRadius: "999px",
-                padding: "14px 18px",
-                marginBottom: "12px",
-                border: "1px solid rgba(255,255,255,0.14)",
-                background: "rgba(0,0,0,0.22)",
-                color: "#fff",
-                outline: "none",
-                fontSize: "15px",
-                lineHeight: 1.2,
-                boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
-              }}
+              style={inputStyle}
             />
 
-            <button
-              style={{
-                width: "100%",
-                boxSizing: "border-box",
-                padding: "14px 18px",
-                borderRadius: "999px",
-                border: "1px solid rgba(165, 103, 255, 0.45)",
-                background:
-                  "linear-gradient(180deg, rgba(24,26,48,1) 0%, rgba(11,13,28,1) 100%)",
-                color: "#fff",
-                fontWeight: 700,
-                cursor: "pointer",
-                boxShadow:
-                  "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 20px rgba(0,0,0,0.28)",
-              }}
-            >
+            <button onClick={handleEmailAccess} style={buttonStyle}>
               Send Access Link
             </button>
           </div>
 
-          <div
-            style={{
-              padding: isDesktop ? "20px" : "18px",
-              borderRadius: "22px",
-              border: "1px solid rgba(255,255,255,0.08)",
-              background: "rgba(255,255,255,0.03)",
-              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
-            }}
-          >
-            <div
-              style={{
-                fontWeight: 800,
-                fontSize: isDesktop ? "22px" : "20px",
-                marginBottom: "8px",
-                textAlign: "center",
-                textShadow: "0 2px 10px rgba(0,0,0,0.28)",
-              }}
-            >
-              Instant Access
-            </div>
+          {/* INSTANT */}
+          <div style={cardStyle(isDesktop)}>
+            <div style={cardTitle(isDesktop)}>Instant Access</div>
 
-            <div
-              style={{
-                fontSize: "14px",
-                marginBottom: "14px",
-                color: "rgba(235,239,255,0.78)",
-                textAlign: "center",
-                lineHeight: "1.5",
-              }}
-            >
-              Post on X to unlock instantly
+            <div style={cardSub}>
+              Post on X to unlock V1 instantly
             </div>
 
             <div style={{ height: isDesktop ? "48px" : "0px" }} />
@@ -268,56 +195,74 @@ export default function EarlyAccessModal({
               href={tweetUrl}
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                width: "100%",
-                boxSizing: "border-box",
-                padding: "14px 18px",
-                borderRadius: "999px",
-                border: "1px solid rgba(165, 103, 255, 0.45)",
-                background:
-                  "linear-gradient(180deg, rgba(24,26,48,1) 0%, rgba(11,13,28,1) 100%)",
-                color: "#fff",
-                fontWeight: 700,
-                cursor: "pointer",
-                boxShadow:
-                  "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 20px rgba(0,0,0,0.28)",
-                textDecoration: "none",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+              onClick={handleInstantAccess}
+              style={{ ...buttonStyle, display: "flex", textDecoration: "none" }}
             >
               Post on X
             </a>
           </div>
         </div>
 
+        {/* FOOT */}
         <div
           style={{
             marginTop: isDesktop ? "22px" : "18px",
             textAlign: "center",
             fontSize: isDesktop ? "26px" : "clamp(24px, 7vw, 30px)",
             fontWeight: 900,
-            letterSpacing: "-0.03em",
-            color: "#F8FAFF",
-            textShadow: "0 4px 20px rgba(0,0,0,0.35)",
-            padding: isDesktop ? "0" : "0 8px",
           }}
         >
-          Want to see{" "}
-          <span
-            style={{
-              background:
-                "linear-gradient(90deg, #66F2FF 0%, #7FD9FF 18%, #B486FF 55%, #FF67D4 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            ZWAP!
-          </span>{" "}
-          in action?
+          Ready to move, play, and earn today?
         </div>
       </div>
     </div>
   );
 }
+
+/* ---------- styles ---------- */
+
+const cardStyle = (isDesktop) => ({
+  padding: isDesktop ? "20px" : "18px",
+  borderRadius: "22px",
+  border: "1px solid rgba(255,255,255,0.08)",
+  background: "rgba(255,255,255,0.03)",
+});
+
+const cardTitle = (isDesktop) => ({
+  fontWeight: 800,
+  fontSize: isDesktop ? "22px" : "20px",
+  marginBottom: "8px",
+  textAlign: "center",
+});
+
+const cardSub = {
+  fontSize: "14px",
+  marginBottom: "14px",
+  color: "rgba(235,239,255,0.78)",
+  textAlign: "center",
+};
+
+const inputStyle = {
+  width: "100%",
+  borderRadius: "999px",
+  padding: "14px 18px",
+  marginBottom: "12px",
+  border: "1px solid rgba(255,255,255,0.14)",
+  background: "rgba(0,0,0,0.22)",
+  color: "#fff",
+  fontSize: "15px",
+};
+
+const buttonStyle = {
+  width: "100%",
+  padding: "14px 18px",
+  borderRadius: "999px",
+  border: "1px solid rgba(165, 103, 255, 0.45)",
+  background:
+    "linear-gradient(180deg, rgba(24,26,48,1) 0%, rgba(11,13,28,1) 100%)",
+  color: "#fff",
+  fontWeight: 700,
+  cursor: "pointer",
+  justifyContent: "center",
+  alignItems: "center",
+};
