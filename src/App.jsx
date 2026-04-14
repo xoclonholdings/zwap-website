@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import heroPhoneMockup from "./assets/hero_phone_mockup.png";
 import EarlyAccessModal from "./EarlyAccessModal.jsx";
 import LandingHeader from "./LandingHeader";
@@ -6,12 +6,16 @@ import bang from "./assets/Zwap_bang_3d.png";
 
 import AboutPage from "./AboutPage";
 import FeaturesPage from "./FeaturesPage";
-import PreviewPage from "./preview/PreviewPage";
 import PartnersPage from "./PartnersPage";
 import DownloadPage from "./DownloadPage";
 import GooglePlay from "./GooglePlay";
 import AppleStore from "./AppleStore";
 import MailingListDatabase from "./MailingListDatabase";
+import PreviewPage from "./preview/PreviewPage";
+
+function generateReferralCode() {
+  return `ZWAP-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+}
 
 function XIcon() {
   return (
@@ -125,6 +129,8 @@ export default function App() {
   const [activePage, setActivePage] = useState("home");
   const [previewUnlocked, setPreviewUnlocked] = useState(false);
   const [pendingPage, setPendingPage] = useState(null);
+  const [referralCode, setReferralCode] = useState("");
+  const [referredBy, setReferredBy] = useState("");
 
   const [isMailOpen, setIsMailOpen] = useState(false);
   const [mailSubject, setMailSubject] = useState("Hello ZWAP!");
@@ -141,6 +147,32 @@ export default function App() {
     }
   };
 
+  useEffect(() => {
+    const savedPreviewUnlocked =
+      localStorage.getItem("zwap_preview_unlocked") === "true";
+    const savedEmail = localStorage.getItem("zwap_early_access_email") || "";
+    const savedReferralCode =
+      localStorage.getItem("zwap_referral_code") || generateReferralCode();
+    const savedReferredBy = localStorage.getItem("zwap_referred_by") || "";
+
+    setPreviewUnlocked(savedPreviewUnlocked);
+    setEmail(savedEmail);
+    setReferralCode(savedReferralCode);
+    setReferredBy(savedReferredBy);
+
+    if (!localStorage.getItem("zwap_referral_code")) {
+      localStorage.setItem("zwap_referral_code", savedReferralCode);
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const incomingRef = params.get("ref");
+
+    if (incomingRef) {
+      setReferredBy(incomingRef);
+      localStorage.setItem("zwap_referred_by", incomingRef);
+    }
+  }, []);
+
   const openEarlyAccessModal = (targetPage = null) => {
     setPendingPage(targetPage);
     setIsModalOpen(true);
@@ -151,10 +183,88 @@ export default function App() {
     setPendingPage(null);
   };
 
-  const unlockPreviewAndEnter = () => {
+  const handleEarlyAccessSubmit = () => {
+    const cleanEmail = email.trim();
+
+    if (!cleanEmail) return;
+
+    const currentRecord = (() => {
+      try {
+        return JSON.parse(localStorage.getItem("zwap_early_access_record") || "{}");
+      } catch {
+        return {};
+      }
+    })();
+
+    const nextRecord = {
+      ...currentRecord,
+      email: cleanEmail,
+      early_access: true,
+      preview_unlocked: true,
+      referral_code: referralCode,
+      referred_by: referredBy || null,
+      referral_count: currentRecord.referral_count || 0,
+      pending_rewards: {
+        referral_zwap: currentRecord?.pending_rewards?.referral_zwap || 0,
+      },
+      created_at: currentRecord.created_at || new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    };
+
+    localStorage.setItem("zwap_early_access_email", cleanEmail);
+    localStorage.setItem("zwap_preview_unlocked", "true");
+    localStorage.setItem("zwap_early_access", "true");
+    localStorage.setItem("zwap_early_access_record", JSON.stringify(nextRecord));
+
     setPreviewUnlocked(true);
     setIsModalOpen(false);
-    setActivePage("preview");
+
+    if (pendingPage === "preview") {
+      setActivePage("preview");
+    }
+
+    setPendingPage(null);
+  };
+
+  const handleInstantPreviewUnlock = () => {
+    const currentRecord = (() => {
+      try {
+        return JSON.parse(localStorage.getItem("zwap_early_access_record") || "{}");
+      } catch {
+        return {};
+      }
+    })();
+
+    const nextRecord = {
+      ...currentRecord,
+      email: email.trim() || currentRecord.email || "",
+      early_access: true,
+      preview_unlocked: true,
+      referral_code: referralCode,
+      referred_by: referredBy || null,
+      referral_count: currentRecord.referral_count || 0,
+      pending_rewards: {
+        referral_zwap: currentRecord?.pending_rewards?.referral_zwap || 0,
+      },
+      created_at: currentRecord.created_at || new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    };
+
+    if (nextRecord.email) {
+      localStorage.setItem("zwap_early_access_email", nextRecord.email);
+    }
+
+    localStorage.setItem("zwap_preview_unlocked", "true");
+    localStorage.setItem("zwap_early_access", "true");
+    localStorage.setItem("zwap_early_access_record", JSON.stringify(nextRecord));
+
+    setPreviewUnlocked(true);
+    setIsModalOpen(false);
+
+    if (pendingPage === "preview") {
+      setActivePage("preview");
+    }
+
     setPendingPage(null);
   };
 
@@ -172,7 +282,8 @@ export default function App() {
           email={email}
           setEmail={setEmail}
           bang={bang}
-          onUnlockPreview={unlockPreviewAndEnter}
+          onSubmitAccess={handleEarlyAccessSubmit}
+          onInstantAccess={handleInstantPreviewUnlock}
           pendingPage={pendingPage}
         />
       </>
@@ -197,7 +308,8 @@ export default function App() {
           email={email}
           setEmail={setEmail}
           bang={bang}
-          onUnlockPreview={unlockPreviewAndEnter}
+          onSubmitAccess={handleEarlyAccessSubmit}
+          onInstantAccess={handleInstantPreviewUnlock}
           pendingPage={pendingPage}
         />
       </>
@@ -221,7 +333,14 @@ export default function App() {
   }
 
   if (activePage === "mailing-list") {
-    return <MailingListDatabase onBack={() => setActivePage("home")} />;
+    return (
+      <MailingListDatabase
+        onBack={() => setActivePage("home")}
+        email={email}
+        setEmail={setEmail}
+        onSubmitAccess={handleEarlyAccessSubmit}
+      />
+    );
   }
 
   return (
@@ -756,7 +875,8 @@ export default function App() {
           email={email}
           setEmail={setEmail}
           bang={bang}
-          onUnlockPreview={unlockPreviewAndEnter}
+          onSubmitAccess={handleEarlyAccessSubmit}
+          onInstantAccess={handleInstantPreviewUnlock}
           pendingPage={pendingPage}
         />
 
