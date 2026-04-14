@@ -15,34 +15,43 @@ export const systemModes = [
 export const modeContent = {
   move: {
     title: "MOVE",
-    description: "Turn real-world movement into rewards. Build streaks. Earn daily.",
+    heroLabel: "MOTION BECOMES VALUE",
+    description:
+      "Turn real-world movement into rewards. Build streaks. Earn daily.",
   },
   play: {
     title: "PLAY",
+    heroLabel: "SKILL INTO PROGRESS",
     description: "Play games. Earn ZWAP. Submit your own.",
   },
   swap: {
     title: "SWAP",
+    heroLabel: "VALUE IN MOTION",
     description: "Exchange assets seamlessly through integrated liquidity.",
   },
   shop: {
     title: "SHOP",
+    heroLabel: "REWARDS MADE USEFUL",
     description: "Spend rewards on digital and real-world items.",
   },
   world: {
     title: "WORLD",
+    heroLabel: "LIVE SYSTEM PRESENCE",
     description: "See live activity. Feel presence. React in real time.",
   },
   profile: {
     title: "PROFILE",
+    heroLabel: "IDENTITY IN PROGRESS",
     description: "Your identity. Your badges. Your progression.",
   },
   audio: {
     title: "AUDIO",
+    heroLabel: "LISTEN WHILE YOU MOVE",
     description: "Soundtrack your experience. Connect and control playback.",
   },
   learn: {
     title: "LEARN",
+    heroLabel: "KNOWLEDGE THAT UNLOCKS",
     description: "Understand the system. Unlock deeper value.",
   },
 };
