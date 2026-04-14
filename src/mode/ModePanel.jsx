@@ -1,24 +1,81 @@
 import React from "react";
+import { getTheme } from "./ModePanelTheme";
+import { getHeroLabel } from "./ModePanelHero";
+import { ModeVisual } from "./ModePanelVisuals";
 
 export default function ModePanel({ activeMode, modeContent }) {
   const content = modeContent[activeMode];
+  const theme = getTheme(activeMode);
+  const heroLabel = getHeroLabel(activeMode, content);
 
   return (
     <div
       style={{
         height: "clamp(340px, 58vh, 560px)",
-        borderRadius: 22,
-        border: "1px solid rgba(120, 90, 255, 0.25)",
+        borderRadius: 24,
+        border: `1px solid ${theme.border}`,
         position: "relative",
-        background:
-          "linear-gradient(180deg, rgba(20,20,40,0.5), rgba(8,8,18,0.95))",
-        boxShadow: getGlow(activeMode),
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-end",
+        background: `
+          radial-gradient(circle at 16% 28%, ${theme.radialA}, transparent 22%),
+          radial-gradient(circle at 74% 18%, ${theme.radialB}, transparent 24%),
+          linear-gradient(180deg, rgba(8,10,22,0.72) 0%, rgba(6,8,18,0.92) 100%)
+        `,
+        boxShadow: `0 0 34px ${theme.glow}`,
       }}
     >
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: `
+            linear-gradient(${theme.grid} 1px, transparent 1px),
+            linear-gradient(90deg, ${theme.grid} 1px, transparent 1px)
+          `,
+          backgroundSize: "42px 42px",
+          opacity: 0.35,
+          pointerEvents: "none",
+        }}
+      />
+
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          pointerEvents: "none",
+        }}
+      >
+        <ModeVisual mode={activeMode} theme={theme} />
+      </div>
+
+      <div
+        style={{
+          position: "absolute",
+          top: "12%",
+          left: "7%",
+          right: "7%",
+          textAlign: "left",
+          pointerEvents: "none",
+        }}
+      >
+        <div
+          style={{
+            fontSize: "clamp(28px, 5vw, 74px)",
+            fontWeight: 900,
+            lineHeight: 0.92,
+            letterSpacing: "-0.05em",
+            color: "rgba(255,255,255,0.11)",
+            textTransform: "uppercase",
+            maxWidth: "72%",
+          }}
+        >
+          {heroLabel}
+        </div>
+      </div>
+
       <div
         style={{
           width: "100%",
@@ -31,12 +88,14 @@ export default function ModePanel({ activeMode, modeContent }) {
           borderTop: "1px solid rgba(255,255,255,0.06)",
           display: "flex",
           justifyContent: "center",
+          position: "relative",
+          zIndex: 2,
         }}
       >
         <div
           style={{
             width: "100%",
-            maxWidth: "540px",
+            maxWidth: "560px",
             textAlign: "center",
             margin: "0 auto",
           }}
@@ -44,11 +103,12 @@ export default function ModePanel({ activeMode, modeContent }) {
           <h2
             style={{
               margin: "0 0 8px 0",
-              fontWeight: 800,
-              letterSpacing: "0.04em",
-              fontSize: "clamp(28px, 4vw, 40px)",
-              lineHeight: 1.05,
+              fontWeight: 900,
+              letterSpacing: "0.03em",
+              fontSize: "clamp(28px, 4vw, 42px)",
+              lineHeight: 1.02,
               color: "#F8FAFF",
+              textTransform: "uppercase",
             }}
           >
             {content.title}
@@ -57,10 +117,9 @@ export default function ModePanel({ activeMode, modeContent }) {
           <p
             style={{
               margin: 0,
-              opacity: 0.88,
+              color: "rgba(235,239,255,0.9)",
               fontSize: "clamp(15px, 2vw, 18px)",
               lineHeight: 1.55,
-              color: "rgba(235,239,255,0.9)",
               maxWidth: "100%",
               overflowWrap: "break-word",
               wordBreak: "normal",
@@ -72,27 +131,4 @@ export default function ModePanel({ activeMode, modeContent }) {
       </div>
     </div>
   );
-}
-
-function getGlow(mode) {
-  switch (mode) {
-    case "move":
-      return "0 0 40px rgba(120, 255, 180, 0.25)";
-    case "play":
-      return "0 0 40px rgba(255, 120, 180, 0.25)";
-    case "swap":
-      return "0 0 40px rgba(120, 180, 255, 0.25)";
-    case "shop":
-      return "0 0 40px rgba(255, 200, 120, 0.25)";
-    case "world":
-      return "0 0 40px rgba(180, 120, 255, 0.25)";
-    case "profile":
-      return "0 0 40px rgba(120, 255, 255, 0.25)";
-    case "audio":
-      return "0 0 40px rgba(255, 120, 255, 0.25)";
-    case "learn":
-      return "0 0 40px rgba(200, 255, 120, 0.25)";
-    default:
-      return "0 0 25px rgba(120, 90, 255, 0.15)";
-  }
 }
