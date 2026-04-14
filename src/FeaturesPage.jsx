@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { coreModes, systemModes, modeContent } from "./mode/FeaturesData";
+import { coreModes, systemModes, modeContent } from "./mode/FeaturesData.js";
 import ModeRail from "./mode/ModeRail";
 import ModePanel from "./mode/ModePanel";
 
