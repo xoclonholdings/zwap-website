@@ -24,6 +24,8 @@ export default function AppRoutes({
   setEmail,
   bang,
   pendingPage,
+  referralCode,
+  onSendInvite,
 }) {
   if (activePage === "about") {
     return (
@@ -108,7 +110,10 @@ export default function AppRoutes({
       <>
         <PreviewPage
           onBack={() => setActivePage("home")}
-          onLockIn={() => openEarlyAccessModal("preview")}
+          onPrivacy={() => setActivePage("privacy")}
+          onTerms={() => setActivePage("terms")}
+          referralCode={referralCode}
+          onSendInvite={onSendInvite}
         />
 
         <EarlyAccessModal
