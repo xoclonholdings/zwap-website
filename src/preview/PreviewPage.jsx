@@ -8,7 +8,11 @@ import PreviewModeTabs from "./PreviewModeTabs";
 import PreviewConsoleCard from "./PreviewConsoleCard";
 import PreviewFooter from "./PreviewFooter";
 
-export default function PreviewPage({ onBack, onLockIn }) {
+export default function PreviewPage({
+  onBack,
+  onPrivacy,
+  onTerms,
+}) {
   const [activeMode, setActiveMode] = useState("move");
   const [progressAnimated, setProgressAnimated] = useState(true);
 
@@ -148,10 +152,12 @@ export default function PreviewPage({ onBack, onLockIn }) {
         <PreviewConsoleCard
           data={activePreview}
           progressAnimated={progressAnimated}
-          onLockIn={onLockIn}
         />
 
-        <PreviewFooter />
+        <PreviewFooter
+          onPrivacy={onPrivacy}
+          onTerms={onTerms}
+        />
       </div>
     </div>
   );
