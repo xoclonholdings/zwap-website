@@ -3,17 +3,6 @@ import bang from "./assets/Zwap_bang_3d.png";
 
 import LandingHeader from "./components/LandingHeader";
 import EarlyAccessModal from "./components/EarlyAccessModal";
-import MailingListDatabase from "./components/MailingListDatabase";
-
-import AboutPage from "./pages/AboutPage";
-import FeaturesPage from "./pages/FeaturesPage";
-import PartnersPage from "./pages/PartnersPage";
-import PrivacyPage from "./pages/PrivacyPage";
-import TermsPage from "./pages/TermsPage";
-import GooglePlay from "./pages/GooglePlay";
-import AppleStore from "./pages/AppleStore";
-
-import PreviewPage from "./preview/PreviewPage";
 
 import MailModal from "./app/MailModal";
 import AppHome from "./app/AppHome";
@@ -84,7 +73,7 @@ export default function App() {
     openEarlyAccessModal,
   });
 
-  const routedPage = (
+  const routeContent = (
     <AppRoutes
       activePage={activePage}
       setActivePage={setActivePage}
@@ -97,21 +86,11 @@ export default function App() {
       setEmail={setEmail}
       bang={bang}
       pendingPage={pendingPage}
-      AboutPage={AboutPage}
-      FeaturesPage={FeaturesPage}
-      PartnersPage={PartnersPage}
-      PrivacyPage={PrivacyPage}
-      TermsPage={TermsPage}
-      GooglePlay={GooglePlay}
-      AppleStore={AppleStore}
-      MailingListDatabase={MailingListDatabase}
-      PreviewPage={PreviewPage}
-      EarlyAccessModal={EarlyAccessModal}
     />
   );
 
-  if (routedPage) {
-    return routedPage;
+  if (activePage !== "home") {
+    return routeContent;
   }
 
   return (
