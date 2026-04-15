@@ -1,6 +1,45 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, FileText } from "lucide-react";
+
+function BackArrowIcon() {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M15 18l-6-6 6-6" />
+    </svg>
+  );
+}
+
+function FileTextIcon() {
+  return (
+    <svg
+      width="32"
+      height="32"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <path d="M14 2v6h6" />
+      <path d="M16 13H8" />
+      <path d="M16 17H8" />
+      <path d="M10 9H8" />
+    </svg>
+  );
+}
 
 export default function TermsPage() {
   const navigate = useNavigate();
@@ -8,7 +47,7 @@ export default function TermsPage() {
   const sections = [
     {
       title: "1. Acceptance of Terms",
-      content: `By accessing or using the ZWAP! application ("App"), you agree to be bound by these Terms of Use and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this App.`
+      content: `By accessing or using the ZWAP! application ("App"), you agree to be bound by these Terms of Use and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this App.`,
     },
     {
       title: "2. Description of Service",
@@ -19,7 +58,7 @@ export default function TermsPage() {
 • Unlock access to ZWAP through milestones and controlled conversion events
 • Access premium features, rewards, and marketplace experiences
 
-The App may use blockchain technology and may require a compatible wallet for certain features.`
+The App may use blockchain technology and may require a compatible wallet for certain features.`,
     },
     {
       title: "3. Eligibility",
@@ -28,7 +67,7 @@ The App may use blockchain technology and may require a compatible wallet for ce
 • You are at least 18 years of age
 • You have the legal capacity to enter into binding agreements
 • Your use complies with all applicable laws in your jurisdiction
-• Cryptocurrency activities are legal in your country of residence`
+• Cryptocurrency activities are legal in your country of residence`,
     },
     {
       title: "4. Account and Wallet",
@@ -36,7 +75,7 @@ The App may use blockchain technology and may require a compatible wallet for ce
 • We do not store private keys
 • Lost wallet access cannot be recovered by us
 • You are responsible for all activities under your account
-• One wallet address per user account`
+• One wallet address per user account`,
     },
     {
       title: "5. zPts and ZWAP",
@@ -46,7 +85,7 @@ The App may use blockchain technology and may require a compatible wallet for ce
 • Rewards are subject to daily and monthly earning limits
 • Unlocks, conversions, and rewards may be delayed or capped
 • We reserve the right to modify reward rates and conversion rules
-• Certain swaps and exchanges may occur through third-party services`
+• Certain swaps and exchanges may occur through third-party services`,
     },
     {
       title: "6. Subscriptions",
@@ -56,7 +95,7 @@ The App may use blockchain technology and may require a compatible wallet for ce
 • Can be cancelled at any time
 • Benefits remain active until the end of the billing period
 • No refunds are provided for partial billing periods
-• Prices and benefits may change with notice`
+• Prices and benefits may change with notice`,
     },
     {
       title: "7. Prohibited Activities",
@@ -67,7 +106,7 @@ The App may use blockchain technology and may require a compatible wallet for ce
 • Create multiple accounts to gain unfair advantages
 • Attempt to exploit bugs or vulnerabilities
 • Use the platform for illegal activity
-• Violate any applicable laws`
+• Violate any applicable laws`,
     },
     {
       title: "8. Intellectual Property",
@@ -75,7 +114,7 @@ The App may use blockchain technology and may require a compatible wallet for ce
 • ZWAP LLC is owned by XOCLON HOLDINGS INC.
 • You may not copy, modify, or distribute our content without permission
 • User-generated content remains yours, but you grant us a license to display and use it
-• ZWAP! branding may not be used without written permission`
+• ZWAP! branding may not be used without written permission`,
     },
     {
       title: "9. Disclaimer of Warranties",
@@ -86,7 +125,7 @@ The App may use blockchain technology and may require a compatible wallet for ce
 • Future value of ZWAP
 • Compatibility with all devices or wallets
 
-Digital assets and blockchain-based systems carry risk. Only participate within your comfort level.`
+Digital assets and blockchain-based systems carry risk. Only participate within your comfort level.`,
     },
     {
       title: "10. Limitation of Liability",
@@ -96,16 +135,16 @@ Digital assets and blockchain-based systems carry risk. Only participate within 
 • Service interruptions
 • Third-party actions
 • Market fluctuations
-• Indirect, incidental, or consequential damages`
+• Indirect, incidental, or consequential damages`,
     },
     {
       title: "11. Changes to Terms",
-      content: `We may modify these terms at any time. Continued use of the App after changes constitutes acceptance of the new terms. Material changes will be communicated through the App or website.`
+      content: `We may modify these terms at any time. Continued use of the App after changes constitutes acceptance of the new terms. Material changes will be communicated through the App or website.`,
     },
     {
       title: "12. Governing Law",
-      content: `These terms shall be governed by and construed in accordance with the laws of the State of Ohio, United States, without regard to its conflict of law provisions.`
-    }
+      content: `These terms shall be governed by and construed in accordance with the laws of the State of Ohio, United States, without regard to its conflict of law provisions.`,
+    },
   ];
 
   return (
@@ -115,8 +154,9 @@ Digital assets and blockchain-based systems carry risk. Only participate within 
           <button
             onClick={() => navigate(-1)}
             className="mr-3 text-gray-400 hover:text-white"
+            aria-label="Back"
           >
-            <ArrowLeft className="w-6 h-6" />
+            <BackArrowIcon />
           </button>
 
           <h1 className="text-lg font-bold text-white">Terms of Use</h1>
@@ -125,23 +165,20 @@ Digital assets and blockchain-based systems carry risk. Only participate within 
 
       <div className="pt-20 pb-8 px-4 max-w-lg mx-auto">
         <div className="text-center mb-8">
-          <div className="w-16 h-16 rounded-full bg-purple-500/20 flex items-center justify-center mx-auto mb-4 pulse-glow-purple">
-            <FileText className="w-8 h-8 text-purple-400" />
+          <div className="w-16 h-16 rounded-full bg-purple-500/20 flex items-center justify-center mx-auto mb-4">
+            <div className="text-purple-400">
+              <FileTextIcon />
+            </div>
           </div>
 
           <h2 className="text-2xl font-bold text-white mb-2">Terms of Use</h2>
 
-          <p className="text-gray-400 text-sm">
-            Last updated: March 2026
-          </p>
+          <p className="text-gray-400 text-sm">Last updated: March 2026</p>
         </div>
 
         <div className="space-y-6">
           {sections.map((section, i) => (
-            <div
-              key={i}
-              className="glass-card p-5 rounded-xl"
-            >
+            <div key={i} className="glass-card p-5 rounded-xl">
               <h3 className="text-lg font-bold text-purple-400 mb-3">
                 {section.title}
               </h3>
