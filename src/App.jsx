@@ -1,120 +1,38 @@
-import React from "react";
-import bang from "./assets/Zwap_bang_3d.png";
+import AboutPage from "../pages/AboutPage";
+import FeaturesPage from "../pages/FeaturesPage";
+import PartnersPage from "../pages/PartnersPage";
+import PrivacyPage from "../pages/PrivacyPage";
+import TermsPage from "../pages/TermsPage";
+import GooglePlay from "../pages/GooglePlay";
+import AppleStore from "../pages/AppleStore";
 
-import LandingHeader from "./components/LandingHeader";
-import EarlyAccessModal from "./components/EarlyAccessModal";
+import MailingListDatabase from "../components/MailingListDatabase";
+import EarlyAccessModal from "../components/EarlyAccessModal";
 
-import MailModal from "./app/MailModal";
-import AppHome from "./app/AppHome";
-import AppFooter from "./app/AppFooter";
-import AppRoutes from "./app/AppRoutes";
-import appStyles from "./app/appStyles";
+import PreviewPage from "../preview/PreviewPage";
+import PreviewUnlockRedirect from "./PreviewUnlockRedirect";
 
-import useAppState from "./app/useAppState";
-import useAppInit from "./app/useAppInit";
-import useMailModal from "./app/useMailModal";
-import useEarlyAccessModal from "./app/useEarlyAccessModal";
-import usePreviewUnlock from "./app/usePreviewUnlock";
-import usePreviewNavigation from "./app/usePreviewNavigation";
-
-export default function App() {
-  const {
-    activePage,
-    setActivePage,
-    isModalOpen,
-    setIsModalOpen,
-    pendingPage,
-    setPendingPage,
-    email,
-    setEmail,
-    previewUnlocked,
-    setPreviewUnlocked,
-    referralCode,
-    setReferralCode,
-    referredBy,
-    setReferredBy,
-  } = useAppState();
-
-  const {
-    isMailOpen,
-    setIsMailOpen,
-    mailSubject,
-    setMailSubject,
-    mailMessage,
-    setMailMessage,
-  } = useMailModal();
-
-  useAppInit({
-    setReferralCode,
-    setPreviewUnlocked,
-    setEmail,
-    setReferredBy,
-  });
-
-  const { openEarlyAccessModal, closeEarlyAccessModal } = useEarlyAccessModal({
-    setPendingPage,
-    setIsModalOpen,
-  });
-
-  const unlockPreview = usePreviewUnlock({
-    email,
-    referralCode,
-    referredBy,
-    pendingPage,
-    setPreviewUnlocked,
-    setIsModalOpen,
-    setActivePage,
-    setPendingPage,
-  });
-
-  const handlePreviewNav = usePreviewNavigation({
-    previewUnlocked,
-    setActivePage,
-    openEarlyAccessModal,
-  });
-
-  const routeContent = (
-    <AppRoutes
-      activePage={activePage}
-      setActivePage={setActivePage}
-      previewUnlocked={previewUnlocked}
-      openEarlyAccessModal={openEarlyAccessModal}
-      closeEarlyAccessModal={closeEarlyAccessModal}
-      unlockPreview={unlockPreview}
-      isModalOpen={isModalOpen}
-      email={email}
-      setEmail={setEmail}
-      bang={bang}
-      pendingPage={pendingPage}
-    />
-  );
-
-  if (activePage !== "home") {
-    return routeContent;
-  }
-
-  return (
-    <div className="landing-shell">
-      <style>{appStyles}</style>
-
-      <div className="landing-app">
-        <LandingHeader
-          onAbout={() => setActivePage("about")}
-          onFeatures={() => setActivePage("features")}
-          onPreview={handlePreviewNav}
-          onPartners={() => setActivePage("partners")}
-          onGooglePlay={() => setActivePage("google-play")}
-          onAppleStore={() => setActivePage("apple-store")}
-        />
-
-        <AppHome
-          openEarlyAccessModal={openEarlyAccessModal}
-          setIsMailOpen={setIsMailOpen}
-        />
-
-        <AppFooter
-          onPrivacy={() => setActivePage("privacy")}
-          onTerms={() => setActivePage("terms")}
+export default function AppRoutes({
+  activePage,
+  setActivePage,
+  previewUnlocked,
+  openEarlyAccessModal,
+  closeEarlyAccessModal,
+  unlockPreview,
+  isModalOpen,
+  email,
+  setEmail,
+  bang,
+  pendingPage,
+  referralCode,
+  onSendInvite,
+}) {
+  if (activePage === "about") {
+    return (
+      <>
+        <AboutPage
+          onBack={() => setActivePage("home")}
+          onLockIn={() => openEarlyAccessModal("preview")}
         />
 
         <EarlyAccessModal
@@ -127,16 +45,90 @@ export default function App() {
           onInstantAccess={unlockPreview}
           pendingPage={pendingPage}
         />
+      </>
+    );
+  }
 
-        <MailModal
-          isOpen={isMailOpen}
-          onClose={() => setIsMailOpen(false)}
-          subject={mailSubject}
-          setSubject={setMailSubject}
-          message={mailMessage}
-          setMessage={setMailMessage}
+  if (activePage === "features") {
+    return <FeaturesPage onBack={() => setActivePage("home")} />;
+  }
+
+  if (activePage === "partners") {
+    return <PartnersPage onBack={() => setActivePage("home")} />;
+  }
+
+  if (activePage === "privacy") {
+    return <PrivacyPage onBack={() => setActivePage("home")} />;
+  }
+
+  if (activePage === "terms") {
+    return <TermsPage onBack={() => setActivePage("home")} />;
+  }
+
+  if (activePage === "google-play") {
+    return <GooglePlay onBack={() => setActivePage("home")} />;
+  }
+
+  if (activePage === "apple-store") {
+    return <AppleStore onBack={() => setActivePage("home")} />;
+  }
+
+  if (activePage === "mailing-list") {
+    return (
+      <MailingListDatabase
+        onBack={() => setActivePage("home")}
+        email={email}
+        setEmail={setEmail}
+        onSubmitAccess={unlockPreview}
+      />
+    );
+  }
+
+  if (activePage === "preview") {
+    if (!previewUnlocked) {
+      return (
+        <>
+          <PreviewUnlockRedirect
+            onOpen={() => openEarlyAccessModal("preview")}
+          />
+
+          <EarlyAccessModal
+            isOpen={isModalOpen}
+            onClose={closeEarlyAccessModal}
+            email={email}
+            setEmail={setEmail}
+            bang={bang}
+            onSubmitAccess={unlockPreview}
+            onInstantAccess={unlockPreview}
+            pendingPage={pendingPage}
+          />
+        </>
+      );
+    }
+
+    return (
+      <>
+        <PreviewPage
+          onBack={() => setActivePage("home")}
+          onPrivacy={() => setActivePage("privacy")}
+          onTerms={() => setActivePage("terms")}
+          referralCode={referralCode}
+          onSendInvite={onSendInvite}
         />
-      </div>
-    </div>
-  );
+
+        <EarlyAccessModal
+          isOpen={isModalOpen}
+          onClose={closeEarlyAccessModal}
+          email={email}
+          setEmail={setEmail}
+          bang={bang}
+          onSubmitAccess={unlockPreview}
+          onInstantAccess={unlockPreview}
+          pendingPage={pendingPage}
+        />
+      </>
+    );
+  }
+
+  return null;
 }
