@@ -20,6 +20,13 @@ export const previewModes = [
 ];
 
 export const movePreview = {
+  id: "move",
+  label: "MOVE",
+  accent: "#67F2FF",
+  glow: "rgba(103,242,255,0.22)",
+  headline: "Move. Earn. Feel the loop.",
+  description:
+    "Start with motion. Watch progress build in real time and see how everyday activity turns into measurable value.",
   stepGoal: 5000,
   frames: [
     {
@@ -28,6 +35,7 @@ export const movePreview = {
       reward: "+12 zPts",
       statA: "Stride synced",
       statB: "Daily streak active",
+      pace: "Warmup",
     },
     {
       steps: 2480,
@@ -35,13 +43,15 @@ export const movePreview = {
       reward: "+24 zPts",
       statA: "Pace building",
       statB: "Motion captured",
+      pace: "Steady",
     },
     {
       steps: 3240,
       percent: 65,
       reward: "+42 zPts",
-      statA: "3,240 steps",
+      statA: "3,240 steps logged",
       statB: "Daily streak active",
+      pace: "Steady",
     },
     {
       steps: 4180,
@@ -49,6 +59,7 @@ export const movePreview = {
       reward: "+58 zPts",
       statA: "Goal closing in",
       statB: "Sync complete",
+      pace: "Strong",
     },
   ],
 };
@@ -99,3 +110,14 @@ export const playPreviewGames = [
     statB: "Bonus path found",
   },
 ];
+
+export const playPreview = {
+  id: "play",
+  label: "PLAY",
+  accent: "#B486FF",
+  glow: "rgba(180,134,255,0.22)",
+  headline: "Play. Progress. Stack momentum.",
+  description:
+    "Jump into the reward loop through gameplay. Participation, completion, and performance all push your progression forward.",
+  games: playPreviewGames,
+};
