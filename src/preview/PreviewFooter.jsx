@@ -55,14 +55,14 @@ export default function PreviewFooter({ onPrivacy, onTerms }) {
         <p
           style={{
             margin: "0 auto 18px",
-            maxWidth: "300px",
+            maxWidth: "310px",
             fontSize: "15px",
             lineHeight: 1.65,
             color: "rgba(235,239,255,0.78)",
           }}
         >
-          Send your referral link before launch and reserve bonus rewards for
-          every verified signup.
+          Use the referral code sent to your email, enter a friend’s email, and
+          reserve bonus rewards for each verified signup before launch.
         </p>
 
         <div
@@ -78,32 +78,22 @@ export default function PreviewFooter({ onPrivacy, onTerms }) {
               border: "1px solid rgba(255,255,255,0.06)",
               background: "rgba(255,255,255,0.025)",
               padding: "14px 16px",
-              textAlign: "left",
             }}
           >
-            <div
+            <input
+              type="text"
+              placeholder="Enter your referral code"
               style={{
-                fontSize: "11px",
-                fontWeight: 800,
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: "rgba(245,247,255,0.48)",
-                marginBottom: "8px",
+                width: "100%",
+                border: "none",
+                outline: "none",
+                background: "transparent",
+                color: "#F8FAFF",
+                fontSize: "15px",
+                textAlign: "center",
+                letterSpacing: "0.06em",
               }}
-            >
-              Your Referral Code
-            </div>
-
-            <div
-              style={{
-                fontSize: "18px",
-                fontWeight: 900,
-                letterSpacing: "0.08em",
-                color: "#B486FF",
-              }}
-            >
-              ZWAP-7X2Q
-            </div>
+            />
           </div>
 
           <div
@@ -131,6 +121,7 @@ export default function PreviewFooter({ onPrivacy, onTerms }) {
         </div>
 
         <button
+          type="button"
           style={{
             width: "100%",
             border: "none",
@@ -155,12 +146,13 @@ export default function PreviewFooter({ onPrivacy, onTerms }) {
             fontSize: "12px",
             lineHeight: 1.6,
             color: "rgba(235,239,255,0.44)",
-            maxWidth: "300px",
+            maxWidth: "310px",
             margin: "0 auto",
           }}
         >
           Earn 5 reserved ZWAP rewards for each verified referral before launch.
-          Referral rewards are capped at 25 reserved ZWAP per account.
+          Referral rewards are capped at 25 reserved ZWAP per account and are
+          activated when the platform opens.
         </div>
       </div>
 
@@ -177,7 +169,6 @@ export default function PreviewFooter({ onPrivacy, onTerms }) {
           onClick={onPrivacy}
           style={{
             color: "inherit",
-            textDecoration: "none",
             background: "transparent",
             border: "none",
             padding: 0,
@@ -192,7 +183,6 @@ export default function PreviewFooter({ onPrivacy, onTerms }) {
           onClick={onTerms}
           style={{
             color: "inherit",
-            textDecoration: "none",
             background: "transparent",
             border: "none",
             padding: 0,
