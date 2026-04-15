@@ -1,0 +1,125 @@
+import AboutPage from "../pages/AboutPage";
+import FeaturesPage from "../pages/FeaturesPage";
+import PartnersPage from "../pages/PartnersPage";
+import PrivacyPage from "../pages/PrivacyPage";
+import TermsPage from "../pages/TermsPage";
+import GooglePlay from "../pages/GooglePlay";
+import AppleStore from "../pages/AppleStore";
+import MailingListDatabase from "../MailingListDatabase";
+import PreviewPage from "../preview/PreviewPage";
+
+import EarlyAccessModal from "../EarlyAccessModal";
+import PreviewUnlockRedirect from "./PreviewUnlockRedirect";
+
+export default function AppRoutes({
+  activePage,
+  setActivePage,
+  previewUnlocked,
+  openEarlyAccessModal,
+  closeEarlyAccessModal,
+  unlockPreview,
+  isModalOpen,
+  email,
+  setEmail,
+  bang,
+  pendingPage,
+}) {
+  if (activePage === "about") {
+    return (
+      <>
+        <AboutPage
+          onBack={() => setActivePage("home")}
+          onLockIn={() => openEarlyAccessModal("preview")}
+        />
+
+        <EarlyAccessModal
+          isOpen={isModalOpen}
+          onClose={closeEarlyAccessModal}
+          email={email}
+          setEmail={setEmail}
+          bang={bang}
+          onSubmitAccess={unlockPreview}
+          onInstantAccess={unlockPreview}
+          pendingPage={pendingPage}
+        />
+      </>
+    );
+  }
+
+  if (activePage === "features") {
+    return <FeaturesPage onBack={() => setActivePage("home")} />;
+  }
+
+  if (activePage === "partners") {
+    return <PartnersPage onBack={() => setActivePage("home")} />;
+  }
+
+  if (activePage === "privacy") {
+    return <PrivacyPage />;
+  }
+
+  if (activePage === "terms") {
+    return <TermsPage />;
+  }
+
+  if (activePage === "google-play") {
+    return <GooglePlay />;
+  }
+
+  if (activePage === "apple-store") {
+    return <AppleStore />;
+  }
+
+  if (activePage === "mailing-list") {
+    return (
+      <MailingListDatabase
+        onBack={() => setActivePage("home")}
+      />
+    );
+  }
+
+  if (activePage === "preview") {
+    if (!previewUnlocked) {
+      return (
+        <>
+          <PreviewUnlockRedirect
+            onOpen={() => openEarlyAccessModal("preview")}
+          />
+
+          <EarlyAccessModal
+            isOpen={isModalOpen}
+            onClose={closeEarlyAccessModal}
+            email={email}
+            setEmail={setEmail}
+            bang={bang}
+            onSubmitAccess={unlockPreview}
+            onInstantAccess={unlockPreview}
+            pendingPage={pendingPage}
+          />
+        </>
+      );
+    }
+
+    return (
+      <>
+        <PreviewPage
+          onBack={() => setActivePage("home")}
+          onLockIn={() => openEarlyAccessModal("preview")}
+        />
+
+        <EarlyAccessModal
+          isOpen={isModalOpen}
+          onClose={closeEarlyAccessModal}
+          email={email}
+          setEmail={setEmail}
+          bang={bang}
+          onSubmitAccess={unlockPreview}
+          onInstantAccess={unlockPreview}
+          pendingPage={pendingPage}
+        />
+      </>
+    );
+  }
+
+  return null;
+}
