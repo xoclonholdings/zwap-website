@@ -1,5 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, FileText } from "lucide-react";
 
@@ -125,11 +124,7 @@ Digital assets and blockchain-based systems carry risk. Only participate within 
       </div>
 
       <div className="pt-20 pb-8 px-4 max-w-lg mx-auto">
-        <motion.div
-          className="text-center mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
+        <div className="text-center mb-8">
           <div className="w-16 h-16 rounded-full bg-purple-500/20 flex items-center justify-center mx-auto mb-4 pulse-glow-purple">
             <FileText className="w-8 h-8 text-purple-400" />
           </div>
@@ -139,16 +134,13 @@ Digital assets and blockchain-based systems carry risk. Only participate within 
           <p className="text-gray-400 text-sm">
             Last updated: March 2026
           </p>
-        </motion.div>
+        </div>
 
         <div className="space-y-6">
           {sections.map((section, i) => (
-            <motion.div
+            <div
               key={i}
               className="glass-card p-5 rounded-xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.03 }}
             >
               <h3 className="text-lg font-bold text-purple-400 mb-3">
                 {section.title}
@@ -157,16 +149,11 @@ Digital assets and blockchain-based systems carry risk. Only participate within 
               <p className="text-gray-300 text-sm whitespace-pre-line leading-relaxed">
                 {section.content}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        <motion.div
-          className="glass-card p-4 rounded-xl mt-8 text-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-        >
+        <div className="glass-card p-4 rounded-xl mt-8 text-center">
           <p className="text-gray-400 text-sm">
             Questions? Contact us at{" "}
             <a
@@ -176,7 +163,7 @@ Digital assets and blockchain-based systems carry risk. Only participate within 
               app@zwap.online
             </a>
           </p>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
