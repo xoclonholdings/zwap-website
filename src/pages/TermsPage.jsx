@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 function BackArrowIcon() {
   return (
@@ -41,9 +40,7 @@ function FileTextIcon() {
   );
 }
 
-export default function TermsPage() {
-  const navigate = useNavigate();
-
+export default function TermsPage({ onBack }) {
   const sections = [
     {
       title: "1. Acceptance of Terms",
@@ -152,7 +149,7 @@ Digital assets and blockchain-based systems carry risk. Only participate within 
       <div className="fixed top-0 left-0 right-0 z-40 bg-[#0a0b1e]/95 backdrop-blur-lg border-b border-purple-500/20">
         <div className="flex items-center px-4 py-3 max-w-lg mx-auto">
           <button
-            onClick={() => navigate(-1)}
+            onClick={onBack}
             className="mr-3 text-gray-400 hover:text-white"
             aria-label="Back"
           >
