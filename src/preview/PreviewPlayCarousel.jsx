@@ -62,11 +62,15 @@ export default function PreviewPlayCarousel({
                 alt={game.label}
                 style={{
                   width: "100%",
-                  maxWidth: "72px",
-                  height: "30px",
+                  maxWidth: isActive ? "104px" : "92px",
+                  maxHeight: isActive ? "40px" : "34px",
                   objectFit: "contain",
                   display: "block",
-                  filter: isActive ? "none" : "opacity(0.84)",
+                  margin: "0 auto",
+                  filter: isActive
+                    ? `drop-shadow(0 0 16px ${game.glow})`
+                    : "opacity(0.82)",
+                  transition: "all 180ms ease",
                 }}
               />
             ) : (
