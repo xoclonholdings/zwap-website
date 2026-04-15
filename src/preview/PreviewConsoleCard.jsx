@@ -42,11 +42,7 @@ const DEFAULT_PLAY_GAMES = [
   },
 ];
 
-export default function PreviewConsoleCard({
-  data,
-  progressAnimated,
-  onLockIn,
-}) {
+export default function PreviewConsoleCard({ data, progressAnimated }) {
   const [frameIndex, setFrameIndex] = useState(0);
   const [activeGameId, setActiveGameId] = useState(
     data?.games?.[0]?.id || DEFAULT_PLAY_GAMES[0].id
@@ -288,7 +284,7 @@ export default function PreviewConsoleCard({
 
         <p
           style={{
-            margin: "0 auto 16px",
+            margin: "0 auto",
             maxWidth: "320px",
             fontSize: "15px",
             lineHeight: 1.6,
@@ -297,28 +293,6 @@ export default function PreviewConsoleCard({
         >
           {data.description}
         </p>
-
-        <button
-          onClick={onLockIn}
-          style={{
-            width: "100%",
-            maxWidth: "260px",
-            padding: "14px 18px",
-            borderRadius: "999px",
-            border: "2px solid rgba(165, 103, 255, 0.78)",
-            background:
-              "linear-gradient(180deg, rgba(14,16,30,0.94) 0%, rgba(8,10,22,0.98) 100%)",
-            color: "#F9FAFF",
-            fontSize: "16px",
-            fontWeight: 800,
-            letterSpacing: "0.02em",
-            cursor: "pointer",
-            boxShadow:
-              "inset 0 1px 0 rgba(255,255,255,0.08), 0 10px 26px rgba(73, 44, 162, 0.28)",
-          }}
-        >
-          Lock In. Early.
-        </button>
       </div>
     </section>
   );
