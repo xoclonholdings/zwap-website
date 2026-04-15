@@ -1,5 +1,9 @@
-import React, { useState } from "react";
-import { previewModes } from "./PreviewData";
+import React, { useMemo, useState } from "react";
+import {
+  previewModes,
+  movePreview,
+  playPreview,
+} from "./PreviewData";
 import PreviewModeTabs from "./PreviewModeTabs";
 import PreviewConsoleCard from "./PreviewConsoleCard";
 import PreviewFooter from "./PreviewFooter";
@@ -8,8 +12,13 @@ export default function PreviewPage({ onBack, onLockIn }) {
   const [activeMode, setActiveMode] = useState("move");
   const [progressAnimated, setProgressAnimated] = useState(true);
 
-  const activePreview =
-    previewModes.find((mode) => mode.id === activeMode) || previewModes[0];
+  const activePreview = useMemo(() => {
+    if (activeMode === "play") {
+      return playPreview;
+    }
+
+    return movePreview;
+  }, [activeMode]);
 
   const handleModeChange = (modeId) => {
     setActiveMode(modeId);
@@ -125,8 +134,8 @@ export default function PreviewPage({ onBack, onLockIn }) {
               color: "rgba(235,239,255,0.76)",
             }}
           >
-            A lightweight first look at the V1 loop. Choose a lane and preview
-            how progression begins.
+            A lightweight first look at the V1 loop. Tap between MOVE and PLAY
+            to experience how progression begins.
           </p>
         </section>
 
