@@ -1,6 +1,32 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 
-export default function PreviewFooter({ onPrivacy, onTerms }) {
+export default function PreviewFooter({
+  onPrivacy,
+  onTerms,
+  referralCode = "",
+  onSendInvite,
+}) {
+  const [enteredReferralCode, setEnteredReferralCode] = useState(referralCode);
+  const [friendEmail, setFriendEmail] = useState("");
+
+  const isInviteReady = useMemo(() => {
+    return (
+      enteredReferralCode.trim().length > 0 &&
+      friendEmail.trim().length > 0
+    );
+  }, [enteredReferralCode, friendEmail]);
+
+  const handleInvite = () => {
+    if (!isInviteReady) return;
+
+    if (typeof onSendInvite === "function") {
+      onSendInvite({
+        referralCode: enteredReferralCode.trim(),
+        friendEmail: friendEmail.trim(),
+      });
+    }
+  };
+
   return (
     <footer
       style={{
@@ -61,8 +87,8 @@ export default function PreviewFooter({ onPrivacy, onTerms }) {
             color: "rgba(235,239,255,0.78)",
           }}
         >
-          Use the referral code sent to your email, enter a friend’s email, and
-          reserve bonus rewards for each verified signup before launch.
+          Use the referral code sent to your email, enter a friend’s email,
+          and reserve bonus rewards for each verified signup before launch.
         </p>
 
         <div
@@ -82,7 +108,9 @@ export default function PreviewFooter({ onPrivacy, onTerms }) {
           >
             <input
               type="text"
-              placeholder="Enter your referral code"
+              value={enteredReferralCode}
+              onChange={(e) => setEnteredReferralCode(e.target.value)}
+              placeholder="Enter referral code from your email"
               style={{
                 width: "100%",
                 border: "none",
@@ -106,6 +134,8 @@ export default function PreviewFooter({ onPrivacy, onTerms }) {
           >
             <input
               type="email"
+              value={friendEmail}
+              onChange={(e) => setFriendEmail(e.target.value)}
               placeholder="Enter a friend's email"
               style={{
                 width: "100%",
@@ -122,20 +152,26 @@ export default function PreviewFooter({ onPrivacy, onTerms }) {
 
         <button
           type="button"
+          onClick={handleInvite}
+          disabled={!isInviteReady}
           style={{
             width: "100%",
             border: "none",
             borderRadius: "999px",
             padding: "14px 18px",
-            background:
-              "linear-gradient(90deg, rgba(103,242,255,0.22) 0%, rgba(180,134,255,0.22) 100%)",
-            color: "#F8FAFF",
+            background: isInviteReady
+              ? "linear-gradient(90deg, rgba(103,242,255,0.22) 0%, rgba(180,134,255,0.22) 100%)"
+              : "rgba(255,255,255,0.08)",
+            color: isInviteReady ? "#F8FAFF" : "rgba(248,250,255,0.42)",
             fontSize: "15px",
             fontWeight: 800,
             letterSpacing: "0.02em",
-            cursor: "pointer",
-            boxShadow: "0 0 18px rgba(180,134,255,0.16)",
+            cursor: isInviteReady ? "pointer" : "not-allowed",
+            boxShadow: isInviteReady
+              ? "0 0 18px rgba(180,134,255,0.16)"
+              : "none",
             marginBottom: "12px",
+            transition: "all 180ms ease",
           }}
         >
           Send Invite
@@ -150,9 +186,9 @@ export default function PreviewFooter({ onPrivacy, onTerms }) {
             margin: "0 auto",
           }}
         >
-          Earn 5 reserved ZWAP rewards for each verified referral before launch.
-          Referral rewards are capped at 25 reserved ZWAP per account and are
-          activated when the platform opens.
+          Earn 5 reserved ZWAP rewards for each verified referral before
+          launch. Referral rewards are capped at 25 reserved ZWAP per account
+          and activate after real signup and first activity inside the app.
         </div>
       </div>
 
@@ -166,6 +202,7 @@ export default function PreviewFooter({ onPrivacy, onTerms }) {
         }}
       >
         <button
+          type="button"
           onClick={onPrivacy}
           style={{
             color: "inherit",
@@ -180,6 +217,7 @@ export default function PreviewFooter({ onPrivacy, onTerms }) {
         </button>
 
         <button
+          type="button"
           onClick={onTerms}
           style={{
             color: "inherit",
