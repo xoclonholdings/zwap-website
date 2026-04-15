@@ -1,6 +1,6 @@
 import React from "react";
-import logo from "./assets/Zwap_logo_full.png";
-import googlePlayLogo from "./assets/google_play_logo.PNG";
+import logo from "../assets/Zwap_logo_full.png";
+import googlePlayLogo from "../assets/google_play_logo.PNG";
 
 function AppleIcon() {
   return (
