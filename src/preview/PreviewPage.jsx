@@ -12,16 +12,14 @@ export default function PreviewPage({
   onBack,
   onPrivacy,
   onTerms,
+  referralCode,
+  onSendInvite,
 }) {
   const [activeMode, setActiveMode] = useState("move");
   const [progressAnimated, setProgressAnimated] = useState(true);
 
   const activePreview = useMemo(() => {
-    if (activeMode === "play") {
-      return playPreview;
-    }
-
-    return movePreview;
+    return activeMode === "play" ? playPreview : movePreview;
   }, [activeMode]);
 
   const handleModeChange = (modeId) => {
@@ -157,6 +155,8 @@ export default function PreviewPage({
         <PreviewFooter
           onPrivacy={onPrivacy}
           onTerms={onTerms}
+          referralCode={referralCode}
+          onSendInvite={onSendInvite}
         />
       </div>
     </div>
