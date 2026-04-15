@@ -56,11 +56,11 @@ export default function AppRoutes({
   }
 
   if (activePage === "privacy") {
-    return <PrivacyPage />;
+    return <PrivacyPage onBack={() => setActivePage("home")} />;
   }
 
   if (activePage === "terms") {
-    return <TermsPage />;
+    return <TermsPage onBack={() => setActivePage("home")} />;
   }
 
   if (activePage === "google-play") {
