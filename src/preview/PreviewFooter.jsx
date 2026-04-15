@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-export default function PreviewFooter() {
+export default function PreviewFooter({ onPrivacy, onTerms }) {
   return (
     <footer
       style={{
@@ -174,25 +173,35 @@ export default function PreviewFooter() {
           fontSize: "14px",
         }}
       >
-        <Link
-          to="/privacy"
+        <button
+          onClick={onPrivacy}
           style={{
             color: "inherit",
             textDecoration: "none",
+            background: "transparent",
+            border: "none",
+            padding: 0,
+            cursor: "pointer",
+            fontSize: "14px",
           }}
         >
           Privacy Policy
-        </Link>
+        </button>
 
-        <Link
-          to="/terms"
+        <button
+          onClick={onTerms}
           style={{
             color: "inherit",
             textDecoration: "none",
+            background: "transparent",
+            border: "none",
+            padding: 0,
+            cursor: "pointer",
+            fontSize: "14px",
           }}
         >
           Terms of Service
-        </Link>
+        </button>
       </div>
 
       <div
