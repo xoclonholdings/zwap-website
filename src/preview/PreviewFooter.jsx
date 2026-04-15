@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function PreviewFooter() {
   return (
@@ -39,7 +40,7 @@ export default function PreviewFooter() {
 
         <div
           style={{
-            fontSize: "24px",
+            fontSize: "28px",
             fontWeight: 900,
             lineHeight: 1.08,
             letterSpacing: "-0.03em",
@@ -47,28 +48,29 @@ export default function PreviewFooter() {
             marginBottom: "10px",
           }}
         >
-          Bring people in early.
+          Invite friends.
           <br />
-          Get rewarded at launch.
+          Stack launch rewards.
         </div>
 
         <p
           style={{
-            margin: "0 auto 14px",
-            maxWidth: "320px",
+            margin: "0 auto 18px",
+            maxWidth: "300px",
             fontSize: "15px",
             lineHeight: 1.65,
             color: "rgba(235,239,255,0.78)",
           }}
         >
-          Every successful referral reserves rewards before launch. When ZWAP!
-          opens, those rewards activate and your network starts with momentum.
+          Send your referral link before launch and reserve bonus rewards for
+          every verified signup.
         </p>
 
         <div
           style={{
             display: "grid",
             gap: "10px",
+            marginBottom: "12px",
           }}
         >
           <div
@@ -76,12 +78,33 @@ export default function PreviewFooter() {
               borderRadius: "18px",
               border: "1px solid rgba(255,255,255,0.06)",
               background: "rgba(255,255,255,0.025)",
-              padding: "12px 14px",
-              fontSize: "14px",
-              color: "rgba(235,239,255,0.84)",
+              padding: "14px 16px",
+              textAlign: "left",
             }}
           >
-            Your referral code and link were sent to your email
+            <div
+              style={{
+                fontSize: "11px",
+                fontWeight: 800,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "rgba(245,247,255,0.48)",
+                marginBottom: "8px",
+              }}
+            >
+              Your Referral Code
+            </div>
+
+            <div
+              style={{
+                fontSize: "18px",
+                fontWeight: 900,
+                letterSpacing: "0.08em",
+                color: "#B486FF",
+              }}
+            >
+              ZWAP-7X2Q
+            </div>
           </div>
 
           <div
@@ -89,13 +112,56 @@ export default function PreviewFooter() {
               borderRadius: "18px",
               border: "1px solid rgba(255,255,255,0.06)",
               background: "rgba(255,255,255,0.025)",
-              padding: "12px 14px",
-              fontSize: "14px",
-              color: "rgba(235,239,255,0.84)",
+              padding: "14px 16px",
             }}
           >
-            The more people you bring in, the stronger your launch position
+            <input
+              type="email"
+              placeholder="Enter a friend's email"
+              style={{
+                width: "100%",
+                border: "none",
+                outline: "none",
+                background: "transparent",
+                color: "#F8FAFF",
+                fontSize: "15px",
+                textAlign: "center",
+              }}
+            />
           </div>
+        </div>
+
+        <button
+          style={{
+            width: "100%",
+            border: "none",
+            borderRadius: "999px",
+            padding: "14px 18px",
+            background:
+              "linear-gradient(90deg, rgba(103,242,255,0.22) 0%, rgba(180,134,255,0.22) 100%)",
+            color: "#F8FAFF",
+            fontSize: "15px",
+            fontWeight: 800,
+            letterSpacing: "0.02em",
+            cursor: "pointer",
+            boxShadow: "0 0 18px rgba(180,134,255,0.16)",
+            marginBottom: "12px",
+          }}
+        >
+          Send Invite
+        </button>
+
+        <div
+          style={{
+            fontSize: "12px",
+            lineHeight: 1.6,
+            color: "rgba(235,239,255,0.44)",
+            maxWidth: "300px",
+            margin: "0 auto",
+          }}
+        >
+          Earn 5 reserved ZWAP rewards for each verified referral before launch.
+          Referral rewards are capped at 25 reserved ZWAP per account.
         </div>
       </div>
 
@@ -108,12 +174,25 @@ export default function PreviewFooter() {
           fontSize: "14px",
         }}
       >
-        <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
+        <Link
+          to="/privacy"
+          style={{
+            color: "inherit",
+            textDecoration: "none",
+          }}
+        >
           Privacy Policy
-        </a>
-        <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
+        </Link>
+
+        <Link
+          to="/terms"
+          style={{
+            color: "inherit",
+            textDecoration: "none",
+          }}
+        >
           Terms of Service
-        </a>
+        </Link>
       </div>
 
       <div
