@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import SponsorsForm from "../sponsors/SponsorsForm.jsx";
+import SponsorsForm from "../sponsors/SponsorForm.jsx";
 import SponsorFormModal from "../sponsors/SponsorFormModal.jsx";
 import { whyPartner, partnershipLanes, bestFit } from "./PartnersPage.data";
 
