@@ -5,10 +5,11 @@ import PrivacyPage from "../pages/PrivacyPage";
 import TermsPage from "../pages/TermsPage";
 import GooglePlay from "../pages/GooglePlay";
 import AppleStore from "../pages/AppleStore";
-import MailingListDatabase from "../MailingListDatabase";
-import PreviewPage from "../preview/PreviewPage";
 
-import EarlyAccessModal from "../EarlyAccessModal";
+import MailingListDatabase from "../components/MailingListDatabase";
+import EarlyAccessModal from "../components/EarlyAccessModal";
+
+import PreviewPage from "../preview/PreviewPage";
 import PreviewUnlockRedirect from "./PreviewUnlockRedirect";
 
 export default function AppRoutes({
@@ -63,17 +64,20 @@ export default function AppRoutes({
   }
 
   if (activePage === "google-play") {
-    return <GooglePlay />;
+    return <GooglePlay onBack={() => setActivePage("home")} />;
   }
 
   if (activePage === "apple-store") {
-    return <AppleStore />;
+    return <AppleStore onBack={() => setActivePage("home")} />;
   }
 
   if (activePage === "mailing-list") {
     return (
       <MailingListDatabase
         onBack={() => setActivePage("home")}
+        email={email}
+        setEmail={setEmail}
+        onSubmitAccess={unlockPreview}
       />
     );
   }
