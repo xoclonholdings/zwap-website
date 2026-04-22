@@ -1,5 +1,5 @@
 import React from "react";
-import GlobalFooterLinks from "../components/GlobalFooterLinks";
+import GlobalFooterLinks from "../../components/GlobalFooterLinks";
 
 function SectionEyebrow({ children }) {
   return (
@@ -221,6 +221,13 @@ export default function ContactPage({
   onPrivacy,
   onTerms,
   onSitemap,
+  onNews,
+  onBlog,
+  onAbout,
+  onFeatures,
+  onPartners,
+  onDevelopers,
+  onEnterprise,
 }) {
   const isDesktop =
     typeof window !== "undefined" ? window.innerWidth >= 900 : false;
@@ -472,6 +479,13 @@ export default function ContactPage({
           onPrivacy={onPrivacy}
           onTerms={onTerms}
           onSitemap={onSitemap}
+          onNews={onNews}
+          onBlog={onBlog}
+          onAbout={onAbout}
+          onFeatures={onFeatures}
+          onPartners={onPartners}
+          onDevelopers={onDevelopers}
+          onEnterprise={onEnterprise}
         />
       </div>
     </div>
