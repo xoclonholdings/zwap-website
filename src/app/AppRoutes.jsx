@@ -5,6 +5,7 @@ import PrivacyPage from "../pages/PrivacyPage";
 import TermsPage from "../pages/TermsPage";
 import GooglePlay from "../pages/GooglePlay";
 import AppleStore from "../pages/AppleStore";
+import SitemapPage from "../pages/SitemapPage";
 
 import MailingListDatabase from "../components/MailingListDatabase";
 import EarlyAccessModal from "../components/EarlyAccessModal";
