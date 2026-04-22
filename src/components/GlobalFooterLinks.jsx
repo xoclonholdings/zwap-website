@@ -4,104 +4,171 @@ export default function GlobalFooterLinks({
   onPrivacy,
   onTerms,
   onSitemap,
-  onContact,
-  onFAQ,
+  onNews,
+  onBlog,
+  onAbout,
+  onFeatures,
+  onPartners,
+  onDevelopers,
+  onEnterprise,
   isDesktop = false,
 }) {
-  const buttonStyle = {
-    color: "inherit",
+  const sectionTitleStyle = {
+    fontSize: "11px",
+    fontWeight: 900,
+    letterSpacing: "0.14em",
+    textTransform: "uppercase",
+    color: "rgba(245,247,255,0.42)",
+    marginBottom: "10px",
+  };
+
+  const linkButtonStyle = {
+    color: "rgba(236,240,255,0.76)",
     background: "transparent",
     border: "none",
     padding: 0,
     cursor: "pointer",
     fontSize: "14px",
-    fontWeight: 500,
-    transition: "opacity 0.18s ease",
+    lineHeight: 1.5,
+    textAlign: "left",
   };
 
   return (
     <footer
       style={{
-        marginTop: "8px",
-        paddingTop: "18px",
+        marginTop: "10px",
+        paddingTop: "22px",
         borderTop: "1px solid rgba(255,255,255,0.06)",
-        color: "rgba(236, 240, 255, 0.72)",
         display: "flex",
-        flexDirection: isDesktop ? "row" : "column",
-        alignItems: "center",
-        justifyContent: isDesktop ? "space-between" : "center",
-        gap: "16px",
-        textAlign: isDesktop ? "left" : "center",
+        flexDirection: "column",
+        gap: "22px",
       }}
     >
       <div
         style={{
-          display: "flex",
-          gap: "18px",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          alignItems: "center",
-          fontSize: "14px",
+          display: "grid",
+          gridTemplateColumns: isDesktop
+            ? "repeat(4, minmax(0, 1fr))"
+            : "1fr 1fr",
+          gap: "20px",
         }}
       >
-        <button
-          type="button"
-          onClick={onPrivacy}
-          style={buttonStyle}
-        >
-          Privacy Policy
-        </button>
+        <div>
+          <div style={sectionTitleStyle}>Explore</div>
 
-        <button
-          type="button"
-          onClick={onTerms}
-          style={buttonStyle}
-        >
-          Terms of Service
-        </button>
-
-        <button
-          type="button"
-          onClick={onSitemap}
-          style={buttonStyle}
-        >
-          Sitemap
-        </button>
-
-        {onContact ? (
-          <button
-            type="button"
-            onClick={onContact}
-            style={buttonStyle}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "8px",
+            }}
           >
-            Contact
-          </button>
-        ) : null}
+            <button type="button" onClick={onAbout} style={linkButtonStyle}>
+              About
+            </button>
 
-        {onFAQ ? (
-          <button
-            type="button"
-            onClick={onFAQ}
-            style={buttonStyle}
+            <button type="button" onClick={onFeatures} style={linkButtonStyle}>
+              Features
+            </button>
+
+            <button type="button" onClick={onPartners} style={linkButtonStyle}>
+              Partners
+            </button>
+
+            <button
+              type="button"
+              onClick={onEnterprise}
+              style={linkButtonStyle}
+            >
+              Enterprise
+            </button>
+
+            <button
+              type="button"
+              onClick={onDevelopers}
+              style={linkButtonStyle}
+            >
+              Developers
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <div style={sectionTitleStyle}>Content</div>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "8px",
+            }}
           >
-            FAQ
-          </button>
-        ) : null}
+            <button type="button" onClick={onNews} style={linkButtonStyle}>
+              News
+            </button>
+
+            <button type="button" onClick={onBlog} style={linkButtonStyle}>
+              Blog
+            </button>
+
+            <button type="button" onClick={onSitemap} style={linkButtonStyle}>
+              Sitemap
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <div style={sectionTitleStyle}>Legal</div>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "8px",
+            }}
+          >
+            <button type="button" onClick={onPrivacy} style={linkButtonStyle}>
+              Privacy Policy
+            </button>
+
+            <button type="button" onClick={onTerms} style={linkButtonStyle}>
+              Terms of Use
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <div style={sectionTitleStyle}>ZWAP!</div>
+
+          <div
+            style={{
+              fontSize: "14px",
+              lineHeight: 1.7,
+              color: "rgba(236,240,255,0.68)",
+            }}
+          >
+            ZWAP! is a movement-first reward ecosystem built around progression,
+            consistency, financial literacy, and delayed value.
+          </div>
+        </div>
       </div>
 
       <div
         style={{
+          borderTop: "1px solid rgba(255,255,255,0.05)",
+          paddingTop: "16px",
           display: "flex",
-          flexDirection: "column",
-          gap: "6px",
-          maxWidth: isDesktop ? "480px" : "320px",
-          textAlign: isDesktop ? "right" : "center",
+          flexDirection: isDesktop ? "row" : "column",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "12px",
+          textAlign: isDesktop ? "left" : "center",
         }}
       >
         <div
           style={{
-            fontSize: "14px",
-            lineHeight: 1.5,
+            fontSize: "13px",
+            color: "rgba(236,240,255,0.56)",
           }}
         >
           © 2026 ZWAP!™ owned by ZWAP LLC. All rights reserved.
@@ -109,13 +176,11 @@ export default function GlobalFooterLinks({
 
         <div
           style={{
-            fontSize: "12px",
-            lineHeight: 1.6,
-            color: "rgba(236,240,255,0.48)",
+            fontSize: "13px",
+            color: "rgba(236,240,255,0.46)",
           }}
         >
-          ZWAP! is a movement-first rewards ecosystem developed by XOCLON
-          HOLDINGS INC.
+          Movement • Rewards • Education • Utility
         </div>
       </div>
     </footer>
