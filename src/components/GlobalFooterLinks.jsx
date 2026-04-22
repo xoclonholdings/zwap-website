@@ -142,13 +142,31 @@ export default function GlobalFooterLinks({
 
           <div
             style={{
-              fontSize: "14px",
-              lineHeight: 1.7,
-              color: "rgba(236,240,255,0.68)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "8px",
             }}
           >
-            ZWAP! is a movement-first reward ecosystem built around progression,
-            consistency, financial literacy, and delayed value.
+            <div
+              style={{
+                fontSize: "14px",
+                lineHeight: 1.7,
+                color: "rgba(236,240,255,0.68)",
+              }}
+            >
+              ZWAP! is a movement-first reward ecosystem built around
+              progression, consistency, financial literacy, and delayed value.
+            </div>
+
+            <div
+              style={{
+                fontSize: "13px",
+                lineHeight: 1.7,
+                color: "rgba(236,240,255,0.52)",
+              }}
+            >
+              Developed by ZWAP LLC, a subsidiary of XOCLON HOLDINGS INC.
+            </div>
           </div>
         </div>
       </div>
