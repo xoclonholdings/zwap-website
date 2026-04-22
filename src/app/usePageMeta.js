@@ -131,6 +131,10 @@ function setCanonical(url) {
 
 export default function usePageMeta(activePage) {
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.prerenderReady = false;
+    }
+
     const meta = PAGE_META[activePage] || PAGE_META.home;
     const absoluteUrl = `https://zwap.online${meta.path}`;
 
@@ -154,5 +158,13 @@ export default function usePageMeta(activePage) {
     setMeta("twitter:creator", "@ZWAP_Online");
 
     setCanonical(absoluteUrl);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (typeof window !== "undefined") {
+          window.prerenderReady = true;
+        }
+      });
+    });
   }, [activePage]);
 }
