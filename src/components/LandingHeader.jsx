@@ -135,14 +135,12 @@ export default function LandingHeader({
             style={
               isDesktop
                 ? {
-                    display: "grid",
-                    gridTemplateColumns: "repeat(2, max-content)",
-                    columnGap: "42px",
-                    rowGap: "12px",
-                    justifyContent: "end",
-                    alignContent: "start",
-                    width: "100%",
-                    maxWidth: "440px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-end",
+                    gap: "14px",
+                    flexWrap: "wrap",
+                    maxWidth: "820px",
                   }
                 : {
                     display: "grid",
@@ -151,7 +149,7 @@ export default function LandingHeader({
                     justifyItems: "stretch",
                     alignItems: "center",
                     width: "100%",
-                    maxWidth: "320px",
+                    maxWidth: "300px",
                   }
             }
           >
