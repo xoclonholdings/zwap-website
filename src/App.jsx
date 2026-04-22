@@ -151,6 +151,7 @@ export default function App() {
         <AppFooter
           onPrivacy={() => setActivePage("privacy")}
           onTerms={() => setActivePage("terms")}
+          onSitemap={() => setActivePage("sitemap")}
         />
 
         <EarlyAccessModal
