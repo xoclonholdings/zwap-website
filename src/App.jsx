@@ -16,6 +16,7 @@ import useMailModal from "./app/useMailModal";
 import useEarlyAccessModal from "./app/useEarlyAccessModal";
 import usePreviewUnlock from "./app/usePreviewUnlock";
 import usePreviewNavigation from "./app/usePreviewNavigation";
+import usePageMeta from "./app/usePageMeta";
 
 export default function App() {
   const {
@@ -34,6 +35,8 @@ export default function App() {
     referredBy,
     setReferredBy,
   } = useAppState();
+
+  usePageMeta(activePage);
 
   const {
     isMailOpen,
