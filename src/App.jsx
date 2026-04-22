@@ -137,12 +137,13 @@ export default function App() {
       <div className="landing-app">
         <LandingHeader
           onAbout={() => setActivePage("about")}
+          onNews={() => setActivePage("news")}
+          onBlog={() => setActivePage("blog")}
           onFeatures={() => setActivePage("features")}
           onPreview={handlePreviewNav}
           onPartners={() => setActivePage("partners")}
-          onEnterprise={() => setActivePage("enterprise-wellness")}
           onDevelopers={() => setActivePage("developer-portal")}
-          onNewsBlog={() => setActivePage("blog")}
+          onEnterprise={() => setActivePage("enterprise-wellness")}
           onGooglePlay={() => setActivePage("google-play")}
           onAppleStore={() => setActivePage("apple-store")}
         />
