@@ -224,6 +224,15 @@ export default function PartnersPage({
   onPrivacy,
   onTerms,
   onSitemap,
+  onNews,
+  onBlog,
+  onAbout,
+  onFeatures,
+  onDevelopers,
+  onEnterprise,
+  onContact,
+  onFAQ,
+  onHowItWorks,
 }) {
   const [isDesktop, setIsDesktop] = useState(
     typeof window !== "undefined" ? window.innerWidth >= 1024 : false
@@ -637,6 +646,16 @@ export default function PartnersPage({
           onPrivacy={onPrivacy}
           onTerms={onTerms}
           onSitemap={onSitemap}
+          onNews={onNews}
+          onBlog={onBlog}
+          onAbout={onAbout}
+          onFeatures={onFeatures}
+          onPartners={undefined}
+          onDevelopers={onDevelopers}
+          onEnterprise={onEnterprise}
+          onContact={onContact}
+          onFAQ={onFAQ}
+          onHowItWorks={onHowItWorks}
         />
 
         <SponsorFormModal
