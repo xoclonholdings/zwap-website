@@ -165,6 +165,15 @@ export default function EnterprisePage({
   onPrivacy,
   onTerms,
   onSitemap,
+  onNews,
+  onBlog,
+  onAbout,
+  onFeatures,
+  onPartners,
+  onDevelopers,
+  onContact,
+  onFAQ,
+  onHowItWorks,
 }) {
   const isDesktop =
     typeof window !== "undefined" ? window.innerWidth >= 1024 : false;
@@ -485,6 +494,16 @@ export default function EnterprisePage({
           onPrivacy={onPrivacy}
           onTerms={onTerms}
           onSitemap={onSitemap}
+          onNews={onNews}
+          onBlog={onBlog}
+          onAbout={onAbout}
+          onFeatures={onFeatures}
+          onPartners={onPartners}
+          onDevelopers={onDevelopers}
+          onEnterprise={undefined}
+          onContact={onContact}
+          onFAQ={onFAQ}
+          onHowItWorks={onHowItWorks}
         />
       </div>
     </div>
