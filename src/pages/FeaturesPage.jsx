@@ -11,6 +11,15 @@ export default function FeaturesPage({
   onPrivacy,
   onTerms,
   onSitemap,
+  onNews,
+  onBlog,
+  onAbout,
+  onPartners,
+  onDevelopers,
+  onEnterprise,
+  onContact,
+  onFAQ,
+  onHowItWorks,
 }) {
   const [activeMode, setActiveMode] = useState("move");
   const [isDesktop, setIsDesktop] = useState(
@@ -212,6 +221,16 @@ export default function FeaturesPage({
           onPrivacy={onPrivacy}
           onTerms={onTerms}
           onSitemap={onSitemap}
+          onNews={onNews}
+          onBlog={onBlog}
+          onAbout={onAbout}
+          onFeatures={undefined}
+          onPartners={onPartners}
+          onDevelopers={onDevelopers}
+          onEnterprise={onEnterprise}
+          onContact={onContact}
+          onFAQ={onFAQ}
+          onHowItWorks={onHowItWorks}
         />
       </div>
     </div>
