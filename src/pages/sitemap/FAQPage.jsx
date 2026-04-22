@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import GlobalFooterLinks from "../components/GlobalFooterLinks";
+import GlobalFooterLinks from "../../components/GlobalFooterLinks";
 
 const FAQ_SECTIONS = [
   {
@@ -307,6 +307,13 @@ export default function FAQPage({
   onTerms,
   onSitemap,
   onContact,
+  onNews,
+  onBlog,
+  onAbout,
+  onFeatures,
+  onPartners,
+  onDevelopers,
+  onEnterprise,
 }) {
   const [activeSection, setActiveSection] = useState("general");
   const [openItems, setOpenItems] = useState({});
@@ -575,7 +582,13 @@ export default function FAQPage({
           onPrivacy={onPrivacy}
           onTerms={onTerms}
           onSitemap={onSitemap}
-          onContact={onContact}
+          onNews={onNews}
+          onBlog={onBlog}
+          onAbout={onAbout}
+          onFeatures={onFeatures}
+          onPartners={onPartners}
+          onDevelopers={onDevelopers}
+          onEnterprise={onEnterprise}
         />
       </div>
     </div>
