@@ -111,6 +111,7 @@ export default function App() {
     <AppRoutes
       activePage={activePage}
       setActivePage={setActivePage}
+      setIsMailOpen={setIsMailOpen}
       previewUnlocked={previewUnlocked}
       openEarlyAccessModal={openEarlyAccessModal}
       closeEarlyAccessModal={closeEarlyAccessModal}
