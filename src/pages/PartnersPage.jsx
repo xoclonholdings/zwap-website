@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import SponsorsForm from "../sponsors/SponsorForm.jsx";
 import SponsorFormModal from "../sponsors/SponsorFormModal.jsx";
 import { whyPartner, partnershipLanes, bestFit } from "./PartnersPage.data";
+import GlobalFooterLinks from "../components/GlobalFooterLinks";
 
 function GradientText({ children }) {
   return (
@@ -218,7 +219,12 @@ function WideFeatureCard({ title, desc, accent, isDesktop }) {
   );
 }
 
-export default function PartnersPage({ onBack }) {
+export default function PartnersPage({
+  onBack,
+  onPrivacy,
+  onTerms,
+  onSitemap,
+}) {
   const [isDesktop, setIsDesktop] = useState(
     typeof window !== "undefined" ? window.innerWidth >= 1024 : false
   );
@@ -260,7 +266,7 @@ export default function PartnersPage({ onBack }) {
 
     return () => clearInterval(fitTimer);
   }, []);
-  
+
   const activeWhy = whyPartner[whyIndex];
   const activeLane = partnershipLanes[laneIndex];
   const activeFit = bestFit[fitIndex];
@@ -349,7 +355,9 @@ export default function PartnersPage({ onBack }) {
           >
             <div
               style={{
-                fontSize: isDesktop ? "clamp(44px, 5vw, 66px)" : "clamp(30px, 9vw, 42px)",
+                fontSize: isDesktop
+                  ? "clamp(44px, 5vw, 66px)"
+                  : "clamp(30px, 9vw, 42px)",
                 lineHeight: 1.02,
                 fontWeight: 900,
                 letterSpacing: "-0.04em",
@@ -369,9 +377,9 @@ export default function PartnersPage({ onBack }) {
                 color: "rgba(235,239,255,0.78)",
               }}
             >
-              ZWAP! gives brands, communities, and collaborators a way to connect
-              with a mobile-first reward ecosystem built around movement, play,
-              culture, and participation.
+              ZWAP! gives brands, communities, and collaborators a way to
+              connect with a mobile-first reward ecosystem built around
+              movement, play, culture, and participation.
             </p>
           </GlassCard>
         </section>
@@ -496,7 +504,9 @@ export default function PartnersPage({ onBack }) {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: isDesktop ? "repeat(2, minmax(0, 1fr))" : "1fr",
+              gridTemplateColumns: isDesktop
+                ? "repeat(2, minmax(0, 1fr))"
+                : "1fr",
               gap: "14px",
             }}
           >
@@ -622,55 +632,19 @@ export default function PartnersPage({ onBack }) {
           </GlassCard>
         </section>
 
-        <footer
-          style={{
-            marginTop: "22px",
-            paddingTop: "18px",
-            borderTop: "1px solid rgba(255,255,255,0.06)",
-            color: "rgba(236, 240, 255, 0.72)",
-            display: "flex",
-            flexDirection: isDesktop ? "row" : "column",
-            alignItems: "center",
-            justifyContent: isDesktop ? "space-between" : "center",
-            gap: "12px",
-            textAlign: isDesktop ? "left" : "center",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              gap: "18px",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              fontSize: "14px",
-            }}
-          >
-            <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
-              Privacy Policy
-            </a>
-            <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
-              Terms of Service
-            </a>
-          </div>
-
-          <div
-            style={{
-              fontSize: "14px",
-              lineHeight: 1.5,
-              maxWidth: isDesktop ? "420px" : "280px",
-              textAlign: isDesktop ? "right" : "center",
-            }}
-          >
-            © 2026 ZWAP!™ owned by ZWAP LLC. All rights reserved.
-          </div>
-        </footer>
+        <GlobalFooterLinks
+          isDesktop={isDesktop}
+          onPrivacy={onPrivacy}
+          onTerms={onTerms}
+          onSitemap={onSitemap}
+        />
 
         <SponsorFormModal
           isOpen={isSponsorFormOpen}
           onClose={() => setIsSponsorFormOpen(false)}
           isDesktop={isDesktop}
         >
-        <SponsorsForm recipientEmail="app@zwap.online" />
+          <SponsorsForm recipientEmail="app@zwap.online" />
         </SponsorFormModal>
       </div>
     </div>
