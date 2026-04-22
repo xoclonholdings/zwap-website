@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import bang from "../assets/Zwap_bang_3d.png";
 import zwapCoin from "../assets/zwap_bang_coin.PNG";
 import zPtsCoin from "../assets/zpts_z_coin.PNG";
-
+import GlobalFooterLinks from "../components/GlobalFooterLinks";
 
 function GradientText({ children }) {
   return (
@@ -141,7 +141,13 @@ function CurrencyCard({
   );
 }
 
-export default function AboutPage({ onBack, onLockIn }) {
+export default function AboutPage({
+  onBack,
+  onLockIn,
+  onPrivacy,
+  onTerms,
+  onSitemap,
+}) {
   const [activeModeIndex, setActiveModeIndex] = useState(0);
   const [isDesktop, setIsDesktop] = useState(
     typeof window !== "undefined" ? window.innerWidth >= 1024 : false
@@ -339,7 +345,7 @@ export default function AboutPage({ onBack, onLockIn }) {
               color: "rgba(235,239,255,0.78)",
             }}
           >
-            Move. Play. Earn today.
+            Move. Play. Earn Today.
           </div>
         </section>
 
@@ -583,48 +589,12 @@ export default function AboutPage({ onBack, onLockIn }) {
           </button>
         </section>
 
-        <footer
-          style={{
-            marginTop: "8px",
-            paddingTop: "18px",
-            borderTop: "1px solid rgba(255,255,255,0.06)",
-            color: "rgba(236, 240, 255, 0.72)",
-            display: "flex",
-            flexDirection: isDesktop ? "row" : "column",
-            alignItems: "center",
-            justifyContent: isDesktop ? "space-between" : "center",
-            gap: "12px",
-            textAlign: isDesktop ? "left" : "center",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              gap: "18px",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              fontSize: "14px",
-            }}
-          >
-            <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
-              Privacy Policy
-            </a>
-            <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
-              Terms of Service
-            </a>
-          </div>
-
-          <div
-            style={{
-              fontSize: "14px",
-              lineHeight: 1.5,
-              maxWidth: isDesktop ? "420px" : "280px",
-              textAlign: isDesktop ? "right" : "center",
-            }}
-          >
-            © 2026 ZWAP!™ owned by ZWAP LLC. All rights reserved.
-          </div>
-        </footer>
+        <GlobalFooterLinks
+          isDesktop={isDesktop}
+          onPrivacy={onPrivacy}
+          onTerms={onTerms}
+          onSitemap={onSitemap}
+        />
       </div>
     </div>
   );
