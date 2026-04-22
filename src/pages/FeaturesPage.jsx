@@ -4,8 +4,14 @@ import ModeRail from "../mode/ModeRail";
 import ModePanel from "../mode/ModePanel";
 import FeatureExplainerCard from "./features/FeatureExplainerCard";
 import featuresExplainerData from "./features/featuresExplainerData";
+import GlobalFooterLinks from "../components/GlobalFooterLinks";
 
-export default function FeaturesPage({ onBack, onPrivacy, onTerms }) {
+export default function FeaturesPage({
+  onBack,
+  onPrivacy,
+  onTerms,
+  onSitemap,
+}) {
   const [activeMode, setActiveMode] = useState("move");
   const [isDesktop, setIsDesktop] = useState(
     typeof window !== "undefined" ? window.innerWidth >= 768 : false
@@ -201,71 +207,12 @@ export default function FeaturesPage({ onBack, onPrivacy, onTerms }) {
           Explore the modes and systems that make up the ZWAP! experience.
         </div>
 
-        <footer
-          style={{
-            marginTop: "8px",
-            paddingTop: "18px",
-            borderTop: "1px solid rgba(255,255,255,0.06)",
-            color: "rgba(236, 240, 255, 0.72)",
-            display: "flex",
-            flexDirection: isDesktop ? "row" : "column",
-            alignItems: "center",
-            justifyContent: isDesktop ? "space-between" : "center",
-            gap: "12px",
-            textAlign: isDesktop ? "left" : "center",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              gap: "18px",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              fontSize: "14px",
-            }}
-          >
-            <button
-              type="button"
-              onClick={onPrivacy}
-              style={{
-                color: "inherit",
-                background: "transparent",
-                border: "none",
-                padding: 0,
-                cursor: "pointer",
-                fontSize: "14px",
-              }}
-            >
-              Privacy Policy
-            </button>
-
-            <button
-              type="button"
-              onClick={onTerms}
-              style={{
-                color: "inherit",
-                background: "transparent",
-                border: "none",
-                padding: 0,
-                cursor: "pointer",
-                fontSize: "14px",
-              }}
-            >
-              Terms of Service
-            </button>
-          </div>
-
-          <div
-            style={{
-              fontSize: "14px",
-              lineHeight: 1.5,
-              maxWidth: isDesktop ? "420px" : "280px",
-              textAlign: isDesktop ? "right" : "center",
-            }}
-          >
-            © 2026 ZWAP!™ owned by ZWAP LLC. All rights reserved.
-          </div>
-        </footer>
+        <GlobalFooterLinks
+          isDesktop={isDesktop}
+          onPrivacy={onPrivacy}
+          onTerms={onTerms}
+          onSitemap={onSitemap}
+        />
       </div>
     </div>
   );
