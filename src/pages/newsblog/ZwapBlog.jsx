@@ -11,6 +11,7 @@ const BLOG_CATEGORIES = [
 
 const FEATURED_ARTICLE = {
   id: "featured-blog-1",
+  slug: "why-delayed-rewards-build-better-habits",
   category: "Rewards & Progression",
   title: "Why Delayed Rewards Build Better Habits",
   excerpt:
@@ -23,6 +24,7 @@ const FEATURED_ARTICLE = {
 const BLOG_ARTICLES = [
   {
     id: "blog-1",
+    slug: "why-delayed-rewards-build-better-habits",
     category: "Rewards & Progression",
     title: "Why Delayed Rewards Build Better Habits",
     excerpt:
@@ -32,6 +34,7 @@ const BLOG_ARTICLES = [
   },
   {
     id: "blog-2",
+    slug: "how-zpts-become-zwap",
     category: "Rewards & Progression",
     title: "How zPts Become ZWAP",
     excerpt:
@@ -41,6 +44,7 @@ const BLOG_ARTICLES = [
   },
   {
     id: "blog-3",
+    slug: "how-move-works",
     category: "Wellness & Movement",
     title: "How MOVE Works",
     excerpt:
@@ -50,6 +54,7 @@ const BLOG_ARTICLES = [
   },
   {
     id: "blog-4",
+    slug: "why-financial-literacy-matters",
     category: "Financial Literacy",
     title: "Why Financial Literacy Matters",
     excerpt:
@@ -59,6 +64,7 @@ const BLOG_ARTICLES = [
   },
   {
     id: "blog-5",
+    slug: "what-makes-zwap-different",
     category: "Platform Education",
     title: "What Makes ZWAP Different",
     excerpt:
@@ -68,6 +74,7 @@ const BLOG_ARTICLES = [
   },
   {
     id: "blog-6",
+    slug: "understanding-wallets-tokens-and-utility",
     category: "Crypto Basics",
     title: "Understanding Wallets, Tokens, and Utility",
     excerpt:
@@ -77,6 +84,7 @@ const BLOG_ARTICLES = [
   },
   {
     id: "blog-7",
+    slug: "understanding-the-shop-before-swap",
     category: "Rewards & Progression",
     title: "Understanding the Shop Before Swap",
     excerpt:
@@ -86,6 +94,7 @@ const BLOG_ARTICLES = [
   },
   {
     id: "blog-8",
+    slug: "how-the-garden-system-supports-retention",
     category: "Wellness & Movement",
     title: "How the Garden System Supports Retention",
     excerpt:
@@ -94,6 +103,38 @@ const BLOG_ARTICLES = [
     date: "Apr 2026",
   },
 ];
+
+function getArticleUrl(article) {
+  if (typeof window === "undefined") return "";
+
+  return `${window.location.origin}/blog/${article.slug || article.id}`;
+}
+
+async function handleShareArticle(article) {
+  const url = getArticleUrl(article);
+  const shareText = `${article.title} | ZWAP!`;
+
+  try {
+    if (navigator.share) {
+      await navigator.share({
+        title: article.title,
+        text: article.excerpt,
+        url,
+      });
+      return;
+    }
+
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(`${shareText}\n${url}`);
+      window.alert("Article link copied to clipboard.");
+      return;
+    }
+
+    window.prompt("Copy this article link:", url);
+  } catch (error) {
+    console.error("Share failed:", error);
+  }
+}
 
 function CategoryPill({ isActive, children, onClick }) {
   return (
@@ -115,6 +156,34 @@ function CategoryPill({ isActive, children, onClick }) {
           ? "rgba(103,242,255,0.09)"
           : "rgba(255,255,255,0.04)",
         whiteSpace: "nowrap",
+      }}
+    >
+      {children}
+    </button>
+  );
+}
+
+function ActionButton({ children, onClick, primary = false }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      style={{
+        border: primary
+          ? "1px solid rgba(180,134,255,0.22)"
+          : "1px solid rgba(255,255,255,0.10)",
+        background: primary
+          ? "linear-gradient(180deg, rgba(24,26,48,1) 0%, rgba(11,13,28,1) 100%)"
+          : "rgba(255,255,255,0.04)",
+        color: "#F8FAFF",
+        borderRadius: "999px",
+        padding: primary ? "14px 20px" : "12px 16px",
+        fontSize: primary ? "14px" : "13px",
+        fontWeight: 800,
+        cursor: "pointer",
+        boxShadow: primary
+          ? "inset 0 1px 0 rgba(255,255,255,0.08), 0 10px 24px rgba(0,0,0,0.28)"
+          : "none",
       }}
     >
       {children}
@@ -199,24 +268,18 @@ function FeaturedArticleCard({ article }) {
         <span>{article.date}</span>
       </div>
 
-      <button
-        type="button"
+      <div
         style={{
-          border: "1px solid rgba(180,134,255,0.22)",
-          background:
-            "linear-gradient(180deg, rgba(24,26,48,1) 0%, rgba(11,13,28,1) 100%)",
-          color: "#F8FAFF",
-          borderRadius: "999px",
-          padding: "14px 20px",
-          fontSize: "14px",
-          fontWeight: 800,
-          cursor: "pointer",
-          boxShadow:
-            "inset 0 1px 0 rgba(255,255,255,0.08), 0 10px 24px rgba(0,0,0,0.28)",
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "10px",
         }}
       >
-        {article.cta || "Read More"}
-      </button>
+        <ActionButton primary>{article.cta || "Read More"}</ActionButton>
+        <ActionButton onClick={() => handleShareArticle(article)}>
+          Share
+        </ActionButton>
+      </div>
     </article>
   );
 }
@@ -300,21 +363,18 @@ function ArticleCard({ article }) {
         ) : null}
       </div>
 
-      <button
-        type="button"
+      <div
         style={{
-          border: "1px solid rgba(255,255,255,0.10)",
-          background: "rgba(255,255,255,0.04)",
-          color: "#F8FAFF",
-          borderRadius: "999px",
-          padding: "12px 16px",
-          fontSize: "13px",
-          fontWeight: 800,
-          cursor: "pointer",
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "10px",
         }}
       >
-        Read More
-      </button>
+        <ActionButton>Read More</ActionButton>
+        <ActionButton onClick={() => handleShareArticle(article)}>
+          Share
+        </ActionButton>
+      </div>
     </article>
   );
 }
