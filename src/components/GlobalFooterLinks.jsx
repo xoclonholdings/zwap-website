@@ -11,6 +11,9 @@ export default function GlobalFooterLinks({
   onPartners,
   onDevelopers,
   onEnterprise,
+  onContact,
+  onFAQ,
+  onHowItWorks,
   isDesktop = false,
 }) {
   const sectionTitleStyle = {
@@ -111,6 +114,14 @@ export default function GlobalFooterLinks({
               Blog
             </button>
 
+            <button
+              type="button"
+              onClick={onHowItWorks}
+              style={linkButtonStyle}
+            >
+              How It Works
+            </button>
+
             <button type="button" onClick={onSitemap} style={linkButtonStyle}>
               Sitemap
             </button>
@@ -118,7 +129,7 @@ export default function GlobalFooterLinks({
         </div>
 
         <div>
-          <div style={sectionTitleStyle}>Legal</div>
+          <div style={sectionTitleStyle}>Support</div>
 
           <div
             style={{
@@ -127,6 +138,14 @@ export default function GlobalFooterLinks({
               gap: "8px",
             }}
           >
+            <button type="button" onClick={onContact} style={linkButtonStyle}>
+              Contact
+            </button>
+
+            <button type="button" onClick={onFAQ} style={linkButtonStyle}>
+              FAQ
+            </button>
+
             <button type="button" onClick={onPrivacy} style={linkButtonStyle}>
               Privacy Policy
             </button>
