@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { coreModes, systemModes, modeContent } from "../mode/FeaturesData.js";
 import ModeRail from "../mode/ModeRail";
 import ModePanel from "../mode/ModePanel";
+import FeatureExplainerCard from "./features/FeatureExplainerCard";
+import featuresExplainerData from "./features/featuresExplainerData";
 
-export default function FeaturesPage({ onBack }) {
+export default function FeaturesPage({ onBack, onPrivacy, onTerms }) {
   const [activeMode, setActiveMode] = useState("move");
   const [isDesktop, setIsDesktop] = useState(
     typeof window !== "undefined" ? window.innerWidth >= 768 : false
@@ -17,6 +19,8 @@ export default function FeaturesPage({ onBack }) {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const activeExplainer = featuresExplainerData[activeMode];
 
   return (
     <div
@@ -95,8 +99,6 @@ export default function FeaturesPage({ onBack }) {
               gap: "16px",
               alignItems: "stretch",
               marginBottom: "18px",
-              flex: 1,
-              minHeight: 0,
             }}
           >
             <div
@@ -145,7 +147,6 @@ export default function FeaturesPage({ onBack }) {
               flexDirection: "column",
               gap: "14px",
               marginBottom: "18px",
-              flex: 1,
             }}
           >
             <div
@@ -182,9 +183,11 @@ export default function FeaturesPage({ onBack }) {
           </section>
         )}
 
+        <FeatureExplainerCard data={activeExplainer} />
+
         <div
           style={{
-            marginTop: "4px",
+            marginTop: "16px",
             marginBottom: "18px",
             textAlign: "center",
             fontSize: isDesktop ? "20px" : "18px",
@@ -221,12 +224,35 @@ export default function FeaturesPage({ onBack }) {
               fontSize: "14px",
             }}
           >
-            <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
+            <button
+              type="button"
+              onClick={onPrivacy}
+              style={{
+                color: "inherit",
+                background: "transparent",
+                border: "none",
+                padding: 0,
+                cursor: "pointer",
+                fontSize: "14px",
+              }}
+            >
               Privacy Policy
-            </a>
-            <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
+            </button>
+
+            <button
+              type="button"
+              onClick={onTerms}
+              style={{
+                color: "inherit",
+                background: "transparent",
+                border: "none",
+                padding: 0,
+                cursor: "pointer",
+                fontSize: "14px",
+              }}
+            >
               Terms of Service
-            </a>
+            </button>
           </div>
 
           <div
