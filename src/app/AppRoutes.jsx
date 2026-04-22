@@ -6,6 +6,9 @@ import TermsPage from "../pages/TermsPage";
 import GooglePlay from "../pages/GooglePlay";
 import AppleStore from "../pages/AppleStore";
 import SitemapPage from "../pages/SitemapPage";
+import NewsBlogPage from "../pages/NewsBlogPage";
+import EnterprisePage from "../pages/EnterprisePage";
+import DevelopersPage from "../pages/DevelopersPage";
 
 import MailingListDatabase from "../components/MailingListDatabase";
 import EarlyAccessModal from "../components/EarlyAccessModal";
@@ -72,6 +75,40 @@ export default function AppRoutes({
         onPrivacy={() => setActivePage("privacy")}
         onTerms={() => setActivePage("terms")}
         onSitemap={() => setActivePage("sitemap")}
+      />
+    );
+  }
+
+  if (activePage === "enterprise-wellness") {
+    return (
+      <EnterprisePage
+        onBack={() => setActivePage("home")}
+        onPrivacy={() => setActivePage("privacy")}
+        onTerms={() => setActivePage("terms")}
+        onSitemap={() => setActivePage("sitemap")}
+      />
+    );
+  }
+
+  if (activePage === "developer-portal") {
+    return (
+      <DevelopersPage
+        onBack={() => setActivePage("home")}
+        onPrivacy={() => setActivePage("privacy")}
+        onTerms={() => setActivePage("terms")}
+        onSitemap={() => setActivePage("sitemap")}
+      />
+    );
+  }
+
+  if (activePage === "blog") {
+    return (
+      <NewsBlogPage
+        onBack={() => setActivePage("home")}
+        onPrivacy={() => setActivePage("privacy")}
+        onTerms={() => setActivePage("terms")}
+        onSitemap={() => setActivePage("sitemap")}
+        onAdmin={() => setActivePage("admin")}
       />
     );
   }
