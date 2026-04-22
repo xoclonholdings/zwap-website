@@ -111,13 +111,16 @@ function NewsletterCard() {
 }
 
 export default function NewsBlogPage({
+  initialTab = "news",
   onBack,
   onPrivacy,
   onTerms,
   onSitemap,
   onAdmin,
 }) {
-  const [activeTab, setActiveTab] = useState("news");
+  const [activeTab, setActiveTab] = useState(
+    initialTab === "blog" ? "blog" : "news"
+  );
 
   const isDesktop =
     typeof window !== "undefined" ? window.innerWidth >= 900 : false;
