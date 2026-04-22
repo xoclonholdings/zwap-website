@@ -207,6 +207,13 @@ export default function AppRoutes({
         onPrivacy={footerNav.onPrivacy}
         onTerms={footerNav.onTerms}
         onSitemap={footerNav.onSitemap}
+        onNews={footerNav.onNews}
+        onBlog={footerNav.onBlog}
+        onAbout={footerNav.onAbout}
+        onFeatures={footerNav.onFeatures}
+        onPartners={footerNav.onPartners}
+        onDevelopers={footerNav.onDevelopers}
+        onEnterprise={footerNav.onEnterprise}
       />
     );
   }
@@ -219,6 +226,13 @@ export default function AppRoutes({
         onTerms={footerNav.onTerms}
         onSitemap={footerNav.onSitemap}
         onContact={() => setActivePage("contact")}
+        onNews={footerNav.onNews}
+        onBlog={footerNav.onBlog}
+        onAbout={footerNav.onAbout}
+        onFeatures={footerNav.onFeatures}
+        onPartners={footerNav.onPartners}
+        onDevelopers={footerNav.onDevelopers}
+        onEnterprise={footerNav.onEnterprise}
       />
     );
   }
@@ -231,6 +245,13 @@ export default function AppRoutes({
         onTerms={footerNav.onTerms}
         onSitemap={footerNav.onSitemap}
         onContact={() => setActivePage("contact")}
+        onNews={footerNav.onNews}
+        onBlog={footerNav.onBlog}
+        onAbout={footerNav.onAbout}
+        onFeatures={footerNav.onFeatures}
+        onPartners={footerNav.onPartners}
+        onDevelopers={footerNav.onDevelopers}
+        onEnterprise={footerNav.onEnterprise}
       />
     );
   }
