@@ -124,6 +124,9 @@ export default function NewsBlogPage({
   onPartners,
   onDevelopers,
   onEnterprise,
+  onContact,
+  onFAQ,
+  onHowItWorks,
 }) {
   const [activeTab, setActiveTab] = useState(
     initialTab === "blog" ? "blog" : "news"
@@ -292,6 +295,9 @@ export default function NewsBlogPage({
           onPartners={onPartners}
           onDevelopers={onDevelopers}
           onEnterprise={onEnterprise}
+          onContact={onContact}
+          onFAQ={onFAQ}
+          onHowItWorks={onHowItWorks}
         />
       </div>
     </div>
