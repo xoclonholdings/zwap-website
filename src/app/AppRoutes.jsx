@@ -9,6 +9,7 @@ import SitemapPage from "../pages/SitemapPage";
 import NewsBlogPage from "../pages/NewsBlogPage";
 import EnterprisePage from "../pages/EnterprisePage";
 import DevelopersPage from "../pages/DevelopersPage";
+import AdminPage from "../pages/newsblog/AdminPage";
 
 import MailingListDatabase from "../components/MailingListDatabase";
 import EarlyAccessModal from "../components/EarlyAccessModal";
@@ -101,14 +102,39 @@ export default function AppRoutes({
     );
   }
 
-  if (activePage === "blog") {
+  if (activePage === "news") {
     return (
       <NewsBlogPage
+        initialTab="news"
         onBack={() => setActivePage("home")}
         onPrivacy={() => setActivePage("privacy")}
         onTerms={() => setActivePage("terms")}
         onSitemap={() => setActivePage("sitemap")}
         onAdmin={() => setActivePage("admin")}
+      />
+    );
+  }
+
+  if (activePage === "blog") {
+    return (
+      <NewsBlogPage
+        initialTab="blog"
+        onBack={() => setActivePage("home")}
+        onPrivacy={() => setActivePage("privacy")}
+        onTerms={() => setActivePage("terms")}
+        onSitemap={() => setActivePage("sitemap")}
+        onAdmin={() => setActivePage("admin")}
+      />
+    );
+  }
+
+  if (activePage === "admin") {
+    return (
+      <AdminPage
+        onBack={() => setActivePage("home")}
+        onPrivacy={() => setActivePage("privacy")}
+        onTerms={() => setActivePage("terms")}
+        onSitemap={() => setActivePage("sitemap")}
       />
     );
   }
