@@ -37,15 +37,34 @@ export default function AppRoutes({
   referralCode,
   onSendInvite,
 }) {
+  const footerNav = {
+    onPrivacy: () => setActivePage("privacy"),
+    onTerms: () => setActivePage("terms"),
+    onSitemap: () => setActivePage("sitemap"),
+    onNews: () => setActivePage("news"),
+    onBlog: () => setActivePage("blog"),
+    onAbout: () => setActivePage("about"),
+    onFeatures: () => setActivePage("features"),
+    onPartners: () => setActivePage("partners"),
+    onDevelopers: () => setActivePage("developer-portal"),
+    onEnterprise: () => setActivePage("enterprise-wellness"),
+  };
+
   if (activePage === "about") {
     return (
       <>
         <AboutPage
           onBack={() => setActivePage("home")}
           onLockIn={() => openEarlyAccessModal("preview")}
-          onPrivacy={() => setActivePage("privacy")}
-          onTerms={() => setActivePage("terms")}
-          onSitemap={() => setActivePage("sitemap")}
+          onPrivacy={footerNav.onPrivacy}
+          onTerms={footerNav.onTerms}
+          onSitemap={footerNav.onSitemap}
+          onNews={footerNav.onNews}
+          onBlog={footerNav.onBlog}
+          onFeatures={footerNav.onFeatures}
+          onPartners={footerNav.onPartners}
+          onDevelopers={footerNav.onDevelopers}
+          onEnterprise={footerNav.onEnterprise}
         />
 
         <EarlyAccessModal
@@ -66,9 +85,15 @@ export default function AppRoutes({
     return (
       <FeaturesPage
         onBack={() => setActivePage("home")}
-        onPrivacy={() => setActivePage("privacy")}
-        onTerms={() => setActivePage("terms")}
-        onSitemap={() => setActivePage("sitemap")}
+        onPrivacy={footerNav.onPrivacy}
+        onTerms={footerNav.onTerms}
+        onSitemap={footerNav.onSitemap}
+        onNews={footerNav.onNews}
+        onBlog={footerNav.onBlog}
+        onAbout={footerNav.onAbout}
+        onPartners={footerNav.onPartners}
+        onDevelopers={footerNav.onDevelopers}
+        onEnterprise={footerNav.onEnterprise}
       />
     );
   }
@@ -77,9 +102,15 @@ export default function AppRoutes({
     return (
       <PartnersPage
         onBack={() => setActivePage("home")}
-        onPrivacy={() => setActivePage("privacy")}
-        onTerms={() => setActivePage("terms")}
-        onSitemap={() => setActivePage("sitemap")}
+        onPrivacy={footerNav.onPrivacy}
+        onTerms={footerNav.onTerms}
+        onSitemap={footerNav.onSitemap}
+        onNews={footerNav.onNews}
+        onBlog={footerNav.onBlog}
+        onAbout={footerNav.onAbout}
+        onFeatures={footerNav.onFeatures}
+        onDevelopers={footerNav.onDevelopers}
+        onEnterprise={footerNav.onEnterprise}
       />
     );
   }
@@ -88,9 +119,15 @@ export default function AppRoutes({
     return (
       <EnterprisePage
         onBack={() => setActivePage("home")}
-        onPrivacy={() => setActivePage("privacy")}
-        onTerms={() => setActivePage("terms")}
-        onSitemap={() => setActivePage("sitemap")}
+        onPrivacy={footerNav.onPrivacy}
+        onTerms={footerNav.onTerms}
+        onSitemap={footerNav.onSitemap}
+        onNews={footerNav.onNews}
+        onBlog={footerNav.onBlog}
+        onAbout={footerNav.onAbout}
+        onFeatures={footerNav.onFeatures}
+        onPartners={footerNav.onPartners}
+        onDevelopers={footerNav.onDevelopers}
       />
     );
   }
@@ -99,9 +136,15 @@ export default function AppRoutes({
     return (
       <DevelopersPage
         onBack={() => setActivePage("home")}
-        onPrivacy={() => setActivePage("privacy")}
-        onTerms={() => setActivePage("terms")}
-        onSitemap={() => setActivePage("sitemap")}
+        onPrivacy={footerNav.onPrivacy}
+        onTerms={footerNav.onTerms}
+        onSitemap={footerNav.onSitemap}
+        onNews={footerNav.onNews}
+        onBlog={footerNav.onBlog}
+        onAbout={footerNav.onAbout}
+        onFeatures={footerNav.onFeatures}
+        onPartners={footerNav.onPartners}
+        onEnterprise={footerNav.onEnterprise}
       />
     );
   }
@@ -111,10 +154,17 @@ export default function AppRoutes({
       <NewsBlogPage
         initialTab="news"
         onBack={() => setActivePage("home")}
-        onPrivacy={() => setActivePage("privacy")}
-        onTerms={() => setActivePage("terms")}
-        onSitemap={() => setActivePage("sitemap")}
+        onPrivacy={footerNav.onPrivacy}
+        onTerms={footerNav.onTerms}
+        onSitemap={footerNav.onSitemap}
         onAdmin={() => setActivePage("admin")}
+        onNews={footerNav.onNews}
+        onBlog={footerNav.onBlog}
+        onAbout={footerNav.onAbout}
+        onFeatures={footerNav.onFeatures}
+        onPartners={footerNav.onPartners}
+        onDevelopers={footerNav.onDevelopers}
+        onEnterprise={footerNav.onEnterprise}
       />
     );
   }
@@ -124,10 +174,17 @@ export default function AppRoutes({
       <NewsBlogPage
         initialTab="blog"
         onBack={() => setActivePage("home")}
-        onPrivacy={() => setActivePage("privacy")}
-        onTerms={() => setActivePage("terms")}
-        onSitemap={() => setActivePage("sitemap")}
+        onPrivacy={footerNav.onPrivacy}
+        onTerms={footerNav.onTerms}
+        onSitemap={footerNav.onSitemap}
         onAdmin={() => setActivePage("admin")}
+        onNews={footerNav.onNews}
+        onBlog={footerNav.onBlog}
+        onAbout={footerNav.onAbout}
+        onFeatures={footerNav.onFeatures}
+        onPartners={footerNav.onPartners}
+        onDevelopers={footerNav.onDevelopers}
+        onEnterprise={footerNav.onEnterprise}
       />
     );
   }
@@ -136,9 +193,9 @@ export default function AppRoutes({
     return (
       <AdminPage
         onBack={() => setActivePage("home")}
-        onPrivacy={() => setActivePage("privacy")}
-        onTerms={() => setActivePage("terms")}
-        onSitemap={() => setActivePage("sitemap")}
+        onPrivacy={footerNav.onPrivacy}
+        onTerms={footerNav.onTerms}
+        onSitemap={footerNav.onSitemap}
       />
     );
   }
@@ -147,10 +204,9 @@ export default function AppRoutes({
     return (
       <ContactPage
         onBack={() => setActivePage("home")}
-        onPrivacy={() => setActivePage("privacy")}
-        onTerms={() => setActivePage("terms")}
-        onSitemap={() => setActivePage("sitemap")}
-        onContact={() => setActivePage("contact")}
+        onPrivacy={footerNav.onPrivacy}
+        onTerms={footerNav.onTerms}
+        onSitemap={footerNav.onSitemap}
       />
     );
   }
@@ -159,9 +215,9 @@ export default function AppRoutes({
     return (
       <FAQPage
         onBack={() => setActivePage("home")}
-        onPrivacy={() => setActivePage("privacy")}
-        onTerms={() => setActivePage("terms")}
-        onSitemap={() => setActivePage("sitemap")}
+        onPrivacy={footerNav.onPrivacy}
+        onTerms={footerNav.onTerms}
+        onSitemap={footerNav.onSitemap}
         onContact={() => setActivePage("contact")}
       />
     );
@@ -171,9 +227,9 @@ export default function AppRoutes({
     return (
       <HowItWorksPage
         onBack={() => setActivePage("home")}
-        onPrivacy={() => setActivePage("privacy")}
-        onTerms={() => setActivePage("terms")}
-        onSitemap={() => setActivePage("sitemap")}
+        onPrivacy={footerNav.onPrivacy}
+        onTerms={footerNav.onTerms}
+        onSitemap={footerNav.onSitemap}
         onContact={() => setActivePage("contact")}
       />
     );
@@ -268,9 +324,9 @@ export default function AppRoutes({
       <>
         <PreviewPage
           onBack={() => setActivePage("home")}
-          onPrivacy={() => setActivePage("privacy")}
-          onTerms={() => setActivePage("terms")}
-          onSitemap={() => setActivePage("sitemap")}
+          onPrivacy={footerNav.onPrivacy}
+          onTerms={footerNav.onTerms}
+          onSitemap={footerNav.onSitemap}
           referralCode={referralCode}
           onSendInvite={onSendInvite}
         />
