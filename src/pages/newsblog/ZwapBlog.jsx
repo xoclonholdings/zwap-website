@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import { shareArticle } from "./shareArticle";
 
 const BLOG_CATEGORIES = [
   "All",
@@ -103,38 +104,6 @@ const BLOG_ARTICLES = [
     date: "Apr 2026",
   },
 ];
-
-function getArticleUrl(article) {
-  if (typeof window === "undefined") return "";
-
-  return `${window.location.origin}/blog/${article.slug || article.id}`;
-}
-
-async function handleShareArticle(article) {
-  const url = getArticleUrl(article);
-  const shareText = `${article.title} | ZWAP!`;
-
-  try {
-    if (navigator.share) {
-      await navigator.share({
-        title: article.title,
-        text: article.excerpt,
-        url,
-      });
-      return;
-    }
-
-    if (navigator.clipboard?.writeText) {
-      await navigator.clipboard.writeText(`${shareText}\n${url}`);
-      window.alert("Article link copied to clipboard.");
-      return;
-    }
-
-    window.prompt("Copy this article link:", url);
-  } catch (error) {
-    console.error("Share failed:", error);
-  }
-}
 
 function CategoryPill({ isActive, children, onClick }) {
   return (
@@ -276,7 +245,7 @@ function FeaturedArticleCard({ article }) {
         }}
       >
         <ActionButton primary>{article.cta || "Read More"}</ActionButton>
-        <ActionButton onClick={() => handleShareArticle(article)}>
+        <ActionButton onClick={() => shareArticle(article, "blog")}>
           Share
         </ActionButton>
       </div>
@@ -371,7 +340,7 @@ function ArticleCard({ article }) {
         }}
       >
         <ActionButton>Read More</ActionButton>
-        <ActionButton onClick={() => handleShareArticle(article)}>
+        <ActionButton onClick={() => shareArticle(article, "blog")}>
           Share
         </ActionButton>
       </div>
@@ -386,7 +355,8 @@ export default function ZwapBlog() {
     if (activeCategory === "All") return BLOG_ARTICLES;
 
     return BLOG_ARTICLES.filter(
-      (article) => article.category.toLowerCase() === activeCategory.toLowerCase()
+      (article) =>
+        article.category.toLowerCase() === activeCategory.toLowerCase()
     );
   }, [activeCategory]);
 
