@@ -5,11 +5,15 @@ import PrivacyPage from "../pages/PrivacyPage";
 import TermsPage from "../pages/TermsPage";
 import GooglePlay from "../pages/GooglePlay";
 import AppleStore from "../pages/AppleStore";
-import SitemapPage from "../pages/SitemapPage";
 import NewsBlogPage from "../pages/NewsBlogPage";
 import EnterprisePage from "../pages/EnterprisePage";
 import DevelopersPage from "../pages/DevelopersPage";
 import AdminPage from "../pages/newsblog/AdminPage";
+
+import SitemapPage from "../pages/sitemap/SitemapPage";
+import ContactPage from "../pages/sitemap/ContactPage";
+import FAQPage from "../pages/sitemap/FAQPage";
+import HowItWorksPage from "../pages/sitemap/HowItWorksPage";
 
 import MailingListDatabase from "../components/MailingListDatabase";
 import EarlyAccessModal from "../components/EarlyAccessModal";
@@ -139,6 +143,42 @@ export default function AppRoutes({
     );
   }
 
+  if (activePage === "contact") {
+    return (
+      <ContactPage
+        onBack={() => setActivePage("home")}
+        onPrivacy={() => setActivePage("privacy")}
+        onTerms={() => setActivePage("terms")}
+        onSitemap={() => setActivePage("sitemap")}
+        onContact={() => setActivePage("contact")}
+      />
+    );
+  }
+
+  if (activePage === "faq") {
+    return (
+      <FAQPage
+        onBack={() => setActivePage("home")}
+        onPrivacy={() => setActivePage("privacy")}
+        onTerms={() => setActivePage("terms")}
+        onSitemap={() => setActivePage("sitemap")}
+        onContact={() => setActivePage("contact")}
+      />
+    );
+  }
+
+  if (activePage === "how-it-works") {
+    return (
+      <HowItWorksPage
+        onBack={() => setActivePage("home")}
+        onPrivacy={() => setActivePage("privacy")}
+        onTerms={() => setActivePage("terms")}
+        onSitemap={() => setActivePage("sitemap")}
+        onContact={() => setActivePage("contact")}
+      />
+    );
+  }
+
   if (activePage === "privacy") {
     return <PrivacyPage onBack={() => setActivePage("home")} />;
   }
@@ -172,7 +212,17 @@ export default function AppRoutes({
         onBack={() => setActivePage("home")}
         onNavigate={(routeKey) => {
           if (routeKey === "contact") {
-            setIsMailOpen(true);
+            setActivePage("contact");
+            return;
+          }
+
+          if (routeKey === "faq") {
+            setActivePage("faq");
+            return;
+          }
+
+          if (routeKey === "how-it-works") {
+            setActivePage("how-it-works");
             return;
           }
 
