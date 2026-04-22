@@ -30,12 +30,13 @@ function Star({ style }) {
 
 export default function LandingHeader({
   onAbout,
+  onNews,
+  onBlog,
   onFeatures,
   onPreview,
   onPartners,
-  onEnterprise,
   onDevelopers,
-  onNewsBlog,
+  onEnterprise,
   onGooglePlay,
   onAppleStore,
 }) {
@@ -80,12 +81,13 @@ export default function LandingHeader({
 
   const navItems = [
     { label: "About", onClick: onAbout },
+    { label: "News", onClick: onNews },
+    { label: "Blog", onClick: onBlog },
     { label: "Features", onClick: onFeatures },
     { label: "Preview", onClick: onPreview },
     { label: "Partners", onClick: onPartners },
-    { label: "Enterprise", onClick: onEnterprise },
     { label: "Developers", onClick: onDevelopers },
-    { label: "News Blog", onClick: onNewsBlog },
+    { label: "Enterprise", onClick: onEnterprise },
   ];
 
   return (
@@ -133,12 +135,14 @@ export default function LandingHeader({
             style={
               isDesktop
                 ? {
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "flex-end",
-                    gap: "14px",
-                    flexWrap: "wrap",
-                    maxWidth: "820px",
+                    display: "grid",
+                    gridTemplateColumns: "repeat(2, max-content)",
+                    columnGap: "42px",
+                    rowGap: "12px",
+                    justifyContent: "end",
+                    alignContent: "start",
+                    width: "100%",
+                    maxWidth: "440px",
                   }
                 : {
                     display: "grid",
@@ -147,7 +151,7 @@ export default function LandingHeader({
                     justifyItems: "stretch",
                     alignItems: "center",
                     width: "100%",
-                    maxWidth: "300px",
+                    maxWidth: "320px",
                   }
             }
           >
