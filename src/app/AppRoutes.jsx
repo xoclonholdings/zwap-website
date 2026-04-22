@@ -16,6 +16,7 @@ import PreviewUnlockRedirect from "./PreviewUnlockRedirect";
 export default function AppRoutes({
   activePage,
   setActivePage,
+  setIsMailOpen,
   previewUnlocked,
   openEarlyAccessModal,
   closeEarlyAccessModal,
@@ -34,6 +35,9 @@ export default function AppRoutes({
         <AboutPage
           onBack={() => setActivePage("home")}
           onLockIn={() => openEarlyAccessModal("preview")}
+          onPrivacy={() => setActivePage("privacy")}
+          onTerms={() => setActivePage("terms")}
+          onSitemap={() => setActivePage("sitemap")}
         />
 
         <EarlyAccessModal
@@ -51,11 +55,25 @@ export default function AppRoutes({
   }
 
   if (activePage === "features") {
-    return <FeaturesPage onBack={() => setActivePage("home")} />;
+    return (
+      <FeaturesPage
+        onBack={() => setActivePage("home")}
+        onPrivacy={() => setActivePage("privacy")}
+        onTerms={() => setActivePage("terms")}
+        onSitemap={() => setActivePage("sitemap")}
+      />
+    );
   }
 
   if (activePage === "partners") {
-    return <PartnersPage onBack={() => setActivePage("home")} />;
+    return (
+      <PartnersPage
+        onBack={() => setActivePage("home")}
+        onPrivacy={() => setActivePage("privacy")}
+        onTerms={() => setActivePage("terms")}
+        onSitemap={() => setActivePage("sitemap")}
+      />
+    );
   }
 
   if (activePage === "privacy") {
@@ -84,13 +102,29 @@ export default function AppRoutes({
       />
     );
   }
-  
+
   if (activePage === "sitemap") {
     return (
       <SitemapPage
         onBack={() => setActivePage("home")}
-        onPrivacy={() => setActivePage("privacy")}
-        onTerms={() => setActivePage("terms")}
+        onNavigate={(routeKey) => {
+          if (routeKey === "contact") {
+            setIsMailOpen(true);
+            return;
+          }
+
+          if (routeKey === "early-access") {
+            openEarlyAccessModal("preview");
+            return;
+          }
+
+          if (routeKey === "home") {
+            setActivePage("home");
+            return;
+          }
+
+          setActivePage(routeKey);
+        }}
       />
     );
   }
@@ -123,6 +157,7 @@ export default function AppRoutes({
           onBack={() => setActivePage("home")}
           onPrivacy={() => setActivePage("privacy")}
           onTerms={() => setActivePage("terms")}
+          onSitemap={() => setActivePage("sitemap")}
           referralCode={referralCode}
           onSendInvite={onSendInvite}
         />
