@@ -33,6 +33,9 @@ export default function LandingHeader({
   onFeatures,
   onPreview,
   onPartners,
+  onEnterprise,
+  onDevelopers,
+  onNewsBlog,
   onGooglePlay,
   onAppleStore,
 }) {
@@ -74,6 +77,16 @@ export default function LandingHeader({
     boxShadow:
       "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 20px rgba(0,0,0,0.22)",
   };
+
+  const navItems = [
+    { label: "About", onClick: onAbout },
+    { label: "Features", onClick: onFeatures },
+    { label: "Preview", onClick: onPreview },
+    { label: "Partners", onClick: onPartners },
+    { label: "Enterprise", onClick: onEnterprise },
+    { label: "Developers", onClick: onDevelopers },
+    { label: "News Blog", onClick: onNewsBlog },
+  ];
 
   return (
     <>
@@ -125,6 +138,7 @@ export default function LandingHeader({
                     justifyContent: "flex-end",
                     gap: "14px",
                     flexWrap: "wrap",
+                    maxWidth: "820px",
                   }
                 : {
                     display: "grid",
@@ -133,22 +147,15 @@ export default function LandingHeader({
                     justifyItems: "stretch",
                     alignItems: "center",
                     width: "100%",
-                    maxWidth: "270px",
+                    maxWidth: "300px",
                   }
             }
           >
-            <button onClick={onAbout} style={linkStyle}>
-              About
-            </button>
-            <button onClick={onFeatures} style={linkStyle}>
-              Features
-            </button>
-            <button onClick={onPreview} style={linkStyle}>
-              Preview
-            </button>
-            <button onClick={onPartners} style={linkStyle}>
-              Partners
-            </button>
+            {navItems.map((item) => (
+              <button key={item.label} onClick={item.onClick} style={linkStyle}>
+                {item.label}
+              </button>
+            ))}
           </nav>
         </div>
 
