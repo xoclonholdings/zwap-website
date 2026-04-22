@@ -147,6 +147,15 @@ export default function AboutPage({
   onPrivacy,
   onTerms,
   onSitemap,
+  onNews,
+  onBlog,
+  onFeatures,
+  onPartners,
+  onDevelopers,
+  onEnterprise,
+  onContact,
+  onFAQ,
+  onHowItWorks,
 }) {
   const [activeModeIndex, setActiveModeIndex] = useState(0);
   const [isDesktop, setIsDesktop] = useState(
@@ -196,7 +205,7 @@ export default function AboutPage({
   const modes = [
     {
       title: "MOVE",
-      desc: "Walk and build progression through real-world movement. The more you move, the more momentum you create inside ZWAP.",
+      desc: "Walk and build progression through real-world movement. The more you move, the more momentum you create inside ZWAP!.",
       accent: accents.cyan,
     },
     {
@@ -553,7 +562,7 @@ export default function AboutPage({
               Move. Play. Swap. Shop.
             </span>
             <span style={{ color: "rgba(235,239,255,0.62)" }}>
-              ZWAP is rolling out in phases, with more systems unlocking over
+              ZWAP! is rolling out in phases, with more systems unlocking over
               time.
             </span>
           </div>
@@ -594,6 +603,16 @@ export default function AboutPage({
           onPrivacy={onPrivacy}
           onTerms={onTerms}
           onSitemap={onSitemap}
+          onNews={onNews}
+          onBlog={onBlog}
+          onAbout={undefined}
+          onFeatures={onFeatures}
+          onPartners={onPartners}
+          onDevelopers={onDevelopers}
+          onEnterprise={onEnterprise}
+          onContact={onContact}
+          onFAQ={onFAQ}
+          onHowItWorks={onHowItWorks}
         />
       </div>
     </div>
