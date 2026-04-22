@@ -5,95 +5,100 @@ const PAGE_META = {
     title: "ZWAP! | Move. Play. Earn Today.",
     description:
       "Move. Play. Earn Today. Lock in early access to the ZWAP! preview and explore a behavior-based rewards system built around progression.",
-    path: "/",
   },
   about: {
     title: "About ZWAP! | Movement-First Rewards Ecosystem",
     description:
       "Learn what ZWAP! is, how movement, play, progression, zPts, and ZWAP fit together, and why the system is built around delayed value.",
-    path: "/about",
   },
   news: {
     title: "ZWAP! News | Platform Updates and Announcements",
     description:
       "Read the latest ZWAP! platform updates, launch communication, ecosystem milestones, sponsor news, and rollout visibility.",
-    path: "/news",
   },
   blog: {
     title: "ZWAP! Blog | Rewards, Financial Literacy, and Movement",
     description:
       "Explore ZWAP! blog content covering rewards, progression, movement, crypto basics, financial literacy, and platform education.",
-    path: "/blog",
   },
   features: {
     title: "ZWAP! Features | MOVE, PLAY, SHOP, SWAP, and More",
     description:
       "Explore the ZWAP! feature set, including MOVE, PLAY, SHOP, SWAP, Learn, and the broader reward ecosystem.",
-    path: "/features",
   },
   partners: {
     title: "ZWAP! Partners | Sponsors and Collaboration Opportunities",
     description:
       "Discover how sponsors, brands, and collaborators can partner with ZWAP! across movement, rewards, campaigns, and ecosystem growth.",
-    path: "/partners",
   },
   "enterprise-wellness": {
     title: "ZWAP! Enterprise | Workplace Wellness and Engagement",
     description:
       "Learn how ZWAP! plans to support enterprise wellness, workforce engagement, structured incentives, and measurable participation systems.",
-    path: "/enterprise",
   },
   "developer-portal": {
     title: "ZWAP! Developers | Developer Portal and V2 Expansion",
     description:
       "Explore the future ZWAP! Developer Portal for game submissions, integrations, reward-compatible experiences, and ecosystem expansion.",
-    path: "/developers",
   },
   contact: {
     title: "Contact ZWAP! | Support, Partners, Enterprise, Developers",
     description:
       "Contact ZWAP! for support, sponsor opportunities, enterprise wellness, developer questions, media, and business inquiries.",
-    path: "/contact",
   },
   faq: {
     title: "ZWAP! FAQ | Questions About Rewards, zPts, and ZWAP",
     description:
       "Get answers about ZWAP!, zPts, delayed rewards, movement, Shop, Swap, sponsors, enterprise wellness, and developers.",
-    path: "/faq",
   },
   "how-it-works": {
     title: "How ZWAP! Works | Move, Progress, Unlock",
     description:
       "See how ZWAP! turns movement, play, learning, and engagement into progression, zPts, controlled ZWAP unlocks, and ecosystem utility.",
-    path: "/how-it-works",
   },
   privacy: {
     title: "Privacy Policy | ZWAP!",
     description:
       "Read the ZWAP! Privacy Policy and learn how user information, platform activity, and related data are handled.",
-    path: "/privacy",
   },
   terms: {
     title: "Terms of Use | ZWAP!",
     description:
       "Review the ZWAP! Terms of Use for access, platform rules, and general terms governing the site and ecosystem.",
-    path: "/terms",
   },
   sitemap: {
     title: "Sitemap | ZWAP!",
     description:
       "Browse the ZWAP! sitemap to explore platform pages, support pages, content hubs, and ecosystem sections.",
-    path: "/sitemap",
   },
   preview: {
     title: "ZWAP! Preview | Early Access Experience",
     description:
       "Preview the ZWAP! experience and explore early access to a movement-first rewards ecosystem built around progression and delayed value.",
-    path: "/preview",
+  },
+  "google-play": {
+    title: "ZWAP! on Google Play | Coming Soon",
+    description:
+      "Stay updated on the upcoming Google Play release for ZWAP! and early access to the movement-first rewards ecosystem.",
+  },
+  "apple-store": {
+    title: "ZWAP! on the App Store | Coming Soon",
+    description:
+      "Stay updated on the upcoming App Store release for ZWAP! and early access to the movement-first rewards ecosystem.",
+  },
+  admin: {
+    title: "ZWAP! Admin | Content Management",
+    description:
+      "Administrative area for managing ZWAP! content, updates, announcements, and publishing workflows.",
+  },
+  "mailing-list": {
+    title: "ZWAP! Mailing List | Stay Updated",
+    description:
+      "Join the ZWAP! mailing list for product updates, launch announcements, blog posts, and ecosystem news.",
   },
 };
 
-function setMeta(name, content) {
+function upsertMetaByName(name, content) {
   let tag = document.querySelector(`meta[name="${name}"]`);
 
   if (!tag) {
@@ -105,7 +110,7 @@ function setMeta(name, content) {
   tag.setAttribute("content", content);
 }
 
-function setPropertyMeta(property, content) {
+function upsertMetaByProperty(property, content) {
   let tag = document.querySelector(`meta[property="${property}"]`);
 
   if (!tag) {
@@ -117,54 +122,54 @@ function setPropertyMeta(property, content) {
   tag.setAttribute("content", content);
 }
 
-function setCanonical(url) {
-  let link = document.querySelector('link[rel="canonical"]');
+function upsertCanonical(url) {
+  let tag = document.querySelector('link[rel="canonical"]');
 
-  if (!link) {
-    link = document.createElement("link");
-    link.setAttribute("rel", "canonical");
-    document.head.appendChild(link);
+  if (!tag) {
+    tag = document.createElement("link");
+    tag.setAttribute("rel", "canonical");
+    document.head.appendChild(tag);
   }
 
-  link.setAttribute("href", url);
+  tag.setAttribute("href", url);
 }
 
 export default function usePageMeta(activePage) {
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.prerenderReady = false;
-    }
-
     const meta = PAGE_META[activePage] || PAGE_META.home;
-    const absoluteUrl = `https://zwap.online${meta.path}`;
+    const pathname =
+      typeof window !== "undefined" ? window.location.pathname : "/";
+    const absoluteUrl = `https://zwap.online${pathname || "/"}`;
 
     document.title = meta.title;
 
-    setMeta("description", meta.description);
+    upsertMetaByName("description", meta.description);
 
-    setPropertyMeta("og:type", "website");
-    setPropertyMeta("og:url", absoluteUrl);
-    setPropertyMeta("og:title", meta.title);
-    setPropertyMeta("og:description", meta.description);
-    setPropertyMeta("og:image", "https://zwap.online/website_preview.PNG");
-    setPropertyMeta("og:image:alt", "ZWAP! website preview");
+    upsertMetaByProperty("og:type", "website");
+    upsertMetaByProperty("og:url", absoluteUrl);
+    upsertMetaByProperty("og:title", meta.title);
+    upsertMetaByProperty("og:description", meta.description);
+    upsertMetaByProperty(
+      "og:image",
+      "https://zwap.online/website_preview.PNG"
+    );
+    upsertMetaByProperty("og:image:alt", "ZWAP! website preview");
 
-    setMeta("twitter:card", "summary_large_image");
-    setMeta("twitter:url", absoluteUrl);
-    setMeta("twitter:title", meta.title);
-    setMeta("twitter:description", meta.description);
-    setMeta("twitter:image", "https://zwap.online/website_preview.PNG");
-    setMeta("twitter:site", "@ZWAP_Online");
-    setMeta("twitter:creator", "@ZWAP_Online");
+    upsertMetaByName("twitter:card", "summary_large_image");
+    upsertMetaByName("twitter:url", absoluteUrl);
+    upsertMetaByName("twitter:title", meta.title);
+    upsertMetaByName("twitter:description", meta.description);
+    upsertMetaByName(
+      "twitter:image",
+      "https://zwap.online/website_preview.PNG"
+    );
+    upsertMetaByName("twitter:site", "@ZWAP_Online");
+    upsertMetaByName("twitter:creator", "@ZWAP_Online");
 
-    setCanonical(absoluteUrl);
+    upsertCanonical(absoluteUrl);
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        if (typeof window !== "undefined") {
-          window.prerenderReady = true;
-        }
-      });
-    });
+    if (typeof window !== "undefined") {
+      window.prerenderReady = true;
+    }
   }, [activePage]);
 }
