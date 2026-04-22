@@ -165,6 +165,15 @@ export default function DevelopersPage({
   onPrivacy,
   onTerms,
   onSitemap,
+  onNews,
+  onBlog,
+  onAbout,
+  onFeatures,
+  onPartners,
+  onEnterprise,
+  onContact,
+  onFAQ,
+  onHowItWorks,
 }) {
   const isDesktop =
     typeof window !== "undefined" ? window.innerWidth >= 1024 : false;
@@ -492,6 +501,16 @@ export default function DevelopersPage({
           onPrivacy={onPrivacy}
           onTerms={onTerms}
           onSitemap={onSitemap}
+          onNews={onNews}
+          onBlog={onBlog}
+          onAbout={onAbout}
+          onFeatures={onFeatures}
+          onPartners={onPartners}
+          onDevelopers={undefined}
+          onEnterprise={onEnterprise}
+          onContact={onContact}
+          onFAQ={onFAQ}
+          onHowItWorks={onHowItWorks}
         />
       </div>
     </div>
