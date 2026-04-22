@@ -1,6 +1,7 @@
 export default function AppFooter({
   onPrivacy,
   onTerms,
+  onSitemap,
 }) {
   return (
     <footer className="landing-footer">
@@ -11,6 +12,10 @@ export default function AppFooter({
 
         <button type="button" onClick={onTerms}>
           Terms of Service
+        </button>
+
+        <button type="button" onClick={onSitemap}>
+          Sitemap
         </button>
       </div>
 
