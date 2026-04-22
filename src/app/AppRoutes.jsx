@@ -48,6 +48,9 @@ export default function AppRoutes({
     onPartners: () => setActivePage("partners"),
     onDevelopers: () => setActivePage("developer-portal"),
     onEnterprise: () => setActivePage("enterprise-wellness"),
+    onContact: () => setActivePage("contact"),
+    onFAQ: () => setActivePage("faq"),
+    onHowItWorks: () => setActivePage("how-it-works"),
   };
 
   if (activePage === "about") {
@@ -65,6 +68,9 @@ export default function AppRoutes({
           onPartners={footerNav.onPartners}
           onDevelopers={footerNav.onDevelopers}
           onEnterprise={footerNav.onEnterprise}
+          onContact={footerNav.onContact}
+          onFAQ={footerNav.onFAQ}
+          onHowItWorks={footerNav.onHowItWorks}
         />
 
         <EarlyAccessModal
@@ -94,6 +100,9 @@ export default function AppRoutes({
         onPartners={footerNav.onPartners}
         onDevelopers={footerNav.onDevelopers}
         onEnterprise={footerNav.onEnterprise}
+        onContact={footerNav.onContact}
+        onFAQ={footerNav.onFAQ}
+        onHowItWorks={footerNav.onHowItWorks}
       />
     );
   }
@@ -111,6 +120,9 @@ export default function AppRoutes({
         onFeatures={footerNav.onFeatures}
         onDevelopers={footerNav.onDevelopers}
         onEnterprise={footerNav.onEnterprise}
+        onContact={footerNav.onContact}
+        onFAQ={footerNav.onFAQ}
+        onHowItWorks={footerNav.onHowItWorks}
       />
     );
   }
@@ -128,6 +140,9 @@ export default function AppRoutes({
         onFeatures={footerNav.onFeatures}
         onPartners={footerNav.onPartners}
         onDevelopers={footerNav.onDevelopers}
+        onContact={footerNav.onContact}
+        onFAQ={footerNav.onFAQ}
+        onHowItWorks={footerNav.onHowItWorks}
       />
     );
   }
@@ -145,6 +160,9 @@ export default function AppRoutes({
         onFeatures={footerNav.onFeatures}
         onPartners={footerNav.onPartners}
         onEnterprise={footerNav.onEnterprise}
+        onContact={footerNav.onContact}
+        onFAQ={footerNav.onFAQ}
+        onHowItWorks={footerNav.onHowItWorks}
       />
     );
   }
@@ -165,6 +183,9 @@ export default function AppRoutes({
         onPartners={footerNav.onPartners}
         onDevelopers={footerNav.onDevelopers}
         onEnterprise={footerNav.onEnterprise}
+        onContact={footerNav.onContact}
+        onFAQ={footerNav.onFAQ}
+        onHowItWorks={footerNav.onHowItWorks}
       />
     );
   }
@@ -185,6 +206,9 @@ export default function AppRoutes({
         onPartners={footerNav.onPartners}
         onDevelopers={footerNav.onDevelopers}
         onEnterprise={footerNav.onEnterprise}
+        onContact={footerNav.onContact}
+        onFAQ={footerNav.onFAQ}
+        onHowItWorks={footerNav.onHowItWorks}
       />
     );
   }
@@ -214,6 +238,9 @@ export default function AppRoutes({
         onPartners={footerNav.onPartners}
         onDevelopers={footerNav.onDevelopers}
         onEnterprise={footerNav.onEnterprise}
+        onContact={footerNav.onContact}
+        onFAQ={footerNav.onFAQ}
+        onHowItWorks={footerNav.onHowItWorks}
       />
     );
   }
@@ -225,7 +252,7 @@ export default function AppRoutes({
         onPrivacy={footerNav.onPrivacy}
         onTerms={footerNav.onTerms}
         onSitemap={footerNav.onSitemap}
-        onContact={() => setActivePage("contact")}
+        onContact={footerNav.onContact}
         onNews={footerNav.onNews}
         onBlog={footerNav.onBlog}
         onAbout={footerNav.onAbout}
@@ -233,6 +260,8 @@ export default function AppRoutes({
         onPartners={footerNav.onPartners}
         onDevelopers={footerNav.onDevelopers}
         onEnterprise={footerNav.onEnterprise}
+        onFAQ={footerNav.onFAQ}
+        onHowItWorks={footerNav.onHowItWorks}
       />
     );
   }
@@ -244,7 +273,7 @@ export default function AppRoutes({
         onPrivacy={footerNav.onPrivacy}
         onTerms={footerNav.onTerms}
         onSitemap={footerNav.onSitemap}
-        onContact={() => setActivePage("contact")}
+        onContact={footerNav.onContact}
         onNews={footerNav.onNews}
         onBlog={footerNav.onBlog}
         onAbout={footerNav.onAbout}
@@ -252,6 +281,8 @@ export default function AppRoutes({
         onPartners={footerNav.onPartners}
         onDevelopers={footerNav.onDevelopers}
         onEnterprise={footerNav.onEnterprise}
+        onFAQ={footerNav.onFAQ}
+        onHowItWorks={footerNav.onHowItWorks}
       />
     );
   }
