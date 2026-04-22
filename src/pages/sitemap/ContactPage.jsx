@@ -162,12 +162,14 @@ function ContactFormStub() {
           disabled
           style={inputStyle}
         />
+
         <input
           type="email"
           placeholder="Your email"
           disabled
           style={inputStyle}
         />
+
         <textarea
           placeholder="Your message"
           rows={5}
@@ -180,6 +182,7 @@ function ContactFormStub() {
               "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
           }}
         />
+
         <button
           type="button"
           disabled
@@ -456,7 +459,7 @@ export default function ContactPage({
               color: "rgba(235,239,255,0.76)",
             }}
           >
-            ZWAP! is developed by XOCLON HOLDINGS INC.
+            ZWAP! is developed by ZWAP LLC, a subsidiary of XOCLON HOLDINGS INC.
           </p>
 
           <p
