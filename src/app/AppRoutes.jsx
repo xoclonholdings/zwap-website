@@ -84,6 +84,16 @@ export default function AppRoutes({
       />
     );
   }
+  
+  if (activePage === "sitemap") {
+    return (
+      <SitemapPage
+        onBack={() => setActivePage("home")}
+        onPrivacy={() => setActivePage("privacy")}
+        onTerms={() => setActivePage("terms")}
+      />
+    );
+  }
 
   if (activePage === "preview") {
     if (!previewUnlocked) {
