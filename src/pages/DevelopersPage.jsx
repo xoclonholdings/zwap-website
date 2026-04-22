@@ -270,7 +270,8 @@ export default function DevelopersPage({
               padding: isDesktop ? "30px 30px" : "24px 20px",
             }}
           >
-            <SectionEyebrow>V2 Expansion</SectionEyrow>
+            <SectionEyebrow>V2 Expansion</SectionEyebrow>
+
             <h1
               style={{
                 margin: "0 0 14px",
