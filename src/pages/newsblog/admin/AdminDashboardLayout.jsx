@@ -3,7 +3,7 @@ import AdminMetricsRow from "./AdminMetricsRow";
 import AdminLaneTabs from "./AdminLaneTabs";
 import AdminEntryQueue from "./AdminEntryQueue";
 import AdminEditorPanel from "./AdminEditorPanel";
-import { GlassPanel, SectionEyebrow } from "./AdminUI";
+import { GlassPanel, SectionEyebrow, ActionButton } from "./AdminUI";
 
 export default function AdminDashboardLayout({
   isDesktop,
@@ -23,6 +23,7 @@ export default function AdminDashboardLayout({
   onDraftChange,
   onSaveDraft,
   onPublish,
+  onSignOut,
 }) {
   return (
     <>
@@ -88,28 +89,16 @@ export default function AdminDashboardLayout({
 
             <div
               style={{
-                width: isDesktop ? "180px" : "100%",
+                width: isDesktop ? "220px" : "100%",
                 flexShrink: 0,
+                display: "grid",
+                gap: "10px",
               }}
             >
-              <button
-                type="button"
-                onClick={onBack}
-                style={{
-                  width: "100%",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  background: "rgba(255,255,255,0.04)",
-                  color: "#F8FAFF",
-                  borderRadius: "14px",
-                  padding: "14px 14px",
-                  cursor: "pointer",
-                  fontSize: "14px",
-                  fontWeight: 800,
-                  textAlign: "center",
-                }}
-              >
-                Back
-              </button>
+              <ActionButton label="Back" onClick={onBack} />
+              {onSignOut ? (
+                <ActionButton label="Sign Out" onClick={onSignOut} />
+              ) : null}
             </div>
           </div>
         </GlassPanel>
