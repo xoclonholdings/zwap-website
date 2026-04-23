@@ -12,9 +12,14 @@ exports.handler = async function handler(event) {
   try {
     const db = await getDb();
 
-    const id =
-      event.queryStringParameters?.id ||
-      JSON.parse(event.body || "{}").id;
+    let body = {};
+    try {
+      body = JSON.parse(event.body || "{}");
+    } catch {
+      body = {};
+    }
+
+    const id = event.queryStringParameters?.id || body.id;
 
     if (!id) {
       return {
@@ -23,12 +28,14 @@ exports.handler = async function handler(event) {
       };
     }
 
+    const now = new Date().toISOString();
+
     const result = await db.collection("website_posts").updateOne(
       { _id: new ObjectId(id) },
       {
         $set: {
-          deletedAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
+          deletedAt: now,
+          updatedAt: now,
         },
       }
     );
