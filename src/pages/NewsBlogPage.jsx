@@ -13,7 +13,7 @@ function SectionEyebrow({ children }) {
         fontWeight: 900,
         letterSpacing: "0.16em",
         textTransform: "uppercase",
-        color: "rgba(245,247,255,0.52)",
+        color: "rgba(245,247,255,0.66)",
         marginBottom: "12px",
       }}
     >
@@ -28,20 +28,22 @@ function HeaderTabButton({ isActive, children, onClick }) {
       type="button"
       onClick={onClick}
       style={{
-        border: "none",
+        border: isActive
+          ? "1px solid rgba(103,242,255,0.34)"
+          : "1px solid rgba(255,255,255,0.10)",
         cursor: "pointer",
-        padding: "11px 18px",
+        padding: "12px 20px",
         borderRadius: "999px",
         fontSize: "12px",
         fontWeight: 900,
         letterSpacing: "0.08em",
         textTransform: "uppercase",
-        color: isActive ? "#05060B" : "rgba(245,247,255,0.78)",
+        color: isActive ? "#071018" : "rgba(245,247,255,0.88)",
         background: isActive
           ? "linear-gradient(90deg, #66F2FF 0%, #B486FF 100%)"
-          : "rgba(255,255,255,0.06)",
+          : "rgba(255,255,255,0.07)",
         boxShadow: isActive
-          ? "0 0 18px rgba(180,134,255,0.22)"
+          ? "0 10px 24px rgba(180,134,255,0.22)"
           : "inset 0 1px 0 rgba(255,255,255,0.04)",
         transition: "all 0.18s ease",
       }}
@@ -56,13 +58,13 @@ function NewsletterCard() {
     <section
       style={{
         marginBottom: "24px",
-        borderRadius: "24px",
-        border: "1px solid rgba(255,255,255,0.08)",
+        borderRadius: "26px",
+        border: "1px solid rgba(255,255,255,0.12)",
         background:
-          "radial-gradient(circle at top right, rgba(102,242,255,0.12), transparent 30%), radial-gradient(circle at left center, rgba(180,134,255,0.12), transparent 28%), linear-gradient(180deg, rgba(16,18,34,0.94) 0%, rgba(8,10,22,0.98) 100%)",
-        padding: "22px 18px",
+          "radial-gradient(circle at top right, rgba(102,242,255,0.12), transparent 28%), radial-gradient(circle at left center, rgba(180,134,255,0.14), transparent 30%), linear-gradient(180deg, rgba(18,21,40,0.98) 0%, rgba(10,12,26,0.99) 100%)",
+        padding: "24px 18px 18px",
         boxShadow:
-          "0 18px 40px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.03)",
+          "0 18px 40px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.05)",
         overflow: "hidden",
       }}
     >
@@ -71,12 +73,12 @@ function NewsletterCard() {
       <h2
         style={{
           margin: "0 0 10px",
-          fontSize: "clamp(24px, 6vw, 36px)",
-          lineHeight: 1.08,
+          fontSize: "clamp(28px, 7vw, 40px)",
+          lineHeight: 1.04,
           fontWeight: 900,
-          letterSpacing: "-0.03em",
+          letterSpacing: "-0.04em",
           textAlign: "center",
-          color: "#F8FAFF",
+          color: "#FCFDFF",
         }}
       >
         Get ZWAP! updates by email
@@ -85,23 +87,27 @@ function NewsletterCard() {
       <p
         style={{
           margin: "0 auto 18px",
-          maxWidth: "720px",
+          maxWidth: "760px",
           textAlign: "center",
-          fontSize: "14px",
-          lineHeight: 1.75,
-          color: "rgba(235,239,255,0.74)",
+          fontSize: "15px",
+          lineHeight: 1.72,
+          color: "rgba(245,247,255,0.86)",
         }}
       >
-        Subscribe for launch updates, new blog posts, sponsor news, educational
-        content, and future ecosystem announcements from ZWAP!.
+        Subscribe for launch updates, new blog posts, sponsor news,
+        educational content, and future ecosystem announcements from ZWAP!.
       </p>
 
       <div
         style={{
-          borderRadius: "20px",
-          border: "1px solid rgba(255,255,255,0.06)",
-          background: "rgba(255,255,255,0.03)",
-          padding: "14px",
+          maxWidth: "760px",
+          margin: "0 auto",
+          borderRadius: "22px",
+          border: "1px solid rgba(255,255,255,0.10)",
+          background:
+            "linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.03) 100%)",
+          padding: "16px",
+          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
         }}
       >
         <MailingListDatabase />
@@ -143,10 +149,10 @@ export default function NewsBlogPage({
         display: "flex",
         justifyContent: "center",
         background: `
-          radial-gradient(circle at 72% 22%, rgba(204,91,255,0.10), transparent 16%),
-          radial-gradient(circle at 18% 28%, rgba(88,240,255,0.08), transparent 14%),
-          radial-gradient(circle at 55% 62%, rgba(255,176,86,0.05), transparent 12%),
-          linear-gradient(180deg, #030308 0%, #080913 58%, #04050A 100%)
+          radial-gradient(circle at 74% 18%, rgba(204,91,255,0.12), transparent 18%),
+          radial-gradient(circle at 16% 24%, rgba(88,240,255,0.10), transparent 16%),
+          radial-gradient(circle at 52% 62%, rgba(255,176,86,0.05), transparent 12%),
+          linear-gradient(180deg, #020308 0%, #060913 54%, #03050B 100%)
         `,
         color: "#F5F7FF",
         fontFamily:
@@ -170,7 +176,7 @@ export default function NewsBlogPage({
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            marginBottom: "20px",
+            marginBottom: "22px",
           }}
         >
           <button
@@ -179,7 +185,7 @@ export default function NewsBlogPage({
             style={{
               border: "none",
               background: "transparent",
-              color: "rgba(245,247,255,0.76)",
+              color: "rgba(245,247,255,0.82)",
               fontSize: "15px",
               fontWeight: 700,
               cursor: "pointer",
@@ -195,7 +201,7 @@ export default function NewsBlogPage({
               fontWeight: 800,
               letterSpacing: "0.16em",
               textTransform: "uppercase",
-              color: "rgba(245,247,255,0.56)",
+              color: "rgba(245,247,255,0.62)",
             }}
           >
             Blog & Updates
@@ -207,7 +213,7 @@ export default function NewsBlogPage({
             style={{
               border: "none",
               background: "transparent",
-              color: "rgba(245,247,255,0.72)",
+              color: "rgba(245,247,255,0.80)",
               fontSize: "14px",
               fontWeight: 800,
               cursor: "pointer",
@@ -221,7 +227,7 @@ export default function NewsBlogPage({
         <section
           style={{
             textAlign: "center",
-            marginBottom: "24px",
+            marginBottom: "26px",
           }}
         >
           <SectionEyebrow>ZWAP! Editorial Hub</SectionEyebrow>
@@ -233,7 +239,7 @@ export default function NewsBlogPage({
               lineHeight: 1.02,
               fontWeight: 900,
               letterSpacing: "-0.04em",
-              color: "#F9FBFF",
+              color: "#FCFDFF",
             }}
           >
             Blog & Updates
@@ -243,9 +249,9 @@ export default function NewsBlogPage({
             style={{
               margin: "0 auto",
               maxWidth: "760px",
-              fontSize: "15px",
-              lineHeight: 1.7,
-              color: "rgba(235,239,255,0.76)",
+              fontSize: "16px",
+              lineHeight: 1.72,
+              color: "rgba(245,247,255,0.86)",
             }}
           >
             Movement. Rewards. Financial literacy. Product updates. Everything
