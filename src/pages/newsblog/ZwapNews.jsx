@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import usePublicPosts from "../../hooks/usePublicPosts";
 import { shareArticle } from "./shareArticle";
 
 const NEWS_CATEGORIES = [
@@ -10,100 +11,27 @@ const NEWS_CATEGORIES = [
   "Sponsor News",
 ];
 
-const FEATURED_ARTICLE = {
-  id: "featured-news-1",
-  slug: "what-is-zwap",
-  category: "Platform Updates",
-  title: "What is ZWAP!?",
-  excerpt:
-    "ZWAP! is a movement-first reward ecosystem built around progression, consistency, and delayed value.",
-  readTime: "4 min read",
-  date: "Featured",
-  cta: "Read More",
-};
+function toDisplayCategory(category) {
+  const value = String(category || "").toLowerCase();
 
-const NEWS_ARTICLES = [
-  {
-    id: "news-1",
-    slug: "what-is-zwap",
-    category: "Platform Updates",
-    title: "What is ZWAP!?",
-    excerpt:
-      "Get a clear introduction to the ZWAP! ecosystem, including movement-based progression, delayed rewards, and the role of structured value.",
-    readTime: "4 min read",
-    date: "Apr 2026",
-  },
-  {
-    id: "news-2",
-    slug: "how-zpts-become-zwap",
-    category: "Launch Updates",
-    title: "How zPts Become ZWAP",
-    excerpt:
-      "A breakdown of how effort becomes progression and how progression eventually unlocks ZWAP through controlled system logic.",
-    readTime: "5 min read",
-    date: "Apr 2026",
-  },
-  {
-    id: "news-3",
-    slug: "what-makes-zwap-different",
-    category: "Platform Updates",
-    title: "What Makes ZWAP Different",
-    excerpt:
-      "ZWAP! is designed around action, rhythm, and controlled value release instead of passive farming or instant extraction loops.",
-    readTime: "5 min read",
-    date: "Apr 2026",
-  },
-  {
-    id: "news-4",
-    slug: "why-delayed-rewards-build-better-habits",
-    category: "Community",
-    title: "Why Delayed Rewards Build Better Habits",
-    excerpt:
-      "Delayed value gives progression emotional weight, reduces impulsive extraction, and creates stronger behavioral retention over time.",
-    readTime: "4 min read",
-    date: "Apr 2026",
-  },
-  {
-    id: "news-5",
-    slug: "understanding-the-shop-before-swap",
-    category: "Launch Updates",
-    title: "Understanding the Shop Before Swap",
-    excerpt:
-      "The Shop is designed to come first so users build a relationship with utility before exchange is introduced later in the lifecycle.",
-    readTime: "4 min read",
-    date: "Apr 2026",
-  },
-  {
-    id: "news-6",
-    slug: "how-the-garden-system-works",
-    category: "Platform Updates",
-    title: "How the Garden System Works",
-    excerpt:
-      "The Garden adds emotional retention, visual progression, and consistency-based attachment to the ZWAP! experience.",
-    readTime: "4 min read",
-    date: "Apr 2026",
-  },
-  {
-    id: "news-7",
-    slug: "future-sponsor-rewards-in-zwap",
-    category: "Sponsor News",
-    title: "Future Sponsor Rewards in ZWAP!",
-    excerpt:
-      "Sponsor-backed rewards, product drops, and premium unlocks are designed to strengthen utility without disrupting the core economy.",
-    readTime: "5 min read",
-    date: "Apr 2026",
-  },
-  {
-    id: "news-8",
-    slug: "why-news-and-education-both-matter",
-    category: "Partner News",
-    title: "Why News and Education Both Matter",
-    excerpt:
-      "ZWAP! uses both timely updates and evergreen educational content to help users, partners, and reviewers understand the system more clearly.",
-    readTime: "4 min read",
-    date: "Apr 2026",
-  },
-];
+  if (value === "platform-update") return "Platform Updates";
+  if (value === "sponsor-announcement") return "Sponsor News";
+  if (value === "launch-announcement") return "Launch Updates";
+  if (value === "public-explainer") return "Partner News";
+  if (value === "news") return "Platform Updates";
+  if (value === "community") return "Community";
+  if (value === "partner-news") return "Partner News";
+  if (value === "launch-updates") return "Launch Updates";
+  if (value === "platform-updates") return "Platform Updates";
+  if (value === "sponsor-news") return "Sponsor News";
+
+  return category || "Platform Updates";
+}
+
+function matchesCategory(article, activeCategory) {
+  if (activeCategory === "All") return true;
+  return toDisplayCategory(article.category) === activeCategory;
+}
 
 function CategoryPill({ isActive, children, onClick }) {
   return (
@@ -112,19 +40,20 @@ function CategoryPill({ isActive, children, onClick }) {
       onClick={onClick}
       style={{
         border: isActive
-          ? "1px solid rgba(103,242,255,0.26)"
-          : "1px solid rgba(255,255,255,0.08)",
+          ? "1px solid rgba(103,242,255,0.34)"
+          : "1px solid rgba(255,255,255,0.12)",
         cursor: "pointer",
-        padding: "9px 14px",
+        padding: "10px 15px",
         borderRadius: "999px",
         fontSize: "11px",
         fontWeight: 800,
         letterSpacing: "0.05em",
-        color: isActive ? "#67F2FF" : "rgba(245,247,255,0.72)",
+        color: isActive ? "#081019" : "rgba(245,247,255,0.88)",
         background: isActive
-          ? "rgba(103,242,255,0.09)"
-          : "rgba(255,255,255,0.04)",
+          ? "linear-gradient(90deg, #66F2FF 0%, #B486FF 100%)"
+          : "rgba(255,255,255,0.07)",
         whiteSpace: "nowrap",
+        boxShadow: isActive ? "0 10px 24px rgba(180,134,255,0.20)" : "none",
       }}
     >
       {children}
@@ -132,27 +61,29 @@ function CategoryPill({ isActive, children, onClick }) {
   );
 }
 
-function ActionButton({ children, onClick, primary = false }) {
+function ActionButton({ children, onClick, primary = false, disabled = false }) {
   return (
     <button
       type="button"
       onClick={onClick}
+      disabled={disabled}
       style={{
         border: primary
-          ? "1px solid rgba(180,134,255,0.22)"
-          : "1px solid rgba(255,255,255,0.10)",
+          ? "1px solid rgba(103,242,255,0.32)"
+          : "1px solid rgba(255,255,255,0.12)",
         background: primary
-          ? "linear-gradient(180deg, rgba(24,26,48,1) 0%, rgba(11,13,28,1) 100%)"
-          : "rgba(255,255,255,0.04)",
-        color: "#F8FAFF",
+          ? "linear-gradient(180deg, rgba(22,27,54,0.96) 0%, rgba(10,13,30,0.98) 100%)"
+          : "rgba(255,255,255,0.06)",
+        color: disabled ? "rgba(248,250,255,0.42)" : "#F8FAFF",
         borderRadius: "999px",
         padding: primary ? "14px 20px" : "12px 16px",
         fontSize: primary ? "14px" : "13px",
         fontWeight: 800,
-        cursor: "pointer",
+        cursor: disabled ? "not-allowed" : "pointer",
         boxShadow: primary
-          ? "inset 0 1px 0 rgba(255,255,255,0.08), 0 10px 24px rgba(0,0,0,0.28)"
+          ? "inset 0 1px 0 rgba(255,255,255,0.10), 0 10px 24px rgba(0,0,0,0.24)"
           : "none",
+        opacity: disabled ? 0.65 : 1,
       }}
     >
       {children}
@@ -161,16 +92,18 @@ function ActionButton({ children, onClick, primary = false }) {
 }
 
 function FeaturedArticleCard({ article }) {
+  if (!article) return null;
+
   return (
     <article
       style={{
         borderRadius: "28px",
-        border: "1px solid rgba(255,255,255,0.08)",
+        border: "1px solid rgba(255,255,255,0.12)",
         background:
-          "radial-gradient(circle at top right, rgba(102,242,255,0.16), transparent 28%), radial-gradient(circle at left center, rgba(180,134,255,0.14), transparent 26%), linear-gradient(180deg, rgba(18,20,36,0.96) 0%, rgba(8,10,22,0.98) 100%)",
+          "radial-gradient(circle at top right, rgba(102,242,255,0.16), transparent 28%), radial-gradient(circle at left center, rgba(180,134,255,0.16), transparent 30%), linear-gradient(180deg, rgba(20,23,42,0.98) 0%, rgba(10,12,25,0.99) 100%)",
         padding: "22px 18px",
         boxShadow:
-          "0 20px 44px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.04)",
+          "0 18px 40px rgba(0,0,0,0.26), inset 0 1px 0 rgba(255,255,255,0.05)",
       }}
     >
       <div
@@ -178,19 +111,19 @@ function FeaturedArticleCard({ article }) {
           display: "inline-flex",
           alignItems: "center",
           justifyContent: "center",
-          padding: "7px 12px",
+          padding: "8px 13px",
           borderRadius: "999px",
           marginBottom: "14px",
           background: "rgba(103,242,255,0.10)",
-          border: "1px solid rgba(103,242,255,0.18)",
-          color: "#67F2FF",
+          border: "1px solid rgba(103,242,255,0.22)",
+          color: "#7AF4FF",
           fontSize: "11px",
           fontWeight: 900,
           letterSpacing: "0.08em",
           textTransform: "uppercase",
         }}
       >
-        Featured • {article.category}
+        Featured • {toDisplayCategory(article.category)}
       </div>
 
       <h2
@@ -200,7 +133,7 @@ function FeaturedArticleCard({ article }) {
           fontWeight: 900,
           letterSpacing: "-0.04em",
           margin: "0 0 12px",
-          color: "#F9FBFF",
+          color: "#FCFDFF",
         }}
       >
         {article.title}
@@ -209,9 +142,9 @@ function FeaturedArticleCard({ article }) {
       <p
         style={{
           margin: "0 0 16px",
-          fontSize: "15px",
-          lineHeight: 1.75,
-          color: "rgba(235,239,255,0.78)",
+          fontSize: "16px",
+          lineHeight: 1.7,
+          color: "rgba(245,247,255,0.90)",
           maxWidth: "760px",
         }}
       >
@@ -225,16 +158,16 @@ function FeaturedArticleCard({ article }) {
           gap: "10px 14px",
           alignItems: "center",
           marginBottom: "18px",
-          color: "rgba(235,239,255,0.58)",
+          color: "rgba(235,239,255,0.72)",
           fontSize: "12px",
           fontWeight: 800,
           letterSpacing: "0.04em",
           textTransform: "uppercase",
         }}
       >
-        <span>{article.readTime}</span>
+        <span>{article.readTime || "4 min read"}</span>
         <span>•</span>
-        <span>{article.date}</span>
+        <span>{article.date || "Published"}</span>
       </div>
 
       <div
@@ -244,7 +177,9 @@ function FeaturedArticleCard({ article }) {
           gap: "10px",
         }}
       >
-        <ActionButton primary>{article.cta || "Read More"}</ActionButton>
+        <ActionButton primary disabled>
+          Read More
+        </ActionButton>
         <ActionButton onClick={() => shareArticle(article, "news")}>
           Share
         </ActionButton>
@@ -258,12 +193,12 @@ function ArticleCard({ article }) {
     <article
       style={{
         borderRadius: "24px",
-        border: "1px solid rgba(255,255,255,0.08)",
+        border: "1px solid rgba(255,255,255,0.12)",
         background:
-          "radial-gradient(circle at top right, rgba(180,134,255,0.12), transparent 30%), rgba(255,255,255,0.03)",
+          "radial-gradient(circle at top right, rgba(180,134,255,0.10), transparent 32%), linear-gradient(180deg, rgba(18,21,38,0.97) 0%, rgba(10,12,24,0.99) 100%)",
         padding: "18px",
         boxShadow:
-          "0 14px 28px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.03)",
+          "0 12px 26px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.04)",
       }}
     >
       <div
@@ -276,23 +211,23 @@ function ArticleCard({ article }) {
           marginBottom: "12px",
           background: "rgba(103,242,255,0.10)",
           border: "1px solid rgba(103,242,255,0.18)",
-          color: "#67F2FF",
+          color: "#7AF4FF",
           fontSize: "11px",
           fontWeight: 900,
           letterSpacing: "0.08em",
           textTransform: "uppercase",
         }}
       >
-        {article.category}
+        {toDisplayCategory(article.category)}
       </div>
 
       <h3
         style={{
-          fontSize: "22px",
+          fontSize: "24px",
           fontWeight: 900,
-          lineHeight: 1.1,
+          lineHeight: 1.12,
           margin: "0 0 10px",
-          color: "#F8FAFF",
+          color: "#FCFDFF",
         }}
       >
         {article.title}
@@ -301,9 +236,9 @@ function ArticleCard({ article }) {
       <p
         style={{
           margin: "0 0 14px",
-          fontSize: "14px",
-          lineHeight: 1.7,
-          color: "rgba(235,239,255,0.74)",
+          fontSize: "15px",
+          lineHeight: 1.72,
+          color: "rgba(245,247,255,0.88)",
         }}
       >
         {article.excerpt}
@@ -316,14 +251,14 @@ function ArticleCard({ article }) {
           gap: "8px 12px",
           alignItems: "center",
           marginBottom: "16px",
-          color: "rgba(235,239,255,0.55)",
+          color: "rgba(235,239,255,0.70)",
           fontSize: "11px",
           fontWeight: 800,
           letterSpacing: "0.05em",
           textTransform: "uppercase",
         }}
       >
-        <span>{article.readTime}</span>
+        <span>{article.readTime || "4 min read"}</span>
         {article.date ? (
           <>
             <span>•</span>
@@ -339,7 +274,7 @@ function ArticleCard({ article }) {
           gap: "10px",
         }}
       >
-        <ActionButton>Read More</ActionButton>
+        <ActionButton disabled>Read More</ActionButton>
         <ActionButton onClick={() => shareArticle(article, "news")}>
           Share
         </ActionButton>
@@ -348,36 +283,144 @@ function ArticleCard({ article }) {
   );
 }
 
+function EmptyState() {
+  return (
+    <section
+      style={{
+        borderRadius: "24px",
+        border: "1px solid rgba(255,255,255,0.10)",
+        background:
+          "linear-gradient(180deg, rgba(16,18,32,0.96) 0%, rgba(9,11,22,0.98) 100%)",
+        padding: "24px 18px",
+        textAlign: "center",
+      }}
+    >
+      <h3
+        style={{
+          margin: "0 0 10px",
+          fontSize: "22px",
+          lineHeight: 1.1,
+          fontWeight: 900,
+          color: "#F8FAFF",
+        }}
+      >
+        No published news yet
+      </h3>
+
+      <p
+        style={{
+          margin: 0,
+          fontSize: "14px",
+          lineHeight: 1.7,
+          color: "rgba(235,239,255,0.76)",
+        }}
+      >
+        Published news posts from the website admin will appear here.
+      </p>
+    </section>
+  );
+}
+
 export default function ZwapNews() {
   const [activeCategory, setActiveCategory] = useState("All");
+  const { newsPosts, featuredPost, isLoading, loadError } = usePublicPosts();
 
   const filteredArticles = useMemo(() => {
-    if (activeCategory === "All") return NEWS_ARTICLES;
+    return newsPosts.filter((article) => matchesCategory(article, activeCategory));
+  }, [newsPosts, activeCategory]);
 
-    return NEWS_ARTICLES.filter(
-      (article) =>
-        article.category.toLowerCase() === activeCategory.toLowerCase()
-    );
-  }, [activeCategory]);
+  const visibleFeatured = useMemo(() => {
+    if (featuredPost && matchesCategory(featuredPost, activeCategory)) {
+      return featuredPost;
+    }
+
+    return filteredArticles[0] || null;
+  }, [featuredPost, filteredArticles, activeCategory]);
+
+  const gridArticles = useMemo(() => {
+    if (!visibleFeatured) return filteredArticles;
+
+    return filteredArticles.filter((article) => article.id !== visibleFeatured.id);
+  }, [filteredArticles, visibleFeatured]);
 
   const isDesktop =
     typeof window !== "undefined" ? window.innerWidth >= 900 : false;
 
+  if (isLoading) {
+    return (
+      <section
+        style={{
+          borderRadius: "24px",
+          border: "1px solid rgba(255,255,255,0.10)",
+          background:
+            "linear-gradient(180deg, rgba(16,18,32,0.96) 0%, rgba(9,11,22,0.98) 100%)",
+          padding: "24px 18px",
+          textAlign: "center",
+          color: "rgba(245,247,255,0.84)",
+          fontSize: "15px",
+          fontWeight: 700,
+        }}
+      >
+        Loading news...
+      </section>
+    );
+  }
+
+  if (loadError) {
+    return (
+      <section
+        style={{
+          borderRadius: "24px",
+          border: "1px solid rgba(255,120,120,0.20)",
+          background:
+            "linear-gradient(180deg, rgba(32,16,20,0.96) 0%, rgba(22,10,12,0.98) 100%)",
+          padding: "24px 18px",
+          textAlign: "center",
+        }}
+      >
+        <h3
+          style={{
+            margin: "0 0 10px",
+            fontSize: "22px",
+            lineHeight: 1.1,
+            fontWeight: 900,
+            color: "#F8FAFF",
+          }}
+        >
+          News could not load
+        </h3>
+
+        <p
+          style={{
+            margin: 0,
+            fontSize: "14px",
+            lineHeight: 1.7,
+            color: "rgba(245,247,255,0.78)",
+          }}
+        >
+          {loadError}
+        </p>
+      </section>
+    );
+  }
+
   return (
     <div style={{ width: "100%" }}>
-      <section style={{ marginBottom: "20px" }}>
-        <FeaturedArticleCard article={FEATURED_ARTICLE} />
-      </section>
+      {visibleFeatured ? (
+        <section style={{ marginBottom: "20px" }}>
+          <FeaturedArticleCard article={visibleFeatured} />
+        </section>
+      ) : null}
 
       <section
         style={{
           marginBottom: "18px",
           borderRadius: "24px",
-          border: "1px solid rgba(255,255,255,0.08)",
+          border: "1px solid rgba(255,255,255,0.10)",
           background:
-            "linear-gradient(180deg, rgba(14,16,30,0.92) 0%, rgba(8,10,22,0.96) 100%)",
+            "linear-gradient(180deg, rgba(16,18,32,0.96) 0%, rgba(9,11,22,0.98) 100%)",
           boxShadow:
-            "0 18px 40px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.03)",
+            "0 16px 34px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.04)",
           padding: "20px 18px",
         }}
       >
@@ -388,7 +431,7 @@ export default function ZwapNews() {
             lineHeight: 1.08,
             fontWeight: 900,
             letterSpacing: "-0.03em",
-            color: "#F8FAFF",
+            color: "#FCFDFF",
             textAlign: "center",
           }}
         >
@@ -399,9 +442,9 @@ export default function ZwapNews() {
           style={{
             margin: "0 auto",
             maxWidth: "760px",
-            fontSize: "14px",
-            lineHeight: 1.75,
-            color: "rgba(235,239,255,0.74)",
+            fontSize: "15px",
+            lineHeight: 1.72,
+            color: "rgba(245,247,255,0.84)",
             textAlign: "center",
           }}
         >
@@ -431,19 +474,23 @@ export default function ZwapNews() {
         ))}
       </section>
 
-      <section
-        style={{
-          display: "grid",
-          gridTemplateColumns: isDesktop
-            ? "repeat(2, minmax(0, 1fr))"
-            : "1fr",
-          gap: "16px",
-        }}
-      >
-        {filteredArticles.map((article) => (
-          <ArticleCard key={article.id} article={article} />
-        ))}
-      </section>
+      {filteredArticles.length === 0 ? (
+        <EmptyState />
+      ) : (
+        <section
+          style={{
+            display: "grid",
+            gridTemplateColumns: isDesktop
+              ? "repeat(2, minmax(0, 1fr))"
+              : "1fr",
+            gap: "16px",
+          }}
+        >
+          {gridArticles.map((article) => (
+            <ArticleCard key={article.id} article={article} />
+          ))}
+        </section>
+      )}
     </div>
   );
 }
