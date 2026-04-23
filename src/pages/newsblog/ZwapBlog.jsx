@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import usePublicPosts from "../../hooks/usePublicPosts";
 import { shareArticle } from "./shareArticle";
 
 const BLOG_CATEGORIES = [
@@ -10,100 +11,27 @@ const BLOG_CATEGORIES = [
   "Platform Education",
 ];
 
-const FEATURED_ARTICLE = {
-  id: "featured-blog-1",
-  slug: "why-delayed-rewards-build-better-habits",
-  category: "Rewards & Progression",
-  title: "Why Delayed Rewards Build Better Habits",
-  excerpt:
-    "ZWAP! uses delayed value to strengthen consistency, reduce impulsive extraction, and make progress feel earned over time.",
-  readTime: "5 min read",
-  date: "Featured",
-  cta: "Read More",
-};
+function toDisplayCategory(category) {
+  const value = String(category || "").toLowerCase();
 
-const BLOG_ARTICLES = [
-  {
-    id: "blog-1",
-    slug: "why-delayed-rewards-build-better-habits",
-    category: "Rewards & Progression",
-    title: "Why Delayed Rewards Build Better Habits",
-    excerpt:
-      "Instant gratification creates churn. Delayed value creates anticipation, commitment, and a stronger relationship to progress.",
-    readTime: "5 min read",
-    date: "Apr 2026",
-  },
-  {
-    id: "blog-2",
-    slug: "how-zpts-become-zwap",
-    category: "Rewards & Progression",
-    title: "How zPts Become ZWAP",
-    excerpt:
-      "A beginner-friendly explanation of how effort becomes progression and how progression eventually unlocks controlled digital value.",
-    readTime: "4 min read",
-    date: "Apr 2026",
-  },
-  {
-    id: "blog-3",
-    slug: "how-move-works",
-    category: "Wellness & Movement",
-    title: "How MOVE Works",
-    excerpt:
-      "Movement is the primary system input in ZWAP!. Learn how step-based activity supports progression, unlocks, and stronger retention.",
-    readTime: "4 min read",
-    date: "Apr 2026",
-  },
-  {
-    id: "blog-4",
-    slug: "why-financial-literacy-matters",
-    category: "Financial Literacy",
-    title: "Why Financial Literacy Matters",
-    excerpt:
-      "ZWAP! is designed to make value, utility, and progression easier to understand for users who may be new to digital finance.",
-    readTime: "6 min read",
-    date: "Apr 2026",
-  },
-  {
-    id: "blog-5",
-    slug: "what-makes-zwap-different",
-    category: "Platform Education",
-    title: "What Makes ZWAP Different",
-    excerpt:
-      "ZWAP! is not built around passive farming. It is a behavior-based system that rewards action, consistency, and structured engagement.",
-    readTime: "5 min read",
-    date: "Apr 2026",
-  },
-  {
-    id: "blog-6",
-    slug: "understanding-wallets-tokens-and-utility",
-    category: "Crypto Basics",
-    title: "Understanding Wallets, Tokens, and Utility",
-    excerpt:
-      "A simple introduction to wallets, token utility, and why ZWAP! is structured to abstract complexity instead of amplifying confusion.",
-    readTime: "5 min read",
-    date: "Apr 2026",
-  },
-  {
-    id: "blog-7",
-    slug: "understanding-the-shop-before-swap",
-    category: "Rewards & Progression",
-    title: "Understanding the Shop Before Swap",
-    excerpt:
-      "The Shop teaches utility first. That sequencing matters because it builds a healthier relationship with value before exchange is introduced.",
-    readTime: "4 min read",
-    date: "Apr 2026",
-  },
-  {
-    id: "blog-8",
-    slug: "how-the-garden-system-supports-retention",
-    category: "Wellness & Movement",
-    title: "How the Garden System Supports Retention",
-    excerpt:
-      "The Garden creates emotional attachment to consistency by turning daily progress into something visible, persistent, and easier to care about.",
-    readTime: "4 min read",
-    date: "Apr 2026",
-  },
-];
+  if (value === "blog") return "Platform Education";
+  if (value === "public-explainer") return "Platform Education";
+  if (value === "platform-update") return "Rewards & Progression";
+  if (value === "launch-announcement") return "Rewards & Progression";
+  if (value === "sponsor-announcement") return "Financial Literacy";
+  if (value === "financial-literacy") return "Financial Literacy";
+  if (value === "wellness-movement") return "Wellness & Movement";
+  if (value === "crypto-basics") return "Crypto Basics";
+  if (value === "rewards-progression") return "Rewards & Progression";
+  if (value === "platform-education") return "Platform Education";
+
+  return category || "Platform Education";
+}
+
+function matchesCategory(article, activeCategory) {
+  if (activeCategory === "All") return true;
+  return toDisplayCategory(article.category) === activeCategory;
+}
 
 function CategoryPill({ isActive, children, onClick }) {
   return (
@@ -112,19 +40,20 @@ function CategoryPill({ isActive, children, onClick }) {
       onClick={onClick}
       style={{
         border: isActive
-          ? "1px solid rgba(103,242,255,0.26)"
-          : "1px solid rgba(255,255,255,0.08)",
+          ? "1px solid rgba(103,242,255,0.34)"
+          : "1px solid rgba(255,255,255,0.12)",
         cursor: "pointer",
-        padding: "9px 14px",
+        padding: "10px 15px",
         borderRadius: "999px",
         fontSize: "11px",
         fontWeight: 800,
         letterSpacing: "0.05em",
-        color: isActive ? "#67F2FF" : "rgba(245,247,255,0.72)",
+        color: isActive ? "#081019" : "rgba(245,247,255,0.88)",
         background: isActive
-          ? "rgba(103,242,255,0.09)"
-          : "rgba(255,255,255,0.04)",
+          ? "linear-gradient(90deg, #66F2FF 0%, #B486FF 100%)"
+          : "rgba(255,255,255,0.07)",
         whiteSpace: "nowrap",
+        boxShadow: isActive ? "0 10px 24px rgba(180,134,255,0.20)" : "none",
       }}
     >
       {children}
@@ -132,27 +61,29 @@ function CategoryPill({ isActive, children, onClick }) {
   );
 }
 
-function ActionButton({ children, onClick, primary = false }) {
+function ActionButton({ children, onClick, primary = false, disabled = false }) {
   return (
     <button
       type="button"
       onClick={onClick}
+      disabled={disabled}
       style={{
         border: primary
-          ? "1px solid rgba(180,134,255,0.22)"
-          : "1px solid rgba(255,255,255,0.10)",
+          ? "1px solid rgba(103,242,255,0.32)"
+          : "1px solid rgba(255,255,255,0.12)",
         background: primary
-          ? "linear-gradient(180deg, rgba(24,26,48,1) 0%, rgba(11,13,28,1) 100%)"
-          : "rgba(255,255,255,0.04)",
-        color: "#F8FAFF",
+          ? "linear-gradient(180deg, rgba(22,27,54,0.96) 0%, rgba(10,13,30,0.98) 100%)"
+          : "rgba(255,255,255,0.06)",
+        color: disabled ? "rgba(248,250,255,0.42)" : "#F8FAFF",
         borderRadius: "999px",
         padding: primary ? "14px 20px" : "12px 16px",
         fontSize: primary ? "14px" : "13px",
         fontWeight: 800,
-        cursor: "pointer",
+        cursor: disabled ? "not-allowed" : "pointer",
         boxShadow: primary
-          ? "inset 0 1px 0 rgba(255,255,255,0.08), 0 10px 24px rgba(0,0,0,0.28)"
+          ? "inset 0 1px 0 rgba(255,255,255,0.10), 0 10px 24px rgba(0,0,0,0.24)"
           : "none",
+        opacity: disabled ? 0.65 : 1,
       }}
     >
       {children}
@@ -161,16 +92,18 @@ function ActionButton({ children, onClick, primary = false }) {
 }
 
 function FeaturedArticleCard({ article }) {
+  if (!article) return null;
+
   return (
     <article
       style={{
         borderRadius: "28px",
-        border: "1px solid rgba(255,255,255,0.08)",
+        border: "1px solid rgba(255,255,255,0.12)",
         background:
-          "radial-gradient(circle at top right, rgba(102,242,255,0.16), transparent 28%), radial-gradient(circle at left center, rgba(180,134,255,0.14), transparent 26%), linear-gradient(180deg, rgba(18,20,36,0.96) 0%, rgba(8,10,22,0.98) 100%)",
+          "radial-gradient(circle at top right, rgba(102,242,255,0.16), transparent 28%), radial-gradient(circle at left center, rgba(180,134,255,0.16), transparent 30%), linear-gradient(180deg, rgba(20,23,42,0.98) 0%, rgba(10,12,25,0.99) 100%)",
         padding: "22px 18px",
         boxShadow:
-          "0 20px 44px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.04)",
+          "0 18px 40px rgba(0,0,0,0.26), inset 0 1px 0 rgba(255,255,255,0.05)",
       }}
     >
       <div
@@ -178,19 +111,19 @@ function FeaturedArticleCard({ article }) {
           display: "inline-flex",
           alignItems: "center",
           justifyContent: "center",
-          padding: "7px 12px",
+          padding: "8px 13px",
           borderRadius: "999px",
           marginBottom: "14px",
           background: "rgba(103,242,255,0.10)",
-          border: "1px solid rgba(103,242,255,0.18)",
-          color: "#67F2FF",
+          border: "1px solid rgba(103,242,255,0.22)",
+          color: "#7AF4FF",
           fontSize: "11px",
           fontWeight: 900,
           letterSpacing: "0.08em",
           textTransform: "uppercase",
         }}
       >
-        Featured • {article.category}
+        Featured • {toDisplayCategory(article.category)}
       </div>
 
       <h2
@@ -200,7 +133,7 @@ function FeaturedArticleCard({ article }) {
           fontWeight: 900,
           letterSpacing: "-0.04em",
           margin: "0 0 12px",
-          color: "#F9FBFF",
+          color: "#FCFDFF",
         }}
       >
         {article.title}
@@ -209,9 +142,9 @@ function FeaturedArticleCard({ article }) {
       <p
         style={{
           margin: "0 0 16px",
-          fontSize: "15px",
-          lineHeight: 1.75,
-          color: "rgba(235,239,255,0.78)",
+          fontSize: "16px",
+          lineHeight: 1.7,
+          color: "rgba(245,247,255,0.90)",
           maxWidth: "760px",
         }}
       >
@@ -225,16 +158,16 @@ function FeaturedArticleCard({ article }) {
           gap: "10px 14px",
           alignItems: "center",
           marginBottom: "18px",
-          color: "rgba(235,239,255,0.58)",
+          color: "rgba(235,239,255,0.72)",
           fontSize: "12px",
           fontWeight: 800,
           letterSpacing: "0.04em",
           textTransform: "uppercase",
         }}
       >
-        <span>{article.readTime}</span>
+        <span>{article.readTime || "4 min read"}</span>
         <span>•</span>
-        <span>{article.date}</span>
+        <span>{article.date || "Published"}</span>
       </div>
 
       <div
@@ -244,7 +177,9 @@ function FeaturedArticleCard({ article }) {
           gap: "10px",
         }}
       >
-        <ActionButton primary>{article.cta || "Read More"}</ActionButton>
+        <ActionButton primary disabled>
+          Read More
+        </ActionButton>
         <ActionButton onClick={() => shareArticle(article, "blog")}>
           Share
         </ActionButton>
@@ -258,12 +193,12 @@ function ArticleCard({ article }) {
     <article
       style={{
         borderRadius: "24px",
-        border: "1px solid rgba(255,255,255,0.08)",
+        border: "1px solid rgba(255,255,255,0.12)",
         background:
-          "radial-gradient(circle at top right, rgba(180,134,255,0.12), transparent 30%), rgba(255,255,255,0.03)",
+          "radial-gradient(circle at top right, rgba(180,134,255,0.10), transparent 32%), linear-gradient(180deg, rgba(18,21,38,0.97) 0%, rgba(10,12,24,0.99) 100%)",
         padding: "18px",
         boxShadow:
-          "0 14px 28px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.03)",
+          "0 12px 26px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.04)",
       }}
     >
       <div
@@ -276,23 +211,23 @@ function ArticleCard({ article }) {
           marginBottom: "12px",
           background: "rgba(103,242,255,0.10)",
           border: "1px solid rgba(103,242,255,0.18)",
-          color: "#67F2FF",
+          color: "#7AF4FF",
           fontSize: "11px",
           fontWeight: 900,
           letterSpacing: "0.08em",
           textTransform: "uppercase",
         }}
       >
-        {article.category}
+        {toDisplayCategory(article.category)}
       </div>
 
       <h3
         style={{
-          fontSize: "22px",
+          fontSize: "24px",
           fontWeight: 900,
-          lineHeight: 1.1,
+          lineHeight: 1.12,
           margin: "0 0 10px",
-          color: "#F8FAFF",
+          color: "#FCFDFF",
         }}
       >
         {article.title}
@@ -301,9 +236,9 @@ function ArticleCard({ article }) {
       <p
         style={{
           margin: "0 0 14px",
-          fontSize: "14px",
-          lineHeight: 1.7,
-          color: "rgba(235,239,255,0.74)",
+          fontSize: "15px",
+          lineHeight: 1.72,
+          color: "rgba(245,247,255,0.88)",
         }}
       >
         {article.excerpt}
@@ -316,14 +251,14 @@ function ArticleCard({ article }) {
           gap: "8px 12px",
           alignItems: "center",
           marginBottom: "16px",
-          color: "rgba(235,239,255,0.55)",
+          color: "rgba(235,239,255,0.70)",
           fontSize: "11px",
           fontWeight: 800,
           letterSpacing: "0.05em",
           textTransform: "uppercase",
         }}
       >
-        <span>{article.readTime}</span>
+        <span>{article.readTime || "4 min read"}</span>
         {article.date ? (
           <>
             <span>•</span>
@@ -339,7 +274,7 @@ function ArticleCard({ article }) {
           gap: "10px",
         }}
       >
-        <ActionButton>Read More</ActionButton>
+        <ActionButton disabled>Read More</ActionButton>
         <ActionButton onClick={() => shareArticle(article, "blog")}>
           Share
         </ActionButton>
@@ -348,36 +283,147 @@ function ArticleCard({ article }) {
   );
 }
 
+function EmptyState() {
+  return (
+    <section
+      style={{
+        borderRadius: "24px",
+        border: "1px solid rgba(255,255,255,0.10)",
+        background:
+          "linear-gradient(180deg, rgba(16,18,32,0.96) 0%, rgba(9,11,22,0.98) 100%)",
+        padding: "24px 18px",
+        textAlign: "center",
+      }}
+    >
+      <h3
+        style={{
+          margin: "0 0 10px",
+          fontSize: "22px",
+          lineHeight: 1.1,
+          fontWeight: 900,
+          color: "#F8FAFF",
+        }}
+      >
+        No published blog posts yet
+      </h3>
+
+      <p
+        style={{
+          margin: 0,
+          fontSize: "14px",
+          lineHeight: 1.7,
+          color: "rgba(235,239,255,0.76)",
+        }}
+      >
+        Published blog posts from the website admin will appear here.
+      </p>
+    </section>
+  );
+}
+
 export default function ZwapBlog() {
   const [activeCategory, setActiveCategory] = useState("All");
+  const { blogPosts, featuredPost, isLoading, loadError } = usePublicPosts();
 
   const filteredArticles = useMemo(() => {
-    if (activeCategory === "All") return BLOG_ARTICLES;
+    return blogPosts.filter((article) => matchesCategory(article, activeCategory));
+  }, [blogPosts, activeCategory]);
 
-    return BLOG_ARTICLES.filter(
-      (article) =>
-        article.category.toLowerCase() === activeCategory.toLowerCase()
-    );
-  }, [activeCategory]);
+  const visibleFeatured = useMemo(() => {
+    const featuredIsBlog =
+      featuredPost && String(featuredPost.category || "").toLowerCase() === "blog";
+
+    if (featuredIsBlog && matchesCategory(featuredPost, activeCategory)) {
+      return featuredPost;
+    }
+
+    return filteredArticles[0] || null;
+  }, [featuredPost, filteredArticles, activeCategory]);
+
+  const gridArticles = useMemo(() => {
+    if (!visibleFeatured) return filteredArticles;
+
+    return filteredArticles.filter((article) => article.id !== visibleFeatured.id);
+  }, [filteredArticles, visibleFeatured]);
 
   const isDesktop =
     typeof window !== "undefined" ? window.innerWidth >= 900 : false;
 
+  if (isLoading) {
+    return (
+      <section
+        style={{
+          borderRadius: "24px",
+          border: "1px solid rgba(255,255,255,0.10)",
+          background:
+            "linear-gradient(180deg, rgba(16,18,32,0.96) 0%, rgba(9,11,22,0.98) 100%)",
+          padding: "24px 18px",
+          textAlign: "center",
+          color: "rgba(245,247,255,0.84)",
+          fontSize: "15px",
+          fontWeight: 700,
+        }}
+      >
+        Loading blog...
+      </section>
+    );
+  }
+
+  if (loadError) {
+    return (
+      <section
+        style={{
+          borderRadius: "24px",
+          border: "1px solid rgba(255,120,120,0.20)",
+          background:
+            "linear-gradient(180deg, rgba(32,16,20,0.96) 0%, rgba(22,10,12,0.98) 100%)",
+          padding: "24px 18px",
+          textAlign: "center",
+        }}
+      >
+        <h3
+          style={{
+            margin: "0 0 10px",
+            fontSize: "22px",
+            lineHeight: 1.1,
+            fontWeight: 900,
+            color: "#F8FAFF",
+          }}
+        >
+          Blog could not load
+        </h3>
+
+        <p
+          style={{
+            margin: 0,
+            fontSize: "14px",
+            lineHeight: 1.7,
+            color: "rgba(245,247,255,0.78)",
+          }}
+        >
+          {loadError}
+        </p>
+      </section>
+    );
+  }
+
   return (
     <div style={{ width: "100%" }}>
-      <section style={{ marginBottom: "20px" }}>
-        <FeaturedArticleCard article={FEATURED_ARTICLE} />
-      </section>
+      {visibleFeatured ? (
+        <section style={{ marginBottom: "20px" }}>
+          <FeaturedArticleCard article={visibleFeatured} />
+        </section>
+      ) : null}
 
       <section
         style={{
           marginBottom: "18px",
           borderRadius: "24px",
-          border: "1px solid rgba(255,255,255,0.08)",
+          border: "1px solid rgba(255,255,255,0.10)",
           background:
-            "linear-gradient(180deg, rgba(14,16,30,0.92) 0%, rgba(8,10,22,0.96) 100%)",
+            "linear-gradient(180deg, rgba(16,18,32,0.96) 0%, rgba(9,11,22,0.98) 100%)",
           boxShadow:
-            "0 18px 40px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.03)",
+            "0 16px 34px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.04)",
           padding: "20px 18px",
         }}
       >
@@ -388,7 +434,7 @@ export default function ZwapBlog() {
             lineHeight: 1.08,
             fontWeight: 900,
             letterSpacing: "-0.03em",
-            color: "#F8FAFF",
+            color: "#FCFDFF",
             textAlign: "center",
           }}
         >
@@ -399,9 +445,9 @@ export default function ZwapBlog() {
           style={{
             margin: "0 auto",
             maxWidth: "760px",
-            fontSize: "14px",
-            lineHeight: 1.75,
-            color: "rgba(235,239,255,0.74)",
+            fontSize: "15px",
+            lineHeight: 1.72,
+            color: "rgba(245,247,255,0.84)",
             textAlign: "center",
           }}
         >
@@ -431,19 +477,23 @@ export default function ZwapBlog() {
         ))}
       </section>
 
-      <section
-        style={{
-          display: "grid",
-          gridTemplateColumns: isDesktop
-            ? "repeat(2, minmax(0, 1fr))"
-            : "1fr",
-          gap: "16px",
-        }}
-      >
-        {filteredArticles.map((article) => (
-          <ArticleCard key={article.id} article={article} />
-        ))}
-      </section>
+      {filteredArticles.length === 0 ? (
+        <EmptyState />
+      ) : (
+        <section
+          style={{
+            display: "grid",
+            gridTemplateColumns: isDesktop
+              ? "repeat(2, minmax(0, 1fr))"
+              : "1fr",
+            gap: "16px",
+          }}
+        >
+          {gridArticles.map((article) => (
+            <ArticleCard key={article.id} article={article} />
+          ))}
+        </section>
+      )}
     </div>
   );
 }
