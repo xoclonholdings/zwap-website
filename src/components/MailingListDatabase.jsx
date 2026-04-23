@@ -60,8 +60,7 @@ export default function MailingListDatabase() {
         referred_by: referredBy || existing.referred_by || null,
         referral_count: existing.referral_count || 0,
         pending_rewards: {
-          referral_zwap:
-            existing?.pending_rewards?.referral_zwap || 0,
+          referral_zwap: existing?.pending_rewards?.referral_zwap || 0,
         },
         created_at: existing.created_at || new Date().toISOString(),
         updated_at: new Date().toISOString(),
@@ -91,7 +90,7 @@ export default function MailingListDatabase() {
       <div
         style={{
           textAlign: "center",
-          padding: "10px 6px",
+          padding: "4px 2px",
         }}
       >
         <div
@@ -108,8 +107,8 @@ export default function MailingListDatabase() {
         <div
           style={{
             fontSize: "14px",
-            color: "rgba(245,247,255,0.78)",
             lineHeight: 1.6,
+            color: "rgba(245,247,255,0.78)",
           }}
         >
           Check your email for your referral link and updates.
@@ -119,12 +118,20 @@ export default function MailingListDatabase() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      style={{
+        width: "100%",
+        boxSizing: "border-box",
+      }}
+    >
       <div
         style={{
           display: "flex",
-          gap: "10px",
           flexDirection: "column",
+          gap: "10px",
+          width: "100%",
+          boxSizing: "border-box",
         }}
       >
         <input
@@ -135,13 +142,15 @@ export default function MailingListDatabase() {
           required
           style={{
             width: "100%",
+            boxSizing: "border-box",
             padding: "14px 16px",
-            borderRadius: "14px",
-            border: "1px solid rgba(255,255,255,0.12)",
+            borderRadius: "16px",
+            border: "1px solid rgba(255,255,255,0.14)",
             background: "rgba(255,255,255,0.06)",
             color: "#F8FAFF",
             fontSize: "14px",
             outline: "none",
+            boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
           }}
         />
 
@@ -150,17 +159,17 @@ export default function MailingListDatabase() {
           disabled={loading}
           style={{
             width: "100%",
+            boxSizing: "border-box",
             borderRadius: "999px",
-            padding: "14px 18px",
+            padding: "15px 18px",
             border: "1px solid rgba(103,242,255,0.30)",
-            background:
-              "linear-gradient(90deg, #66F2FF 0%, #B486FF 100%)",
+            background: "linear-gradient(90deg, #66F2FF 0%, #B486FF 100%)",
             color: "#05060B",
             fontSize: "14px",
             fontWeight: 900,
             cursor: "pointer",
             opacity: loading ? 0.6 : 1,
-            boxShadow: "0 10px 24px rgba(180,134,255,0.22)",
+            boxShadow: "0 10px 24px rgba(180,134,255,0.20)",
           }}
         >
           {loading ? "Submitting..." : "Join the Newsletter"}
