@@ -9,12 +9,12 @@ function SectionEyebrow({ children }) {
     <div
       style={{
         textAlign: "center",
-        fontSize: "12px",
+        fontSize: "11px",
         fontWeight: 900,
         letterSpacing: "0.16em",
         textTransform: "uppercase",
-        color: "rgba(245,247,255,0.66)",
-        marginBottom: "12px",
+        color: "rgba(245,247,255,0.64)",
+        marginBottom: "10px",
       }}
     >
       {children}
@@ -32,7 +32,7 @@ function HeaderTabButton({ isActive, children, onClick }) {
           ? "1px solid rgba(103,242,255,0.34)"
           : "1px solid rgba(255,255,255,0.10)",
         cursor: "pointer",
-        padding: "12px 20px",
+        padding: "12px 22px",
         borderRadius: "999px",
         fontSize: "12px",
         fontWeight: 900,
@@ -58,13 +58,13 @@ function NewsletterCard() {
     <section
       style={{
         marginBottom: "24px",
-        borderRadius: "26px",
+        borderRadius: "24px",
         border: "1px solid rgba(255,255,255,0.12)",
         background:
-          "radial-gradient(circle at top right, rgba(102,242,255,0.12), transparent 28%), radial-gradient(circle at left center, rgba(180,134,255,0.14), transparent 30%), linear-gradient(180deg, rgba(18,21,40,0.98) 0%, rgba(10,12,26,0.99) 100%)",
-        padding: "24px 18px 18px",
+          "radial-gradient(circle at top right, rgba(102,242,255,0.10), transparent 26%), radial-gradient(circle at left center, rgba(180,134,255,0.12), transparent 28%), linear-gradient(180deg, rgba(18,21,40,0.98) 0%, rgba(10,12,26,0.99) 100%)",
+        padding: "20px 16px 16px",
         boxShadow:
-          "0 18px 40px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.05)",
+          "0 18px 40px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.05)",
         overflow: "hidden",
       }}
     >
@@ -73,8 +73,8 @@ function NewsletterCard() {
       <h2
         style={{
           margin: "0 0 10px",
-          fontSize: "clamp(28px, 7vw, 40px)",
-          lineHeight: 1.04,
+          fontSize: "clamp(24px, 6.5vw, 34px)",
+          lineHeight: 1.02,
           fontWeight: 900,
           letterSpacing: "-0.04em",
           textAlign: "center",
@@ -86,12 +86,12 @@ function NewsletterCard() {
 
       <p
         style={{
-          margin: "0 auto 18px",
-          maxWidth: "760px",
+          margin: "0 auto 16px",
+          maxWidth: "680px",
           textAlign: "center",
-          fontSize: "15px",
-          lineHeight: 1.72,
-          color: "rgba(245,247,255,0.86)",
+          fontSize: "14px",
+          lineHeight: 1.68,
+          color: "rgba(245,247,255,0.84)",
         }}
       >
         Subscribe for launch updates, new blog posts, sponsor news,
@@ -100,13 +100,13 @@ function NewsletterCard() {
 
       <div
         style={{
-          maxWidth: "760px",
+          maxWidth: "640px",
           margin: "0 auto",
-          borderRadius: "22px",
+          borderRadius: "20px",
           border: "1px solid rgba(255,255,255,0.10)",
           background:
             "linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.03) 100%)",
-          padding: "16px",
+          padding: "14px",
           boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
         }}
       >
@@ -165,7 +165,7 @@ export default function NewsBlogPage({
           maxWidth: "1200px",
           minHeight: "100dvh",
           padding:
-            "calc(env(safe-area-inset-top, 0px) + 16px) 16px calc(env(safe-area-inset-bottom, 0px) + 32px)",
+            "calc(env(safe-area-inset-top, 0px) + 34px) 16px calc(env(safe-area-inset-bottom, 0px) + 32px)",
           boxSizing: "border-box",
           display: "flex",
           flexDirection: "column",
@@ -176,7 +176,7 @@ export default function NewsBlogPage({
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            marginBottom: "22px",
+            marginBottom: "18px",
           }}
         >
           <button
@@ -197,11 +197,11 @@ export default function NewsBlogPage({
 
           <div
             style={{
-              fontSize: "13px",
+              fontSize: "12px",
               fontWeight: 800,
               letterSpacing: "0.16em",
               textTransform: "uppercase",
-              color: "rgba(245,247,255,0.62)",
+              color: "rgba(245,247,255,0.60)",
             }}
           >
             Blog & Updates
@@ -227,15 +227,15 @@ export default function NewsBlogPage({
         <section
           style={{
             textAlign: "center",
-            marginBottom: "26px",
+            marginBottom: "22px",
           }}
         >
           <SectionEyebrow>ZWAP! Editorial Hub</SectionEyebrow>
 
           <h1
             style={{
-              margin: "0 0 12px",
-              fontSize: "clamp(34px, 9vw, 60px)",
+              margin: "0 0 10px",
+              fontSize: "clamp(30px, 8vw, 56px)",
               lineHeight: 1.02,
               fontWeight: 900,
               letterSpacing: "-0.04em",
@@ -249,9 +249,9 @@ export default function NewsBlogPage({
             style={{
               margin: "0 auto",
               maxWidth: "760px",
-              fontSize: "16px",
-              lineHeight: 1.72,
-              color: "rgba(245,247,255,0.86)",
+              fontSize: "15px",
+              lineHeight: 1.62,
+              color: "rgba(245,247,255,0.84)",
             }}
           >
             Movement. Rewards. Financial literacy. Product updates. Everything
@@ -265,7 +265,7 @@ export default function NewsBlogPage({
             justifyContent: "center",
             gap: "10px",
             flexWrap: "wrap",
-            marginBottom: "22px",
+            marginBottom: "20px",
           }}
         >
           <HeaderTabButton
@@ -283,7 +283,7 @@ export default function NewsBlogPage({
           </HeaderTabButton>
         </section>
 
-        <section style={{ marginBottom: "24px" }}>
+        <section style={{ marginBottom: "22px" }}>
           {activeTab === "news" ? <ZwapNews /> : <ZwapBlog />}
         </section>
 
