@@ -65,77 +65,76 @@ const INITIAL_CONTENT = {
   ],
 };
 
-function AdminCard({ title, description, accent, children }) {
+function SectionEyebrow({ children }) {
   return (
     <div
       style={{
-        borderRadius: "26px",
-        border: `1px solid ${accent.border}`,
-        background: `
-          radial-gradient(circle at 18% 18%, ${accent.glow}, transparent 22%),
-          rgba(255,255,255,0.035)
-        `,
-        boxShadow: `0 0 28px ${accent.glow}`,
-        padding: "22px 20px",
+        fontSize: "12px",
+        fontWeight: 900,
+        letterSpacing: "0.14em",
+        textTransform: "uppercase",
+        color: "rgba(245,247,255,0.48)",
+        marginBottom: "10px",
       }}
     >
-      <div
-        style={{
-          fontSize: "22px",
-          fontWeight: 900,
-          lineHeight: 1.1,
-          marginBottom: "8px",
-          color: "#F8FAFF",
-        }}
-      >
-        {title}
-      </div>
-
-      <div
-        style={{
-          fontSize: "14px",
-          lineHeight: 1.65,
-          color: "rgba(235,239,255,0.72)",
-          marginBottom: "18px",
-        }}
-      >
-        {description}
-      </div>
-
       {children}
     </div>
   );
 }
 
-function QuickActionButton({ label, onClick }) {
+function GlassPanel({ children, style = {} }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
+    <section
       style={{
-        width: "100%",
+        borderRadius: "24px",
         border: "1px solid rgba(255,255,255,0.08)",
-        background: "rgba(255,255,255,0.04)",
-        color: "#F8FAFF",
-        borderRadius: "16px",
-        padding: "14px 14px",
-        cursor: "pointer",
-        fontSize: "14px",
-        fontWeight: 700,
-        textAlign: "left",
-        transition: "all 180ms ease",
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = "rgba(180,134,255,0.24)";
-        e.currentTarget.style.background = "rgba(255,255,255,0.06)";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
-        e.currentTarget.style.background = "rgba(255,255,255,0.04)";
+        background:
+          "linear-gradient(180deg, rgba(14,16,30,0.92) 0%, rgba(8,10,22,0.96) 100%)",
+        boxShadow:
+          "0 18px 40px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.03)",
+        padding: "20px 18px",
+        ...style,
       }}
     >
-      {label}
-    </button>
+      {children}
+    </section>
+  );
+}
+
+function SmallMetric({ label, value }) {
+  return (
+    <div
+      style={{
+        borderRadius: "18px",
+        border: "1px solid rgba(255,255,255,0.08)",
+        background: "rgba(255,255,255,0.035)",
+        padding: "14px 14px",
+      }}
+    >
+      <div
+        style={{
+          fontSize: "11px",
+          fontWeight: 900,
+          letterSpacing: "0.12em",
+          textTransform: "uppercase",
+          color: "rgba(245,247,255,0.48)",
+          marginBottom: "8px",
+        }}
+      >
+        {label}
+      </div>
+
+      <div
+        style={{
+          fontSize: "24px",
+          fontWeight: 900,
+          lineHeight: 1,
+          color: "#F8FAFF",
+        }}
+      >
+        {value}
+      </div>
+    </div>
   );
 }
 
@@ -167,6 +166,110 @@ function HeaderTabButton({ isActive, children, onClick }) {
   );
 }
 
+function AdminInput({ value, onChange, placeholder }) {
+  return (
+    <input
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      style={{
+        width: "100%",
+        borderRadius: "14px",
+        border: "1px solid rgba(255,255,255,0.10)",
+        background: "rgba(255,255,255,0.04)",
+        color: "#F8FAFF",
+        padding: "14px 14px",
+        fontSize: "14px",
+        fontWeight: 600,
+        outline: "none",
+        boxSizing: "border-box",
+      }}
+    />
+  );
+}
+
+function AdminTextarea({ value, onChange, placeholder, rows = 4 }) {
+  return (
+    <textarea
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      rows={rows}
+      style={{
+        width: "100%",
+        borderRadius: "14px",
+        border: "1px solid rgba(255,255,255,0.10)",
+        background: "rgba(255,255,255,0.04)",
+        color: "#F8FAFF",
+        padding: "14px 14px",
+        fontSize: "14px",
+        fontWeight: 600,
+        outline: "none",
+        boxSizing: "border-box",
+        resize: "vertical",
+        fontFamily:
+          "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      }}
+    />
+  );
+}
+
+function ActionButton({ label, onClick, primary = false }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      style={{
+        width: "100%",
+        border: primary
+          ? "1px solid rgba(103,242,255,0.24)"
+          : "1px solid rgba(255,255,255,0.08)",
+        background: primary
+          ? "linear-gradient(90deg, rgba(103,242,255,0.18) 0%, rgba(180,134,255,0.18) 100%)"
+          : "rgba(255,255,255,0.04)",
+        color: "#F8FAFF",
+        borderRadius: "14px",
+        padding: "14px 14px",
+        cursor: "pointer",
+        fontSize: "14px",
+        fontWeight: 800,
+        textAlign: "center",
+      }}
+    >
+      {label}
+    </button>
+  );
+}
+
+function StatusPill({ value }) {
+  return (
+    <span
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "6px 10px",
+        borderRadius: "999px",
+        background:
+          value === "Published"
+            ? "rgba(103,242,255,0.12)"
+            : "rgba(180,134,255,0.12)",
+        border:
+          value === "Published"
+            ? "1px solid rgba(103,242,255,0.22)"
+            : "1px solid rgba(180,134,255,0.22)",
+        color: value === "Published" ? "#67F2FF" : "#B486FF",
+        fontSize: "11px",
+        fontWeight: 900,
+        letterSpacing: "0.08em",
+        textTransform: "uppercase",
+      }}
+    >
+      {value}
+    </span>
+  );
+}
+
 function TogglePill({ active, label, onClick }) {
   return (
     <button
@@ -194,72 +297,20 @@ function TogglePill({ active, label, onClick }) {
   );
 }
 
-function AdminInput({ value, onChange, placeholder }) {
-  return (
-    <input
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      style={{
-        width: "100%",
-        borderRadius: "16px",
-        border: "1px solid rgba(255,255,255,0.10)",
-        background: "rgba(255,255,255,0.04)",
-        color: "#F8FAFF",
-        padding: "14px 14px",
-        fontSize: "14px",
-        fontWeight: 600,
-        outline: "none",
-        boxSizing: "border-box",
-      }}
-    />
-  );
-}
-
-function AdminTextarea({ value, onChange, placeholder, rows = 4 }) {
-  return (
-    <textarea
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      rows={rows}
-      style={{
-        width: "100%",
-        borderRadius: "16px",
-        border: "1px solid rgba(255,255,255,0.10)",
-        background: "rgba(255,255,255,0.04)",
-        color: "#F8FAFF",
-        padding: "14px 14px",
-        fontSize: "14px",
-        fontWeight: 600,
-        outline: "none",
-        boxSizing: "border-box",
-        resize: "vertical",
-        fontFamily:
-          "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-      }}
-    />
-  );
-}
-
-function EntryEditor({
+function EntryRow({
   entry,
-  isDesktop,
   activeContentType,
-  onUpdate,
+  onEdit,
   onDelete,
   onSetFeatured,
 }) {
   return (
-    <article
+    <div
       style={{
-        borderRadius: "24px",
+        borderRadius: "18px",
         border: "1px solid rgba(255,255,255,0.08)",
-        background:
-          "radial-gradient(circle at top right, rgba(180,134,255,0.12), transparent 30%), rgba(255,255,255,0.03)",
-        padding: "18px",
-        boxShadow:
-          "0 14px 28px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.03)",
+        background: "rgba(255,255,255,0.03)",
+        padding: "16px 14px",
       }}
     >
       <div
@@ -268,164 +319,243 @@ function EntryEditor({
           flexWrap: "wrap",
           alignItems: "center",
           justifyContent: "space-between",
-          gap: "12px",
-          marginBottom: "16px",
+          gap: "10px",
+          marginBottom: "10px",
         }}
       >
-        <div>
-          <div
-            style={{
-              fontSize: "12px",
-              fontWeight: 900,
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              color: "rgba(245,247,255,0.48)",
-              marginBottom: "6px",
-            }}
-          >
-            {activeContentType === "news" ? "News Entry" : "Blog Entry"}
-          </div>
-
-          <div
-            style={{
-              fontSize: "18px",
-              fontWeight: 900,
-              color: "#F8FAFF",
-              lineHeight: 1.1,
-            }}
-          >
-            {entry.title || "Untitled Entry"}
-          </div>
-        </div>
-
         <div
           style={{
             display: "flex",
             flexWrap: "wrap",
+            alignItems: "center",
             gap: "8px",
           }}
         >
-          <QuickActionButton
-            label={entry.featured ? "Featured" : "Set Featured"}
-            onClick={() => onSetFeatured(entry.id)}
-          />
-          <QuickActionButton
-            label="Delete Entry"
-            onClick={() => onDelete(entry.id)}
-          />
+          <span
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "6px 10px",
+              borderRadius: "999px",
+              background: "rgba(103,242,255,0.10)",
+              border: "1px solid rgba(103,242,255,0.18)",
+              color: "#67F2FF",
+              fontSize: "11px",
+              fontWeight: 900,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+            }}
+          >
+            {entry.category}
+          </span>
+
+          <StatusPill value={entry.status} />
+
+          {entry.featured ? (
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "6px 10px",
+                borderRadius: "999px",
+                background: "rgba(255,183,92,0.10)",
+                border: "1px solid rgba(255,183,92,0.18)",
+                color: "#FFB75C",
+                fontSize: "11px",
+                fontWeight: 900,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+              }}
+            >
+              Featured
+            </span>
+          ) : null}
+        </div>
+
+        <div
+          style={{
+            fontSize: "12px",
+            color: "rgba(235,239,255,0.56)",
+            fontWeight: 700,
+          }}
+        >
+          {activeContentType === "news" ? "News Entry" : "Blog Entry"}
         </div>
       </div>
 
       <div
         style={{
-          display: "grid",
-          gap: "12px",
+          fontSize: "20px",
+          fontWeight: 900,
+          lineHeight: 1.15,
+          color: "#F8FAFF",
+          marginBottom: "8px",
         }}
       >
-        <AdminInput
-          value={entry.category}
-          onChange={(e) => onUpdate(entry.id, "category", e.target.value)}
-          placeholder="Category"
-        />
-
-        <AdminInput
-          value={entry.title}
-          onChange={(e) => onUpdate(entry.id, "title", e.target.value)}
-          placeholder="Article title"
-        />
-
-        <AdminTextarea
-          value={entry.excerpt}
-          onChange={(e) => onUpdate(entry.id, "excerpt", e.target.value)}
-          placeholder="Short excerpt"
-          rows={4}
-        />
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: isDesktop ? "repeat(3, minmax(0, 1fr))" : "1fr",
-            gap: "12px",
-          }}
-        >
-          <AdminInput
-            value={entry.readTime}
-            onChange={(e) => onUpdate(entry.id, "readTime", e.target.value)}
-            placeholder="Read time"
-          />
-
-          <AdminInput
-            value={entry.date}
-            onChange={(e) => onUpdate(entry.id, "date", e.target.value)}
-            placeholder="Date"
-          />
-
-          <AdminInput
-            value={entry.status}
-            onChange={(e) => onUpdate(entry.id, "status", e.target.value)}
-            placeholder="Status"
-          />
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "10px",
-            marginTop: "4px",
-          }}
-        >
-          <TogglePill
-            active={entry.featured}
-            label={entry.featured ? "Featured On" : "Featured Off"}
-            onClick={() => onUpdate(entry.id, "featured", !entry.featured)}
-          />
-
-          <TogglePill
-            active={entry.shareToSocial}
-            label={entry.shareToSocial ? "Social Share On" : "Social Share Off"}
-            onClick={() =>
-              onUpdate(entry.id, "shareToSocial", !entry.shareToSocial)
-            }
-          />
-
-          <TogglePill
-            active={entry.sendNewsletter}
-            label={
-              entry.sendNewsletter
-                ? "Newsletter Send On"
-                : "Newsletter Send Off"
-            }
-            onClick={() =>
-              onUpdate(entry.id, "sendNewsletter", !entry.sendNewsletter)
-            }
-          />
-        </div>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: isDesktop ? "repeat(3, minmax(0, 1fr))" : "1fr",
-            gap: "10px",
-            marginTop: "8px",
-          }}
-        >
-          <QuickActionButton label="Save Draft" />
-          <QuickActionButton label="Publish Entry" />
-          <QuickActionButton label="Preview Share Card" />
-        </div>
+        {entry.title || "Untitled Entry"}
       </div>
-    </article>
+
+      <div
+        style={{
+          fontSize: "14px",
+          lineHeight: 1.65,
+          color: "rgba(235,239,255,0.72)",
+          marginBottom: "14px",
+        }}
+      >
+        {entry.excerpt || "No excerpt added yet."}
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "10px",
+          fontSize: "12px",
+          color: "rgba(235,239,255,0.54)",
+          marginBottom: "14px",
+        }}
+      >
+        <span>{entry.readTime}</span>
+        <span>{entry.date || "No date"}</span>
+        <span>{entry.shareToSocial ? "Social On" : "Social Off"}</span>
+        <span>{entry.sendNewsletter ? "Newsletter On" : "Newsletter Off"}</span>
+      </div>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+          gap: "10px",
+        }}
+      >
+        <ActionButton label="Edit" onClick={() => onEdit(entry.id)} />
+        <ActionButton
+          label={entry.featured ? "Featured" : "Set Featured"}
+          onClick={() => onSetFeatured(entry.id)}
+        />
+        <ActionButton label="Delete" onClick={() => onDelete(entry.id)} />
+      </div>
+    </div>
   );
 }
 
-export default function AdminPage({ onBack, onPrivacy, onTerms, onSitemap }) {
+function RestrictedAccess({ onBack }) {
+  return (
+    <div
+      style={{
+        minHeight: "100dvh",
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        background: `
+          radial-gradient(circle at 72% 22%, rgba(204, 91, 255, 0.10), transparent 16%),
+          radial-gradient(circle at 18% 28%, rgba(88, 240, 255, 0.08), transparent 14%),
+          radial-gradient(circle at 55% 62%, rgba(255, 176, 86, 0.05), transparent 12%),
+          linear-gradient(180deg, #030308 0%, #080913 58%, #04050A 100%)
+        `,
+        color: "#F5F7FF",
+        fontFamily:
+          "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      }}
+    >
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "620px",
+          minHeight: "100dvh",
+          padding:
+            "calc(env(safe-area-inset-top, 0px) + 18px) 16px calc(env(safe-area-inset-bottom, 0px) + 32px)",
+          boxSizing: "border-box",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <GlassPanel
+          style={{
+            width: "100%",
+            textAlign: "center",
+            padding: "28px 22px",
+          }}
+        >
+          <div
+            style={{
+              width: "74px",
+              height: "74px",
+              margin: "0 auto 16px",
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              background: "rgba(180,134,255,0.10)",
+              border: "1px solid rgba(180,134,255,0.18)",
+              boxShadow: "0 0 26px rgba(180,134,255,0.12)",
+              fontSize: "30px",
+            }}
+          >
+            🔒
+          </div>
+
+          <h1
+            style={{
+              margin: "0 0 12px",
+              fontSize: "clamp(32px, 9vw, 46px)",
+              lineHeight: 1.02,
+              fontWeight: 900,
+              letterSpacing: "-0.04em",
+              color: "#F8FAFF",
+            }}
+          >
+            Admin Only
+          </h1>
+
+          <p
+            style={{
+              margin: "0 auto 20px",
+              maxWidth: "480px",
+              fontSize: "15px",
+              lineHeight: 1.7,
+              color: "rgba(235,239,255,0.74)",
+            }}
+          >
+            This page is restricted to authorized ZWAP! administrators only.
+            Wire real authentication in the route layer, then pass
+            <code style={{ marginLeft: 6, color: "#67F2FF" }}>
+              isAdminAuthenticated
+            </code>
+            as true for approved users.
+          </p>
+
+          <div
+            style={{
+              maxWidth: "220px",
+              margin: "0 auto",
+            }}
+          >
+            <ActionButton label="Back" onClick={onBack} primary />
+          </div>
+        </GlassPanel>
+      </div>
+    </div>
+  );
+}
+
+export default function AdminPage({
+  onBack,
+  onPrivacy,
+  onTerms,
+  onSitemap,
+  isAdminAuthenticated = false,
+}) {
   const [isDesktop, setIsDesktop] = useState(
     typeof window !== "undefined" ? window.innerWidth >= 900 : false
   );
-
   const [activeTab, setActiveTab] = useState("news");
   const [contentStore, setContentStore] = useState(INITIAL_CONTENT);
+  const [editingId, setEditingId] = useState(null);
+  const [draft, setDraft] = useState(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -440,26 +570,29 @@ export default function AdminPage({ onBack, onPrivacy, onTerms, onSitemap }) {
     return contentStore[activeTab] || [];
   }, [contentStore, activeTab]);
 
-  const accents = {
-    purple: {
-      border: "rgba(180,134,255,0.20)",
-      glow: "rgba(180,134,255,0.10)",
-    },
-    cyan: {
-      border: "rgba(103,242,255,0.20)",
-      glow: "rgba(103,242,255,0.10)",
-    },
-    pink: {
-      border: "rgba(255,103,212,0.20)",
-      glow: "rgba(255,103,212,0.10)",
-    },
-    gold: {
-      border: "rgba(255,183,92,0.20)",
-      glow: "rgba(255,183,92,0.10)",
-    },
-  };
+  const stats = useMemo(() => {
+    const allEntries = [...contentStore.news, ...contentStore.blog];
 
-  const handleAddEntry = () => {
+    return {
+      total: allEntries.length,
+      drafts: allEntries.filter((entry) => entry.status === "Draft").length,
+      featured: allEntries.filter((entry) => entry.featured).length,
+      newsletter: allEntries.filter((entry) => entry.sendNewsletter).length,
+    };
+  }, [contentStore]);
+
+  useEffect(() => {
+    const found =
+      activeEntries.find((entry) => entry.id === editingId) || null;
+
+    setDraft(found ? { ...found } : null);
+  }, [editingId, activeEntries]);
+
+  if (!isAdminAuthenticated) {
+    return <RestrictedAccess onBack={onBack} />;
+  }
+
+  const handleCreateNew = () => {
     const newEntry = {
       id: `${activeTab}-${Date.now()}`,
       category: activeTab === "news" ? "Platform Updates" : "Platform Education",
@@ -477,15 +610,7 @@ export default function AdminPage({ onBack, onPrivacy, onTerms, onSitemap }) {
       ...prev,
       [activeTab]: [newEntry, ...prev[activeTab]],
     }));
-  };
-
-  const handleUpdateEntry = (entryId, field, value) => {
-    setContentStore((prev) => ({
-      ...prev,
-      [activeTab]: prev[activeTab].map((entry) =>
-        entry.id === entryId ? { ...entry, [field]: value } : entry
-      ),
-    }));
+    setEditingId(newEntry.id);
   };
 
   const handleDeleteEntry = (entryId) => {
@@ -493,6 +618,11 @@ export default function AdminPage({ onBack, onPrivacy, onTerms, onSitemap }) {
       ...prev,
       [activeTab]: prev[activeTab].filter((entry) => entry.id !== entryId),
     }));
+
+    if (editingId === entryId) {
+      setEditingId(null);
+      setDraft(null);
+    }
   };
 
   const handleSetFeatured = (entryId) => {
@@ -502,6 +632,49 @@ export default function AdminPage({ onBack, onPrivacy, onTerms, onSitemap }) {
         ...entry,
         featured: entry.id === entryId,
       })),
+    }));
+
+    if (editingId === entryId && draft) {
+      setDraft({
+        ...draft,
+        featured: true,
+      });
+    }
+  };
+
+  const handleDraftChange = (field, value) => {
+    setDraft((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  const handleSaveDraft = () => {
+    if (!draft) return;
+
+    setContentStore((prev) => ({
+      ...prev,
+      [activeTab]: prev[activeTab].map((entry) =>
+        entry.id === draft.id ? { ...draft } : entry
+      ),
+    }));
+  };
+
+  const handlePublish = () => {
+    if (!draft) return;
+
+    const publishedDraft = {
+      ...draft,
+      status: "Published",
+    };
+
+    setDraft(publishedDraft);
+
+    setContentStore((prev) => ({
+      ...prev,
+      [activeTab]: prev[activeTab].map((entry) =>
+        entry.id === publishedDraft.id ? publishedDraft : entry
+      ),
     }));
   };
 
@@ -526,7 +699,7 @@ export default function AdminPage({ onBack, onPrivacy, onTerms, onSitemap }) {
       <div
         style={{
           width: "100%",
-          maxWidth: "1180px",
+          maxWidth: "1240px",
           minHeight: "100dvh",
           padding: isDesktop
             ? "32px 28px 36px"
@@ -576,233 +749,355 @@ export default function AdminPage({ onBack, onPrivacy, onTerms, onSitemap }) {
 
         <section
           style={{
-            textAlign: "center",
-            marginBottom: isDesktop ? "32px" : "24px",
-            maxWidth: "920px",
-            marginInline: "auto",
-          }}
-        >
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "72px",
-              height: "72px",
-              borderRadius: "50%",
-              marginBottom: "18px",
-              background: "rgba(180,134,255,0.10)",
-              border: "1px solid rgba(180,134,255,0.18)",
-              boxShadow: "0 0 26px rgba(180,134,255,0.12)",
-              fontSize: "30px",
-            }}
-          >
-            ⚙️
-          </div>
-
-          <h1
-            style={{
-              margin: "0 0 12px",
-              fontSize: isDesktop
-                ? "clamp(44px, 5vw, 62px)"
-                : "clamp(34px, 10vw, 46px)",
-              lineHeight: 1.02,
-              fontWeight: 900,
-              letterSpacing: "-0.04em",
-              color: "#F8FAFF",
-            }}
-          >
-            ZWAP! Editorial Admin
-          </h1>
-
-          <p
-            style={{
-              margin: "0 auto",
-              maxWidth: "760px",
-              fontSize: isDesktop ? "19px" : "15px",
-              lineHeight: 1.7,
-              color: "rgba(235,239,255,0.78)",
-            }}
-          >
-            Manage news, blog posts, featured placement, newsletter sends,
-            social sharing readiness, sponsor announcements, and future content
-            publishing across the ZWAP! website.
-          </p>
-        </section>
-
-        <section
-          style={{
             marginBottom: "18px",
-            borderRadius: "24px",
-            border: "1px solid rgba(255,255,255,0.08)",
-            background:
-              "linear-gradient(180deg, rgba(14,16,30,0.92) 0%, rgba(8,10,22,0.96) 100%)",
-            boxShadow:
-              "0 18px 40px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.03)",
-            padding: isDesktop ? "20px" : "18px 16px",
           }}
         >
-          <div
+          <GlassPanel
             style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "10px",
-              justifyContent: "center",
-              marginBottom: "16px",
+              padding: isDesktop ? "24px 24px" : "20px 18px",
             }}
           >
-            {CONTENT_TABS.map((tab) => (
-              <HeaderTabButton
-                key={tab.id}
-                isActive={activeTab === tab.id}
-                onClick={() => setActiveTab(tab.id)}
+            <SectionEyebrow>Editorial Control Center</SectionEyebrow>
+
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "12px",
+                textAlign: isDesktop ? "left" : "center",
+              }}
+            >
+              <h1
+                style={{
+                  margin: 0,
+                  fontSize: isDesktop
+                    ? "clamp(42px, 5vw, 60px)"
+                    : "clamp(32px, 9vw, 44px)",
+                  lineHeight: 1.02,
+                  fontWeight: 900,
+                  letterSpacing: "-0.04em",
+                  color: "#F8FAFF",
+                }}
               >
-                {tab.label}
-              </HeaderTabButton>
-            ))}
-          </div>
+                ZWAP! Editorial Admin
+              </h1>
 
-          <div
-            style={{
-              fontSize: "14px",
-              lineHeight: 1.7,
-              color: "rgba(235,239,255,0.74)",
-              textAlign: "center",
-              maxWidth: "780px",
-              margin: "0 auto",
-            }}
-          >
-            Use this area to create entries that can live on the site, be sent
-            through the mailing list, and be shared out to social channels as
-            part of the ZWAP! content rhythm.
-          </div>
+              <p
+                style={{
+                  margin: 0,
+                  maxWidth: "860px",
+                  fontSize: isDesktop ? "18px" : "15px",
+                  lineHeight: 1.7,
+                  color: "rgba(235,239,255,0.76)",
+                }}
+              >
+                Manage News Blog content, update featured entries, control social
+                readiness, prepare newsletter sends, and maintain the editorial
+                surface that powers public updates across the ZWAP! site.
+              </p>
+            </div>
+          </GlassPanel>
         </section>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: isDesktop ? "repeat(2, minmax(0, 1fr))" : "1fr",
-            gap: "16px",
-            marginBottom: "18px",
-          }}
-        >
-          <AdminCard
-            title="Editorial Controls"
-            description="Create announcements, publish blog posts, manage featured placement, and prepare entries for newsletter and social distribution."
-            accent={accents.purple}
-          >
-            <div
-              style={{
-                display: "grid",
-                gap: "10px",
-              }}
-            >
-              <QuickActionButton
-                label={activeTab === "news" ? "Create News Post" : "Create Blog Article"}
-                onClick={handleAddEntry}
-              />
-              <QuickActionButton label="Manage Categories" />
-              <QuickActionButton label="Set Featured Entry" />
-              <QuickActionButton label="Preview Public Layout" />
-            </div>
-          </AdminCard>
-
-          <AdminCard
-            title="Distribution"
-            description="Each entry can feed multiple lanes: website publishing, newsletter sends through MailingListDatabase, and social media sharing."
-            accent={accents.cyan}
-          >
-            <div
-              style={{
-                display: "grid",
-                gap: "10px",
-              }}
-            >
-              <QuickActionButton label="Send Newsletter Update" />
-              <QuickActionButton label="Prepare Social Share Copy" />
-              <QuickActionButton label="Preview Share Card" />
-              <QuickActionButton label="Review Mailing List Segment" />
-            </div>
-          </AdminCard>
-
-          <AdminCard
-            title="Sponsors & Partners"
-            description="Manage sponsor stories, partner spotlights, future campaigns, and cross-promotional update opportunities."
-            accent={accents.pink}
-          >
-            <div
-              style={{
-                display: "grid",
-                gap: "10px",
-              }}
-            >
-              <QuickActionButton label="Add Sponsor Story" />
-              <QuickActionButton label="Feature Partner Spotlight" />
-              <QuickActionButton label="Update Sponsor Rewards" />
-              <QuickActionButton label="Create Campaign Announcement" />
-            </div>
-          </AdminCard>
-
-          <AdminCard
-            title="Website Management"
-            description="Maintain supporting site communication around the editorial layer, including sitemap visibility and content routing."
-            accent={accents.gold}
-          >
-            <div
-              style={{
-                display: "grid",
-                gap: "10px",
-              }}
-            >
-              <QuickActionButton label="Update Sitemap" />
-              <QuickActionButton label="Edit News / Blog Intro Copy" />
-              <QuickActionButton label="Manage Navigation Tabs" />
-              <QuickActionButton label="Review Shared CTA Blocks" />
-            </div>
-          </AdminCard>
-        </div>
 
         <section
           style={{
             display: "grid",
-            gap: "16px",
-            marginBottom: "20px",
+            gridTemplateColumns: isDesktop ? "repeat(4, minmax(0, 1fr))" : "1fr 1fr",
+            gap: "12px",
+            marginBottom: "18px",
           }}
         >
-          {activeEntries.map((entry) => (
-            <EntryEditor
-              key={entry.id}
-              entry={entry}
-              isDesktop={isDesktop}
-              activeContentType={activeTab}
-              onUpdate={handleUpdateEntry}
-              onDelete={handleDeleteEntry}
-              onSetFeatured={handleSetFeatured}
-            />
-          ))}
+          <SmallMetric label="Total Entries" value={stats.total} />
+          <SmallMetric label="Drafts" value={stats.drafts} />
+          <SmallMetric label="Featured" value={stats.featured} />
+          <SmallMetric label="Newsletter Ready" value={stats.newsletter} />
         </section>
 
-        <div
+        <section
           style={{
-            borderRadius: "24px",
-            border: "1px solid rgba(255,255,255,0.08)",
-            background: "rgba(255,255,255,0.03)",
-            padding: isDesktop ? "22px 24px" : "18px 16px",
+            marginBottom: "18px",
+          }}
+        >
+          <GlassPanel>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "12px",
+                marginBottom: "16px",
+              }}
+            >
+              <div>
+                <SectionEyebrow>Content Lane</SectionEyebrow>
+                <div
+                  style={{
+                    fontSize: "22px",
+                    fontWeight: 900,
+                    lineHeight: 1.1,
+                    color: "#F8FAFF",
+                  }}
+                >
+                  {activeTab === "news" ? "News Management" : "Blog Management"}
+                </div>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "10px",
+                }}
+              >
+                {CONTENT_TABS.map((tab) => (
+                  <HeaderTabButton
+                    key={tab.id}
+                    isActive={activeTab === tab.id}
+                    onClick={() => {
+                      setActiveTab(tab.id);
+                      setEditingId(null);
+                    }}
+                  >
+                    {tab.label}
+                  </HeaderTabButton>
+                ))}
+              </div>
+            </div>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: isDesktop ? "220px 1fr" : "1fr",
+                gap: "12px",
+              }}
+            >
+              <ActionButton
+                label={activeTab === "news" ? "Create News Post" : "Create Blog Post"}
+                onClick={handleCreateNew}
+                primary
+              />
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: isDesktop ? "repeat(3, minmax(0, 1fr))" : "1fr",
+                  gap: "10px",
+                }}
+              >
+                <ActionButton label="Prepare Newsletter Send" onClick={() => {}} />
+                <ActionButton label="Preview Public Layout" onClick={() => {}} />
+                <ActionButton label="Review Share Readiness" onClick={() => {}} />
+              </div>
+            </div>
+          </GlassPanel>
+        </section>
+
+        <section
+          style={{
+            display: "grid",
+            gridTemplateColumns: isDesktop ? "minmax(0, 0.95fr) minmax(0, 1.35fr)" : "1fr",
+            gap: "18px",
             marginBottom: "24px",
           }}
         >
-          <div
-            style={{
-              fontSize: "12px",
-              fontWeight: 900,
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              color: "rgba(245,247,255,0.48)",
-              marginBottom: "10px",
-            }}
-          >
-            Current Status
-          </div>
+          <GlassPanel>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "12px",
+                marginBottom: "14px",
+              }}
+            >
+              <div>
+                <SectionEyebrow>Entry Queue</SectionEyebrow>
+                <div
+                  style={{
+                    fontSize: "22px",
+                    fontWeight: 900,
+                    color: "#F8FAFF",
+                  }}
+                >
+                  {activeTab === "news" ? "News Entries" : "Blog Entries"}
+                </div>
+              </div>
+
+              <div
+                style={{
+                  fontSize: "12px",
+                  fontWeight: 800,
+                  color: "rgba(235,239,255,0.54)",
+                }}
+              >
+                {activeEntries.length} total
+              </div>
+            </div>
+
+            <div
+              style={{
+                display: "grid",
+                gap: "12px",
+              }}
+            >
+              {activeEntries.map((entry) => (
+                <EntryRow
+                  key={entry.id}
+                  entry={entry}
+                  activeContentType={activeTab}
+                  onEdit={setEditingId}
+                  onDelete={handleDeleteEntry}
+                  onSetFeatured={handleSetFeatured}
+                />
+              ))}
+            </div>
+          </GlassPanel>
+
+          <GlassPanel>
+            <div
+              style={{
+                marginBottom: "14px",
+              }}
+            >
+              <SectionEyebrow>Editor</SectionEyebrow>
+              <div
+                style={{
+                  fontSize: "22px",
+                  fontWeight: 900,
+                  color: "#F8FAFF",
+                  marginBottom: "8px",
+                }}
+              >
+                {draft ? "Editing Entry" : "Select an Entry"}
+              </div>
+
+              <div
+                style={{
+                  fontSize: "14px",
+                  lineHeight: 1.65,
+                  color: "rgba(235,239,255,0.72)",
+                }}
+              >
+                {draft
+                  ? "Update the content, status, and distribution flags for the selected entry."
+                  : "Choose a News or Blog entry from the queue, or create a new one to begin editing."}
+              </div>
+            </div>
+
+            {draft ? (
+              <div
+                style={{
+                  display: "grid",
+                  gap: "12px",
+                }}
+              >
+                <AdminInput
+                  value={draft.category}
+                  onChange={(e) => handleDraftChange("category", e.target.value)}
+                  placeholder="Category"
+                />
+
+                <AdminInput
+                  value={draft.title}
+                  onChange={(e) => handleDraftChange("title", e.target.value)}
+                  placeholder="Article title"
+                />
+
+                <AdminTextarea
+                  value={draft.excerpt}
+                  onChange={(e) => handleDraftChange("excerpt", e.target.value)}
+                  placeholder="Short excerpt"
+                  rows={5}
+                />
+
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: isDesktop ? "repeat(3, minmax(0, 1fr))" : "1fr",
+                    gap: "12px",
+                  }}
+                >
+                  <AdminInput
+                    value={draft.readTime}
+                    onChange={(e) => handleDraftChange("readTime", e.target.value)}
+                    placeholder="Read time"
+                  />
+                  <AdminInput
+                    value={draft.date}
+                    onChange={(e) => handleDraftChange("date", e.target.value)}
+                    placeholder="Date"
+                  />
+                  <AdminInput
+                    value={draft.status}
+                    onChange={(e) => handleDraftChange("status", e.target.value)}
+                    placeholder="Status"
+                  />
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: "10px",
+                    marginTop: "4px",
+                  }}
+                >
+                  <TogglePill
+                    active={draft.featured}
+                    label={draft.featured ? "Featured On" : "Featured Off"}
+                    onClick={() => handleDraftChange("featured", !draft.featured)}
+                  />
+
+                  <TogglePill
+                    active={draft.shareToSocial}
+                    label={draft.shareToSocial ? "Social Share On" : "Social Share Off"}
+                    onClick={() =>
+                      handleDraftChange("shareToSocial", !draft.shareToSocial)
+                    }
+                  />
+
+                  <TogglePill
+                    active={draft.sendNewsletter}
+                    label={
+                      draft.sendNewsletter
+                        ? "Newsletter Send On"
+                        : "Newsletter Send Off"
+                    }
+                    onClick={() =>
+                      handleDraftChange("sendNewsletter", !draft.sendNewsletter)
+                    }
+                  />
+                </div>
+
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: isDesktop ? "repeat(3, minmax(0, 1fr))" : "1fr",
+                    gap: "10px",
+                    marginTop: "8px",
+                  }}
+                >
+                  <ActionButton label="Save Draft" onClick={handleSaveDraft} primary />
+                  <ActionButton label="Publish Entry" onClick={handlePublish} />
+                  <ActionButton
+                    label="Clear Selection"
+                    onClick={() => {
+                      setEditingId(null);
+                      setDraft(null);
+                    }}
+                  />
+                </div>
+              </div>
+            ) : null}
+          </GlassPanel>
+        </section>
+
+        <GlassPanel
+          style={{
+            marginBottom: "24px",
+          }}
+        >
+          <SectionEyebrow>Current Status</SectionEyebrow>
 
           <div
             style={{
@@ -811,14 +1106,17 @@ export default function AdminPage({ onBack, onPrivacy, onTerms, onSitemap }) {
               color: "rgba(235,239,255,0.76)",
             }}
           >
-            This admin surface is now structured around the editorial system.
-            News and Blog are separated, entries can be flagged for newsletter
-            delivery, and each item can be marked as social-share ready for
-            future platform posting and distribution workflows.
+            This admin surface is now structured as a protected editorial
+            workspace. News and Blog are separated, entries can be edited from a
+            focused queue, featured placement is controlled at the entry level,
+            and newsletter or social flags are handled directly inside the
+            editor. For real production use, pair this page with actual route
+            protection and authenticated admin state in the parent layer.
           </div>
-        </div>
+        </GlassPanel>
 
         <GlobalFooterLinks
+          isDesktop={isDesktop}
           onPrivacy={onPrivacy}
           onTerms={onTerms}
           onSitemap={onSitemap}
