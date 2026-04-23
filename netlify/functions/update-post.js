@@ -12,6 +12,7 @@ exports.handler = async function handler(event) {
   try {
     const db = await getDb();
     const data = JSON.parse(event.body || "{}");
+    const now = new Date().toISOString();
 
     if (!data.id) {
       return {
@@ -20,20 +21,30 @@ exports.handler = async function handler(event) {
       };
     }
 
+    const nextStatus = data.status || "draft";
+
     const updateDoc = {
       title: data.title || "",
       slug: data.slug || "",
       excerpt: data.excerpt || "",
       body: data.body || "",
       category: data.category || "news",
-      tags: data.tags || [],
+      tags: Array.isArray(data.tags) ? data.tags : [],
       coverImageUrl: data.coverImageUrl || "",
       authorName: data.authorName || "",
+      sponsorName: data.sponsorName || "",
       date: data.date || "",
-      status: data.status || "draft",
+      readTime: data.readTime || "4 min read",
+      status: nextStatus,
       featured: Boolean(data.featured),
-      updatedAt: new Date().toISOString(),
+      shareToSocial: Boolean(data.shareToSocial),
+      sendNewsletter: Boolean(data.sendNewsletter),
+      updatedAt: now,
     };
+
+    if (nextStatus === "published") {
+      updateDoc.publishedAt = data.publishedAt || now;
+    }
 
     const result = await db.collection("website_posts").updateOne(
       { _id: new ObjectId(data.id) },
