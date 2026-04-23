@@ -19,9 +19,14 @@ exports.handler = async function handler(event) {
       .sort({ createdAt: -1 })
       .toArray();
 
+    const normalizedPosts = posts.map((post) => ({
+      ...post,
+      _id: post._id.toString(),
+    }));
+
     return {
       statusCode: 200,
-      body: JSON.stringify(posts),
+      body: JSON.stringify(normalizedPosts),
     };
   } catch (error) {
     return {
