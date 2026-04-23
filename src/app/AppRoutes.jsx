@@ -36,6 +36,7 @@ export default function AppRoutes({
   pendingPage,
   referralCode,
   onSendInvite,
+  isAdminAuthenticated,
 }) {
   const footerNav = {
     onPrivacy: () => setActivePage("privacy"),
@@ -216,10 +217,11 @@ export default function AppRoutes({
   if (activePage === "admin") {
     return (
       <AdminPage
-        onBack={() => setActivePage("home")}
+        onBack={() => setActivePage("blog")}
         onPrivacy={footerNav.onPrivacy}
         onTerms={footerNav.onTerms}
         onSitemap={footerNav.onSitemap}
+        isAdminAuthenticated={isAdminAuthenticated}
       />
     );
   }
@@ -316,37 +318,50 @@ export default function AppRoutes({
 
   if (activePage === "sitemap") {
     return (
-      <SitemapPage
-        onBack={() => setActivePage("home")}
-        onNavigate={(routeKey) => {
-          if (routeKey === "contact") {
-            setActivePage("contact");
-            return;
-          }
+      <>
+        <SitemapPage
+          onBack={() => setActivePage("home")}
+          onNavigate={(routeKey) => {
+            if (routeKey === "contact") {
+              setActivePage("contact");
+              return;
+            }
 
-          if (routeKey === "faq") {
-            setActivePage("faq");
-            return;
-          }
+            if (routeKey === "faq") {
+              setActivePage("faq");
+              return;
+            }
 
-          if (routeKey === "how-it-works") {
-            setActivePage("how-it-works");
-            return;
-          }
+            if (routeKey === "how-it-works") {
+              setActivePage("how-it-works");
+              return;
+            }
 
-          if (routeKey === "early-access") {
-            openEarlyAccessModal("preview");
-            return;
-          }
+            if (routeKey === "early-access") {
+              openEarlyAccessModal("preview");
+              return;
+            }
 
-          if (routeKey === "home") {
-            setActivePage("home");
-            return;
-          }
+            if (routeKey === "home") {
+              setActivePage("home");
+              return;
+            }
 
-          setActivePage(routeKey);
-        }}
-      />
+            setActivePage(routeKey);
+          }}
+        />
+
+        <EarlyAccessModal
+          isOpen={isModalOpen}
+          onClose={closeEarlyAccessModal}
+          email={email}
+          setEmail={setEmail}
+          bang={bang}
+          onSubmitAccess={unlockPreview}
+          onInstantAccess={unlockPreview}
+          pendingPage={pendingPage}
+        />
+      </>
     );
   }
 
