@@ -10,8 +10,8 @@ exports.handler = async function handler(event) {
 
   try {
     const db = await getDb();
-
     const data = JSON.parse(event.body || "{}");
+    const now = new Date().toISOString();
 
     const newPost = {
       title: data.title || "",
@@ -19,28 +19,31 @@ exports.handler = async function handler(event) {
       excerpt: data.excerpt || "",
       body: data.body || "",
       category: data.category || "news",
-      tags: data.tags || [],
+      tags: Array.isArray(data.tags) ? data.tags : [],
       coverImageUrl: data.coverImageUrl || "",
       authorName: data.authorName || "",
-      date: data.date || new Date().toISOString(),
+      sponsorName: data.sponsorName || "",
+      date: data.date || "",
+      readTime: data.readTime || "4 min read",
 
       status: data.status || "draft",
-      featured: data.featured || false,
+      featured: Boolean(data.featured),
+      shareToSocial: Boolean(data.shareToSocial),
+      sendNewsletter: Boolean(data.sendNewsletter),
 
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
+      createdAt: now,
+      updatedAt: now,
+      publishedAt: data.status === "published" ? now : "",
       deletedAt: null,
     };
 
-    const result = await db
-      .collection("website_posts")
-      .insertOne(newPost);
+    const result = await db.collection("website_posts").insertOne(newPost);
 
     return {
       statusCode: 200,
       body: JSON.stringify({
         success: true,
-        id: result.insertedId,
+        id: result.insertedId.toString(),
       }),
     };
   } catch (error) {
