@@ -4,15 +4,23 @@ import GlobalFooterLinks from "../../components/GlobalFooterLinks";
 import AdminAccessGate from "./admin/AdminAccessGate";
 import AdminDashboardLayout from "./admin/AdminDashboardLayout";
 import useAdminContent from "./admin/useAdminContent";
+import useAdminAuth from "./admin/useAdminAuth";
 
 export default function AdminPage({
   onBack,
   onPrivacy,
   onTerms,
   onSitemap,
-  isAdminAuthenticated = false,
 }) {
   const {
+    isAdminAuthenticated,
+    isAuthenticating,
+    authError,
+    signIn,
+  } = useAdminAuth();
+
+  const {
+    contentTabs,
     isDesktop,
     activeTab,
     setActiveTab,
@@ -31,7 +39,14 @@ export default function AdminPage({
   } = useAdminContent();
 
   if (!isAdminAuthenticated) {
-    return <AdminAccessGate onBack={onBack} />;
+    return (
+      <AdminAccessGate
+        onBack={onBack}
+        onAuthenticate={signIn}
+        isAuthenticating={isAuthenticating}
+        errorMessage={authError}
+      />
+    );
   }
 
   return (
@@ -67,6 +82,7 @@ export default function AdminPage({
       >
         <AdminDashboardLayout
           isDesktop={isDesktop}
+          contentTabs={contentTabs}
           onBack={onBack}
           activeTab={activeTab}
           setActiveTab={setActiveTab}
