@@ -520,12 +520,9 @@ function RestrictedAccess({ onBack }) {
               color: "rgba(235,239,255,0.74)",
             }}
           >
-            This page is restricted to authorized ZWAP! administrators only.
-            Wire real authentication in the route layer, then pass
-            <code style={{ marginLeft: 6, color: "#67F2FF" }}>
-              isAdminAuthenticated
-            </code>
-            as true for approved users.
+            This area is restricted to authorized ZWAP! administrators only.
+            Please return to the public site or sign in with approved admin
+            credentials.
           </p>
 
           <div
