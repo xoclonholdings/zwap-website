@@ -1,5 +1,28 @@
 const { Resend } = require("resend");
 
+const TOPIC_ROUTES = {
+  support: "support@zwap.online",
+  partners: "partners@zwap.online",
+  enterprise: "enterprise@zwap.online",
+  developers: "developers@zwap.online",
+  press: "press@zwap.online",
+  business: "hello@zwap.online",
+  general: "hello@zwap.online",
+};
+
+function normalizeTopic(topic) {
+  const clean = String(topic || "general").trim().toLowerCase();
+
+  if (clean.includes("support")) return "support";
+  if (clean.includes("partner") || clean.includes("sponsor")) return "partners";
+  if (clean.includes("enterprise") || clean.includes("workplace")) return "enterprise";
+  if (clean.includes("developer")) return "developers";
+  if (clean.includes("press") || clean.includes("media")) return "press";
+  if (clean.includes("business")) return "business";
+
+  return "general";
+}
+
 exports.handler = async function handler(event) {
   if (event.httpMethod !== "POST") {
     return {
@@ -9,19 +32,14 @@ exports.handler = async function handler(event) {
   }
 
   try {
-    if (!process.env.RESEND_API_KEY) {
+    const resendApiKey = process.env.RESEND_API_KEY;
+    const fromEmail = process.env.RESEND_FROM_EMAIL || "app@zwap.online";
+
+    if (!resendApiKey) {
       throw new Error("Missing RESEND_API_KEY environment variable.");
     }
 
-    if (!process.env.CONTACT_TO_EMAIL) {
-      throw new Error("Missing CONTACT_TO_EMAIL environment variable.");
-    }
-
-    if (!process.env.RESEND_FROM_EMAIL) {
-      throw new Error("Missing RESEND_FROM_EMAIL environment variable.");
-    }
-
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    const resend = new Resend(resendApiKey);
     const data = JSON.parse(event.body || "{}");
 
     const name = String(data.name || "").trim();
@@ -38,13 +56,22 @@ exports.handler = async function handler(event) {
       };
     }
 
+    const routeKey = normalizeTopic(topic);
+    const toEmail = TOPIC_ROUTES[routeKey] || TOPIC_ROUTES.general;
+
     await resend.emails.send({
-      from: process.env.RESEND_FROM_EMAIL,
-      to: process.env.CONTACT_TO_EMAIL,
+      from: `ZWAP! Contact <${fromEmail}>`,
+      to: toEmail,
       reply_to: email,
       subject: `ZWAP! Contact Form: ${topic}`,
       text: `
 New ZWAP! contact form submission
+
+Route:
+${routeKey}
+
+Sent To:
+${toEmail}
 
 Name:
 ${name}
@@ -64,6 +91,7 @@ ${message}
       statusCode: 200,
       body: JSON.stringify({
         success: true,
+        routedTo: routeKey,
       }),
     };
   } catch (error) {
