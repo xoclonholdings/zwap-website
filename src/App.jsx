@@ -3,10 +3,10 @@ import bang from "./assets/Zwap_bang_3d.png";
 
 import LandingHeader from "./components/LandingHeader";
 import EarlyAccessModal from "./components/EarlyAccessModal";
+import GlobalFooterLinks from "./components/GlobalFooterLinks";
 
 import MailModal from "./app/MailModal";
 import AppHome from "./app/AppHome";
-import AppFooter from "./app/AppFooter";
 import AppRoutes from "./app/AppRoutes";
 import appStyles from "./app/appStyles";
 
@@ -133,6 +133,9 @@ export default function App() {
     return routeContent;
   }
 
+  const isDesktop =
+    typeof window !== "undefined" ? window.innerWidth >= 900 : false;
+
   return (
     <div className="landing-shell">
       <style>{appStyles}</style>
@@ -154,12 +157,25 @@ export default function App() {
         <AppHome
           openEarlyAccessModal={openEarlyAccessModal}
           setIsMailOpen={setIsMailOpen}
+          onNews={() => setActivePage("news")}
+          onBlog={() => setActivePage("blog")}
         />
 
-        <AppFooter
+        <GlobalFooterLinks
+          isDesktop={isDesktop}
           onPrivacy={() => setActivePage("privacy")}
           onTerms={() => setActivePage("terms")}
           onSitemap={() => setActivePage("sitemap")}
+          onNews={() => setActivePage("news")}
+          onBlog={() => setActivePage("blog")}
+          onAbout={() => setActivePage("about")}
+          onFeatures={() => setActivePage("features")}
+          onPartners={() => setActivePage("partners")}
+          onDevelopers={() => setActivePage("developer-portal")}
+          onEnterprise={() => setActivePage("enterprise-wellness")}
+          onContact={() => setActivePage("contact")}
+          onFAQ={() => setActivePage("faq")}
+          onHowItWorks={() => setActivePage("how-it-works")}
         />
 
         <EarlyAccessModal
