@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import GlobalFooterLinks from "../../components/GlobalFooterLinks";
 
 function SectionEyebrow({ children }) {
@@ -55,25 +55,14 @@ function ContactCard({ title, email, description, accent = "cyan" }) {
           linear-gradient(180deg, rgba(16,18,34,0.94) 0%, rgba(8,10,22,0.98) 100%)
         `,
         padding: "20px 18px",
-        boxShadow:
-          "0 16px 34px rgba(0,0,0,0.26), inset 0 1px 0 rgba(255,255,255,0.03)",
       }}
     >
       <div
         style={{
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "6px 10px",
-          borderRadius: "999px",
-          marginBottom: "12px",
-          background: "rgba(255,255,255,0.04)",
-          border: `1px solid ${theme.border}`,
-          color: theme.text,
           fontSize: "11px",
           fontWeight: 900,
-          letterSpacing: "0.08em",
-          textTransform: "uppercase",
+          color: theme.text,
+          marginBottom: "10px",
         }}
       >
         {title}
@@ -81,12 +70,9 @@ function ContactCard({ title, email, description, accent = "cyan" }) {
 
       <div
         style={{
-          fontSize: "19px",
-          fontWeight: 900,
-          lineHeight: 1.2,
-          marginBottom: "10px",
+          fontSize: "18px",
+          fontWeight: 800,
           color: "#F8FAFF",
-          wordBreak: "break-word",
         }}
       >
         {email}
@@ -94,10 +80,9 @@ function ContactCard({ title, email, description, accent = "cyan" }) {
 
       <p
         style={{
-          margin: 0,
+          marginTop: "8px",
           fontSize: "14px",
-          lineHeight: 1.75,
-          color: "rgba(235,239,255,0.74)",
+          color: "rgba(235,239,255,0.7)",
         }}
       >
         {description}
@@ -105,119 +90,6 @@ function ContactCard({ title, email, description, accent = "cyan" }) {
     </article>
   );
 }
-
-function ContactFormStub() {
-  return (
-    <section
-      style={{
-        borderRadius: "24px",
-        border: "1px solid rgba(255,255,255,0.08)",
-        background:
-          "linear-gradient(180deg, rgba(14,16,30,0.92) 0%, rgba(8,10,22,0.96) 100%)",
-        boxShadow:
-          "0 18px 40px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.03)",
-        padding: "22px 18px",
-      }}
-    >
-      <SectionEyebrow>Contact Form</SectionEyebrow>
-
-      <h2
-        style={{
-          margin: "0 0 10px",
-          fontSize: "clamp(22px, 6vw, 34px)",
-          lineHeight: 1.08,
-          fontWeight: 900,
-          letterSpacing: "-0.03em",
-          textAlign: "center",
-          color: "#F8FAFF",
-        }}
-      >
-        Send an inquiry
-      </h2>
-
-      <p
-        style={{
-          margin: "0 auto 18px",
-          maxWidth: "720px",
-          textAlign: "center",
-          fontSize: "14px",
-          lineHeight: 1.75,
-          color: "rgba(235,239,255,0.74)",
-        }}
-      >
-        A direct contact form can be connected here later for support, sponsor,
-        enterprise, developer, and press requests. For now, use the email
-        addresses above to reach the correct lane faster.
-      </p>
-
-      <div
-        style={{
-          display: "grid",
-          gap: "12px",
-        }}
-      >
-        <input
-          type="text"
-          placeholder="Your name"
-          disabled
-          style={inputStyle}
-        />
-
-        <input
-          type="email"
-          placeholder="Your email"
-          disabled
-          style={inputStyle}
-        />
-
-        <textarea
-          placeholder="Your message"
-          rows={5}
-          disabled
-          style={{
-            ...inputStyle,
-            resize: "vertical",
-            minHeight: "120px",
-            fontFamily:
-              "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-          }}
-        />
-
-        <button
-          type="button"
-          disabled
-          style={{
-            border: "1px solid rgba(180,134,255,0.22)",
-            background:
-              "linear-gradient(180deg, rgba(24,26,48,1) 0%, rgba(11,13,28,1) 100%)",
-            color: "rgba(248,250,255,0.52)",
-            borderRadius: "999px",
-            padding: "14px 20px",
-            fontSize: "14px",
-            fontWeight: 800,
-            cursor: "not-allowed",
-            boxShadow:
-              "inset 0 1px 0 rgba(255,255,255,0.06), 0 10px 24px rgba(0,0,0,0.22)",
-          }}
-        >
-          Contact Form Coming Soon
-        </button>
-      </div>
-    </section>
-  );
-}
-
-const inputStyle = {
-  width: "100%",
-  boxSizing: "border-box",
-  borderRadius: "16px",
-  border: "1px solid rgba(255,255,255,0.10)",
-  background: "rgba(255,255,255,0.04)",
-  color: "rgba(245,247,255,0.55)",
-  padding: "14px 14px",
-  fontSize: "14px",
-  outline: "none",
-};
 
 export default function ContactPage({
   onBack,
@@ -235,246 +107,135 @@ export default function ContactPage({
   const isDesktop =
     typeof window !== "undefined" ? window.innerWidth >= 900 : false;
 
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    topic: "General Inquiry",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const handleChange = (key, value) => {
+    setForm((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (loading) return;
+
+    setLoading(true);
+
+    try {
+      const res = await fetch("/.netlify/functions/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed");
+      }
+
+      setSuccess(true);
+      setForm({
+        name: "",
+        email: "",
+        topic: "General Inquiry",
+        message: "",
+      });
+    } catch (err) {
+      alert("Something went wrong. Try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div
       style={{
         minHeight: "100dvh",
-        width: "100%",
         display: "flex",
         justifyContent: "center",
-        background: `
-          radial-gradient(circle at 72% 22%, rgba(204,91,255,0.10), transparent 16%),
-          radial-gradient(circle at 18% 28%, rgba(88,240,255,0.08), transparent 14%),
-          radial-gradient(circle at 55% 62%, rgba(255,176,86,0.05), transparent 12%),
-          linear-gradient(180deg, #030308 0%, #080913 58%, #04050A 100%)
-        `,
+        background: "#030308",
         color: "#F5F7FF",
-        fontFamily:
-          "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
       }}
     >
-      <div
-        style={{
-          width: "100%",
-          maxWidth: "1200px",
-          minHeight: "100dvh",
-          padding:
-            "calc(env(safe-area-inset-top, 0px) + 16px) 16px calc(env(safe-area-inset-bottom, 0px) + 32px)",
-          boxSizing: "border-box",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginBottom: "20px",
-          }}
-        >
-          <button
-            type="button"
-            onClick={onBack}
-            style={{
-              border: "none",
-              background: "transparent",
-              color: "rgba(245,247,255,0.76)",
-              fontSize: "15px",
-              fontWeight: 700,
-              cursor: "pointer",
-              padding: 0,
-            }}
-          >
-            ← Back
-          </button>
+      <div style={{ width: "100%", maxWidth: "1200px", padding: "20px" }}>
+        <button onClick={onBack}>← Back</button>
 
-          <div
-            style={{
-              fontSize: "13px",
-              fontWeight: 800,
-              letterSpacing: "0.16em",
-              textTransform: "uppercase",
-              color: "rgba(245,247,255,0.56)",
-            }}
-          >
-            Contact
-          </div>
+        <h1 style={{ textAlign: "center" }}>Contact ZWAP!</h1>
 
-          <div style={{ width: "52px" }} />
-        </div>
+        {/* FORM */}
+        <section style={{ marginTop: 20 }}>
+          {success ? (
+            <div style={{ textAlign: "center" }}>
+              Message sent. We'll get back to you.
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <input
+                placeholder="Your name"
+                value={form.name}
+                onChange={(e) => handleChange("name", e.target.value)}
+                required
+                style={inputStyle}
+              />
 
-        <section
-          style={{
-            textAlign: "center",
-            marginBottom: "24px",
-          }}
-        >
-          <SectionEyebrow>Reach the Team</SectionEyebrow>
+              <input
+                type="email"
+                placeholder="Your email"
+                value={form.email}
+                onChange={(e) => handleChange("email", e.target.value)}
+                required
+                style={inputStyle}
+              />
 
-          <h1
-            style={{
-              margin: "0 0 12px",
-              fontSize: "clamp(34px, 9vw, 60px)",
-              lineHeight: 1.02,
-              fontWeight: 900,
-              letterSpacing: "-0.04em",
-              color: "#F9FBFF",
-            }}
-          >
-            Contact ZWAP!
-          </h1>
+              <select
+                value={form.topic}
+                onChange={(e) => handleChange("topic", e.target.value)}
+                style={inputStyle}
+              >
+                <option>General Inquiry</option>
+                <option>Support</option>
+                <option>Partnership</option>
+                <option>Enterprise</option>
+                <option>Developers</option>
+                <option>Press</option>
+              </select>
 
-          <p
-            style={{
-              margin: "0 auto",
-              maxWidth: "760px",
-              fontSize: "15px",
-              lineHeight: 1.7,
-              color: "rgba(235,239,255,0.76)",
-            }}
-          >
-            Questions, partnerships, enterprise wellness, sponsors, developers,
-            press, or support. Reach the ZWAP! team here.
-          </p>
-        </section>
+              <textarea
+                placeholder="Your message"
+                value={form.message}
+                onChange={(e) => handleChange("message", e.target.value)}
+                required
+                rows={5}
+                style={{ ...inputStyle, minHeight: 120 }}
+              />
 
-        <section
-          style={{
-            marginBottom: "18px",
-            borderRadius: "24px",
-            border: "1px solid rgba(255,255,255,0.08)",
-            background:
-              "linear-gradient(180deg, rgba(14,16,30,0.92) 0%, rgba(8,10,22,0.96) 100%)",
-            boxShadow:
-              "0 18px 40px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.03)",
-            padding: "20px 18px",
-          }}
-        >
-          <h2
-            style={{
-              margin: "0 0 10px",
-              fontSize: "clamp(22px, 6vw, 34px)",
-              lineHeight: 1.08,
-              fontWeight: 900,
-              letterSpacing: "-0.03em",
-              color: "#F8FAFF",
-              textAlign: "center",
-            }}
-          >
-            Direct contact lanes
-          </h2>
-
-          <p
-            style={{
-              margin: "0 auto",
-              maxWidth: "760px",
-              fontSize: "14px",
-              lineHeight: 1.75,
-              color: "rgba(235,239,255,0.74)",
-              textAlign: "center",
-            }}
-          >
-            Use the lane that best matches your request so it lands in the right
-            place from the start.
-          </p>
-        </section>
-
-        <section
-          style={{
-            display: "grid",
-            gridTemplateColumns: isDesktop
-              ? "repeat(2, minmax(0, 1fr))"
-              : "1fr",
-            gap: "16px",
-            marginBottom: "24px",
-          }}
-        >
-          <ContactCard
-            title="General Support"
-            email="support@zwap.online"
-            description="For app questions, account help, early access, and general support."
-            accent="cyan"
-          />
-
-          <ContactCard
-            title="Sponsors & Partners"
-            email="partners@zwap.online"
-            description="For sponsor opportunities, featured campaigns, ecosystem partnerships, and brand collaborations."
-            accent="purple"
-          />
-
-          <ContactCard
-            title="Enterprise & Workplace Wellness"
-            email="enterprise@zwap.online"
-            description="For workplace wellness, team engagement, rewards programs, and enterprise partnerships."
-            accent="gold"
-          />
-
-          <ContactCard
-            title="Developers"
-            email="developers@zwap.online"
-            description="For SDK access, game submissions, integrations, APIs, and developer partnerships."
-            accent="pink"
-          />
-
-          <ContactCard
-            title="Press & Media"
-            email="press@zwap.online"
-            description="For interviews, media coverage, podcasts, speaking opportunities, and press inquiries."
-            accent="cyan"
-          />
-
-          <ContactCard
-            title="Business"
-            email="hello@zwap.online"
-            description="For broader business inquiries, strategic conversations, and general company communication."
-            accent="purple"
-          />
-        </section>
-
-        <div style={{ marginBottom: "24px" }}>
-          <ContactFormStub />
-        </div>
-
-        <section
-          style={{
-            marginBottom: "24px",
-            borderRadius: "24px",
-            border: "1px solid rgba(255,255,255,0.08)",
-            background:
-              "linear-gradient(180deg, rgba(16,18,34,0.94) 0%, rgba(8,10,22,0.98) 100%)",
-            padding: "22px 18px",
-            textAlign: "center",
-          }}
-        >
-          <SectionEyebrow>Response Window</SectionEyebrow>
-
-          <p
-            style={{
-              margin: "0 auto 10px",
-              maxWidth: "760px",
-              fontSize: "14px",
-              lineHeight: 1.8,
-              color: "rgba(235,239,255,0.76)",
-            }}
-          >
-            ZWAP! is developed by ZWAP LLC, a subsidiary of XOCLON HOLDINGS INC.
-          </p>
-
-          <p
-            style={{
-              margin: 0,
-              maxWidth: "760px",
-              marginInline: "auto",
-              fontSize: "14px",
-              lineHeight: 1.8,
-              color: "rgba(235,239,255,0.64)",
-            }}
-          >
-            Response times may vary depending on request volume, but most
-            inquiries are answered within 2–5 business days.
-          </p>
+              <button
+                type="submit"
+                disabled={loading}
+                style={{
+                  width: "100%",
+                  padding: 14,
+                  borderRadius: 999,
+                  background: "#6b5cff",
+                  color: "white",
+                  fontWeight: "bold",
+                  border: "none",
+                  marginTop: 10,
+                }}
+              >
+                {loading ? "Sending..." : "Send Message"}
+              </button>
+            </form>
+          )}
         </section>
 
         <GlobalFooterLinks
@@ -494,3 +255,13 @@ export default function ContactPage({
     </div>
   );
 }
+
+const inputStyle = {
+  width: "100%",
+  marginBottom: 10,
+  padding: 12,
+  borderRadius: 10,
+  border: "1px solid #444",
+  background: "#111",
+  color: "white",
+};
