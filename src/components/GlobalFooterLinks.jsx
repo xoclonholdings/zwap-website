@@ -36,6 +36,15 @@ export default function GlobalFooterLinks({
     textAlign: "left",
   };
 
+  const gradientZwapStyle = {
+    fontWeight: 800,
+    background:
+      "linear-gradient(90deg, #66F2FF 0%, #7FD9FF 18%, #B486FF 55%, #FF67D4 100%)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    backgroundClip: "text",
+  };
+
   return (
     <footer
       style={{
@@ -154,10 +163,26 @@ export default function GlobalFooterLinks({
               Terms of Use
             </button>
           </div>
+
+          <div
+            style={{
+              marginTop: "14px",
+              maxWidth: "220px",
+              fontSize: "12px",
+              lineHeight: 1.6,
+              color: "rgba(236,240,255,0.42)",
+              textAlign: "left",
+            }}
+          >
+            <span style={gradientZwapStyle}>ZWAP!</span> is currently in early
+            access. Features and rewards are subject to change during rollout.
+          </div>
         </div>
 
         <div>
-          <div style={sectionTitleStyle}>ZWAP!</div>
+          <div style={sectionTitleStyle}>
+            <span style={gradientZwapStyle}>ZWAP!</span>
+          </div>
 
           <div
             style={{
@@ -173,8 +198,9 @@ export default function GlobalFooterLinks({
                 color: "rgba(236,240,255,0.68)",
               }}
             >
-              ZWAP! is a movement-first reward ecosystem built around
-              progression, consistency, financial literacy, and delayed value.
+              <span style={gradientZwapStyle}>ZWAP!</span> is a movement-first
+              reward ecosystem built around progression, consistency, financial
+              literacy, and delayed value.
             </div>
 
             <div
@@ -208,7 +234,8 @@ export default function GlobalFooterLinks({
             color: "rgba(236,240,255,0.56)",
           }}
         >
-          © 2026 ZWAP!™ owned by ZWAP LLC. All rights reserved.
+          © 2026 <span style={gradientZwapStyle}>ZWAP!</span>™ owned by ZWAP
+          LLC. All rights reserved.
         </div>
 
         <div
