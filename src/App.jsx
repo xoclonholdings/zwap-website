@@ -5,14 +5,12 @@ import LandingHeader from "./components/LandingHeader";
 import EarlyAccessModal from "./components/EarlyAccessModal";
 import GlobalFooterLinks from "./components/GlobalFooterLinks";
 
-import MailModal from "./app/MailModal";
 import AppHome from "./app/AppHome";
 import AppRoutes from "./app/AppRoutes";
 import appStyles from "./app/appStyles";
 
 import useAppState from "./app/useAppState";
 import useAppInit from "./app/useAppInit";
-import useMailModal from "./app/useMailModal";
 import useEarlyAccessModal from "./app/useEarlyAccessModal";
 import usePreviewUnlock from "./app/usePreviewUnlock";
 import usePreviewNavigation from "./app/usePreviewNavigation";
@@ -37,15 +35,6 @@ export default function App() {
   } = useAppState();
 
   usePageMeta(activePage);
-
-  const {
-    isMailOpen,
-    setIsMailOpen,
-    mailSubject,
-    setMailSubject,
-    mailMessage,
-    setMailMessage,
-  } = useMailModal();
 
   useAppInit({
     setReferralCode,
@@ -114,7 +103,6 @@ export default function App() {
     <AppRoutes
       activePage={activePage}
       setActivePage={setActivePage}
-      setIsMailOpen={setIsMailOpen}
       previewUnlocked={previewUnlocked}
       openEarlyAccessModal={openEarlyAccessModal}
       closeEarlyAccessModal={closeEarlyAccessModal}
@@ -156,7 +144,7 @@ export default function App() {
 
         <AppHome
           openEarlyAccessModal={openEarlyAccessModal}
-          setIsMailOpen={setIsMailOpen}
+          onContact={() => setActivePage("contact")}
           onNews={() => setActivePage("news")}
           onBlog={() => setActivePage("blog")}
         />
@@ -187,15 +175,6 @@ export default function App() {
           onSubmitAccess={unlockPreview}
           onInstantAccess={unlockPreview}
           pendingPage={pendingPage}
-        />
-
-        <MailModal
-          isOpen={isMailOpen}
-          onClose={() => setIsMailOpen(false)}
-          subject={mailSubject}
-          setSubject={setMailSubject}
-          message={mailMessage}
-          setMessage={setMailMessage}
         />
       </div>
     </div>
