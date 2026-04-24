@@ -2,9 +2,11 @@ import heroPhoneMockup from "../assets/hero_phone_mockup.png";
 import usePublicPosts from "../hooks/usePublicPosts";
 import { XIcon, TikTokIcon, MailIcon } from "./icons";
 
-function LandingLatestUpdates({ onNews, onBlog }) {
-  const { posts, featuredPost, isLoading, loadError } = usePublicPosts();
+function GradientZwap() {
+  return <span className="gradient-zwap">ZWAP!</span>;
+}
 
+function LandingLatestUpdates({ posts, featuredPost, isLoading, loadError, onNews, onBlog }) {
   const visiblePosts = [
     featuredPost,
     ...posts.filter((post) => post.id !== featuredPost?.id),
@@ -19,7 +21,9 @@ function LandingLatestUpdates({ onNews, onBlog }) {
   return (
     <section className="landing-latest">
       <div className="landing-latest-head">
-        <div className="landing-latest-eyebrow">Latest from ZWAP!</div>
+        <div className="landing-latest-eyebrow">
+          Latest from <GradientZwap />
+        </div>
 
         <h2 className="landing-latest-title">
           Platform Updates & Insights
@@ -27,7 +31,7 @@ function LandingLatestUpdates({ onNews, onBlog }) {
 
         <p className="landing-latest-sub">
           Follow launch notes, platform explainers, sponsor news, and ecosystem
-          updates as ZWAP! moves toward public rollout.
+          updates as <GradientZwap /> moves toward public rollout.
         </p>
       </div>
 
@@ -79,6 +83,8 @@ export default function AppHome({
   onNews,
   onBlog,
 }) {
+  const { posts, featuredPost, isLoading, loadError } = usePublicPosts();
+
   return (
     <>
       <main className="landing-main">
@@ -89,13 +95,12 @@ export default function AppHome({
             </h1>
 
             <h2 className="landing-title-bottom">
-              <span className="landing-title-accent">ZWAP!</span>{" "}
-              turns it into rewards.
+              <GradientZwap /> turns it into rewards.
             </h2>
           </div>
 
           <p className="landing-sub">
-            It’s giving...earn smarter not harder.
+            {featuredPost?.excerpt || "It’s giving...earn smarter not harder."}
           </p>
 
           <div className="landing-cta-group">
@@ -144,7 +149,14 @@ export default function AppHome({
         </section>
       </main>
 
-      <LandingLatestUpdates onNews={onNews} onBlog={onBlog} />
+      <LandingLatestUpdates
+        posts={posts}
+        featuredPost={featuredPost}
+        isLoading={isLoading}
+        loadError={loadError}
+        onNews={onNews}
+        onBlog={onBlog}
+      />
     </>
   );
 }
