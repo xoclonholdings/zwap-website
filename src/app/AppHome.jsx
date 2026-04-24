@@ -6,7 +6,14 @@ function GradientZwap() {
   return <span className="gradient-zwap">ZWAP!</span>;
 }
 
-function LandingLatestUpdates({ posts, featuredPost, isLoading, loadError, onNews, onBlog }) {
+function LandingLatestUpdates({
+  posts,
+  featuredPost,
+  isLoading,
+  loadError,
+  onNews,
+  onBlog,
+}) {
   const visiblePosts = [
     featuredPost,
     ...posts.filter((post) => post.id !== featuredPost?.id),
@@ -79,9 +86,9 @@ function LandingLatestUpdates({ posts, featuredPost, isLoading, loadError, onNew
 
 export default function AppHome({
   openEarlyAccessModal,
-  setIsMailOpen,
   onNews,
   onBlog,
+  onContact, // ✅ NEW PROP
 }) {
   const { posts, featuredPost, isLoading, loadError } = usePublicPosts();
 
@@ -130,9 +137,10 @@ export default function AppHome({
                 <TikTokIcon />
               </a>
 
+              {/* ✅ FIXED */}
               <button
                 type="button"
-                onClick={() => setIsMailOpen(true)}
+                onClick={onContact}
                 aria-label="Email"
               >
                 <MailIcon />
