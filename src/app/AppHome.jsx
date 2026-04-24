@@ -1,9 +1,83 @@
 import heroPhoneMockup from "../assets/hero_phone_mockup.png";
+import usePublicPosts from "../hooks/usePublicPosts";
 import { XIcon, TikTokIcon, MailIcon } from "./icons";
+
+function LandingLatestUpdates({ onNews, onBlog }) {
+  const { posts, featuredPost, isLoading, loadError } = usePublicPosts();
+
+  const visiblePosts = [
+    featuredPost,
+    ...posts.filter((post) => post.id !== featuredPost?.id),
+  ]
+    .filter(Boolean)
+    .slice(0, 3);
+
+  if (isLoading || loadError || visiblePosts.length === 0) {
+    return null;
+  }
+
+  return (
+    <section className="landing-latest">
+      <div className="landing-latest-head">
+        <div className="landing-latest-eyebrow">Latest from ZWAP!</div>
+
+        <h2 className="landing-latest-title">
+          Platform Updates & Insights
+        </h2>
+
+        <p className="landing-latest-sub">
+          Follow launch notes, platform explainers, sponsor news, and ecosystem
+          updates as ZWAP! moves toward public rollout.
+        </p>
+      </div>
+
+      <div className="landing-latest-grid">
+        {visiblePosts.map((post) => (
+          <article
+            key={post.id}
+            className={`landing-latest-card ${
+              post.featured ? "is-featured" : ""
+            }`}
+          >
+            <div className="landing-latest-card-tag">
+              {post.featured ? "Featured" : post.category || "Update"}
+            </div>
+
+            <h3>{post.title}</h3>
+
+            <p>{post.excerpt}</p>
+
+            <div className="landing-latest-meta">
+              <span>{post.readTime || "4 min read"}</span>
+              {post.date ? (
+                <>
+                  <span>•</span>
+                  <span>{post.date}</span>
+                </>
+              ) : null}
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div className="landing-latest-actions">
+        <button type="button" onClick={onNews}>
+          View News
+        </button>
+
+        <button type="button" onClick={onBlog}>
+          View Blog
+        </button>
+      </div>
+    </section>
+  );
+}
 
 export default function AppHome({
   openEarlyAccessModal,
   setIsMailOpen,
+  onNews,
+  onBlog,
 }) {
   return (
     <>
@@ -69,6 +143,8 @@ export default function AppHome({
           />
         </section>
       </main>
+
+      <LandingLatestUpdates onNews={onNews} onBlog={onBlog} />
     </>
   );
 }
