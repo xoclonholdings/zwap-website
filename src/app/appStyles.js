@@ -159,283 +159,116 @@ const appStyles = `
     filter: drop-shadow(0 0 26px rgba(130, 88, 255, 0.14));
   }
 
-  .landing-footer {
-    margin-top: 8px;
-    padding-top: 18px;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    color: rgba(236, 240, 255, 0.72);
+  /* ---------- NEW SECTION ---------- */
+
+  .gradient-zwap {
+    font-weight: 800;
+    background: linear-gradient(90deg, #66F2FF 0%, #7FD9FF 18%, #B486FF 55%, #FF67D4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .landing-latest {
+    width: 100%;
+    margin-top: 28px;
+    padding: 22px 14px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
-    text-align: center;
-  }
-
-  .landing-footer-links {
-    display: flex;
     gap: 18px;
-    flex-wrap: wrap;
-    justify-content: center;
-    font-size: 14px;
   }
 
-  .landing-footer-links button {
-    color: inherit;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    font: inherit;
+  .landing-latest-head {
+    text-align: center;
+    max-width: 520px;
   }
 
-  .landing-footer-copy {
-    font-size: 14px;
-    line-height: 1.5;
-    max-width: 280px;
+  .landing-latest-eyebrow {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(245,247,255,0.52);
+    margin-bottom: 8px;
   }
 
-  .mail-modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(1, 2, 8, 0.76);
-    backdrop-filter: blur(8px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    z-index: 9999;
-  }
-
-  .mail-modal-card {
-    width: 100%;
-    max-width: 460px;
-    border-radius: 24px;
-    border: 1px solid rgba(174, 132, 255, 0.24);
-    background:
-      radial-gradient(circle at 72% 24%, rgba(122, 91, 255, 0.10), transparent 24%),
-      linear-gradient(180deg, rgba(12,14,28,0.96) 0%, rgba(8,10,20,0.98) 100%);
-    box-shadow:
-      0 20px 60px rgba(0,0,0,0.42),
-      0 0 30px rgba(103, 78, 255, 0.12);
-    padding: 20px;
-  }
-
-  .mail-modal-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 18px;
-  }
-
-  .mail-modal-title {
-    font-size: 24px;
-    line-height: 1.05;
+  .landing-latest-title {
+    font-size: clamp(22px, 6vw, 32px);
     font-weight: 900;
     letter-spacing: -0.03em;
-    color: #F7F8FF;
+    margin: 0 0 8px;
   }
 
-  .mail-close {
-    border: none;
-    background: transparent;
-    color: rgba(245,247,255,0.82);
-    font-size: 32px;
-    line-height: 1;
-    cursor: pointer;
-    padding: 0;
+  .landing-latest-sub {
+    font-size: 14px;
+    color: rgba(235,239,255,0.72);
+    line-height: 1.6;
   }
 
-  .mail-field {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 14px;
-  }
-
-  .mail-label {
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(245,247,255,0.62);
-  }
-
-  .mail-input,
-  .mail-textarea {
+  .landing-latest-grid {
     width: 100%;
-    border-radius: 16px;
-    border: 1px solid rgba(174, 132, 255, 0.24);
-    background: rgba(255,255,255,0.04);
-    color: #F5F7FF;
-    padding: 14px 16px;
-    font-size: 15px;
-    outline: none;
+    display: grid;
+    gap: 14px;
   }
 
-  .mail-input.readonly {
-    color: rgba(245,247,255,0.88);
+  .landing-latest-card {
+    border-radius: 22px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background:
+      radial-gradient(circle at top right, rgba(180,134,255,0.12), transparent 30%),
+      rgba(255,255,255,0.03);
+    padding: 16px;
+    text-align: left;
   }
 
-  .mail-textarea {
-    min-height: 120px;
-    resize: vertical;
-    line-height: 1.5;
+  .landing-latest-card.is-featured {
+    border-color: rgba(103,242,255,0.22);
   }
 
-  .mail-actions {
+  .landing-latest-card h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+    font-weight: 900;
+  }
+
+  .landing-latest-card p {
+    font-size: 13px;
+    color: rgba(235,239,255,0.72);
+  }
+
+  .landing-latest-meta {
+    margin-top: 10px;
+    font-size: 11px;
+    color: rgba(235,239,255,0.55);
+    display: flex;
+    gap: 6px;
+  }
+
+  .landing-latest-actions {
     display: flex;
     gap: 12px;
-    margin-top: 8px;
   }
 
-  .mail-secondary,
-  .mail-primary {
-    flex: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 52px;
+  .landing-latest-actions button {
     border-radius: 999px;
-    font-size: 15px;
-    font-weight: 800;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  .mail-secondary {
-    border: 1px solid rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.12);
     background: rgba(255,255,255,0.04);
-    color: rgba(245,247,255,0.88);
-  }
-
-  .mail-primary {
-    border: 2px solid rgba(165, 103, 255, 0.78);
-    background: linear-gradient(180deg, rgba(14,16,30,0.94) 0%, rgba(8,10,22,0.98) 100%);
-    color: #F9FAFF;
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.08),
-      0 10px 26px rgba(73, 44, 162, 0.28);
-  }
-
-  @keyframes shimmer {
-    0% { box-shadow: 0 0 18px rgba(115, 88, 255, 0.25), 0 0 28px rgba(226, 74, 255, 0.10); }
-    50% { box-shadow: 0 0 26px rgba(115, 88, 255, 0.35), 0 0 40px rgba(226, 74, 255, 0.16); }
-    100% { box-shadow: 0 0 18px rgba(115, 88, 255, 0.25), 0 0 28px rgba(226, 74, 255, 0.10); }
-  }
-
-  @keyframes floatMockup {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-8px); }
-    100% { transform: translateY(0px); }
+    color: #F8FAFF;
+    padding: 10px 16px;
+    font-weight: 800;
+    cursor: pointer;
   }
 
   @media (min-width: 768px) {
-    .landing-app {
-      max-width: 900px;
-      padding:
-        calc(env(safe-area-inset-top, 0px) + 18px)
-        24px
-        calc(env(safe-area-inset-bottom, 0px) + 28px);
-    }
-
-    .landing-main {
-      gap: 34px;
-    }
-
-    .landing-title-top {
-      font-size: clamp(48px, 7.8vw, 74px);
-    }
-
-    .landing-title-bottom {
-      font-size: clamp(54px, 8.6vw, 84px);
-      margin-top: 18px;
-    }
-
-    .landing-sub {
-      max-width: 420px;
-      font-size: 19px;
-    }
-
-    .landing-visual img {
-      max-width: 500px;
-    }
-
-    .landing-footer-copy {
-      max-width: 420px;
+    .landing-latest-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
   @media (min-width: 1100px) {
-    .landing-app {
-      max-width: 1200px;
-      padding:
-        calc(env(safe-area-inset-top, 0px) + 24px)
-        32px
-        calc(env(safe-area-inset-bottom, 0px) + 28px);
-    }
-
-    .landing-main {
-      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-      gap: 44px;
-      padding-top: 18px;
-    }
-
-    .landing-copy {
-      align-items: center;
-      text-align: center;
-    }
-
-    .landing-title-wrap {
-      align-items: center;
-    }
-
-    .landing-title-top {
-      font-size: clamp(56px, 5.2vw, 84px);
-    }
-
-    .landing-title-bottom {
-      font-size: clamp(64px, 6vw, 96px);
-      margin-top: 24px;
-      max-width: 760px;
-    }
-
-    .landing-sub {
-      max-width: 500px;
-      font-size: 22px;
-    }
-
-    .landing-cta {
-      max-width: 320px;
-      font-size: 21px;
-    }
-
-    .landing-cta-group {
-      align-items: center;
-    }
-
-    .landing-socials {
-      justify-content: center;
-    }
-
-    .landing-visual {
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-
-    .landing-visual img {
-      max-width: 620px;
-    }
-
-    .landing-footer {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      text-align: left;
-    }
-
-    .landing-footer-copy {
-      text-align: right;
+    .landing-latest-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 `;
