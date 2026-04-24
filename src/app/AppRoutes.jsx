@@ -24,7 +24,6 @@ import PreviewUnlockRedirect from "./PreviewUnlockRedirect";
 export default function AppRoutes({
   activePage,
   setActivePage,
-  setIsMailOpen,
   previewUnlocked,
   openEarlyAccessModal,
   closeEarlyAccessModal,
