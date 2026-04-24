@@ -4,7 +4,13 @@ import googlePlayLogo from "../assets/google_play_logo.PNG";
 
 function AppleIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
       <path d="M16.7 12.9c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.7-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 6.9 1.1 9 .7 1 1.6 2.2 2.8 2.1 1.1 0 1.6-.7 3-.7 1.4 0 1.8.7 3 .7 1.2 0 2-.1 2.7-1.1.8-1 1.2-2 1.2-2.1-.1 0-2.3-.9-2.3-5.1ZM14.5 6.4c.6-.7 1-1.7.9-2.6-.9 0-2 .6-2.6 1.3-.6.6-1.1 1.6-1 2.5 1 .1 2-.5 2.7-1.2Z" />
     </svg>
   );
@@ -48,14 +54,14 @@ export default function LandingHeader({
     textDecoration: "none",
     background: "transparent",
     border: "none",
-    padding: 0,
+    padding: isDesktop ? "6px 0" : 0,
     cursor: "pointer",
     fontSize: "12px",
     fontWeight: 700,
     letterSpacing: "0.08em",
     textTransform: "uppercase",
-    textAlign: isDesktop ? "right" : "center",
-    width: "100%",
+    textAlign: "center",
+    width: isDesktop ? "auto" : "100%",
     whiteSpace: "nowrap",
   };
 
@@ -105,9 +111,9 @@ export default function LandingHeader({
         <div
           style={{
             display: "flex",
-            alignItems: "flex-start",
+            alignItems: isDesktop ? "center" : "flex-start",
             justifyContent: "space-between",
-            gap: "12px",
+            gap: isDesktop ? "28px" : "12px",
           }}
         >
           <div
@@ -126,21 +132,36 @@ export default function LandingHeader({
                 display: "block",
               }}
             />
+
             <Star style={{ top: "-4px", left: "8px" }} />
-            <Star style={{ top: "10px", right: "4px", animationDelay: "0.8s" }} />
-            <Star style={{ bottom: "8px", right: "-2px", animationDelay: "1.4s" }} />
+            <Star
+              style={{
+                top: "10px",
+                right: "4px",
+                animationDelay: "0.8s",
+              }}
+            />
+            <Star
+              style={{
+                bottom: "8px",
+                right: "-2px",
+                animationDelay: "1.4s",
+              }}
+            />
           </div>
 
           <nav
             style={
               isDesktop
                 ? {
-                    display: "flex",
+                    flex: 1,
+                    display: "grid",
+                    gridTemplateColumns: "repeat(4, max-content)",
+                    justifyContent: "end",
                     alignItems: "center",
-                    justifyContent: "flex-end",
-                    gap: "14px",
-                    flexWrap: "wrap",
-                    maxWidth: "820px",
+                    columnGap: "22px",
+                    rowGap: "10px",
+                    maxWidth: "760px",
                   }
                 : {
                     display: "grid",
