@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../assets/Zwap_logo_full.png";
 import googlePlayLogo from "../assets/google_play_logo.PNG";
 
@@ -46,18 +46,28 @@ export default function LandingHeader({
   onGooglePlay,
   onAppleStore,
 }) {
-  const isDesktop =
-    typeof window !== "undefined" ? window.innerWidth >= 768 : false;
+  const [isDesktop, setIsDesktop] = useState(
+    typeof window !== "undefined" ? window.innerWidth >= 1024 : false
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const linkStyle = {
     color: "#F5F7FF",
     textDecoration: "none",
     background: "transparent",
     border: "none",
-    padding: isDesktop ? "6px 0" : 0,
+    padding: isDesktop ? "6px 4px" : 0,
     cursor: "pointer",
-    fontSize: "12px",
-    fontWeight: 700,
+    fontSize: isDesktop ? "12px" : "12px",
+    fontWeight: 800,
     letterSpacing: "0.08em",
     textTransform: "uppercase",
     textAlign: "center",
@@ -113,13 +123,14 @@ export default function LandingHeader({
             display: "flex",
             alignItems: isDesktop ? "center" : "flex-start",
             justifyContent: "space-between",
-            gap: isDesktop ? "28px" : "12px",
+            gap: isDesktop ? "32px" : "12px",
+            width: "100%",
           }}
         >
           <div
             style={{
               position: "relative",
-              width: isDesktop ? "104px" : "96px",
+              width: isDesktop ? "118px" : "96px",
               flexShrink: 0,
             }}
           >
@@ -155,13 +166,13 @@ export default function LandingHeader({
               isDesktop
                 ? {
                     flex: 1,
-                    display: "grid",
-                    gridTemplateColumns: "repeat(4, max-content)",
-                    justifyContent: "end",
+                    minWidth: 0,
+                    display: "flex",
                     alignItems: "center",
-                    columnGap: "22px",
-                    rowGap: "10px",
-                    maxWidth: "760px",
+                    justifyContent: "flex-end",
+                    gap: "18px",
+                    flexWrap: "nowrap",
+                    overflow: "visible",
                   }
                 : {
                     display: "grid",
