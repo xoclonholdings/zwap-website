@@ -14,6 +14,7 @@ export default function GlobalFooterLinks({
   onContact,
   onFAQ,
   onHowItWorks,
+  onDeleteAccount,
   isDesktop = false,
 }) {
   const sectionTitleStyle = {
@@ -43,6 +44,17 @@ export default function GlobalFooterLinks({
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
     backgroundClip: "text",
+  };
+
+  const handleDeleteAccountClick = () => {
+    if (typeof onDeleteAccount === "function") {
+      onDeleteAccount();
+      return;
+    }
+
+    if (typeof window !== "undefined") {
+      window.location.href = "/delete-account";
+    }
   };
 
   return (
@@ -161,6 +173,14 @@ export default function GlobalFooterLinks({
 
             <button type="button" onClick={onTerms} style={linkButtonStyle}>
               Terms of Use
+            </button>
+
+            <button
+              type="button"
+              onClick={handleDeleteAccountClick}
+              style={linkButtonStyle}
+            >
+              Account & Data Deletion
             </button>
           </div>
 
