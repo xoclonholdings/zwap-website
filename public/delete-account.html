@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZWAP! Account & Data Deletion</title>
+  <title>ZWAP! Account &amp; Data Deletion</title>
 
   <style>
     :root {
-      --bg: #050814;
       --card: rgba(255, 255, 255, 0.055);
       --text: rgba(255, 255, 255, 0.88);
       --muted: rgba(255, 255, 255, 0.64);
@@ -219,10 +218,6 @@
       box-shadow: 0 0 28px rgba(34, 211, 238, 0.16);
     }
 
-    .button:hover {
-      background: linear-gradient(90deg, rgba(34, 211, 238, 0.3), rgba(244, 114, 182, 0.2));
-    }
-
     .data-list {
       display: grid;
       gap: 10px;
@@ -273,7 +268,7 @@
   <main class="page">
     <section class="hero">
       <div class="eyebrow">Privacy Control</div>
-      <h1>ZWAP! Account & Data Deletion</h1>
+      <h1>ZWAP! Account &amp; Data Deletion</h1>
       <p class="subtitle">
         Use this page to request deletion of your ZWAP! account and associated data,
         or to request deletion of specific app data without deleting your full account.
@@ -288,12 +283,12 @@
           Requests are reviewed and processed within 7 days.
         </p>
 
-        <form name="zwap-account-data-request" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <form name="zwap-account-data-request" method="post" data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="zwap-account-data-request">
 
           <label class="hidden">
             Do not fill this out
-            <input name="bot-field">
+            <input type="text" name="bot-field">
           </label>
 
           <label>
@@ -310,9 +305,7 @@
             </select>
           </label>
 
-          <label>
-            Data categories requested for deletion
-          </label>
+          <label>Data categories requested for deletion</label>
 
           <div class="checkbox-group">
             <label class="checkbox-line">
