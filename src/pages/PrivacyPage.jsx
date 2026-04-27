@@ -43,10 +43,12 @@ export default function PrivacyPage({ onBack }) {
       content: `We collect information you provide directly to us, including:
 
 • Wallet address when you connect your wallet
-• Email address if you join the mailing list or early access
-• Step count and movement data through MOVE features
+• Email address if you join the mailing list, sign in, or request early access
+• Step count, fitness activity, and movement data through MOVE features
 • Gameplay activity, scores, and session history
+• Learning progress and completion history
 • Daily task completion and reward history
+• zPts balance, streaks, badges, and progression records
 • Transaction and conversion history inside the platform
 
 We do not collect sensitive personal information unless you voluntarily provide it through support, contact forms, or early access registration.`,
@@ -56,11 +58,31 @@ We do not collect sensitive personal information unless you voluntarily provide 
       content: `We use the information we collect to:
 
 • Provide, maintain, and improve ZWAP!
-• Track progression, streaks, and rewards
+• Create and manage user accounts
+• Track progression, streaks, zPts, badges, and rewards
 • Process referrals and early access rewards
 • Send important platform updates and launch emails
 • Detect abuse, fraud, manipulation, or suspicious activity
 • Support user accounts, subscriptions, and platform features`,
+    },
+    {
+      title: "Account and Data Deletion",
+      content: `You may request deletion of your ZWAP! account and associated data, or request deletion of specific app data without deleting your full account.
+
+Deletion requests may include:
+
+• Email address
+• Account information
+• Fitness and activity data, including step-related activity
+• Gameplay, learning progress, and completion history
+• zPts balance and progression data
+• Streaks, badges, and app progress connected to your account
+
+Submit requests at:
+
+https://zwap.online/delete-account
+
+Requests are reviewed and processed within 7 days after receipt and verification. Minimal records may be retained only where required for security, fraud prevention, legal compliance, dispute handling, or abuse prevention.`,
     },
     {
       title: "Data Security",
@@ -80,12 +102,15 @@ No online system is completely immune from risk, so we cannot guarantee absolute
 • Your wallet address may be publicly visible on-chain
 • Blockchain transactions may be permanent and immutable
 • We do not control third-party blockchain networks
-• On-chain activity may be independently viewable by others`,
+• On-chain activity may be independently viewable by others
+
+Certain blockchain-related records cannot be deleted or altered by ZWAP! once recorded on public networks.`,
     },
     {
       title: "Third-Party Services",
       content: `We may use third-party services to operate parts of the platform, including:
 
+• Authentication providers
 • Analytics providers
 • Email and communications services
 • Payment processors
@@ -100,6 +125,8 @@ These third parties may have their own terms and privacy practices.`,
 • Disconnect your wallet at any time
 • Choose whether to provide your email for early access or updates
 • Contact us about your personal data
+• Request deletion of your account and associated data
+• Request deletion of specific app data without deleting your account
 • Opt out of promotional communications where applicable
 
 Please note that certain blockchain-related records cannot be deleted or altered.`,
@@ -136,7 +163,7 @@ Please note that certain blockchain-related records cannot be deleted or altered
 
           <h2 className="text-2xl font-bold text-white mb-2">Privacy Policy</h2>
 
-          <p className="text-gray-400 text-sm">Last updated: March 2026</p>
+          <p className="text-gray-400 text-sm">Last updated: April 2026</p>
         </div>
 
         <div className="space-y-6">
@@ -161,6 +188,16 @@ Please note that certain blockchain-related records cannot be deleted or altered
               className="text-cyan-400 hover:underline"
             >
               app@zwap.online
+            </a>
+          </p>
+
+          <p className="text-gray-400 text-sm mt-3">
+            Account or data deletion requests can be submitted at{" "}
+            <a
+              href="/delete-account"
+              className="text-cyan-400 hover:underline"
+            >
+              zwap.online/delete-account
             </a>
           </p>
         </div>
