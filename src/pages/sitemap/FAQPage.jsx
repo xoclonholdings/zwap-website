@@ -139,6 +139,32 @@ const FAQ_SECTIONS = [
     ],
   },
   {
+    id: "privacy-data",
+    title: "Privacy & Data",
+    faqs: [
+      {
+        question: "Can I delete my ZWAP! account?",
+        answer:
+          "Yes. You can request deletion of your ZWAP! account and associated data through the Account & Data Deletion page. Requests are reviewed and processed within 7 days.",
+      },
+      {
+        question: "Can I delete specific app data without deleting my account?",
+        answer:
+          "Yes. You can request deletion of specific data categories, including activity data, gameplay progress, learning progress, zPts balance, streaks, badges, and progression records.",
+      },
+      {
+        question: "What data is deleted when I request account deletion?",
+        answer:
+          "Account deletion includes your email address, account information, fitness and activity data, gameplay and learning progress, zPts balance, streaks, badges, and app progress connected to your account.",
+      },
+      {
+        question: "Can any data be retained after deletion?",
+        answer:
+          "Minimal records may be retained only where required for security, fraud prevention, legal compliance, dispute handling, or abuse prevention.",
+      },
+    ],
+  },
+  {
     id: "sponsors",
     title: "Sponsors",
     faqs: [
@@ -314,6 +340,7 @@ export default function FAQPage({
   onPartners,
   onDevelopers,
   onEnterprise,
+  onDeleteAccount,
 }) {
   const [activeSection, setActiveSection] = useState("general");
   const [openItems, setOpenItems] = useState({});
@@ -330,6 +357,17 @@ export default function FAQPage({
       ...prev,
       [question]: !prev[question],
     }));
+  };
+
+  const handleDeleteAccountClick = () => {
+    if (typeof onDeleteAccount === "function") {
+      onDeleteAccount();
+      return;
+    }
+
+    if (typeof window !== "undefined") {
+      window.location.href = "/delete-account";
+    }
   };
 
   return (
@@ -518,6 +556,67 @@ export default function FAQPage({
           style={{
             marginBottom: "24px",
             borderRadius: "24px",
+            border: "1px solid rgba(103,242,255,0.12)",
+            background:
+              "radial-gradient(circle at top right, rgba(103,242,255,0.10), transparent 34%), linear-gradient(180deg, rgba(16,18,34,0.94) 0%, rgba(8,10,22,0.98) 100%)",
+            padding: "22px 18px",
+            textAlign: "center",
+          }}
+        >
+          <SectionEyebrow>Privacy Control</SectionEyebrow>
+
+          <h2
+            style={{
+              margin: "0 0 10px",
+              fontSize: "clamp(22px, 6vw, 34px)",
+              lineHeight: 1.08,
+              fontWeight: 900,
+              letterSpacing: "-0.03em",
+              color: "#F8FAFF",
+            }}
+          >
+            Manage account & data deletion
+          </h2>
+
+          <p
+            style={{
+              margin: "0 auto 18px",
+              maxWidth: "720px",
+              fontSize: "14px",
+              lineHeight: 1.75,
+              color: "rgba(235,239,255,0.74)",
+            }}
+          >
+            You can request deletion of your full ZWAP! account and associated
+            data, or request deletion of specific app data without deleting your
+            full account.
+          </p>
+
+          <button
+            type="button"
+            onClick={handleDeleteAccountClick}
+            style={{
+              border: "1px solid rgba(103,242,255,0.24)",
+              background:
+                "linear-gradient(180deg, rgba(21,38,48,1) 0%, rgba(11,13,28,1) 100%)",
+              color: "#F8FAFF",
+              borderRadius: "999px",
+              padding: "14px 22px",
+              fontSize: "14px",
+              fontWeight: 800,
+              cursor: "pointer",
+              boxShadow:
+                "inset 0 1px 0 rgba(255,255,255,0.08), 0 10px 24px rgba(0,0,0,0.28)",
+            }}
+          >
+            Account & Data Deletion
+          </button>
+        </section>
+
+        <section
+          style={{
+            marginBottom: "24px",
+            borderRadius: "24px",
             border: "1px solid rgba(255,255,255,0.08)",
             background:
               "linear-gradient(180deg, rgba(16,18,34,0.94) 0%, rgba(8,10,22,0.98) 100%)",
@@ -589,6 +688,7 @@ export default function FAQPage({
           onPartners={onPartners}
           onDevelopers={onDevelopers}
           onEnterprise={onEnterprise}
+          onDeleteAccount={handleDeleteAccountClick}
         />
       </div>
     </div>
