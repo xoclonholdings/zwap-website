@@ -114,7 +114,26 @@ The App may use blockchain technology and may require a compatible wallet for ce
 • ZWAP! branding may not be used without written permission`,
     },
     {
-      title: "9. Disclaimer of Warranties",
+      title: "9. Account and Data Deletion",
+      content: `You may request deletion of your ZWAP! account and associated data, or request deletion of specific app data without deleting your full account.
+
+Requests may include:
+
+• Account information
+• Email address
+• Fitness and activity data
+• Gameplay and learning progress
+• zPts balance and progression data
+• Streaks, badges, and app progress connected to your account
+
+Deletion requests can be submitted at:
+
+https://zwap.online/delete-account
+
+Requests are reviewed and processed within 7 days after receipt and verification. Minimal records may be retained only where required for security, fraud prevention, legal compliance, dispute handling, or abuse prevention.`,
+    },
+    {
+      title: "10. Disclaimer of Warranties",
       content: `THE APP IS PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND. WE DO NOT GUARANTEE:
 
 • Continuous or uninterrupted service
@@ -125,7 +144,7 @@ The App may use blockchain technology and may require a compatible wallet for ce
 Digital assets and blockchain-based systems carry risk. Only participate within your comfort level.`,
     },
     {
-      title: "10. Limitation of Liability",
+      title: "11. Limitation of Liability",
       content: `TO THE MAXIMUM EXTENT PERMITTED BY LAW, ZWAP! AND ITS AFFILIATES SHALL NOT BE LIABLE FOR:
 
 • Loss of funds, rewards, or tokens
@@ -135,11 +154,11 @@ Digital assets and blockchain-based systems carry risk. Only participate within 
 • Indirect, incidental, or consequential damages`,
     },
     {
-      title: "11. Changes to Terms",
+      title: "12. Changes to Terms",
       content: `We may modify these terms at any time. Continued use of the App after changes constitutes acceptance of the new terms. Material changes will be communicated through the App or website.`,
     },
     {
-      title: "12. Governing Law",
+      title: "13. Governing Law",
       content: `These terms shall be governed by and construed in accordance with the laws of the State of Ohio, United States, without regard to its conflict of law provisions.`,
     },
   ];
@@ -195,6 +214,16 @@ Digital assets and blockchain-based systems carry risk. Only participate within 
               className="text-purple-400 hover:underline"
             >
               app@zwap.online
+            </a>
+          </p>
+
+          <p className="text-gray-400 text-sm mt-3">
+            Account or data deletion requests can be submitted at{" "}
+            <a
+              href="/delete-account"
+              className="text-purple-400 hover:underline"
+            >
+              zwap.online/delete-account
             </a>
           </p>
         </div>
