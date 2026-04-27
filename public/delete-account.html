@@ -9,10 +9,9 @@
     :root {
       --bg: #050814;
       --card: rgba(255, 255, 255, 0.055);
-      --card-strong: rgba(255, 255, 255, 0.085);
       --text: rgba(255, 255, 255, 0.88);
-      --muted: rgba(255, 255, 255, 0.62);
-      --faint: rgba(255, 255, 255, 0.42);
+      --muted: rgba(255, 255, 255, 0.64);
+      --faint: rgba(255, 255, 255, 0.46);
       --cyan: #22d3ee;
       --purple: #c084fc;
       --pink: #f472b6;
@@ -26,14 +25,14 @@
     body {
       min-height: 100vh;
       margin: 0;
-      padding: 32px 18px;
+      padding: 34px 18px;
       font-family: Arial, Helvetica, sans-serif;
       color: #ffffff;
       background:
-        radial-gradient(circle at 50% 12%, rgba(34, 211, 238, 0.22), transparent 34%),
-        radial-gradient(circle at 12% 88%, rgba(192, 132, 252, 0.16), transparent 32%),
+        radial-gradient(circle at 50% 10%, rgba(34, 211, 238, 0.24), transparent 34%),
+        radial-gradient(circle at 16% 86%, rgba(192, 132, 252, 0.16), transparent 32%),
         radial-gradient(circle at 92% 70%, rgba(244, 114, 182, 0.12), transparent 30%),
-        linear-gradient(180deg, #070b19 0%, #050814 52%, #02030a 100%);
+        linear-gradient(180deg, #070b19 0%, #050814 55%, #02030a 100%);
     }
 
     .page {
@@ -43,14 +42,14 @@
     }
 
     .hero {
-      padding: 28px 0 18px;
+      padding: 22px 0 16px;
       text-align: center;
     }
 
     .eyebrow {
       margin-bottom: 14px;
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--cyan);
@@ -58,8 +57,8 @@
 
     h1 {
       margin: 0;
-      font-size: clamp(38px, 10vw, 72px);
-      line-height: 0.95;
+      font-size: clamp(38px, 10vw, 70px);
+      line-height: 0.96;
       letter-spacing: -0.075em;
       background: linear-gradient(90deg, var(--cyan), #8fb4ff, var(--purple), var(--pink));
       -webkit-background-clip: text;
@@ -68,12 +67,26 @@
       filter: drop-shadow(0 0 22px rgba(34, 211, 238, 0.22));
     }
 
+    h2 {
+      margin: 0 0 12px;
+      font-size: 19px;
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      color: var(--text);
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
     .subtitle {
       max-width: 620px;
       margin: 22px auto 0;
-      font-size: 18px;
+      font-size: 17px;
       line-height: 1.55;
-      color: var(--muted);
     }
 
     .grid {
@@ -95,34 +108,17 @@
       backdrop-filter: blur(12px);
     }
 
-    .card-title {
-      margin: 0 0 10px;
-      font-size: 18px;
-      font-weight: 900;
-      letter-spacing: -0.03em;
-      color: var(--text);
-    }
-
-    .card-copy {
-      margin: 0;
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--muted);
-    }
-
-    .steps {
-      margin: 18px 0 0;
-      padding: 0;
-      list-style: none;
+    .pill-row {
       display: grid;
-      gap: 12px;
+      gap: 10px;
+      margin-top: 16px;
     }
 
-    .steps li {
-      padding: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+    .pill {
+      border: 1px solid rgba(34, 211, 238, 0.18);
       border-radius: 18px;
       background: rgba(0, 0, 0, 0.22);
+      padding: 14px;
       color: var(--text);
       font-size: 14px;
       line-height: 1.5;
@@ -136,7 +132,7 @@
 
     form {
       display: grid;
-      gap: 14px;
+      gap: 15px;
       margin-top: 18px;
       text-align: left;
     }
@@ -145,18 +141,19 @@
       display: grid;
       gap: 8px;
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--faint);
     }
 
     input,
-    textarea {
+    textarea,
+    select {
       width: 100%;
-      border: 1px solid rgba(34, 211, 238, 0.22);
+      border: 1px solid rgba(34, 211, 238, 0.24);
       border-radius: 18px;
-      background: rgba(0, 0, 0, 0.28);
+      background: rgba(0, 0, 0, 0.3);
       color: #ffffff;
       outline: none;
       padding: 14px 16px;
@@ -166,18 +163,46 @@
     }
 
     textarea {
-      min-height: 120px;
+      min-height: 118px;
       resize: vertical;
     }
 
     input:focus,
-    textarea:focus {
+    textarea:focus,
+    select:focus {
       border-color: rgba(34, 211, 238, 0.62);
       background: rgba(34, 211, 238, 0.06);
     }
 
     .hidden {
       display: none;
+    }
+
+    .checkbox-group {
+      display: grid;
+      gap: 10px;
+      margin-top: 2px;
+    }
+
+    .checkbox-line {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 12px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+      text-transform: none;
+      letter-spacing: 0;
+      font-weight: 700;
+    }
+
+    .checkbox-line input {
+      width: auto;
+      margin-top: 2px;
     }
 
     .button {
@@ -247,23 +272,24 @@
 <body>
   <main class="page">
     <section class="hero">
-      <div class="eyebrow">Account & Data Request</div>
-      <h1>ZWAP! Account Deletion</h1>
+      <div class="eyebrow">Privacy Control</div>
+      <h1>ZWAP! Account & Data Deletion</h1>
       <p class="subtitle">
-        Use this page to request deletion of your ZWAP! account and associated data.
-        Requests are reviewed and processed within 7 days.
+        Use this page to request deletion of your ZWAP! account and associated data,
+        or to request deletion of specific app data without deleting your full account.
       </p>
     </section>
 
     <section class="grid">
       <div class="card">
-        <h2 class="card-title">Submit a deletion request</h2>
-        <p class="card-copy">
+        <h2>Submit a request</h2>
+        <p>
           Complete the form below using the email address connected to your ZWAP! account.
+          Requests are reviewed and processed within 7 days.
         </p>
 
-        <form name="delete-account" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/delete-account-success">
-          <input type="hidden" name="form-name" value="delete-account">
+        <form name="zwap-account-data-request" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="zwap-account-data-request">
 
           <label class="hidden">
             Do not fill this out
@@ -277,42 +303,94 @@
 
           <label>
             Request type
-            <input name="request_type" type="text" value="Delete my ZWAP! account and associated data" readonly>
+            <select name="request_type" required>
+              <option value="">Select a request type</option>
+              <option value="Delete my ZWAP! account and associated data">Delete my ZWAP! account and associated data</option>
+              <option value="Delete specific ZWAP! app data only">Delete specific ZWAP! app data only</option>
+            </select>
           </label>
 
           <label>
-            Additional details
-            <textarea name="details" placeholder="Optional: add any details that help us identify your account."></textarea>
+            Data categories requested for deletion
           </label>
 
-          <button class="button" type="submit">Submit Deletion Request</button>
+          <div class="checkbox-group">
+            <label class="checkbox-line">
+              <input type="checkbox" name="data_categories" value="Email address and account information">
+              Email address and account information
+            </label>
+
+            <label class="checkbox-line">
+              <input type="checkbox" name="data_categories" value="Fitness and activity data">
+              Fitness and activity data, including step-related activity
+            </label>
+
+            <label class="checkbox-line">
+              <input type="checkbox" name="data_categories" value="Gameplay and learning progress">
+              Gameplay, learning progress, and completion history
+            </label>
+
+            <label class="checkbox-line">
+              <input type="checkbox" name="data_categories" value="zPts balance and progression data">
+              zPts balance, streaks, badges, and progression data
+            </label>
+
+            <label class="checkbox-line">
+              <input type="checkbox" name="data_categories" value="All account and associated data">
+              All account and associated data
+            </label>
+          </div>
+
+          <label>
+            Additional details
+            <textarea name="details" placeholder="Optional: add any details that help us identify your account or request."></textarea>
+          </label>
+
+          <button class="button" type="submit">Submit Request</button>
         </form>
 
         <p class="note">
           You may also email your request directly to
           <span class="email">admin@zwap.online</span>
-          with the subject “Delete My Account.”
+          with the subject “Delete My Account” or “Delete My Data.”
         </p>
       </div>
 
       <div class="card">
-        <h2 class="card-title">What data will be deleted?</h2>
-        <p class="card-copy">
-          When your request is verified, ZWAP! will delete your account and associated user data.
+        <h2>Delete app account</h2>
+        <p>
+          If you request full account deletion, ZWAP! will delete your account and associated
+          data connected to that account.
         </p>
 
         <ul class="data-list">
           <li>Email address</li>
           <li>Account information</li>
-          <li>Activity data, including steps, gameplay, and learning progress</li>
+          <li>Fitness and activity data, including step-related activity</li>
+          <li>Gameplay, learning progress, and completion history</li>
           <li>zPts balance and progression data</li>
           <li>Streaks, badges, and app progress connected to the account</li>
         </ul>
       </div>
 
       <div class="card">
-        <h2 class="card-title">What may be retained?</h2>
-        <p class="card-copy">
+        <h2>Manage app data</h2>
+        <p>
+          If you do not want to delete your full account, you may request deletion of
+          specific data categories collected through the app.
+        </p>
+
+        <div class="pill-row">
+          <div class="pill">Activity data, including step-related activity</div>
+          <div class="pill">Gameplay and learning progress</div>
+          <div class="pill">zPts, streak, badge, and progression records</div>
+          <div class="pill">Account information tied to your ZWAP! account</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Data that may be retained</h2>
+        <p>
           Minimal records may be retained only where required for security, fraud prevention,
           legal compliance, dispute handling, or abuse prevention.
         </p>
@@ -324,22 +402,22 @@
       </div>
 
       <div class="card">
-        <h2 class="card-title">Processing timeframe</h2>
-        <p class="card-copy">
-          Account and associated data deletion requests are processed within 7 days after the
-          request is received and verified.
+        <h2>Processing timeframe</h2>
+        <p>
+          Account deletion and app data deletion requests are processed within 7 days after
+          the request is received and verified.
         </p>
 
-        <ol class="steps">
-          <li>Submit the form above or email <span class="email">admin@zwap.online</span>.</li>
-          <li>Use the email address connected to your ZWAP! account.</li>
-          <li>ZWAP! will process the request within 7 days.</li>
-        </ol>
+        <div class="pill-row">
+          <div class="pill">Submit this form or email admin@zwap.online</div>
+          <div class="pill">Use the email address connected to your ZWAP! account</div>
+          <div class="pill">Requests are reviewed and processed within 7 days</div>
+        </div>
       </div>
     </section>
 
     <footer class="footer">
-      <div>ZWAP! account and data deletion request page.</div>
+      <div>ZWAP! account and app data deletion request page.</div>
       <div class="brand-pill">zwap.online</div>
     </footer>
   </main>
