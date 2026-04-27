@@ -19,7 +19,14 @@ function SectionEyebrow({ children }) {
   );
 }
 
-function ContactCard({ title, email, description, accent = "cyan" }) {
+function ContactCard({
+  title,
+  email,
+  description,
+  accent = "cyan",
+  buttonLabel,
+  onClick,
+}) {
   const accentMap = {
     cyan: {
       border: "rgba(103,242,255,0.18)",
@@ -102,6 +109,26 @@ function ContactCard({ title, email, description, accent = "cyan" }) {
       >
         {description}
       </p>
+
+      {buttonLabel ? (
+        <button
+          type="button"
+          onClick={onClick}
+          style={{
+            marginTop: "16px",
+            border: `1px solid ${theme.border}`,
+            background: "rgba(255,255,255,0.05)",
+            color: theme.text,
+            borderRadius: "999px",
+            padding: "11px 16px",
+            fontSize: "13px",
+            fontWeight: 900,
+            cursor: "pointer",
+          }}
+        >
+          {buttonLabel}
+        </button>
+      ) : null}
     </article>
   );
 }
@@ -292,6 +319,7 @@ function ContactForm() {
           >
             <option>General Inquiry</option>
             <option>Support</option>
+            <option>Account & Data Deletion</option>
             <option>Sponsors & Partners</option>
             <option>Enterprise & Workplace Wellness</option>
             <option>Developers</option>
@@ -369,9 +397,21 @@ export default function ContactPage({
   onContact,
   onFAQ,
   onHowItWorks,
+  onDeleteAccount,
 }) {
   const isDesktop =
     typeof window !== "undefined" ? window.innerWidth >= 900 : false;
+
+  const handleDeleteAccountClick = () => {
+    if (typeof onDeleteAccount === "function") {
+      onDeleteAccount();
+      return;
+    }
+
+    if (typeof window !== "undefined") {
+      window.location.href = "/delete-account";
+    }
+  };
 
   return (
     <div
@@ -473,7 +513,8 @@ export default function ContactPage({
             }}
           >
             Questions, partnerships, enterprise wellness, sponsors, developers,
-            press, or support. Reach the ZWAP! team here.
+            press, support, or account and data deletion. Reach the ZWAP! team
+            here.
           </p>
         </section>
 
@@ -533,6 +574,15 @@ export default function ContactPage({
             email="support@zwap.online"
             description="For app questions, account help, early access, and general support."
             accent="cyan"
+          />
+
+          <ContactCard
+            title="Account & Data Deletion"
+            email="admin@zwap.online"
+            description="For deleting your ZWAP! account and associated data, or requesting deletion of specific app data without deleting your full account."
+            accent="gold"
+            buttonLabel="Open Deletion Request"
+            onClick={handleDeleteAccountClick}
           />
 
           <ContactCard
@@ -630,6 +680,7 @@ export default function ContactPage({
           onContact={onContact}
           onFAQ={onFAQ}
           onHowItWorks={onHowItWorks}
+          onDeleteAccount={handleDeleteAccountClick}
         />
       </div>
     </div>
