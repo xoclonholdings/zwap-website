@@ -31,7 +31,8 @@ function AssetVisual({ mode, theme }) {
     <>
       <img
         src={asset}
-        alt={`${mode} feature visual`}
+        alt=""
+        aria-hidden="true"
         style={{
           position: "absolute",
           inset: 0,
@@ -39,7 +40,24 @@ function AssetVisual({ mode, theme }) {
           height: "100%",
           objectFit: "cover",
           objectPosition: "center",
-          opacity: 0.92,
+          opacity: 0.18,
+          filter: "blur(18px) saturate(1.2) contrast(1.05)",
+          transform: "scale(1.08)",
+          pointerEvents: "none",
+        }}
+      />
+
+      <img
+        src={asset}
+        alt={`${mode} feature visual`}
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "contain",
+          objectPosition: "center",
+          opacity: 0.96,
           filter: "saturate(1.08) contrast(1.04)",
           pointerEvents: "none",
         }}
@@ -50,8 +68,8 @@ function AssetVisual({ mode, theme }) {
           position: "absolute",
           inset: 0,
           background: `
-            radial-gradient(circle at 50% 32%, transparent 0%, rgba(0,0,0,0.18) 42%, rgba(0,0,0,0.48) 100%),
-            linear-gradient(180deg, rgba(3,3,10,0.08) 0%, rgba(3,3,10,0.22) 48%, rgba(3,3,10,0.78) 100%)
+            radial-gradient(circle at 50% 34%, transparent 0%, rgba(0,0,0,0.06) 42%, rgba(0,0,0,0.32) 100%),
+            linear-gradient(180deg, rgba(3,3,10,0.02) 0%, rgba(3,3,10,0.10) 52%, rgba(3,3,10,0.34) 100%)
           `,
           pointerEvents: "none",
         }}
