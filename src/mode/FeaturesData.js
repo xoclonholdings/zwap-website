@@ -1,7 +1,7 @@
 export const coreModes = [
   { id: "move", label: "MOVE" },
   { id: "play", label: "PLAY" },
-  { id: "swap", label: "SWAP" },
+  { id: "garden", label: "GARDEN" },
   { id: "shop", label: "SHOP" },
 ];
 
@@ -22,12 +22,13 @@ export const modeContent = {
   play: {
     title: "PLAY",
     heroLabel: "SKILL INTO PROGRESS",
-    description: "Play games. Earn ZWAP. Submit your own.",
+    description: "Play games. Build momentum. Turn engagement into progression.",
   },
-  swap: {
-    title: "SWAP",
-    heroLabel: "VALUE IN MOTION",
-    description: "Exchange assets seamlessly through integrated liquidity.",
+  garden: {
+    title: "GARDEN",
+    heroLabel: "PROGRESS MUST BE PROTECTED",
+    description:
+      "Grow your Garden through consistency, protect your streak, and build long-term progression.",
   },
   shop: {
     title: "SHOP",
