@@ -11,7 +11,7 @@ export default function ModePanel({ activeMode, modeContent }) {
   return (
     <div
       style={{
-        height: "clamp(420px, 62vh, 620px)",
+        minHeight: "clamp(460px, 66vh, 680px)",
         borderRadius: 24,
         border: `1px solid ${theme.border}`,
         position: "relative",
@@ -21,7 +21,7 @@ export default function ModePanel({ activeMode, modeContent }) {
         background: `
           radial-gradient(circle at 16% 28%, ${theme.radialA}, transparent 22%),
           radial-gradient(circle at 74% 18%, ${theme.radialB}, transparent 24%),
-          linear-gradient(180deg, rgba(8,10,22,0.72) 0%, rgba(6,8,18,0.92) 100%)
+          linear-gradient(180deg, rgba(8,10,22,0.72) 0%, rgba(6,8,18,0.94) 100%)
         `,
         boxShadow: `0 0 34px ${theme.glow}`,
       }}
@@ -35,7 +35,7 @@ export default function ModePanel({ activeMode, modeContent }) {
             linear-gradient(90deg, ${theme.grid} 1px, transparent 1px)
           `,
           backgroundSize: "42px 42px",
-          opacity: 0.22,
+          opacity: 0.16,
           pointerEvents: "none",
           zIndex: 0,
         }}
@@ -45,7 +45,7 @@ export default function ModePanel({ activeMode, modeContent }) {
         style={{
           position: "relative",
           flex: "1 1 auto",
-          minHeight: 0,
+          minHeight: "clamp(320px, 48vh, 520px)",
           width: "100%",
           overflow: "hidden",
           zIndex: 1,
@@ -56,7 +56,7 @@ export default function ModePanel({ activeMode, modeContent }) {
         <div
           style={{
             position: "absolute",
-            top: "10%",
+            top: "8%",
             left: "6%",
             right: "6%",
             textAlign: "left",
@@ -70,7 +70,7 @@ export default function ModePanel({ activeMode, modeContent }) {
               fontWeight: 900,
               lineHeight: 0.92,
               letterSpacing: "-0.05em",
-              color: "rgba(255,255,255,0.12)",
+              color: "rgba(255,255,255,0.10)",
               textTransform: "uppercase",
               maxWidth: "72%",
             }}
@@ -86,7 +86,7 @@ export default function ModePanel({ activeMode, modeContent }) {
           padding: "22px 16px 24px",
           boxSizing: "border-box",
           background:
-            "linear-gradient(180deg, rgba(8,10,22,0.92), rgba(5,6,14,0.98))",
+            "linear-gradient(180deg, rgba(8,10,22,0.94), rgba(5,6,14,0.99))",
           borderTop: "1px solid rgba(255,255,255,0.08)",
           display: "flex",
           justifyContent: "center",
@@ -97,7 +97,7 @@ export default function ModePanel({ activeMode, modeContent }) {
         <div
           style={{
             width: "100%",
-            maxWidth: "620px",
+            maxWidth: "680px",
             textAlign: "center",
             margin: "0 auto",
           }}
