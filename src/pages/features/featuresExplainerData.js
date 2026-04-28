@@ -77,16 +77,16 @@ const featuresExplainerData = {
     ],
   },
 
-  swap: {
-    title: "Swap connects progression to long-term utility.",
+  garden: {
+    title: "Garden protects progress and gives consistency an emotional home.",
     description:
-      "Swap is where users eventually convert progression into ZWAP rewards. Instead of allowing instant cash-out behavior, ZWAP! uses a delayed value model where users build zPts first, then unlock ZWAP over time through thresholds and progression.",
+      "Garden is the retention layer of ZWAP!. It turns daily consistency into something users can see, protect, and grow. Instead of making progress feel like numbers only, Garden gives streaks and habits a living visual system that rewards care, recovery, and long-term commitment.",
     bullets: [
-      "Track zPts balances and ZWAP conversion thresholds",
-      "Support future token swaps and partner integrations",
-      "Help users understand long-term earning potential",
-      "Create a healthier economy by slowing immediate sell pressure",
-      "Turn consistency into utility instead of instant extraction",
+      "Grow Garden health through daily activity and streak consistency",
+      "Protect progress with care actions, boosts, and future utility items",
+      "Connect movement, play, learning, and daily loops into one living system",
+      "Create emotional attachment so users return for more than balances",
+      "Unlock future Garden items, themes, bonuses, and seasonal growth rewards",
     ],
   },
 
