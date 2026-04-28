@@ -11,14 +11,13 @@ export default function ModePanel({ activeMode, modeContent }) {
   return (
     <div
       style={{
-        height: "clamp(340px, 58vh, 560px)",
+        height: "clamp(420px, 62vh, 620px)",
         borderRadius: 24,
         border: `1px solid ${theme.border}`,
         position: "relative",
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "flex-end",
         background: `
           radial-gradient(circle at 16% 28%, ${theme.radialA}, transparent 22%),
           radial-gradient(circle at 74% 18%, ${theme.radialB}, transparent 24%),
@@ -36,66 +35,69 @@ export default function ModePanel({ activeMode, modeContent }) {
             linear-gradient(90deg, ${theme.grid} 1px, transparent 1px)
           `,
           backgroundSize: "42px 42px",
-          opacity: 0.35,
+          opacity: 0.22,
           pointerEvents: "none",
+          zIndex: 0,
         }}
       />
 
       <div
         style={{
-          position: "absolute",
-          inset: 0,
-          pointerEvents: "none",
+          position: "relative",
+          flex: "1 1 auto",
+          minHeight: 0,
+          width: "100%",
+          overflow: "hidden",
+          zIndex: 1,
         }}
       >
         <ModeVisual mode={activeMode} theme={theme} />
-      </div>
 
-      <div
-        style={{
-          position: "absolute",
-          top: "12%",
-          left: "7%",
-          right: "7%",
-          textAlign: "left",
-          pointerEvents: "none",
-        }}
-      >
         <div
           style={{
-            fontSize: "clamp(28px, 5vw, 74px)",
-            fontWeight: 900,
-            lineHeight: 0.92,
-            letterSpacing: "-0.05em",
-            color: "rgba(255,255,255,0.11)",
-            textTransform: "uppercase",
-            maxWidth: "72%",
+            position: "absolute",
+            top: "10%",
+            left: "6%",
+            right: "6%",
+            textAlign: "left",
+            pointerEvents: "none",
+            zIndex: 2,
           }}
         >
-          {heroLabel}
+          <div
+            style={{
+              fontSize: "clamp(28px, 5vw, 74px)",
+              fontWeight: 900,
+              lineHeight: 0.92,
+              letterSpacing: "-0.05em",
+              color: "rgba(255,255,255,0.12)",
+              textTransform: "uppercase",
+              maxWidth: "72%",
+            }}
+          >
+            {heroLabel}
+          </div>
         </div>
       </div>
 
       <div
         style={{
           width: "100%",
-          padding: "18px 16px",
+          padding: "22px 16px 24px",
           boxSizing: "border-box",
-          backdropFilter: "blur(14px)",
-          WebkitBackdropFilter: "blur(14px)",
           background:
-            "linear-gradient(180deg, rgba(10,10,20,0.18), rgba(10,10,20,0.88))",
-          borderTop: "1px solid rgba(255,255,255,0.06)",
+            "linear-gradient(180deg, rgba(8,10,22,0.92), rgba(5,6,14,0.98))",
+          borderTop: "1px solid rgba(255,255,255,0.08)",
           display: "flex",
           justifyContent: "center",
           position: "relative",
-          zIndex: 2,
+          zIndex: 3,
         }}
       >
         <div
           style={{
             width: "100%",
-            maxWidth: "560px",
+            maxWidth: "620px",
             textAlign: "center",
             margin: "0 auto",
           }}
@@ -105,7 +107,7 @@ export default function ModePanel({ activeMode, modeContent }) {
               margin: "0 0 8px 0",
               fontWeight: 900,
               letterSpacing: "0.03em",
-              fontSize: "clamp(28px, 4vw, 42px)",
+              fontSize: "clamp(30px, 4vw, 46px)",
               lineHeight: 1.02,
               color: "#F8FAFF",
               textTransform: "uppercase",
