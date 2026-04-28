@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import bang from "../assets/Zwap_bang_3d.png";
+import featureIntro from "../assets/feature-intro.PNG";
 import zwapCoin from "../assets/zwap_bang_coin.PNG";
 import zPtsCoin from "../assets/zpts_z_coin.PNG";
 import GlobalFooterLinks from "../components/GlobalFooterLinks";
@@ -57,47 +57,69 @@ function GlassCard({ children, style = {} }) {
   );
 }
 
-function CurrencyCard({
-  title,
-  desc,
-  accent,
-  coinSrc,
-  coinAlt,
-  reverse = false,
-  isDesktop = false,
-}) {
-  const background = reverse
-    ? "linear-gradient(135deg, rgba(255,103,212,0.10) 0%, rgba(180,134,255,0.10) 48%, rgba(102,242,255,0.08) 100%)"
-    : "linear-gradient(135deg, rgba(102,242,255,0.10) 0%, rgba(121,175,255,0.10) 48%, rgba(180,134,255,0.08) 100%)";
-
+function InfoTile({ title, children, isDesktop = false }) {
   return (
-    <div
+    <GlassCard
       style={{
-        borderRadius: "26px",
-        border: `1px solid ${accent.border}`,
-        background,
-        boxShadow: `0 0 28px ${accent.glow}`,
-        padding: isDesktop ? "24px 22px" : "22px 18px",
-        minHeight: isDesktop ? "100%" : "unset",
+        minHeight: isDesktop ? "150px" : "unset",
         display: "flex",
         flexDirection: "column",
-        alignItems: "center",
+        justifyContent: "center",
         textAlign: "center",
-        overflow: "hidden",
+        padding: isDesktop ? "26px 24px" : "22px 20px",
       }}
     >
       <div
         style={{
-          width: isDesktop ? "108px" : "92px",
-          height: isDesktop ? "108px" : "92px",
+          fontSize: isDesktop ? "34px" : "26px",
+          fontWeight: 900,
+          lineHeight: 1.05,
+          letterSpacing: "-0.03em",
+          color: "#F9FBFF",
+          marginBottom: "10px",
+        }}
+      >
+        {title}
+      </div>
+
+      <div
+        style={{
+          fontSize: isDesktop ? "17px" : "15px",
+          lineHeight: 1.65,
+          color: "rgba(235,239,255,0.78)",
+        }}
+      >
+        {children}
+      </div>
+    </GlassCard>
+  );
+}
+
+function CurrencyMiniCard({ title, desc, coinSrc, coinAlt, accent }) {
+  return (
+    <div
+      style={{
+        borderRadius: "24px",
+        border: `1px solid ${accent.border}`,
+        background: "rgba(255,255,255,0.035)",
+        padding: "18px 16px",
+        display: "grid",
+        gridTemplateColumns: "64px 1fr",
+        gap: "14px",
+        alignItems: "center",
+        boxShadow: `0 0 24px ${accent.glow}`,
+      }}
+    >
+      <div
+        style={{
+          width: "64px",
+          height: "64px",
           borderRadius: "999px",
+          background: "rgba(255,255,255,0.04)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          marginBottom: "14px",
-          background: "rgba(255,255,255,0.04)",
-          boxShadow: `0 0 26px ${accent.glow}`,
-          flexShrink: 0,
+          boxShadow: `0 0 20px ${accent.glow}`,
         }}
       >
         <img
@@ -107,37 +129,64 @@ function CurrencyCard({
             width: "100%",
             height: "100%",
             objectFit: "contain",
-            filter: reverse
-              ? "drop-shadow(0 0 18px rgba(255,103,212,0.22))"
-              : "drop-shadow(0 0 18px rgba(103,242,255,0.22))",
           }}
         />
       </div>
 
-      <div
-        style={{
-          fontSize: isDesktop ? "30px" : "26px",
-          fontWeight: 900,
-          letterSpacing: "-0.02em",
-          marginBottom: "10px",
-          color: accent.text,
-          lineHeight: 1.05,
-        }}
-      >
-        {title}
-      </div>
+      <div>
+        <div
+          style={{
+            fontSize: "22px",
+            fontWeight: 900,
+            lineHeight: 1,
+            color: accent.text,
+            marginBottom: "8px",
+          }}
+        >
+          {title}
+        </div>
 
-      <div
-        style={{
-          fontSize: isDesktop ? "17px" : "15px",
-          lineHeight: 1.7,
-          color: "rgba(235,239,255,0.82)",
-          maxWidth: "34rem",
-        }}
-      >
-        {desc}
+        <div
+          style={{
+            fontSize: "14px",
+            lineHeight: 1.5,
+            color: "rgba(235,239,255,0.78)",
+          }}
+        >
+          {desc}
+        </div>
       </div>
     </div>
+  );
+}
+
+function ModePill({ mode, isActive, onClick }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      style={{
+        border: isActive
+          ? "1px solid rgba(103,242,255,0.34)"
+          : "1px solid rgba(255,255,255,0.08)",
+        background: isActive
+          ? "linear-gradient(90deg, rgba(103,242,255,0.18) 0%, rgba(180,134,255,0.18) 100%)"
+          : "rgba(255,255,255,0.04)",
+        color: isActive ? "#F8FAFF" : "rgba(245,247,255,0.72)",
+        borderRadius: "999px",
+        padding: "10px 14px",
+        cursor: "pointer",
+        fontSize: "12px",
+        fontWeight: 900,
+        letterSpacing: "0.08em",
+        textTransform: "uppercase",
+        boxShadow: isActive
+          ? "0 0 18px rgba(103,242,255,0.12)"
+          : "none",
+      }}
+    >
+      {mode.title}
+    </button>
   );
 }
 
@@ -200,28 +249,33 @@ export default function AboutPage({
       border: "rgba(255,103,212,0.24)",
       glow: "rgba(255,103,212,0.10)",
     },
+    green: {
+      text: "#7CFF5C",
+      border: "rgba(124,255,92,0.24)",
+      glow: "rgba(124,255,92,0.10)",
+    },
   };
 
   const modes = [
     {
       title: "MOVE",
-      desc: "Walk and build progression through real-world movement. The more you move, the more momentum you create inside ZWAP!.",
+      desc: "Walk, build streaks, and turn real-world motion into progression.",
       accent: accents.cyan,
     },
     {
       title: "PLAY",
-      desc: "Play games, stay engaged, and turn participation into progression through skill, consistency, and return behavior.",
+      desc: "Play games, complete challenges, and create momentum through engagement.",
       accent: accents.purple,
     },
     {
-      title: "SHOP",
-      desc: "Use what you earn on curated products, digital drops, and ecosystem-based offers designed to make rewards feel useful.",
-      accent: accents.pink,
+      title: "GARDEN",
+      desc: "Protect your streak, grow your Garden, and give consistency a living reward layer.",
+      accent: accents.green,
     },
     {
-      title: "SWAP",
-      desc: "Exchange unlocked value through a cleaner, guided experience built to keep utility and flow at the center.",
-      accent: accents.blue,
+      title: "SHOP",
+      desc: "Use progression on boosts, digital items, premium content, and future real-world rewards.",
+      accent: accents.pink,
     },
   ];
 
@@ -298,86 +352,170 @@ export default function AboutPage({
 
         <section
           style={{
-            textAlign: "center",
+            display: "grid",
+            gridTemplateColumns: isDesktop ? "minmax(330px, 0.78fr) minmax(0, 1fr)" : "1fr",
+            gap: isDesktop ? "28px" : "18px",
+            alignItems: "stretch",
             marginBottom: isDesktop ? "34px" : "26px",
-            maxWidth: "980px",
-            marginInline: "auto",
           }}
         >
-          <img
-            src={bang}
-            alt="ZWAP!"
+          <div
             style={{
-              width: isDesktop ? "128px" : "112px",
-              height: "auto",
-              display: "block",
-              margin: "0 auto 18px",
-              filter: "drop-shadow(0 0 22px rgba(103,242,255,0.24))",
-            }}
-          />
-
-          <h1
-            style={{
-              margin: "0 0 14px",
-              fontSize: isDesktop
-                ? "clamp(44px, 5vw, 66px)"
-                : "clamp(34px, 10vw, 48px)",
-              lineHeight: 1.02,
-              fontWeight: 900,
-              letterSpacing: "-0.04em",
-              color: "#F9FBFF",
+              borderRadius: "32px",
+              border: "1px solid rgba(255,255,255,0.08)",
+              overflow: "hidden",
+              minHeight: isDesktop ? "720px" : "560px",
+              background: "rgba(255,255,255,0.03)",
+              boxShadow:
+                "0 24px 60px rgba(0,0,0,0.34), 0 0 34px rgba(103,242,255,0.08)",
+              position: "relative",
             }}
           >
-            What is <GradientText>ZWAP!</GradientText>?
-          </h1>
+            <img
+              src={featureIntro}
+              alt="ZWAP! movement and rewards intro"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center",
+                display: "block",
+              }}
+            />
 
-          <p
-            style={{
-              margin: "0 auto 14px",
-              maxWidth: isDesktop ? "860px" : "330px",
-              fontSize: isDesktop ? "23px" : "16px",
-              lineHeight: isDesktop ? 1.55 : 1.65,
-              color: "rgba(235,239,255,0.8)",
-            }}
-          >
-            ZWAP! is a behavior-based reward ecosystem that turns movement,
-            play, and everyday participation into measurable progression and
-            controlled digital value.
-          </p>
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background:
+                  "linear-gradient(180deg, rgba(3,3,8,0.02) 0%, rgba(3,3,8,0.10) 52%, rgba(3,3,8,0.30) 100%)",
+                pointerEvents: "none",
+              }}
+            />
+          </div>
 
           <div
             style={{
-              fontSize: isDesktop ? "20px" : "15px",
-              fontWeight: 800,
-              letterSpacing: "0.06em",
-              textTransform: "uppercase",
-              color: "rgba(235,239,255,0.78)",
+              display: "grid",
+              gap: isDesktop ? "20px" : "16px",
+              alignContent: "center",
             }}
           >
-            Move. Play. Earn Today.
+            <InfoTile title="What is ZWAP!" isDesktop={isDesktop}>
+              ZWAP! is a behavior-based reward ecosystem that turns movement,
+              play, learning, and daily participation into measurable
+              progression.
+            </InfoTile>
+
+            <GlassCard
+              style={{
+                padding: isDesktop ? "26px 24px" : "22px 20px",
+              }}
+            >
+              <SectionEyebrow>Dual currency system</SectionEyebrow>
+
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: isDesktop ? "1fr 1fr" : "1fr",
+                  gap: "14px",
+                }}
+              >
+                <CurrencyMiniCard
+                  title="ZWAP!"
+                  desc="The utility layer used for value, spending, and future exchange."
+                  coinSrc={zwapCoin}
+                  coinAlt="ZWAP coin"
+                  accent={accents.cyan}
+                />
+
+                <CurrencyMiniCard
+                  title="zPts"
+                  desc="The progression layer earned through activity before value unlocks."
+                  coinSrc={zPtsCoin}
+                  coinAlt="zPts coin"
+                  accent={accents.pink}
+                />
+              </div>
+            </GlassCard>
+
+            <GlassCard
+              style={{
+                padding: isDesktop ? "30px 28px" : "24px 20px",
+                textAlign: "center",
+                border: `1px solid ${activeMode.accent.border}`,
+                boxShadow: `0 0 34px ${activeMode.accent.glow}`,
+              }}
+            >
+              <SectionEyebrow>Modes</SectionEyebrow>
+
+              <div
+                style={{
+                  fontSize: isDesktop ? "44px" : "34px",
+                  fontWeight: 900,
+                  letterSpacing: "0.03em",
+                  marginBottom: "12px",
+                  color: activeMode.accent.text,
+                }}
+              >
+                {activeMode.title}
+              </div>
+
+              <div
+                style={{
+                  fontSize: isDesktop ? "19px" : "15px",
+                  lineHeight: 1.7,
+                  color: "rgba(235,239,255,0.82)",
+                  maxWidth: "44rem",
+                  marginInline: "auto",
+                }}
+              >
+                {activeMode.desc}
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  gap: "10px",
+                  marginTop: "20px",
+                  flexWrap: "wrap",
+                }}
+              >
+                {modes.map((mode, index) => (
+                  <ModePill
+                    key={mode.title}
+                    mode={mode}
+                    isActive={index === activeModeIndex}
+                    onClick={() => setActiveModeIndex(index)}
+                  />
+                ))}
+              </div>
+            </GlassCard>
           </div>
         </section>
 
         <section
           style={{
-            marginBottom: isDesktop ? "26px" : "18px",
-            maxWidth: "980px",
+            marginBottom: isDesktop ? "28px" : "24px",
+            maxWidth: "1060px",
             marginInline: "auto",
+            width: "100%",
           }}
         >
           <GlassCard
             style={{
               textAlign: "center",
-              padding: isDesktop ? "28px 30px" : "22px 20px",
+              padding: isDesktop ? "30px 34px" : "22px 20px",
             }}
           >
             <div
               style={{
-                fontSize: isDesktop ? "44px" : "26px",
+                fontSize: isDesktop ? "44px" : "28px",
                 lineHeight: 1.08,
                 fontWeight: 900,
                 letterSpacing: "-0.04em",
-                marginBottom: "12px",
+                marginBottom: "14px",
                 color: "#F9FBFF",
               }}
             >
@@ -396,144 +534,11 @@ export default function AboutPage({
                 marginInline: "auto",
               }}
             >
-              Most platforms are built to keep you scrolling, tapping, and
+              Most platforms are built to keep users scrolling, tapping, and
               spending without returning anything meaningful. ZWAP! flips that
               by rewarding actions that already fit into daily life.
             </div>
           </GlassCard>
-        </section>
-
-        <section
-          style={{
-            marginBottom: isDesktop ? "30px" : "24px",
-            maxWidth: "1100px",
-            marginInline: "auto",
-          }}
-        >
-          <SectionEyebrow>One ecosystem. Four modes.</SectionEyebrow>
-
-          <div
-            style={{
-              borderRadius: "28px",
-              border: `1px solid ${activeMode.accent.border}`,
-              background: `
-                radial-gradient(circle at 20% 20%, ${activeMode.accent.glow}, transparent 24%),
-                radial-gradient(circle at 80% 78%, rgba(180,134,255,0.10), transparent 28%),
-                rgba(255,255,255,0.035)
-              `,
-              boxShadow: `0 0 34px ${activeMode.accent.glow}`,
-              padding: isDesktop ? "30px 34px" : "22px 20px",
-              textAlign: "center",
-              minHeight: isDesktop ? "260px" : "220px",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              transition: "all 300ms ease",
-            }}
-          >
-            <div
-              style={{
-                fontSize: isDesktop ? "46px" : "34px",
-                fontWeight: 900,
-                letterSpacing: "0.03em",
-                marginBottom: "14px",
-                color: activeMode.accent.text,
-              }}
-            >
-              {activeMode.title}
-            </div>
-
-            <div
-              style={{
-                fontSize: isDesktop ? "22px" : "16px",
-                lineHeight: isDesktop ? 1.75 : 1.7,
-                color: "rgba(235,239,255,0.82)",
-                maxWidth: isDesktop ? "860px" : "unset",
-                marginInline: "auto",
-              }}
-            >
-              {activeMode.desc}
-            </div>
-
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                gap: "10px",
-                marginTop: "18px",
-                flexWrap: "wrap",
-              }}
-            >
-              {modes.map((mode, index) => (
-                <button
-                  key={mode.title}
-                  onClick={() => setActiveModeIndex(index)}
-                  style={{
-                    border: "none",
-                    cursor: "pointer",
-                    padding: "8px 14px",
-                    borderRadius: "999px",
-                    fontSize: "12px",
-                    fontWeight: 800,
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color:
-                      index === activeModeIndex
-                        ? "#04050A"
-                        : "rgba(245,247,255,0.75)",
-                    background:
-                      index === activeModeIndex
-                        ? mode.accent.text
-                        : "rgba(255,255,255,0.06)",
-                    boxShadow:
-                      index === activeModeIndex
-                        ? `0 0 18px ${mode.accent.glow}`
-                        : "none",
-                  }}
-                >
-                  {mode.title}
-                </button>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section
-          style={{
-            marginBottom: isDesktop ? "30px" : "24px",
-            maxWidth: "1100px",
-            marginInline: "auto",
-          }}
-        >
-          <SectionEyebrow>Dual currency system</SectionEyebrow>
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: isDesktop ? "1fr 1fr" : "1fr",
-              gap: isDesktop ? "18px" : "14px",
-              alignItems: "stretch",
-            }}
-          >
-            <CurrencyCard
-              title="ZWAP!"
-              desc="The utility layer of the ecosystem, used across rewards, spending, and future exchange."
-              accent={accents.cyan}
-              coinSrc={zwapCoin}
-              coinAlt="ZWAP coin"
-              isDesktop={isDesktop}
-            />
-
-            <CurrencyCard
-              title="zPts"
-              desc="The progression layer earned through activity, engagement, and consistency before value is unlocked."
-              accent={accents.pink}
-              coinSrc={zPtsCoin}
-              coinAlt="zPts coin"
-              reverse
-              isDesktop={isDesktop}
-            />
-          </div>
         </section>
 
         <section
@@ -559,7 +564,7 @@ export default function AboutPage({
                 color: "#F8FAFF",
               }}
             >
-              Move. Play. Swap. Shop.
+              Move. Play. Grow. Shop.
             </span>
             <span style={{ color: "rgba(235,239,255,0.62)" }}>
               ZWAP! is rolling out in phases, with more systems unlocking over
