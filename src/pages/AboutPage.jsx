@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import featureIntro from "../assets/feature-intro.PNG";
+import featureIntro from "../assets/features/feature-intro.PNG";
 import zwapCoin from "../assets/zwap_bang_coin.PNG";
 import zPtsCoin from "../assets/zpts_z_coin.PNG";
 import GlobalFooterLinks from "../components/GlobalFooterLinks";
