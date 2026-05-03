@@ -18,9 +18,13 @@ export default function IOSBetaPage({ onBack }) {
             </ol>
           </div>
 
-          <a href="/v1" className="ios-beta-button">
+          {/* ✅ FIXED BUTTON — no redirect */}
+          <button
+            className="ios-beta-button"
+            onClick={() => onBack && onBack()}
+          >
             Open ZWAP!
-          </a>
+          </button>
 
           <p className="ios-beta-note">
             Browser-based preview.<br />
@@ -64,17 +68,13 @@ export default function IOSBetaPage({ onBack }) {
           font-family: -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        /* 🔥 TRUE ZWAP TITLE */
         .ios-beta-title {
           font-size: 28px;
           margin-bottom: 6px;
           letter-spacing: 0.6px;
-
           background: linear-gradient(90deg, #22d3ee, #a855f7);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-
-          text-shadow: 0 0 10px rgba(34,211,238,0.25);
         }
 
         .ios-beta-sub {
@@ -95,26 +95,23 @@ export default function IOSBetaPage({ onBack }) {
           margin-top: 6px;
         }
 
-        /* 🔧 BUTTON FIX (REAL CENTER FIX) */
         .ios-beta-button {
           display: block;
           width: 100%;
           margin-top: 16px;
           padding: 12px;
           border-radius: 16px;
-
           background: linear-gradient(
             90deg,
             #22d3ee 10%,
             #60a5fa 50%,
             #a855f7 90%
           );
-
           color: black;
           font-weight: 600;
           text-align: center;
-          text-decoration: none;
-
+          border: none;
+          cursor: pointer;
           box-shadow:
             0 0 20px rgba(34,211,238,0.35),
             0 0 30px rgba(168,85,247,0.25);
