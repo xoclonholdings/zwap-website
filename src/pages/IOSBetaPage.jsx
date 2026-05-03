@@ -27,7 +27,7 @@ export default function IOSBetaPage({ onBack }) {
           <button
             className="ios-beta-button"
             onClick={() => {
-              window.location.href = "/app/";
+              window.location.href = "https://app.zwap.online";
             }}
           >
             Open ZWAP!
