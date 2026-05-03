@@ -21,6 +21,9 @@ import EarlyAccessModal from "../components/EarlyAccessModal";
 import PreviewPage from "../preview/PreviewPage";
 import PreviewUnlockRedirect from "./PreviewUnlockRedirect";
 
+// ✅ NEW IMPORT
+import IOSBetaPage from "../pages/IOSBetaPage";
+
 export default function AppRoutes({
   activePage,
   setActivePage,
@@ -52,6 +55,11 @@ export default function AppRoutes({
     onFAQ: () => setActivePage("faq"),
     onHowItWorks: () => setActivePage("how-it-works"),
   };
+
+  // ✅ NEW ROUTE — iOS Beta (hidden page)
+  if (activePage === "ios-beta") {
+    return <IOSBetaPage onBack={() => setActivePage("home")} />;
+  }
 
   if (activePage === "about") {
     return (
