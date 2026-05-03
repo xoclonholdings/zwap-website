@@ -18,10 +18,10 @@ export default function IOSBetaPage({ onBack }) {
             </ol>
           </div>
 
-          {/* ✅ FIXED BUTTON — no redirect */}
+          {/* ✅ Opens preview directly */}
           <button
             className="ios-beta-button"
-            onClick={() => onBack && onBack()}
+            onClick={() => (window.location.href = "/preview")}
           >
             Open ZWAP!
           </button>
