@@ -40,10 +40,15 @@ export default function useAppInit({
       localStorage.setItem("zwap_referred_by", ref);
     }
 
-    const path = window.location.pathname;
+    const path = window.location.pathname.replace(/\/+$/, "") || "/";
 
     if (path === "/ios-beta") {
       setActivePage("ios-beta");
+      return;
+    }
+
+    if (path === "/") {
+      setActivePage("home");
     }
   }, [
     setReferralCode,
