@@ -6,6 +6,7 @@ export default function useAppInit({
   setPreviewUnlocked,
   setEmail,
   setReferredBy,
+  setActivePage,
 }) {
   useEffect(() => {
     const record = getStoredRecord();
@@ -27,8 +28,7 @@ export default function useAppInit({
 
     setEmail(localStorage.getItem("zwap_early_access_email") || "");
 
-    const savedReferredBy =
-      localStorage.getItem("zwap_referred_by") || "";
+    const savedReferredBy = localStorage.getItem("zwap_referred_by") || "";
 
     setReferredBy(savedReferredBy);
 
@@ -39,10 +39,17 @@ export default function useAppInit({
       setReferredBy(ref);
       localStorage.setItem("zwap_referred_by", ref);
     }
+
+    const path = window.location.pathname;
+
+    if (path === "/ios-beta") {
+      setActivePage("ios-beta");
+    }
   }, [
     setReferralCode,
     setPreviewUnlocked,
     setEmail,
     setReferredBy,
+    setActivePage,
   ]);
 }
