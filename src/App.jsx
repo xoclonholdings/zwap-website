@@ -41,6 +41,7 @@ export default function App() {
     setPreviewUnlocked,
     setEmail,
     setReferredBy,
+    setActivePage,
   });
 
   const { openEarlyAccessModal, closeEarlyAccessModal } = useEarlyAccessModal({
