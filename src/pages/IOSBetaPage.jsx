@@ -18,17 +18,15 @@ export default function IOSBetaPage({ onBack }) {
             </ol>
           </div>
 
-          {/* ✅ Opens preview directly */}
           <button
             className="ios-beta-button"
-            onClick={() => (window.location.href = "/preview")}
+            onClick={() => (window.location.href = "/app/")}
           >
             Open ZWAP!
           </button>
 
           <p className="ios-beta-note">
-            Browser-based preview.<br />
-            Full app experience coming soon.
+            Full app build
           </p>
 
           <button className="ios-beta-back" onClick={onBack}>
@@ -109,12 +107,8 @@ export default function IOSBetaPage({ onBack }) {
           );
           color: black;
           font-weight: 600;
-          text-align: center;
           border: none;
           cursor: pointer;
-          box-shadow:
-            0 0 20px rgba(34,211,238,0.35),
-            0 0 30px rgba(168,85,247,0.25);
         }
 
         .ios-beta-note {
