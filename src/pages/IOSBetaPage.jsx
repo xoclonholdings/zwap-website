@@ -1,397 +1,229 @@
-import AboutPage from "../pages/AboutPage";
-import FeaturesPage from "../pages/FeaturesPage";
-import PartnersPage from "../pages/PartnersPage";
-import PrivacyPage from "../pages/PrivacyPage";
-import TermsPage from "../pages/TermsPage";
-import GooglePlay from "../pages/GooglePlay";
-import AppleStore from "../pages/AppleStore";
-import NewsBlogPage from "../pages/NewsBlogPage";
-import EnterprisePage from "../pages/EnterprisePage";
-import DevelopersPage from "../pages/DevelopersPage";
-import AdminPage from "../pages/newsblog/AdminPage";
+import React from "react";
 
-import SitemapPage from "../pages/sitemap/SitemapPage";
-import ContactPage from "../pages/sitemap/ContactPage";
-import FAQPage from "../pages/sitemap/FAQPage";
-import HowItWorksPage from "../pages/sitemap/HowItWorksPage";
+function getDeviceType() {
+  const userAgent =
+    typeof navigator !== "undefined" ? navigator.userAgent || "" : "";
 
-import MailingListDatabase from "../components/MailingListDatabase";
-import EarlyAccessModal from "../components/EarlyAccessModal";
+  const isAndroid = /Android/i.test(userAgent);
+  const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
 
-import PreviewUnlockRedirect from "./PreviewUnlockRedirect";
-import IOSBetaPage from "../pages/IOSBetaPage";
+  if (isAndroid) return "android";
+  if (isIOS) return "ios";
 
-export default function AppRoutes({
-  activePage,
-  setActivePage,
-  previewUnlocked,
-  openEarlyAccessModal,
-  closeEarlyAccessModal,
-  unlockPreview,
-  isModalOpen,
-  email,
-  setEmail,
-  bang,
-  pendingPage,
-  referralCode,
-  onSendInvite,
-  isAdminAuthenticated,
-}) {
-  const footerNav = {
-    onPrivacy: () => setActivePage("privacy"),
-    onTerms: () => setActivePage("terms"),
-    onSitemap: () => setActivePage("sitemap"),
-    onNews: () => setActivePage("news"),
-    onBlog: () => setActivePage("blog"),
-    onAbout: () => setActivePage("about"),
-    onFeatures: () => setActivePage("features"),
-    onPartners: () => setActivePage("partners"),
-    onDevelopers: () => setActivePage("developer-portal"),
-    onEnterprise: () => setActivePage("enterprise-wellness"),
-    onContact: () => setActivePage("contact"),
-    onFAQ: () => setActivePage("faq"),
-    onHowItWorks: () => setActivePage("how-it-works"),
-  };
+  return "desktop";
+}
 
-  if (activePage === "ios-beta") {
-    return <IOSBetaPage onBack={() => setActivePage("home")} />;
-  }
+function InstallSteps() {
+  const deviceType = getDeviceType();
 
-  if (activePage === "about") {
+  if (deviceType === "android") {
     return (
-      <>
-        <AboutPage
-          onBack={() => setActivePage("home")}
-          onLockIn={() => openEarlyAccessModal("preview")}
-          onPrivacy={footerNav.onPrivacy}
-          onTerms={footerNav.onTerms}
-          onSitemap={footerNav.onSitemap}
-          onNews={footerNav.onNews}
-          onBlog={footerNav.onBlog}
-          onFeatures={footerNav.onFeatures}
-          onPartners={footerNav.onPartners}
-          onDevelopers={footerNav.onDevelopers}
-          onEnterprise={footerNav.onEnterprise}
-          onContact={footerNav.onContact}
-          onFAQ={footerNav.onFAQ}
-          onHowItWorks={footerNav.onHowItWorks}
-        />
-
-        <EarlyAccessModal
-          isOpen={isModalOpen}
-          onClose={closeEarlyAccessModal}
-          email={email}
-          setEmail={setEmail}
-          bang={bang}
-          onSubmitAccess={unlockPreview}
-          onInstantAccess={unlockPreview}
-          pendingPage={pendingPage}
-        />
-      </>
+      <div className="ios-beta-steps">
+        <strong>Install:</strong>
+        <ol>
+          <li>
+            Open this page in <b>Chrome</b>
+          </li>
+          <li>
+            Tap the <b>menu</b> button
+          </li>
+          <li>
+            Tap <b>Install app</b> or <b>Add to Home Screen</b>
+          </li>
+          <li>Launch ZWAP! from your home screen</li>
+        </ol>
+      </div>
     );
   }
 
-  if (activePage === "features") {
+  if (deviceType === "ios") {
     return (
-      <FeaturesPage
-        onBack={() => setActivePage("home")}
-        onPrivacy={footerNav.onPrivacy}
-        onTerms={footerNav.onTerms}
-        onSitemap={footerNav.onSitemap}
-        onNews={footerNav.onNews}
-        onBlog={footerNav.onBlog}
-        onAbout={footerNav.onAbout}
-        onPartners={footerNav.onPartners}
-        onDevelopers={footerNav.onDevelopers}
-        onEnterprise={footerNav.onEnterprise}
-        onContact={footerNav.onContact}
-        onFAQ={footerNav.onFAQ}
-        onHowItWorks={footerNav.onHowItWorks}
-      />
+      <div className="ios-beta-steps">
+        <strong>Install:</strong>
+        <ol>
+          <li>
+            Open this page in <b>Safari</b>
+          </li>
+          <li>
+            Tap the <b>Share</b> button
+          </li>
+          <li>
+            Tap <b>Add to Home Screen</b>
+          </li>
+          <li>Launch ZWAP! from your home screen</li>
+        </ol>
+      </div>
     );
   }
 
-  if (activePage === "partners") {
-    return (
-      <PartnersPage
-        onBack={() => setActivePage("home")}
-        onPrivacy={footerNav.onPrivacy}
-        onTerms={footerNav.onTerms}
-        onSitemap={footerNav.onSitemap}
-        onNews={footerNav.onNews}
-        onBlog={footerNav.onBlog}
-        onAbout={footerNav.onAbout}
-        onFeatures={footerNav.onFeatures}
-        onDevelopers={footerNav.onDevelopers}
-        onEnterprise={footerNav.onEnterprise}
-        onContact={footerNav.onContact}
-        onFAQ={footerNav.onFAQ}
-        onHowItWorks={footerNav.onHowItWorks}
-      />
-    );
-  }
+  return (
+    <div className="ios-beta-steps">
+      <strong>Preview:</strong>
+      <ol>
+        <li>Open ZWAP! in your browser</li>
+        <li>For the best preview, use a mobile device</li>
+        <li>Install from Safari on iPhone or Chrome on Android</li>
+      </ol>
+    </div>
+  );
+}
 
-  if (activePage === "enterprise-wellness") {
-    return (
-      <EnterprisePage
-        onBack={() => setActivePage("home")}
-        onPrivacy={footerNav.onPrivacy}
-        onTerms={footerNav.onTerms}
-        onSitemap={footerNav.onSitemap}
-        onNews={footerNav.onNews}
-        onBlog={footerNav.onBlog}
-        onAbout={footerNav.onAbout}
-        onFeatures={footerNav.onFeatures}
-        onPartners={footerNav.onPartners}
-        onDevelopers={footerNav.onDevelopers}
-        onContact={footerNav.onContact}
-        onFAQ={footerNav.onFAQ}
-        onHowItWorks={footerNav.onHowItWorks}
-      />
-    );
-  }
+export default function IOSBetaPage({ onBack }) {
+  return (
+    <div className="ios-beta-shell">
+      <div className="ios-beta-container">
+        <div className="ios-beta-card">
+          <h1 className="ios-beta-title">ZWAP!</h1>
+          <p className="ios-beta-sub">Preview Access</p>
 
-  if (activePage === "developer-portal") {
-    return (
-      <DevelopersPage
-        onBack={() => setActivePage("home")}
-        onPrivacy={footerNav.onPrivacy}
-        onTerms={footerNav.onTerms}
-        onSitemap={footerNav.onSitemap}
-        onNews={footerNav.onNews}
-        onBlog={footerNav.onBlog}
-        onAbout={footerNav.onAbout}
-        onFeatures={footerNav.onFeatures}
-        onPartners={footerNav.onPartners}
-        onEnterprise={footerNav.onEnterprise}
-        onContact={footerNav.onContact}
-        onFAQ={footerNav.onFAQ}
-        onHowItWorks={footerNav.onHowItWorks}
-      />
-    );
-  }
+          <InstallSteps />
 
-  if (activePage === "news") {
-    return (
-      <NewsBlogPage
-        initialTab="news"
-        onBack={() => setActivePage("home")}
-        onPrivacy={footerNav.onPrivacy}
-        onTerms={footerNav.onTerms}
-        onSitemap={footerNav.onSitemap}
-        onAdmin={() => setActivePage("admin")}
-        onNews={footerNav.onNews}
-        onBlog={footerNav.onBlog}
-        onAbout={footerNav.onAbout}
-        onFeatures={footerNav.onFeatures}
-        onPartners={footerNav.onPartners}
-        onDevelopers={footerNav.onDevelopers}
-        onEnterprise={footerNav.onEnterprise}
-        onContact={footerNav.onContact}
-        onFAQ={footerNav.onFAQ}
-        onHowItWorks={footerNav.onHowItWorks}
-      />
-    );
-  }
+          <button
+            className="ios-beta-button"
+            onClick={() => {
+              window.location.href = "https://app.zwap.online";
+            }}
+          >
+            Open ZWAP!
+          </button>
 
-  if (activePage === "blog") {
-    return (
-      <NewsBlogPage
-        initialTab="blog"
-        onBack={() => setActivePage("home")}
-        onPrivacy={footerNav.onPrivacy}
-        onTerms={footerNav.onTerms}
-        onSitemap={footerNav.onSitemap}
-        onAdmin={() => setActivePage("admin")}
-        onNews={footerNav.onNews}
-        onBlog={footerNav.onBlog}
-        onAbout={footerNav.onAbout}
-        onFeatures={footerNav.onFeatures}
-        onPartners={footerNav.onPartners}
-        onDevelopers={footerNav.onDevelopers}
-        onEnterprise={footerNav.onEnterprise}
-        onContact={footerNav.onContact}
-        onFAQ={footerNav.onFAQ}
-        onHowItWorks={footerNav.onHowItWorks}
-      />
-    );
-  }
+          <div className="ios-beta-preview-mode">
+            <strong>Preview Mode</strong>
+            <span>You’re early.</span>
+            <span>
+              Some features are still locked while we finalize the system.
+            </span>
+            <span>Move. Play. Explore.</span>
+            <span>More unlocks at launch.</span>
+          </div>
 
-  if (activePage === "admin") {
-    return (
-      <AdminPage
-        onBack={() => setActivePage("blog")}
-        onPrivacy={footerNav.onPrivacy}
-        onTerms={footerNav.onTerms}
-        onSitemap={footerNav.onSitemap}
-        isAdminAuthenticated={isAdminAuthenticated}
-      />
-    );
-  }
+          <p className="ios-beta-note">
+            Browser-based preview.
+            <br />
+            Full app experience coming soon.
+          </p>
 
-  if (activePage === "contact") {
-    return (
-      <ContactPage
-        onBack={() => setActivePage("home")}
-        onPrivacy={footerNav.onPrivacy}
-        onTerms={footerNav.onTerms}
-        onSitemap={footerNav.onSitemap}
-        onNews={footerNav.onNews}
-        onBlog={footerNav.onBlog}
-        onAbout={footerNav.onAbout}
-        onFeatures={footerNav.onFeatures}
-        onPartners={footerNav.onPartners}
-        onDevelopers={footerNav.onDevelopers}
-        onEnterprise={footerNav.onEnterprise}
-        onContact={footerNav.onContact}
-        onFAQ={footerNav.onFAQ}
-        onHowItWorks={footerNav.onHowItWorks}
-      />
-    );
-  }
+          <button className="ios-beta-back" onClick={onBack}>
+            Back
+          </button>
+        </div>
+      </div>
 
-  if (activePage === "faq") {
-    return (
-      <FAQPage
-        onBack={() => setActivePage("home")}
-        onPrivacy={footerNav.onPrivacy}
-        onTerms={footerNav.onTerms}
-        onSitemap={footerNav.onSitemap}
-        onContact={footerNav.onContact}
-        onNews={footerNav.onNews}
-        onBlog={footerNav.onBlog}
-        onAbout={footerNav.onAbout}
-        onFeatures={footerNav.onFeatures}
-        onPartners={footerNav.onPartners}
-        onDevelopers={footerNav.onDevelopers}
-        onEnterprise={footerNav.onEnterprise}
-        onFAQ={footerNav.onFAQ}
-        onHowItWorks={footerNav.onHowItWorks}
-      />
-    );
-  }
+      <style>{`
+        .ios-beta-shell {
+          min-height: 100vh;
+          background: radial-gradient(
+            circle at center,
+            rgba(34,211,238,0.18),
+            rgba(8,10,22,0.96) 60%,
+            #000
+          );
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+        }
 
-  if (activePage === "how-it-works") {
-    return (
-      <HowItWorksPage
-        onBack={() => setActivePage("home")}
-        onPrivacy={footerNav.onPrivacy}
-        onTerms={footerNav.onTerms}
-        onSitemap={footerNav.onSitemap}
-        onContact={footerNav.onContact}
-        onNews={footerNav.onNews}
-        onBlog={footerNav.onBlog}
-        onAbout={footerNav.onAbout}
-        onFeatures={footerNav.onFeatures}
-        onPartners={footerNav.onPartners}
-        onDevelopers={footerNav.onDevelopers}
-        onEnterprise={footerNav.onEnterprise}
-        onFAQ={footerNav.onFAQ}
-        onHowItWorks={footerNav.onHowItWorks}
-      />
-    );
-  }
+        .ios-beta-container {
+          width: 100%;
+          max-width: 360px;
+        }
 
-  if (activePage === "privacy") {
-    return <PrivacyPage onBack={() => setActivePage("home")} />;
-  }
+        .ios-beta-card {
+          border-radius: 28px;
+          padding: 28px 20px;
+          background: rgba(255,255,255,0.04);
+          border: 1px solid rgba(255,255,255,0.08);
+          box-shadow: 0 0 60px rgba(34,211,238,0.08);
+          text-align: center;
+          color: white;
+          font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
 
-  if (activePage === "terms") {
-    return <TermsPage onBack={() => setActivePage("home")} />;
-  }
+        .ios-beta-title {
+          font-size: 28px;
+          margin-bottom: 6px;
+          letter-spacing: 0.6px;
+          background: linear-gradient(90deg, #22d3ee, #a855f7);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
 
-  if (activePage === "google-play") {
-    return <GooglePlay onBack={() => setActivePage("home")} />;
-  }
+        .ios-beta-sub {
+          font-size: 13px;
+          opacity: 0.75;
+          margin-bottom: 20px;
+        }
 
-  if (activePage === "apple-store") {
-    return <AppleStore onBack={() => setActivePage("home")} />;
-  }
+        .ios-beta-steps {
+          text-align: left;
+          font-size: 14px;
+          line-height: 1.6;
+          margin-bottom: 20px;
+        }
 
-  if (activePage === "mailing-list") {
-    return (
-      <MailingListDatabase
-        onBack={() => setActivePage("home")}
-        email={email}
-        setEmail={setEmail}
-        onSubmitAccess={unlockPreview}
-      />
-    );
-  }
+        .ios-beta-steps ol {
+          padding-left: 18px;
+          margin-top: 6px;
+        }
 
-  if (activePage === "sitemap") {
-    return (
-      <>
-        <SitemapPage
-          onBack={() => setActivePage("home")}
-          onNavigate={(routeKey) => {
-            if (routeKey === "contact") {
-              setActivePage("contact");
-              return;
-            }
+        .ios-beta-button {
+          display: block;
+          width: 100%;
+          margin-top: 16px;
+          padding: 12px;
+          border-radius: 16px;
+          background: linear-gradient(
+            90deg,
+            #22d3ee 10%,
+            #60a5fa 50%,
+            #a855f7 90%
+          );
+          color: black;
+          font-weight: 600;
+          text-align: center;
+          border: none;
+          cursor: pointer;
+          box-shadow:
+            0 0 20px rgba(34,211,238,0.35),
+            0 0 30px rgba(168,85,247,0.25);
+        }
 
-            if (routeKey === "faq") {
-              setActivePage("faq");
-              return;
-            }
+        .ios-beta-preview-mode {
+          margin-top: 18px;
+          border-radius: 20px;
+          border: 1px solid rgba(34,211,238,0.14);
+          background: rgba(34,211,238,0.045);
+          padding: 14px 14px;
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          font-size: 12px;
+          line-height: 1.45;
+          color: rgba(255,255,255,0.72);
+        }
 
-            if (routeKey === "how-it-works") {
-              setActivePage("how-it-works");
-              return;
-            }
+        .ios-beta-preview-mode strong {
+          color: rgba(255,255,255,0.92);
+          font-size: 13px;
+          margin-bottom: 2px;
+        }
 
-            if (routeKey === "early-access") {
-              openEarlyAccessModal("preview");
-              return;
-            }
+        .ios-beta-note {
+          margin-top: 16px;
+          font-size: 12px;
+          opacity: 0.6;
+        }
 
-            if (routeKey === "home") {
-              setActivePage("home");
-              return;
-            }
-
-            setActivePage(routeKey);
-          }}
-        />
-
-        <EarlyAccessModal
-          isOpen={isModalOpen}
-          onClose={closeEarlyAccessModal}
-          email={email}
-          setEmail={setEmail}
-          bang={bang}
-          onSubmitAccess={unlockPreview}
-          onInstantAccess={unlockPreview}
-          pendingPage={pendingPage}
-        />
-      </>
-    );
-  }
-
-  if (activePage === "preview") {
-    if (!previewUnlocked) {
-      return (
-        <>
-          <PreviewUnlockRedirect
-            onOpen={() => openEarlyAccessModal("preview")}
-          />
-
-          <EarlyAccessModal
-            isOpen={isModalOpen}
-            onClose={closeEarlyAccessModal}
-            email={email}
-            setEmail={setEmail}
-            bang={bang}
-            onSubmitAccess={unlockPreview}
-            onInstantAccess={unlockPreview}
-            pendingPage={pendingPage}
-          />
-        </>
-      );
-    }
-
-    return <IOSBetaPage onBack={() => setActivePage("home")} />;
-  }
-
-  return null;
+        .ios-beta-back {
+          margin-top: 18px;
+          font-size: 13px;
+          background: transparent;
+          border: none;
+          color: rgba(255,255,255,0.6);
+          cursor: pointer;
+        }
+      `}</style>
+    </div>
+  );
 }
