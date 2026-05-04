@@ -1,5 +1,10 @@
 import React from "react";
-import { GlassPanel, SectionEyebrow, HeaderTabButton, ActionButton } from "./AdminUI";
+import {
+  GlassPanel,
+  SectionEyebrow,
+  HeaderTabButton,
+  ActionButton,
+} from "./AdminUI";
 
 export default function AdminLaneTabs({
   isDesktop,
@@ -9,6 +14,27 @@ export default function AdminLaneTabs({
   setEditingId,
   onCreateNew,
 }) {
+  const handlePrepareNewsletter = () => {
+    window.alert(
+      "Newsletter preparation is not connected yet. Use the editor newsletter toggle to mark entries for sending."
+    );
+  };
+
+  const handlePreviewPublicLayout = () => {
+    if (activeTab === "news") {
+      window.open("/news", "_blank", "noopener,noreferrer");
+      return;
+    }
+
+    window.open("/blog", "_blank", "noopener,noreferrer");
+  };
+
+  const handleReviewShareReadiness = () => {
+    window.alert(
+      "Share readiness is handled inside each entry. Open an entry and check the Share to Social toggle."
+    );
+  };
+
   return (
     <section
       style={{
@@ -72,9 +98,7 @@ export default function AdminLaneTabs({
         >
           <ActionButton
             label={
-              activeTab === "news"
-                ? "Create News Post"
-                : "Create Blog Post"
+              activeTab === "news" ? "Create News Post" : "Create Blog Post"
             }
             onClick={onCreateNew}
             primary
@@ -89,9 +113,20 @@ export default function AdminLaneTabs({
               gap: "10px",
             }}
           >
-            <ActionButton label="Prepare Newsletter Send" onClick={() => {}} />
-            <ActionButton label="Preview Public Layout" onClick={() => {}} />
-            <ActionButton label="Review Share Readiness" onClick={() => {}} />
+            <ActionButton
+              label="Prepare Newsletter Send"
+              onClick={handlePrepareNewsletter}
+            />
+
+            <ActionButton
+              label="Preview Public Layout"
+              onClick={handlePreviewPublicLayout}
+            />
+
+            <ActionButton
+              label="Review Share Readiness"
+              onClick={handleReviewShareReadiness}
+            />
           </div>
         </div>
       </GlassPanel>
