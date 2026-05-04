@@ -1,6 +1,67 @@
 import React from "react";
 import { ActionButton, StatusPill } from "./AdminUI";
 
+function getTagList(tags) {
+  if (Array.isArray(tags)) {
+    return tags.filter((tag) => String(tag || "").trim());
+  }
+
+  if (typeof tags === "string") {
+    return tags
+      .split(",")
+      .map((tag) => tag.trim())
+      .filter(Boolean);
+  }
+
+  return [];
+}
+
+function MetadataPill({ children, tone = "default" }) {
+  const toneStyles = {
+    cyan: {
+      background: "rgba(103,242,255,0.10)",
+      border: "1px solid rgba(103,242,255,0.18)",
+      color: "#67F2FF",
+    },
+    purple: {
+      background: "rgba(180,134,255,0.12)",
+      border: "1px solid rgba(180,134,255,0.20)",
+      color: "#B486FF",
+    },
+    gold: {
+      background: "rgba(255,183,92,0.10)",
+      border: "1px solid rgba(255,183,92,0.18)",
+      color: "#FFB75C",
+    },
+    default: {
+      background: "rgba(255,255,255,0.04)",
+      border: "1px solid rgba(255,255,255,0.08)",
+      color: "rgba(235,239,255,0.68)",
+    },
+  };
+
+  const style = toneStyles[tone] || toneStyles.default;
+
+  return (
+    <span
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "6px 10px",
+        borderRadius: "999px",
+        fontSize: "11px",
+        fontWeight: 900,
+        letterSpacing: "0.08em",
+        textTransform: "uppercase",
+        ...style,
+      }}
+    >
+      {children}
+    </span>
+  );
+}
+
 export default function AdminEntryRow({
   entry,
   activeContentType,
@@ -8,6 +69,9 @@ export default function AdminEntryRow({
   onDelete,
   onSetFeatured,
 }) {
+  const tagList = getTagList(entry.tags);
+  const hasSeries = Boolean(String(entry.series || "").trim());
+
   return (
     <div
       style={{
@@ -35,46 +99,14 @@ export default function AdminEntryRow({
             gap: "8px",
           }}
         >
-          <span
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "6px 10px",
-              borderRadius: "999px",
-              background: "rgba(103,242,255,0.10)",
-              border: "1px solid rgba(103,242,255,0.18)",
-              color: "#67F2FF",
-              fontSize: "11px",
-              fontWeight: 900,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-            }}
-          >
-            {entry.category || "Uncategorized"}
-          </span>
+          <MetadataPill tone="cyan">
+            {entry.category || activeContentType || "Uncategorized"}
+          </MetadataPill>
 
           <StatusPill value={entry.status || "Draft"} />
 
           {entry.featured ? (
-            <span
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "6px 10px",
-                borderRadius: "999px",
-                background: "rgba(255,183,92,0.10)",
-                border: "1px solid rgba(255,183,92,0.18)",
-                color: "#FFB75C",
-                fontSize: "11px",
-                fontWeight: 900,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-              }}
-            >
-              Featured
-            </span>
+            <MetadataPill tone="gold">Featured</MetadataPill>
           ) : null}
         </div>
 
@@ -88,6 +120,16 @@ export default function AdminEntryRow({
           {activeContentType === "news" ? "News Entry" : "Blog Entry"}
         </div>
       </div>
+
+      {hasSeries ? (
+        <div
+          style={{
+            marginBottom: "10px",
+          }}
+        >
+          <MetadataPill tone="purple">{entry.series}</MetadataPill>
+        </div>
+      ) : null}
 
       <div
         style={{
@@ -111,6 +153,21 @@ export default function AdminEntryRow({
       >
         {entry.excerpt || "No excerpt added yet."}
       </div>
+
+      {tagList.length > 0 ? (
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "8px",
+            marginBottom: "14px",
+          }}
+        >
+          {tagList.map((tag) => (
+            <MetadataPill key={tag}>{tag}</MetadataPill>
+          ))}
+        </div>
+      ) : null}
 
       <div
         style={{
