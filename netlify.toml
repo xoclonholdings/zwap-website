@@ -3,9 +3,14 @@
   to = "/app/:splat"
   status = 200
 
-# ✅ DO NOT touch real files (JS, CSS, images)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
   force = false
+
+[[plugins]]
+  package = "netlify-plugin-html-validate"
+
+  [plugins.inputs]
+    disabled = true
