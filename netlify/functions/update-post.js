@@ -29,6 +29,7 @@ exports.handler = async function handler(event) {
       excerpt: data.excerpt || "",
       body: data.body || "",
       category: data.category || "news",
+      series: data.series || "",
       tags: Array.isArray(data.tags) ? data.tags : [],
       coverImageUrl: data.coverImageUrl || "",
       authorName: data.authorName || "",
