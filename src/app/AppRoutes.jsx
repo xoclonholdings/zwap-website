@@ -18,10 +18,7 @@ import HowItWorksPage from "../pages/sitemap/HowItWorksPage";
 import MailingListDatabase from "../components/MailingListDatabase";
 import EarlyAccessModal from "../components/EarlyAccessModal";
 
-import PreviewPage from "../preview/PreviewPage";
 import PreviewUnlockRedirect from "./PreviewUnlockRedirect";
-
-// ✅ NEW IMPORT
 import IOSBetaPage from "../pages/IOSBetaPage";
 
 export default function AppRoutes({
@@ -56,7 +53,6 @@ export default function AppRoutes({
     onHowItWorks: () => setActivePage("how-it-works"),
   };
 
-  // ✅ NEW ROUTE — iOS Beta (hidden page)
   if (activePage === "ios-beta") {
     return <IOSBetaPage onBack={() => setActivePage("home")} />;
   }
@@ -394,29 +390,7 @@ export default function AppRoutes({
       );
     }
 
-    return (
-      <>
-        <PreviewPage
-          onBack={() => setActivePage("home")}
-          onPrivacy={footerNav.onPrivacy}
-          onTerms={footerNav.onTerms}
-          onSitemap={footerNav.onSitemap}
-          referralCode={referralCode}
-          onSendInvite={onSendInvite}
-        />
-
-        <EarlyAccessModal
-          isOpen={isModalOpen}
-          onClose={closeEarlyAccessModal}
-          email={email}
-          setEmail={setEmail}
-          bang={bang}
-          onSubmitAccess={unlockPreview}
-          onInstantAccess={unlockPreview}
-          pendingPage={pendingPage}
-        />
-      </>
-    );
+    return <IOSBetaPage onBack={() => setActivePage("home")} />;
   }
 
   return null;
