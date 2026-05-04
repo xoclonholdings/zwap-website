@@ -42,8 +42,8 @@ export default function useAppInit({
 
     const path = window.location.pathname.replace(/\/+$/, "") || "/";
 
-    if (path === "/ios-beta") {
-      setActivePage("ios-beta");
+    if (path === "/preview" || path === "/ios-beta") {
+      setActivePage("preview");
       return;
     }
 
