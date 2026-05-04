@@ -11,6 +11,7 @@ import {
 export default function AdminEditorPanel({
   isDesktop,
   draft,
+  activeTab, // 🔥 NEW PROP (we will pass this next)
   onDraftChange,
   onSaveDraft,
   onPublish,
@@ -18,11 +19,7 @@ export default function AdminEditorPanel({
 }) {
   return (
     <GlassPanel>
-      <div
-        style={{
-          marginBottom: "14px",
-        }}
-      >
+      <div style={{ marginBottom: "14px" }}>
         <SectionEyebrow>Editor</SectionEyebrow>
 
         <div
@@ -50,15 +47,12 @@ export default function AdminEditorPanel({
       </div>
 
       {draft ? (
-        <div
-          style={{
-            display: "grid",
-            gap: "12px",
-          }}
-        >
+        <div style={{ display: "grid", gap: "12px" }}>
+
+          {/* 🔥 HARD CATEGORY (LOCKED) */}
           <AdminInput
-            value={draft.category}
-            onChange={(e) => onDraftChange("category", e.target.value)}
+            value={activeTab === "news" ? "news" : "blog"}
+            onChange={() => {}}
             placeholder="Category"
           />
 
@@ -101,6 +95,25 @@ export default function AdminEditorPanel({
             />
           </div>
 
+          {/* 🔥 NEW: TAGS + SERIES (YOUR REQUEST) */}
+          <AdminInput
+            value={draft.tags?.join(", ") || ""}
+            onChange={(e) =>
+              onDraftChange(
+                "tags",
+                e.target.value.split(",").map((t) => t.trim())
+              )
+            }
+            placeholder="Tags (comma separated)"
+          />
+
+          <AdminInput
+            value={draft.series || ""}
+            onChange={(e) => onDraftChange("series", e.target.value)}
+            placeholder="Series (optional)"
+          />
+
+          {/* 🔥 TOGGLES (UNCHANGED POSITION BUT NOW BELOW TAGS) */}
           <div
             style={{
               display: "flex",
