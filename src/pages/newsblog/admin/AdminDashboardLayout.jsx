@@ -135,6 +135,7 @@ export default function AdminDashboardLayout({
 
         <AdminEditorPanel
           isDesktop={isDesktop}
+          activeTab={activeTab}
           draft={draft}
           setDraft={setDraft}
           onDraftChange={onDraftChange}
