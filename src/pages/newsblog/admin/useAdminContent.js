@@ -85,6 +85,32 @@ function mapDraftToUpdatePayload(draft, activeTab) {
   };
 }
 
+function createBlankEntry(activeTab) {
+  return {
+    id: `local-${Date.now()}`,
+    category: activeTab,
+    title: "",
+    excerpt: "",
+    body: "",
+    readTime: "4 min read",
+    date: "",
+    status: "Draft",
+    featured: false,
+    shareToSocial: true,
+    sendNewsletter: false,
+    slug: "",
+    tags: [],
+    coverImageUrl: "",
+    authorName: "",
+    sponsorName: "",
+    createdAt: "",
+    updatedAt: "",
+    publishedAt: "",
+    deletedAt: null,
+    isLocalDraft: true,
+  };
+}
+
 export default function useAdminContent(initialContent = EMPTY_CONTENT) {
   const [isDesktop, setIsDesktop] = useState(
     typeof window !== "undefined" ? window.innerWidth >= 900 : false
@@ -157,7 +183,10 @@ export default function useAdminContent(initialContent = EMPTY_CONTENT) {
   }, [contentStore, activeTab]);
 
   const stats = useMemo(() => {
-    const allEntries = [...(contentStore.news || []), ...(contentStore.blog || [])];
+    const allEntries = [
+      ...(contentStore.news || []),
+      ...(contentStore.blog || []),
+    ];
 
     return {
       total: allEntries.length,
@@ -172,62 +201,38 @@ export default function useAdminContent(initialContent = EMPTY_CONTENT) {
     setDraft(found ? { ...found } : null);
   }, [editingId, activeEntries]);
 
-  const handleCreateNew = async () => {
-    const newEntry = {
-      id: "",
-      category: activeTab,
-      title: "",
-      excerpt: "",
-      body: "",
-      readTime: "4 min read",
-      date: "",
-      status: "Draft",
-      featured: false,
-      shareToSocial: true,
-      sendNewsletter: false,
-      slug: "",
-      tags: [],
-      coverImageUrl: "",
-      authorName: "",
-      sponsorName: "",
-      createdAt: "",
-      updatedAt: "",
-      publishedAt: "",
-      deletedAt: null,
-    };
+  const handleCreateNew = () => {
+    const newEntry = createBlankEntry(activeTab);
 
-    try {
-      const response = await fetch(ADMIN_CREATE_POST_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(mapDraftToCreatePayload(newEntry, activeTab)),
-      });
+    setContentStore((prev) => ({
+      ...prev,
+      [activeTab]: [newEntry, ...(prev[activeTab] || [])],
+    }));
 
-      if (!response.ok) {
-        throw new Error("Failed to create post.");
-      }
-
-      const result = await response.json();
-
-      const savedEntry = {
-        ...newEntry,
-        id: result.id,
-      };
-
-      setContentStore((prev) => ({
-        ...prev,
-        [activeTab]: [savedEntry, ...(prev[activeTab] || [])],
-      }));
-
-      setEditingId(savedEntry.id);
-    } catch (error) {
-      setLoadError(error.message || "Failed to create post.");
-    }
+    setEditingId(newEntry.id);
+    setDraft(newEntry);
+    setLoadError("");
   };
 
   const handleDeleteEntry = async (entryId) => {
+    const entry = activeEntries.find((item) => item.id === entryId);
+
+    if (entry?.isLocalDraft) {
+      setContentStore((prev) => ({
+        ...prev,
+        [activeTab]: (prev[activeTab] || []).filter(
+          (item) => item.id !== entryId
+        ),
+      }));
+
+      if (editingId === entryId) {
+        setEditingId(null);
+        setDraft(null);
+      }
+
+      return;
+    }
+
     try {
       const response = await fetch(`${ADMIN_DELETE_POST_URL}?id=${entryId}`, {
         method: "DELETE",
@@ -239,7 +244,9 @@ export default function useAdminContent(initialContent = EMPTY_CONTENT) {
 
       setContentStore((prev) => ({
         ...prev,
-        [activeTab]: (prev[activeTab] || []).filter((entry) => entry.id !== entryId),
+        [activeTab]: (prev[activeTab] || []).filter(
+          (item) => item.id !== entryId
+        ),
       }));
 
       if (editingId === entryId) {
@@ -260,7 +267,7 @@ export default function useAdminContent(initialContent = EMPTY_CONTENT) {
       })),
     }));
 
-    if (editingId === entryId && draft) {
+    if (editingId === entryId) {
       setDraft((prev) => (prev ? { ...prev, featured: true } : prev));
     }
   };
@@ -273,9 +280,45 @@ export default function useAdminContent(initialContent = EMPTY_CONTENT) {
   };
 
   const handleSaveDraft = async () => {
-    if (!draft || !draft.id) return;
+    if (!draft) return;
 
     try {
+      if (draft.isLocalDraft) {
+        const response = await fetch(ADMIN_CREATE_POST_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(mapDraftToCreatePayload(draft, activeTab)),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to create post.");
+        }
+
+        const result = await response.json();
+
+        const savedDraft = {
+          ...draft,
+          id: result.id,
+          isLocalDraft: false,
+        };
+
+        setDraft(savedDraft);
+        setEditingId(savedDraft.id);
+
+        setContentStore((prev) => ({
+          ...prev,
+          [activeTab]: (prev[activeTab] || []).map((entry) =>
+            entry.id === draft.id ? savedDraft : entry
+          ),
+        }));
+
+        return;
+      }
+
+      if (!draft.id) return;
+
       const response = await fetch(ADMIN_UPDATE_POST_URL, {
         method: "PUT",
         headers: {
@@ -300,7 +343,7 @@ export default function useAdminContent(initialContent = EMPTY_CONTENT) {
   };
 
   const handlePublish = async () => {
-    if (!draft || !draft.id) return;
+    if (!draft) return;
 
     const publishedDraft = {
       ...draft,
@@ -308,6 +351,42 @@ export default function useAdminContent(initialContent = EMPTY_CONTENT) {
     };
 
     try {
+      if (publishedDraft.isLocalDraft) {
+        const response = await fetch(ADMIN_CREATE_POST_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(mapDraftToCreatePayload(publishedDraft, activeTab)),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to publish post.");
+        }
+
+        const result = await response.json();
+
+        const savedPublishedDraft = {
+          ...publishedDraft,
+          id: result.id,
+          isLocalDraft: false,
+        };
+
+        setDraft(savedPublishedDraft);
+        setEditingId(savedPublishedDraft.id);
+
+        setContentStore((prev) => ({
+          ...prev,
+          [activeTab]: (prev[activeTab] || []).map((entry) =>
+            entry.id === draft.id ? savedPublishedDraft : entry
+          ),
+        }));
+
+        return;
+      }
+
+      if (!publishedDraft.id) return;
+
       const response = await fetch(ADMIN_UPDATE_POST_URL, {
         method: "PUT",
         headers: {
