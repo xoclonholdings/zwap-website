@@ -60,6 +60,7 @@ function LandingLatestUpdates({
 
             <div className="landing-latest-meta">
               <span>{post.readTime || "4 min read"}</span>
+
               {post.date ? (
                 <>
                   <span>•</span>
@@ -88,7 +89,7 @@ export default function AppHome({
   openEarlyAccessModal,
   onNews,
   onBlog,
-  onContact, // ✅ NEW PROP
+  onContact,
 }) {
   const { posts, featuredPost, isLoading, loadError } = usePublicPosts();
 
@@ -98,16 +99,23 @@ export default function AppHome({
         <section className="landing-copy">
           <div className="landing-title-wrap">
             <h1 className="landing-title-top">
-              Most apps waste your time.
+              Move. Play. Progress.
             </h1>
 
             <h2 className="landing-title-bottom">
-              <GradientZwap /> turns it into rewards.
+              <GradientZwap /> turns consistency into utility.
             </h2>
           </div>
 
           <p className="landing-sub">
-            {featuredPost?.excerpt || "It’s giving...earn smarter not harder."}
+            ZWAP! is a mobile progression app where movement,
+            games, and consistency unlock zPts, Shop utility,
+            and future ecosystem access.
+          </p>
+
+          <p className="landing-sub">
+            Built with reward caps, delayed value, and
+            controlled progression from day one.
           </p>
 
           <div className="landing-cta-group">
@@ -137,7 +145,6 @@ export default function AppHome({
                 <TikTokIcon />
               </a>
 
-              {/* ✅ FIXED */}
               <button
                 type="button"
                 onClick={onContact}
