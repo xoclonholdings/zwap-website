@@ -173,7 +173,8 @@ const appStyles = `
     background-clip: text;
   }
 
-  .landing-trust {
+  .landing-trust,
+  .landing-powered {
     width: 100%;
     margin: 26px auto 0;
     padding: 18px 16px;
@@ -189,7 +190,17 @@ const appStyles = `
     text-align: left;
   }
 
-  .landing-trust-eyebrow {
+  .landing-powered {
+    margin-top: 18px;
+    border-color: rgba(180,134,255,0.16);
+    background:
+      radial-gradient(circle at top left, rgba(255,103,212,0.08), transparent 34%),
+      radial-gradient(circle at bottom right, rgba(102,242,255,0.08), transparent 36%),
+      rgba(255,255,255,0.032);
+  }
+
+  .landing-trust-eyebrow,
+  .landing-powered-eyebrow {
     margin-bottom: 8px;
     font-size: 11px;
     font-weight: 900;
@@ -198,7 +209,12 @@ const appStyles = `
     color: rgba(103,242,255,0.70);
   }
 
-  .landing-trust-title {
+  .landing-powered-eyebrow {
+    color: rgba(255,103,212,0.72);
+  }
+
+  .landing-trust-title,
+  .landing-powered-title {
     margin: 0 0 8px;
     font-size: clamp(20px, 5.5vw, 28px);
     line-height: 1.08;
@@ -207,7 +223,8 @@ const appStyles = `
     color: #F8FAFF;
   }
 
-  .landing-trust-copy {
+  .landing-trust-copy,
+  .landing-powered-copy {
     margin: 0;
     font-size: 14px;
     line-height: 1.62;
@@ -240,6 +257,34 @@ const appStyles = `
     border-radius: 999px;
     background: linear-gradient(90deg, #66F2FF, #B486FF, #FF67D4);
     box-shadow: 0 0 12px rgba(103,242,255,0.40);
+  }
+
+  .landing-powered-grid {
+    margin-top: 14px;
+    display: grid;
+    gap: 10px;
+  }
+
+  .landing-powered-card {
+    padding: 13px 13px 12px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.032);
+  }
+
+  .landing-powered-card h3 {
+    margin: 0 0 6px;
+    font-size: 14px;
+    line-height: 1.15;
+    font-weight: 900;
+    color: #F8FAFF;
+  }
+
+  .landing-powered-card p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: rgba(235,239,255,0.68);
   }
 
   .landing-latest {
@@ -334,12 +379,14 @@ const appStyles = `
   }
 
   @media (min-width: 768px) {
-    .landing-trust {
+    .landing-trust,
+    .landing-powered {
       max-width: 680px;
       padding: 22px 20px;
     }
 
-    .landing-trust-points {
+    .landing-trust-points,
+    .landing-powered-grid {
       grid-template-columns: repeat(3, 1fr);
     }
 
