@@ -196,6 +196,49 @@ export default function AppHome({
         </ul>
       </section>
 
+      <section className="landing-powered">
+        <div className="landing-powered-eyebrow">
+          What powers ZWAP!
+        </div>
+
+        <h2 className="landing-powered-title">
+          Rewards need structure, not hype.
+        </h2>
+
+        <p className="landing-powered-copy">
+          ZWAP! is designed around multiple support layers including
+          Shop utility, sponsor-backed rewards, subscriptions,
+          partnerships, wellness campaigns, and future enterprise
+          programs.
+        </p>
+
+        <div className="landing-powered-grid">
+          <div className="landing-powered-card">
+            <h3>Shop Utility</h3>
+            <p>
+              zPts can unlock practical items, boosts, cosmetics,
+              and future reward options before Swap access.
+            </p>
+          </div>
+
+          <div className="landing-powered-card">
+            <h3>Sponsor Support</h3>
+            <p>
+              Partners can support campaigns, challenges, perks,
+              and rewards without controlling emission logic.
+            </p>
+          </div>
+
+          <div className="landing-powered-card">
+            <h3>Future Programs</h3>
+            <p>
+              Enterprise wellness, education, and partner programs
+              can expand the ecosystem without changing the core loop.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <LandingLatestUpdates
         posts={posts}
         featuredPost={featuredPost}
