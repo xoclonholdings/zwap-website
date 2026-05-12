@@ -164,6 +164,38 @@ export default function AppHome({
         </section>
       </main>
 
+      <section className="landing-trust">
+        <div className="landing-trust-eyebrow">
+          How rewards work
+        </div>
+
+        <h2 className="landing-trust-title">
+          Progress first. Utility later.
+        </h2>
+
+        <p className="landing-trust-copy">
+          ZWAP! does not issue unlimited rewards. Users earn zPts
+          through movement, play, learning, and daily activity.
+          Rewards are capped, processed through ZWAP!’s reward
+          system, and built around consistency instead of instant
+          extraction.
+        </p>
+
+        <ul className="landing-trust-points">
+          <li>
+            zPts are off-chain progression points, not instant cash.
+          </li>
+
+          <li>
+            Shop utility comes before Swap access.
+          </li>
+
+          <li>
+            Future ecosystem access unlocks through controlled progression.
+          </li>
+        </ul>
+      </section>
+
       <LandingLatestUpdates
         posts={posts}
         featuredPost={featuredPost}
