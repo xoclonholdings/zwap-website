@@ -1,5 +1,20 @@
 import React, { useEffect, useState } from "react";
 import logo from "../assets/Zwap_logo_full.png";
+import googlePlayLogo from "../assets/google_play_logo.PNG";
+
+function AppleIcon() {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M16.7 12.9c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.7-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 6.9 1.1 9 .7 1 1.6 2.2 2.8 2.1 1.1 0 1.6-.7 3-.7 1.4 0 1.8.7 3 .7 1.2 0 2-.1 2.7-1.1.8-1 1.2-2 1.2-2.1-.1 0-2.3-.9-2.3-5.1ZM14.5 6.4c.6-.7 1-1.7.9-2.6-.9 0-2 .6-2.6 1.3-.6.6-1.1 1.6-1 2.5 1 .1 2-.5 2.7-1.2Z" />
+    </svg>
+  );
+}
 
 function Star({ style }) {
   return (
@@ -28,6 +43,8 @@ export default function LandingHeader({
   onContact,
   onFAQ,
   onUpdates,
+  onGooglePlay,
+  onAppleStore,
 }) {
   const [isDesktop, setIsDesktop] = useState(
     typeof window !== "undefined" ? window.innerWidth >= 1024 : false
@@ -57,6 +74,26 @@ export default function LandingHeader({
     textAlign: "center",
     width: isDesktop ? "auto" : "100%",
     whiteSpace: "nowrap",
+  };
+
+  const storeButtonStyle = {
+    flex: 1,
+    minWidth: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "8px",
+    padding: "11px 12px",
+    borderRadius: "999px",
+    border: "1px solid rgba(174, 132, 255, 0.42)",
+    background:
+      "linear-gradient(180deg, rgba(18,20,38,0.92) 0%, rgba(10,12,26,0.98) 100%)",
+    color: "#FFFFFF",
+    cursor: "pointer",
+    fontSize: "14px",
+    fontWeight: 700,
+    boxShadow:
+      "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 20px rgba(0,0,0,0.22)",
   };
 
   const dropdownStyle = {
@@ -234,6 +271,33 @@ export default function LandingHeader({
               Preview
             </button>
           </nav>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            gap: "10px",
+            width: "100%",
+          }}
+        >
+          <button onClick={onGooglePlay} style={storeButtonStyle}>
+            <img
+              src={googlePlayLogo}
+              alt="Google Play"
+              style={{
+                width: "18px",
+                height: "18px",
+                objectFit: "contain",
+                display: "block",
+              }}
+            />
+            <span>Google Play</span>
+          </button>
+
+          <button onClick={onAppleStore} style={storeButtonStyle}>
+            <AppleIcon />
+            <span>App Store</span>
+          </button>
         </div>
       </header>
 
