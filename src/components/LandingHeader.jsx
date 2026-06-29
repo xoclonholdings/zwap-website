@@ -1,20 +1,5 @@
 import React, { useEffect, useState } from "react";
 import logo from "../assets/Zwap_logo_full.png";
-import googlePlayLogo from "../assets/google_play_logo.PNG";
-
-function AppleIcon() {
-  return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M16.7 12.9c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.7-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 6.9 1.1 9 .7 1 1.6 2.2 2.8 2.1 1.1 0 1.6-.7 3-.7 1.4 0 1.8.7 3 .7 1.2 0 2-.1 2.7-1.1.8-1 1.2-2 1.2-2.1-.1 0-2.3-.9-2.3-5.1ZM14.5 6.4c.6-.7 1-1.7.9-2.6-.9 0-2 .6-2.6 1.3-.6.6-1.1 1.6-1 2.5 1 .1 2-.5 2.7-1.2Z" />
-    </svg>
-  );
-}
 
 function Star({ style }) {
   return (
@@ -40,15 +25,14 @@ export default function LandingHeader({
   onBlog,
   onFeatures,
   onPreview,
-  onPartners,
-  onDevelopers,
-  onEnterprise,
-  onGooglePlay,
-  onAppleStore,
+  onContact,
+  onFAQ,
+  onUpdates,
 }) {
   const [isDesktop, setIsDesktop] = useState(
     typeof window !== "undefined" ? window.innerWidth >= 1024 : false
   );
+  const [openMenu, setOpenMenu] = useState(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -64,9 +48,9 @@ export default function LandingHeader({
     textDecoration: "none",
     background: "transparent",
     border: "none",
-    padding: isDesktop ? "6px 4px" : 0,
+    padding: isDesktop ? "6px 4px" : "10px 8px",
     cursor: "pointer",
-    fontSize: isDesktop ? "12px" : "12px",
+    fontSize: "12px",
     fontWeight: 800,
     letterSpacing: "0.08em",
     textTransform: "uppercase",
@@ -75,35 +59,59 @@ export default function LandingHeader({
     whiteSpace: "nowrap",
   };
 
-  const storeButtonStyle = {
-    flex: 1,
-    minWidth: 0,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "8px",
-    padding: "11px 12px",
-    borderRadius: "999px",
-    border: "1px solid rgba(174, 132, 255, 0.42)",
+  const dropdownStyle = {
+    position: isDesktop ? "absolute" : "static",
+    top: "calc(100% + 8px)",
+    right: 0,
+    zIndex: 12,
+    minWidth: isDesktop ? "170px" : "100%",
+    borderRadius: "18px",
+    border: "1px solid rgba(174,132,255,0.24)",
     background:
-      "linear-gradient(180deg, rgba(18,20,38,0.92) 0%, rgba(10,12,26,0.98) 100%)",
-    color: "#FFFFFF",
-    cursor: "pointer",
-    fontSize: "14px",
-    fontWeight: 700,
+      "linear-gradient(180deg, rgba(18,20,38,0.98) 0%, rgba(8,10,22,0.98) 100%)",
     boxShadow:
-      "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 20px rgba(0,0,0,0.22)",
+      "0 18px 36px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.06)",
+    padding: "10px",
+    display: "grid",
+    gap: "6px",
   };
 
-  const navItems = [
-    { label: "About", onClick: onAbout },
-    { label: "News", onClick: onNews },
-    { label: "Blog", onClick: onBlog },
-    { label: "Features", onClick: onFeatures },
-    { label: "Preview", onClick: onPreview },
-    { label: "Partners", onClick: onPartners },
-    { label: "Developers", onClick: onDevelopers },
-    { label: "Enterprise", onClick: onEnterprise },
+  const dropdownButtonStyle = {
+    ...linkStyle,
+    width: "100%",
+    padding: "10px 12px",
+    textAlign: isDesktop ? "left" : "center",
+    borderRadius: "12px",
+    background: "rgba(255,255,255,0.035)",
+  };
+
+  const closeMenu = () => setOpenMenu(null);
+
+  const handleClick = (callback) => {
+    closeMenu();
+    if (callback) callback();
+  };
+
+  const navGroups = [
+    {
+      label: "Explore",
+      key: "explore",
+      items: [
+        { label: "About", onClick: onAbout },
+        { label: "Features", onClick: onFeatures },
+        { label: "Contact", onClick: onContact },
+        { label: "FAQs", onClick: onFAQ },
+      ],
+    },
+    {
+      label: "Connect",
+      key: "connect",
+      items: [
+        { label: "News", onClick: onNews },
+        { label: "Blog", onClick: onBlog },
+        { label: "Updates", onClick: onUpdates },
+      ],
+    },
   ];
 
   return (
@@ -170,14 +178,14 @@ export default function LandingHeader({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "flex-end",
-                    gap: "18px",
+                    gap: "22px",
                     flexWrap: "nowrap",
                     overflow: "visible",
                   }
                 : {
                     display: "grid",
-                    gridTemplateColumns: "1fr 1fr",
-                    gap: "10px 14px",
+                    gridTemplateColumns: "1fr",
+                    gap: "10px",
                     justifyItems: "stretch",
                     alignItems: "center",
                     width: "100%",
@@ -185,39 +193,47 @@ export default function LandingHeader({
                   }
             }
           >
-            {navItems.map((item) => (
-              <button key={item.label} onClick={item.onClick} style={linkStyle}>
-                {item.label}
-              </button>
+            {navGroups.map((group) => (
+              <div
+                key={group.key}
+                onMouseEnter={() => isDesktop && setOpenMenu(group.key)}
+                onMouseLeave={() => isDesktop && setOpenMenu(null)}
+                style={{
+                  position: "relative",
+                  width: isDesktop ? "auto" : "100%",
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={() =>
+                    setOpenMenu(openMenu === group.key ? null : group.key)
+                  }
+                  style={linkStyle}
+                >
+                  {group.label}
+                </button>
+
+                {openMenu === group.key ? (
+                  <div style={dropdownStyle}>
+                    {group.items.map((item) => (
+                      <button
+                        key={item.label}
+                        type="button"
+                        onClick={() => handleClick(item.onClick)}
+                        style={dropdownButtonStyle}
+                      >
+                        {item.label}
+                      </button>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
             ))}
+
+            <button type="button" onClick={onPreview} style={linkStyle}>
+              Preview
+            </button>
           </nav>
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            gap: "10px",
-            width: "100%",
-          }}
-        >
-          <button onClick={onGooglePlay} style={storeButtonStyle}>
-            <img
-              src={googlePlayLogo}
-              alt="Google Play"
-              style={{
-                width: "18px",
-                height: "18px",
-                objectFit: "contain",
-                display: "block",
-              }}
-            />
-            <span>Google Play</span>
-          </button>
-
-          <button onClick={onAppleStore} style={storeButtonStyle}>
-            <AppleIcon />
-            <span>App Store</span>
-          </button>
         </div>
       </header>
 
