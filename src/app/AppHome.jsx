@@ -98,22 +98,12 @@ export default function AppHome({
       <main className="landing-main">
         <section className="landing-copy">
           <div className="landing-title-wrap">
-            <div
-              style={{
-                color: "rgba(245,247,255,0.72)",
-                fontSize: "clamp(13px, 3.5vw, 16px)",
-                fontWeight: 900,
-                letterSpacing: "0.12em",
-                lineHeight: 1.45,
-                marginBottom: "14px",
-                textTransform: "uppercase",
-              }}
-            >
+            <div className="landing-hero-eyebrow">
               Stay Curious. Discover More. Discover YOU.
             </div>
 
             <h1 className="landing-title-top">
-              The world&apos;s first Discovery App.
+              The world&apos;s first <strong>Discovery App.</strong>
             </h1>
 
             <h2 className="landing-title-bottom">
@@ -121,11 +111,13 @@ export default function AppHome({
               <br />
               More than productivity.
               <br />
+              More than gaming.
+              <br />
               More than rewards.
             </h2>
           </div>
 
-          <p className="landing-sub">
+          <p className="landing-sub landing-sub-anchor">
             <GradientZwap /> helps you discover yourself.
           </p>
 
