@@ -16,7 +16,7 @@ export default function EarlyAccessModal({
   if (!isOpen) return null;
 
   const tweetText = encodeURIComponent(
-    "ZWAP! is live. Move. Play. Earn Today. https://zwap.online"
+    "ZWAP! is a Discovery App. Stay Curious. Discover More. Discover You. https://zwap.online"
   );
 
   const tweetUrl = `https://x.com/intent/tweet?text=${tweetText}`;
@@ -25,12 +25,12 @@ export default function EarlyAccessModal({
     typeof window !== "undefined" ? window.innerWidth >= 900 : false;
 
   const titleText =
-    pendingPage === "preview" ? "Unlock Preview" : "Lock In Early";
+    pendingPage === "preview" ? "Enter Preview" : "Join Early";
 
   const subtitleText =
     pendingPage === "preview"
-      ? "Enter early and step into the first live preview of ZWAP."
-      : "Secure your spot before the system opens.";
+      ? "Step into the first ZWAP! preview."
+      : "Reserve your place before launch.";
 
   const handleEmailAccess = async () => {
     const cleanEmail = email.trim();
@@ -67,7 +67,7 @@ export default function EarlyAccessModal({
         localStorage.setItem("zwap_referred_by", data.referredBy);
       }
 
-      setSuccessMessage("Check your email for your referral link.");
+      setSuccessMessage("Check your email for your preview link.");
 
       if (onSubmitAccess) {
         onSubmitAccess();
@@ -211,7 +211,7 @@ export default function EarlyAccessModal({
                 color: "rgba(235,239,255,0.72)",
               }}
             >
-              Move. Play. Earn Today.
+              Stay Curious. Discover More. Discover You.
             </div>
           </div>
         </div>
@@ -254,7 +254,7 @@ export default function EarlyAccessModal({
                 lineHeight: "1.5",
               }}
             >
-              Enter your email to unlock V1 preview access
+              Enter your email to open the preview.
             </div>
 
             <input
@@ -300,7 +300,7 @@ export default function EarlyAccessModal({
                 opacity: loading ? 0.7 : 1,
               }}
             >
-              {loading ? "Sending..." : "Unlock Preview"}
+              {loading ? "Sending..." : "Enter Preview"}
             </button>
 
             {successMessage ? (
@@ -348,7 +348,7 @@ export default function EarlyAccessModal({
                 lineHeight: "1.5",
               }}
             >
-              Post on X and open the preview immediately
+              Post on X and open the preview immediately.
             </div>
 
             <div style={{ height: isDesktop ? "48px" : "0px" }} />
@@ -394,7 +394,7 @@ export default function EarlyAccessModal({
             padding: isDesktop ? "0" : "0 8px",
           }}
         >
-          Ready to move, play, and earn today?
+          Ready to start exploring?
         </div>
       </div>
     </div>
