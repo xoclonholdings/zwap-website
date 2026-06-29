@@ -95,30 +95,18 @@ export default function GlobalFooterLinks({
               Features
             </button>
 
-            <button type="button" onClick={onPartners} style={linkButtonStyle}>
-              Partners
+            <button type="button" onClick={onContact} style={linkButtonStyle}>
+              Contact
             </button>
 
-            <button
-              type="button"
-              onClick={onEnterprise}
-              style={linkButtonStyle}
-            >
-              Enterprise
-            </button>
-
-            <button
-              type="button"
-              onClick={onDevelopers}
-              style={linkButtonStyle}
-            >
-              Developers
+            <button type="button" onClick={onFAQ} style={linkButtonStyle}>
+              FAQs
             </button>
           </div>
         </div>
 
         <div>
-          <div style={sectionTitleStyle}>Content</div>
+          <div style={sectionTitleStyle}>Connect</div>
 
           <div
             style={{
@@ -140,11 +128,7 @@ export default function GlobalFooterLinks({
               onClick={onHowItWorks}
               style={linkButtonStyle}
             >
-              How It Works
-            </button>
-
-            <button type="button" onClick={onSitemap} style={linkButtonStyle}>
-              Sitemap
+              Updates
             </button>
           </div>
         </div>
@@ -159,12 +143,24 @@ export default function GlobalFooterLinks({
               gap: "8px",
             }}
           >
-            <button type="button" onClick={onContact} style={linkButtonStyle}>
-              Contact
+            <button type="button" onClick={onPartners} style={linkButtonStyle}>
+              Partners
             </button>
 
-            <button type="button" onClick={onFAQ} style={linkButtonStyle}>
-              FAQ
+            <button
+              type="button"
+              onClick={onEnterprise}
+              style={linkButtonStyle}
+            >
+              Enterprise
+            </button>
+
+            <button
+              type="button"
+              onClick={onDevelopers}
+              style={linkButtonStyle}
+            >
+              Developers
             </button>
 
             <button type="button" onClick={onPrivacy} style={linkButtonStyle}>
@@ -173,6 +169,10 @@ export default function GlobalFooterLinks({
 
             <button type="button" onClick={onTerms} style={linkButtonStyle}>
               Terms of Use
+            </button>
+
+            <button type="button" onClick={onSitemap} style={linkButtonStyle}>
+              Sitemap
             </button>
 
             <button
@@ -194,8 +194,8 @@ export default function GlobalFooterLinks({
               textAlign: "left",
             }}
           >
-            <span style={gradientZwapStyle}>ZWAP!</span> is currently in early
-            access. Features and rewards are subject to change during rollout.
+            <span style={gradientZwapStyle}>ZWAP!</span> is in early access.
+            Features and rewards may change during rollout.
           </div>
         </div>
 
@@ -218,9 +218,9 @@ export default function GlobalFooterLinks({
                 color: "rgba(236,240,255,0.68)",
               }}
             >
-              <span style={gradientZwapStyle}>ZWAP!</span> is a movement-first
-              reward ecosystem built around progression, consistency, financial
-              literacy, and delayed value.
+              <span style={gradientZwapStyle}>ZWAP!</span> is a Discovery App
+              built around curiosity, movement, play, education, sound, reward,
+              and reflection.
             </div>
 
             <div
@@ -264,7 +264,7 @@ export default function GlobalFooterLinks({
             color: "rgba(236,240,255,0.46)",
           }}
         >
-          Movement • Rewards • Education • Utility
+          Stay Curious. Discover More. Discover You.
         </div>
       </div>
     </footer>
