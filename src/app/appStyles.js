@@ -70,11 +70,25 @@ const appStyles = `
 
   .landing-title-top {
     margin: 0;
-    font-size: clamp(36px, 11.5vw, 62px);
-    line-height: 1.02;
-    font-weight: 400;
+    font-size: clamp(34px, 10.6vw, 58px);
+    line-height: 1.03;
+    font-weight: 500;
     letter-spacing: -0.04em;
     color: #F7F8FF;
+  }
+
+  .landing-title-category {
+    display: block;
+    margin-top: 8px;
+    font-size: clamp(42px, 13.4vw, 76px);
+    line-height: 0.92;
+    font-weight: 950;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #69D7FF 0%, #87A9FF 46%, #C6A3FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .landing-title-top strong {
@@ -82,9 +96,9 @@ const appStyles = `
   }
 
   .landing-title-bottom {
-    margin: 18px 0 0 0;
-    font-size: clamp(22px, 6.4vw, 36px);
-    line-height: 1.18;
+    margin: 22px 0 0 0;
+    font-size: clamp(22px, 6.2vw, 34px);
+    line-height: 1.28;
     font-weight: 500;
     letter-spacing: -0.03em;
     color: rgba(247,248,255,0.82);
@@ -108,11 +122,13 @@ const appStyles = `
   }
 
   .landing-sub-anchor {
-    font-size: clamp(20px, 5.5vw, 28px);
-    line-height: 1.18;
+    max-width: 430px;
+    font-size: clamp(24px, 7.2vw, 40px);
+    line-height: 1.12;
     font-weight: 900;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.04em;
     color: #F8FAFF;
+    font-style: normal;
   }
 
   .landing-sub + .landing-sub {
