@@ -104,7 +104,7 @@ export default function AppHome({
 
             <h1 className="landing-title-top">
               The world&apos;s first
-              <span className="landing-title-category">Discovery App</span>
+              <span className="landing-title-category">DISCOVERY APP</span>
             </h1>
 
             <h2 className="landing-title-bottom">
