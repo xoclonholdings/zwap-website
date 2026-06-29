@@ -14,6 +14,7 @@ export default function GlobalFooterLinks({
   onContact,
   onFAQ,
   onHowItWorks,
+  onUpdates,
   onDeleteAccount,
   isDesktop = false,
 }) {
@@ -54,6 +55,17 @@ export default function GlobalFooterLinks({
 
     if (typeof window !== "undefined") {
       window.location.href = "/delete-account";
+    }
+  };
+
+  const handleUpdatesClick = () => {
+    if (typeof onUpdates === "function") {
+      onUpdates();
+      return;
+    }
+
+    if (typeof onHowItWorks === "function") {
+      onHowItWorks();
     }
   };
 
@@ -125,7 +137,7 @@ export default function GlobalFooterLinks({
 
             <button
               type="button"
-              onClick={onHowItWorks}
+              onClick={handleUpdatesClick}
               style={linkButtonStyle}
             >
               Updates
