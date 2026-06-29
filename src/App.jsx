@@ -163,6 +163,7 @@ export default function App() {
           onContact={() => setActivePage("contact")}
           onFAQ={() => setActivePage("faq")}
           onHowItWorks={() => setActivePage("how-it-works")}
+          onUpdates={() => setActivePage("mailing-list")}
         />
 
         <EarlyAccessModal
