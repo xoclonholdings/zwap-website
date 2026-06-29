@@ -2,59 +2,59 @@ import { useEffect } from "react";
 
 const PAGE_META = {
   home: {
-    title: "ZWAP! | Move. Play. Earn Today.",
+    title: "ZWAP! | Discovery App",
     description:
-      "Move. Play. Earn Today. Lock in early access to the ZWAP! preview and explore a behavior-based rewards system built around progression.",
+      "ZWAP! is a Discovery App built around curiosity, movement, play, education, sound, reward, and reflection.",
   },
   about: {
-    title: "About ZWAP! | Movement-First Rewards Ecosystem",
+    title: "About ZWAP! | Discovery App",
     description:
-      "Learn what ZWAP! is, how movement, play, progression, zPts, and ZWAP fit together, and why the system is built around delayed value.",
+      "Learn what ZWAP! is, why it exists, who it is for, and how the platform helps people explore through action.",
   },
   news: {
-    title: "ZWAP! News | Platform Updates and Announcements",
+    title: "ZWAP! News | Announcements and Launch Notes",
     description:
-      "Read the latest ZWAP! platform updates, launch communication, ecosystem milestones, sponsor news, and rollout visibility.",
+      "Read ZWAP! news, announcements, launch communication, milestones, and platform updates.",
   },
   blog: {
-    title: "ZWAP! Blog | Rewards, Financial Literacy, and Movement",
+    title: "ZWAP! Blog | Discovery, Wholeness, and Progress",
     description:
-      "Explore ZWAP! blog content covering rewards, progression, movement, crypto basics, financial literacy, and platform education.",
+      "Read ZWAP! blog content on discovery, wholeness, movement, play, education, rewards, and platform building.",
   },
   features: {
-    title: "ZWAP! Features | MOVE, PLAY, SHOP, SWAP, and More",
+    title: "ZWAP! Features | Discover, Move, Play, Learn, Stream, Shop",
     description:
-      "Explore the ZWAP! feature set, including MOVE, PLAY, SHOP, SWAP, Learn, and the broader reward ecosystem.",
+      "Explore the ZWAP! experience: Discover, Move, Play, Learn, Stream, and Shop.",
   },
   partners: {
-    title: "ZWAP! Partners | Sponsors and Collaboration Opportunities",
+    title: "ZWAP! Partners | Support the ZWAP! Ecosystem",
     description:
-      "Discover how sponsors, brands, and collaborators can partner with ZWAP! across movement, rewards, campaigns, and ecosystem growth.",
+      "Learn how partners can support ZWAP! through responsible campaigns, rewards, learning, movement, and community programs.",
   },
   "enterprise-wellness": {
-    title: "ZWAP! Enterprise | Workplace Wellness and Engagement",
+    title: "ZWAP! Enterprise | Engagement Programs",
     description:
-      "Learn how ZWAP! plans to support enterprise wellness, workforce engagement, structured incentives, and measurable participation systems.",
+      "Learn how ZWAP! can support organizations through discovery, movement, learning, engagement, and responsible rewards.",
   },
   "developer-portal": {
-    title: "ZWAP! Developers | Developer Portal and V2 Expansion",
+    title: "ZWAP! Developers | Build for the ZWAP! Ecosystem",
     description:
-      "Explore the future ZWAP! Developer Portal for game submissions, integrations, reward-compatible experiences, and ecosystem expansion.",
+      "Explore future developer opportunities for games, learning tools, integrations, and discovery-compatible experiences.",
   },
   contact: {
-    title: "Contact ZWAP! | Support, Partners, Enterprise, Developers",
+    title: "Contact ZWAP! | Support and Inquiries",
     description:
-      "Contact ZWAP! for support, sponsor opportunities, enterprise wellness, developer questions, media, and business inquiries.",
+      "Contact ZWAP! for support, partners, enterprise, developers, media, and business inquiries.",
   },
   faq: {
-    title: "ZWAP! FAQ | Questions About Rewards, zPts, and ZWAP",
+    title: "ZWAP! FAQs | Questions and Answers",
     description:
-      "Get answers about ZWAP!, zPts, delayed rewards, movement, Shop, Swap, sponsors, enterprise wellness, and developers.",
+      "Get answers about ZWAP!, Discovery Apps, zPts, ZWAP, rewards, Shop, Preview, privacy, and platform access.",
   },
   "how-it-works": {
-    title: "How ZWAP! Works | Move, Progress, Unlock",
+    title: "ZWAP! Updates | Stay Connected",
     description:
-      "See how ZWAP! turns movement, play, learning, and engagement into progression, zPts, controlled ZWAP unlocks, and ecosystem utility.",
+      "Stay connected with ZWAP! updates, mailing list access, launch notes, roadmap progress, and platform communication.",
   },
   privacy: {
     title: "Privacy Policy | ZWAP!",
@@ -72,19 +72,19 @@ const PAGE_META = {
       "Browse the ZWAP! sitemap to explore platform pages, support pages, content hubs, and ecosystem sections.",
   },
   preview: {
-    title: "ZWAP! Preview | Early Access Experience",
+    title: "ZWAP! Preview | Early Access",
     description:
-      "Preview the ZWAP! experience and explore early access to a movement-first rewards ecosystem built around progression and delayed value.",
+      "Enter the ZWAP! preview and explore the platform before public launch.",
   },
   "google-play": {
     title: "ZWAP! on Google Play | Coming Soon",
     description:
-      "Stay updated on the upcoming Google Play release for ZWAP! and early access to the movement-first rewards ecosystem.",
+      "Stay updated on the upcoming Google Play release for ZWAP! and early access to the Discovery App experience.",
   },
   "apple-store": {
     title: "ZWAP! on the App Store | Coming Soon",
     description:
-      "Stay updated on the upcoming App Store release for ZWAP! and early access to the movement-first rewards ecosystem.",
+      "Stay updated on the upcoming App Store release for ZWAP! and early access to the Discovery App experience.",
   },
   admin: {
     title: "ZWAP! Admin | Content Management",
@@ -92,9 +92,9 @@ const PAGE_META = {
       "Administrative area for managing ZWAP! content, updates, announcements, and publishing workflows.",
   },
   "mailing-list": {
-    title: "ZWAP! Mailing List | Stay Updated",
+    title: "ZWAP! Updates | Mailing List",
     description:
-      "Join the ZWAP! mailing list for product updates, launch announcements, blog posts, and ecosystem news.",
+      "Join the ZWAP! mailing list for launch updates, blog posts, news, and platform communication.",
   },
 };
 
