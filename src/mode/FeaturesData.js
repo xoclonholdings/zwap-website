@@ -1,58 +1,44 @@
 export const coreModes = [
+  { id: "discover", label: "DISCOVER" },
   { id: "move", label: "MOVE" },
   { id: "play", label: "PLAY" },
-  { id: "garden", label: "GARDEN" },
-  { id: "shop", label: "SHOP" },
 ];
 
 export const systemModes = [
-  { id: "world", label: "WORLD" },
-  { id: "profile", label: "PROFILE" },
-  { id: "audio", label: "AUDIO" },
   { id: "learn", label: "LEARN" },
+  { id: "stream", label: "STREAM" },
+  { id: "shop", label: "SHOP" },
 ];
 
 export const modeContent = {
+  discover: {
+    title: "DISCOVER",
+    heroLabel: "EXPLORATION OF THE SELF",
+    description: "Explore patterns. Notice progress. See yourself more clearly.",
+  },
   move: {
     title: "MOVE",
-    heroLabel: "MOTION BECOMES VALUE",
-    description:
-      "Turn real-world movement into rewards. Build streaks. Earn daily.",
+    heroLabel: "EXPLORATION THROUGH MOVEMENT",
+    description: "Move your body. Shift your view. Let motion reveal something new.",
   },
   play: {
     title: "PLAY",
-    heroLabel: "SKILL INTO PROGRESS",
-    description: "Play games. Build momentum. Turn engagement into progression.",
-  },
-  garden: {
-    title: "GARDEN",
-    heroLabel: "PROGRESS MUST BE PROTECTED",
-    description:
-      "Grow your Garden through consistency, protect your streak, and build long-term progression.",
-  },
-  shop: {
-    title: "SHOP",
-    heroLabel: "REWARDS MADE USEFUL",
-    description: "Spend rewards on digital and real-world items.",
-  },
-  world: {
-    title: "WORLD",
-    heroLabel: "LIVE SYSTEM PRESENCE",
-    description: "See live activity. Feel presence. React in real time.",
-  },
-  profile: {
-    title: "PROFILE",
-    heroLabel: "IDENTITY IN PROGRESS",
-    description: "Your identity. Your badges. Your progression.",
-  },
-  audio: {
-    title: "AUDIO",
-    heroLabel: "LISTEN WHILE YOU MOVE",
-    description: "Soundtrack your experience. Connect and control playback.",
+    heroLabel: "EXPLORATION THROUGH PLAY",
+    description: "Try. React. Experiment. See what happens when curiosity moves.",
   },
   learn: {
     title: "LEARN",
-    heroLabel: "KNOWLEDGE THAT UNLOCKS",
-    description: "Understand the system. Unlock deeper value.",
+    heroLabel: "EXPLORATION THROUGH EDUCATION",
+    description: "Learn something new. Open a door. Build another way to see.",
+  },
+  stream: {
+    title: "STREAM",
+    heroLabel: "EXPLORATION THROUGH SOUND",
+    description: "Listen while you move. Let sound shape the moment.",
+  },
+  shop: {
+    title: "SHOP",
+    heroLabel: "EXPLORATION THROUGH REWARD",
+    description: "Turn participation into reward. Make progress feel real.",
   },
 };
