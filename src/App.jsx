@@ -135,12 +135,10 @@ export default function App() {
           onNews={() => setActivePage("news")}
           onBlog={() => setActivePage("blog")}
           onFeatures={() => setActivePage("features")}
+          onContact={() => setActivePage("contact")}
+          onFAQ={() => setActivePage("faq")}
+          onUpdates={() => setActivePage("mailing-list")}
           onPreview={handlePreviewNav}
-          onPartners={() => setActivePage("partners")}
-          onDevelopers={() => setActivePage("developer-portal")}
-          onEnterprise={() => setActivePage("enterprise-wellness")}
-          onGooglePlay={() => setActivePage("google-play")}
-          onAppleStore={() => setActivePage("apple-store")}
         />
 
         <AppHome
