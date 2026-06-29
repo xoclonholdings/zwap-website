@@ -146,6 +146,8 @@ export default function App() {
           onContact={() => setActivePage("contact")}
           onNews={() => setActivePage("news")}
           onBlog={() => setActivePage("blog")}
+          onGooglePlay={() => setActivePage("google-play")}
+          onAppleStore={() => setActivePage("apple-store")}
         />
 
         <GlobalFooterLinks
