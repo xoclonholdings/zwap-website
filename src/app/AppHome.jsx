@@ -29,16 +29,16 @@ function LandingLatestUpdates({
     <section className="landing-latest">
       <div className="landing-latest-head">
         <div className="landing-latest-eyebrow">
-          Latest from <GradientZwap />
+          Connect with <GradientZwap />
         </div>
 
         <h2 className="landing-latest-title">
-          Platform Updates & Insights
+          News, Blog, and Updates
         </h2>
 
         <p className="landing-latest-sub">
-          Follow launch notes, platform explainers, sponsor news, and ecosystem
-          updates as <GradientZwap /> moves toward public rollout.
+          Follow the build. Read the story. Stay close as <GradientZwap />
+          moves toward launch.
         </p>
       </div>
 
@@ -99,23 +99,21 @@ export default function AppHome({
         <section className="landing-copy">
           <div className="landing-title-wrap">
             <h1 className="landing-title-top">
-              Move. Play. Progress.
+              Discover More.
             </h1>
 
             <h2 className="landing-title-bottom">
-              <GradientZwap /> turns consistency into utility.
+              Discover You.
             </h2>
           </div>
 
           <p className="landing-sub">
-            ZWAP! is a mobile progression app where movement,
-            games, and consistency unlock zPts, Shop utility,
-            and future ecosystem access.
+            <GradientZwap /> is a Discovery App.
           </p>
 
           <p className="landing-sub">
-            Built with reward caps, delayed value, and
-            controlled progression from day one.
+            Move. Play. Learn. Stream. Shop. Reflect.
+            Start where you are.
           </p>
 
           <div className="landing-cta-group">
@@ -123,7 +121,7 @@ export default function AppHome({
               className="landing-cta"
               onClick={() => openEarlyAccessModal("preview")}
             >
-              Lock In. Early.
+              Start Exploring
             </button>
 
             <div className="landing-socials">
@@ -166,74 +164,87 @@ export default function AppHome({
 
       <section className="landing-trust">
         <div className="landing-trust-eyebrow">
-          How rewards work
+          What is a Discovery App?
         </div>
 
         <h2 className="landing-trust-title">
-          Progress first. Utility later.
+          A place to explore yourself.
         </h2>
 
         <p className="landing-trust-copy">
-          ZWAP! does not issue unlimited rewards. Users earn zPts
-          through movement, play, learning, and daily activity.
-          Rewards are capped, processed through ZWAP!’s reward
-          system, and built around consistency instead of instant
-          extraction.
+          Most apps push you to do more. ZWAP! gives you ways to explore.
+          Movement. Play. Education. Sound. Reward. Reflection.
         </p>
 
         <ul className="landing-trust-points">
           <li>
-            zPts are off-chain progression points, not instant cash.
+            You are not broken.
           </li>
 
           <li>
-            Shop utility comes before Swap access.
+            You do not need another blueprint.
           </li>
 
           <li>
-            Future ecosystem access unlocks through controlled progression.
+            You need space to explore what is already there.
           </li>
         </ul>
       </section>
 
       <section className="landing-powered">
         <div className="landing-powered-eyebrow">
-          What powers ZWAP!
+          Inside ZWAP!
         </div>
 
         <h2 className="landing-powered-title">
-          Rewards need structure, not hype.
+          Six paths. One journey.
         </h2>
 
         <p className="landing-powered-copy">
-          ZWAP! is designed around multiple support layers including
-          Shop utility, sponsor-backed rewards, subscriptions,
-          partnerships, wellness campaigns, and future enterprise
-          programs.
+          Each part of ZWAP! gives you another way to explore.
+          Keep it simple. Keep moving. See what shows up.
         </p>
 
         <div className="landing-powered-grid">
           <div className="landing-powered-card">
-            <h3>Shop Utility</h3>
+            <h3>Discover</h3>
             <p>
-              zPts can unlock practical items, boosts, cosmetics,
-              and future reward options before Swap access.
+              Exploration of the Self.
             </p>
           </div>
 
           <div className="landing-powered-card">
-            <h3>Sponsor Support</h3>
+            <h3>Move</h3>
             <p>
-              Partners can support campaigns, challenges, perks,
-              and rewards without controlling emission logic.
+              Exploration through Movement.
             </p>
           </div>
 
           <div className="landing-powered-card">
-            <h3>Future Programs</h3>
+            <h3>Play</h3>
             <p>
-              Enterprise wellness, education, and partner programs
-              can expand the ecosystem without changing the core loop.
+              Exploration through Play.
+            </p>
+          </div>
+
+          <div className="landing-powered-card">
+            <h3>Learn</h3>
+            <p>
+              Exploration through Education.
+            </p>
+          </div>
+
+          <div className="landing-powered-card">
+            <h3>Stream</h3>
+            <p>
+              Exploration through Sound.
+            </p>
+          </div>
+
+          <div className="landing-powered-card">
+            <h3>Shop</h3>
+            <p>
+              Exploration through Reward.
             </p>
           </div>
         </div>
