@@ -58,6 +58,16 @@ const appStyles = `
     align-items: center;
   }
 
+  .landing-hero-eyebrow {
+    margin-bottom: 14px;
+    font-size: clamp(13px, 3.5vw, 16px);
+    line-height: 1.45;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(103,242,255,0.70);
+  }
+
   .landing-title-top {
     margin: 0;
     font-size: clamp(36px, 11.5vw, 62px);
@@ -67,13 +77,17 @@ const appStyles = `
     color: #F7F8FF;
   }
 
+  .landing-title-top strong {
+    font-weight: 900;
+  }
+
   .landing-title-bottom {
-    margin: 12px 0 0 0;
-    font-size: clamp(42px, 13vw, 68px);
-    line-height: 1.02;
-    font-weight: 700;
-    letter-spacing: -0.04em;
-    color: #F7F8FF;
+    margin: 18px 0 0 0;
+    font-size: clamp(22px, 6.4vw, 36px);
+    line-height: 1.18;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    color: rgba(247,248,255,0.82);
   }
 
   .landing-title-accent {
@@ -91,6 +105,14 @@ const appStyles = `
     line-height: 1.45;
     color: rgba(235, 239, 255, 0.74);
     font-style: italic;
+  }
+
+  .landing-sub-anchor {
+    font-size: clamp(20px, 5.5vw, 28px);
+    line-height: 1.18;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    color: #F8FAFF;
   }
 
   .landing-sub + .landing-sub {
