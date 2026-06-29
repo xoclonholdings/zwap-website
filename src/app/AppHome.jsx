@@ -1,9 +1,24 @@
 import heroPhoneMockup from "../assets/hero_phone_mockup.png";
+import googlePlayLogo from "../assets/google_play_logo.PNG";
 import usePublicPosts from "../hooks/usePublicPosts";
 import { XIcon, TikTokIcon, MailIcon } from "./icons";
 
 function GradientZwap() {
   return <span className="gradient-zwap">ZWAP!</span>;
+}
+
+function AppleIcon() {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M16.7 12.9c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.7-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 6.9 1.1 9 .7 1 1.6 2.2 2.8 2.1 1.1 0 1.6-.7 3-.7 1.4 0 1.8.7 3 .7 1.2 0 2-.1 2.7-1.1.8-1 1.2-2 1.2-2.1-.1 0-2.3-.9-2.3-5.1ZM14.5 6.4c.6-.7 1-1.7.9-2.6-.9 0-2 .6-2.6 1.3-.6.6-1.1 1.6-1 2.5 1 .1 2-.5 2.7-1.2Z" />
+    </svg>
+  );
 }
 
 function LandingLatestUpdates({
@@ -90,30 +105,70 @@ export default function AppHome({
   onNews,
   onBlog,
   onContact,
+  onGooglePlay,
+  onAppleStore,
 }) {
   const { posts, featuredPost, isLoading, loadError } = usePublicPosts();
+
+  const storeButtonStyle = {
+    minWidth: "148px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "8px",
+    padding: "11px 14px",
+    borderRadius: "999px",
+    border: "1px solid rgba(174, 132, 255, 0.42)",
+    background:
+      "linear-gradient(180deg, rgba(18,20,38,0.92) 0%, rgba(10,12,26,0.98) 100%)",
+    color: "#FFFFFF",
+    cursor: "pointer",
+    fontSize: "14px",
+    fontWeight: 700,
+    boxShadow:
+      "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 20px rgba(0,0,0,0.22)",
+  };
 
   return (
     <>
       <main className="landing-main">
         <section className="landing-copy">
           <div className="landing-title-wrap">
+            <div
+              style={{
+                color: "rgba(245,247,255,0.72)",
+                fontSize: "clamp(13px, 3.5vw, 16px)",
+                fontWeight: 900,
+                letterSpacing: "0.12em",
+                lineHeight: 1.45,
+                marginBottom: "14px",
+                textTransform: "uppercase",
+              }}
+            >
+              Stay Curious. Discover More. Discover YOU.
+            </div>
+
             <h1 className="landing-title-top">
-              Discover More.
+              The world&apos;s first Discovery App.
             </h1>
 
             <h2 className="landing-title-bottom">
-              Discover You.
+              More than fitness.
+              <br />
+              More than productivity.
+              <br />
+              More than rewards.
             </h2>
           </div>
 
           <p className="landing-sub">
-            <GradientZwap /> is a Discovery App.
+            <GradientZwap /> helps you discover yourself.
           </p>
 
           <p className="landing-sub">
-            Move. Play. Learn. Stream. Shop. Reflect.
-            Start where you are.
+            Because sometimes the answers you&apos;re looking for...
+            <br />
+            ...have been within you all along.
           </p>
 
           <div className="landing-cta-group">
@@ -123,6 +178,34 @@ export default function AppHome({
             >
               Start Exploring
             </button>
+
+            <div
+              style={{
+                display: "flex",
+                gap: "10px",
+                flexWrap: "wrap",
+                width: "100%",
+              }}
+            >
+              <button type="button" onClick={onAppleStore} style={storeButtonStyle}>
+                <AppleIcon />
+                <span>App Store</span>
+              </button>
+
+              <button type="button" onClick={onGooglePlay} style={storeButtonStyle}>
+                <img
+                  src={googlePlayLogo}
+                  alt="Google Play"
+                  style={{
+                    width: "18px",
+                    height: "18px",
+                    objectFit: "contain",
+                    display: "block",
+                  }}
+                />
+                <span>Google Play</span>
+              </button>
+            </div>
 
             <div className="landing-socials">
               <a
@@ -164,31 +247,23 @@ export default function AppHome({
 
       <section className="landing-trust">
         <div className="landing-trust-eyebrow">
-          What is a Discovery App?
+          Most apps take.
         </div>
 
         <h2 className="landing-trust-title">
-          A place to explore yourself.
+          <GradientZwap /> gives back.
         </h2>
 
         <p className="landing-trust-copy">
-          Most apps push you to do more. ZWAP! gives you ways to explore.
-          Movement. Play. Education. Sound. Reward. Reflection.
+          Explore not only the world around you, but the person experiencing it.
+          <br />
+          <GradientZwap /> is your mirror.
         </p>
 
-        <ul className="landing-trust-points">
-          <li>
-            You are not broken.
-          </li>
-
-          <li>
-            You do not need another blueprint.
-          </li>
-
-          <li>
-            You need space to explore what is already there.
-          </li>
-        </ul>
+        <p className="landing-trust-copy">
+          Through movement, play, education, and more, <GradientZwap /> keeps
+          the score and reveals you to YOU.
+        </p>
       </section>
 
       <section className="landing-powered">
