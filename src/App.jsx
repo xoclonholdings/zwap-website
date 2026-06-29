@@ -138,6 +138,8 @@ export default function App() {
           onContact={() => setActivePage("contact")}
           onFAQ={() => setActivePage("faq")}
           onUpdates={() => setActivePage("mailing-list")}
+          onGooglePlay={() => setActivePage("google-play")}
+          onAppleStore={() => setActivePage("apple-store")}
           onPreview={handlePreviewNav}
         />
 
@@ -146,8 +148,6 @@ export default function App() {
           onContact={() => setActivePage("contact")}
           onNews={() => setActivePage("news")}
           onBlog={() => setActivePage("blog")}
-          onGooglePlay={() => setActivePage("google-play")}
-          onAppleStore={() => setActivePage("apple-store")}
         />
 
         <GlobalFooterLinks
