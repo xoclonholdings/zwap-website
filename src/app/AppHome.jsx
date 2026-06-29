@@ -103,28 +103,29 @@ export default function AppHome({
             </div>
 
             <h1 className="landing-title-top">
-              The world&apos;s first <strong>Discovery App.</strong>
+              The world&apos;s first
+              <span className="landing-title-category">Discovery App</span>
             </h1>
 
             <h2 className="landing-title-bottom">
               More than fitness.
               <br />
-              More than productivity.
-              <br />
               More than gaming.
+              <br />
+              More than shopping.
               <br />
               More than rewards.
             </h2>
           </div>
 
           <p className="landing-sub landing-sub-anchor">
-            <GradientZwap /> helps you discover yourself.
+            <GradientZwap /> helps you rediscover yourself.
           </p>
 
           <p className="landing-sub">
-            Because sometimes the answers you&apos;re looking for...
+            Because the only person you need to become...
             <br />
-            ...have been within you all along.
+            ...is yourself.
           </p>
 
           <div className="landing-cta-group">
@@ -175,11 +176,7 @@ export default function AppHome({
 
       <section className="landing-trust">
         <div className="landing-trust-eyebrow">
-          Most apps take.
-        </div>
-
-        <div className="landing-trust-eyebrow">
-          Most apps distract.
+          Most apps take. Most apps distract.
         </div>
 
         <h2 className="landing-trust-title">
