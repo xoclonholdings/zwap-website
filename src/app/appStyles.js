@@ -221,6 +221,10 @@ const appStyles = `
     color: #F8FAFF;
   }
 
+  .landing-trust-title-spaced {
+    margin-top: 16px;
+  }
+
   .landing-trust-copy,
   .landing-powered-copy {
     margin: 0;
