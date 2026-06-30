@@ -26,7 +26,7 @@ const appStyles = `
     max-width: 100%;
     min-height: 100dvh;
     padding:
-      calc(env(safe-area-inset-top, 0px) + 10px)
+      calc(env(safe-area-inset-top, 0px) + 8px)
       16px
       calc(env(safe-area-inset-bottom, 0px) + 24px);
     display: flex;
@@ -44,7 +44,7 @@ const appStyles = `
       linear-gradient(180deg, rgba(255,255,255,0.018) 1px, transparent 1px);
     background-size: 72px 72px;
     mask-image: linear-gradient(180deg, rgba(0,0,0,0.6), transparent 62%);
-    opacity: 0.28;
+    opacity: 0.22;
   }
 
   .landing-main {
@@ -52,8 +52,8 @@ const appStyles = `
     display: grid;
     grid-template-columns: 1fr;
     align-items: center;
-    gap: 24px;
-    padding-top: 20px;
+    gap: 20px;
+    padding-top: 8px;
   }
 
   .landing-copy {
@@ -72,9 +72,9 @@ const appStyles = `
   }
 
   .landing-hero-eyebrow {
-    margin-bottom: 22px;
+    margin-bottom: 20px;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-    font-size: clamp(12px, 3.25vw, 14px);
+    font-size: clamp(11px, 3.05vw, 14px);
     line-height: 1.45;
     font-weight: 800;
     letter-spacing: 0.18em;
@@ -91,24 +91,24 @@ const appStyles = `
 
   .landing-title-kicker {
     display: block;
-    font-family: "Helvetica Neue", Inter, ui-sans-serif, system-ui, sans-serif;
-    font-size: clamp(35px, 10.4vw, 56px);
+    font-family: "Avenir Next", "Helvetica Neue", Inter, ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(34px, 9.8vw, 56px);
     line-height: 0.98;
-    font-weight: 650;
-    letter-spacing: -0.065em;
+    font-weight: 700;
+    letter-spacing: -0.064em;
   }
 
   .landing-title-category {
     display: block;
     margin: 9px auto 0;
     width: 100%;
-    max-width: 680px;
+    max-width: 690px;
     white-space: nowrap;
-    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", "Helvetica Neue Condensed Black", sans-serif;
-    font-size: clamp(45px, 12.6vw, 92px);
-    line-height: 0.88;
+    font-family: "Avenir Next Condensed", "HelveticaNeue-CondensedBlack", "Arial Narrow", "Helvetica Neue", Inter, sans-serif;
+    font-size: clamp(42px, 11.3vw, 86px);
+    line-height: 0.9;
     font-weight: 900;
-    letter-spacing: -0.035em;
+    letter-spacing: -0.03em;
     text-transform: uppercase;
     background: linear-gradient(92deg, #FFD36E 0%, #FFC4A4 31%, #EFA2D4 61%, #B7B7FF 100%);
     -webkit-background-clip: text;
@@ -121,44 +121,44 @@ const appStyles = `
   }
 
   .landing-feature-list {
-    width: min(100%, 356px);
-    margin: 34px auto 0;
+    width: min(100%, 344px);
+    margin: 30px auto 0;
     display: grid;
-    gap: 20px;
+    gap: 18px;
     text-align: left;
   }
 
   .landing-feature-item {
     display: grid;
-    grid-template-columns: 48px 1fr;
+    grid-template-columns: 42px 1fr;
     align-items: center;
-    gap: 20px;
-    font-family: "Helvetica Neue", Inter, ui-sans-serif, system-ui, sans-serif;
-    font-size: clamp(19px, 5.2vw, 25px);
+    gap: 19px;
+    font-family: "Avenir Next", "Helvetica Neue", Inter, ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(18px, 4.9vw, 24px);
     line-height: 1.08;
-    font-weight: 520;
+    font-weight: 600;
     letter-spacing: -0.045em;
-    color: rgba(247,248,255,0.76);
+    color: rgba(247,248,255,0.72);
   }
 
   .landing-feature-icon {
-    width: 48px;
-    height: 42px;
+    width: 42px;
+    height: 38px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: rgba(103,242,255,0.94);
+    color: rgba(103,242,255,0.92);
   }
 
   .landing-feature-icon svg {
-    width: 42px;
-    height: 42px;
+    width: 38px;
+    height: 38px;
     fill: none;
     stroke: currentColor;
-    stroke-width: 2.6;
+    stroke-width: 2.35;
     stroke-linecap: round;
     stroke-linejoin: round;
-    filter: drop-shadow(0 0 9px rgba(103,242,255,0.34));
+    filter: drop-shadow(0 0 8px rgba(103,242,255,0.30));
   }
 
   .landing-title-accent {
@@ -181,12 +181,12 @@ const appStyles = `
 
   .landing-sub-anchor {
     max-width: 430px;
-    margin-top: 38px;
-    font-family: "Helvetica Neue", Inter, ui-sans-serif, system-ui, sans-serif;
-    font-size: clamp(28px, 7.8vw, 43px);
-    line-height: 1.02;
-    font-weight: 880;
-    letter-spacing: -0.062em;
+    margin-top: 34px;
+    font-family: "Avenir Next", "Helvetica Neue", Inter, ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(27px, 7.4vw, 42px);
+    line-height: 1.04;
+    font-weight: 850;
+    letter-spacing: -0.058em;
     color: #F8FAFF;
     font-style: normal;
   }
@@ -320,7 +320,7 @@ const appStyles = `
   .landing-trust-title,
   .landing-powered-title {
     margin: 0 0 10px;
-    font-family: "Helvetica Neue", Inter, ui-sans-serif, system-ui, sans-serif;
+    font-family: "Avenir Next", "Helvetica Neue", Inter, ui-sans-serif, system-ui, sans-serif;
     font-size: clamp(22px, 6vw, 30px);
     line-height: 1.02;
     font-weight: 900;
@@ -423,7 +423,7 @@ const appStyles = `
   }
 
   .landing-latest-title {
-    font-family: "Helvetica Neue", Inter, ui-sans-serif, system-ui, sans-serif;
+    font-family: "Avenir Next", "Helvetica Neue", Inter, ui-sans-serif, system-ui, sans-serif;
     font-size: clamp(22px, 6vw, 32px);
     font-weight: 900;
     letter-spacing: -0.05em;
