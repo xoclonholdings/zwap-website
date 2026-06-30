@@ -121,18 +121,19 @@ const appStyles = `
   }
 
   .landing-feature-list {
-    width: min(100%, 344px);
-    margin: 30px auto 0;
+    width: min(100%, 324px);
+    margin: 38px auto 0;
     display: grid;
     gap: 18px;
     text-align: left;
+    transform: translateX(22px);
   }
 
   .landing-feature-item {
     display: grid;
-    grid-template-columns: 42px 1fr;
+    grid-template-columns: 38px 1fr;
     align-items: center;
-    gap: 19px;
+    gap: 15px;
     font-family: "Avenir Next", "Helvetica Neue", Inter, ui-sans-serif, system-ui, sans-serif;
     font-size: clamp(18px, 4.9vw, 24px);
     line-height: 1.08;
@@ -142,7 +143,7 @@ const appStyles = `
   }
 
   .landing-feature-icon {
-    width: 42px;
+    width: 38px;
     height: 38px;
     display: inline-flex;
     align-items: center;
@@ -151,8 +152,8 @@ const appStyles = `
   }
 
   .landing-feature-icon svg {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     fill: none;
     stroke: currentColor;
     stroke-width: 2.35;
@@ -488,6 +489,13 @@ const appStyles = `
     padding: 10px 16px;
     font-weight: 800;
     cursor: pointer;
+  }
+
+  @media (max-width: 380px) {
+    .landing-feature-list {
+      width: min(100%, 310px);
+      transform: translateX(12px);
+    }
   }
 
   @media (min-width: 768px) {
