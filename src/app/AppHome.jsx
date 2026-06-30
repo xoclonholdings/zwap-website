@@ -93,6 +93,13 @@ export default function AppHome({
 }) {
   const { posts, featuredPost, isLoading, loadError } = usePublicPosts();
 
+  const featureItems = [
+    { icon: "👟", label: "More than fitness." },
+    { icon: "🎮", label: "More than gaming." },
+    { icon: "🛍️", label: "More than shopping." },
+    { icon: "🎁", label: "More than rewards." },
+  ];
+
   return (
     <>
       <main className="landing-main">
@@ -107,15 +114,16 @@ export default function AppHome({
               <span className="landing-title-category">DISCOVERY APP</span>
             </h1>
 
-            <h2 className="landing-title-bottom">
-              More than fitness.
-              <br />
-              More than gaming.
-              <br />
-              More than shopping.
-              <br />
-              More than rewards.
-            </h2>
+            <div className="landing-feature-list" aria-label="ZWAP! is more than these categories">
+              {featureItems.map((item) => (
+                <div className="landing-feature-item" key={item.label}>
+                  <span className="landing-feature-icon" aria-hidden="true">
+                    {item.icon}
+                  </span>
+                  <span>{item.label}</span>
+                </div>
+              ))}
+            </div>
           </div>
 
           <p className="landing-sub landing-sub-anchor">
