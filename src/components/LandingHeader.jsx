@@ -22,9 +22,9 @@ function Star({ style }) {
       style={{
         position: "absolute",
         color: "#F8F9FF",
-        fontSize: "11px",
+        fontSize: "10px",
         lineHeight: 1,
-        textShadow: "0 0 10px rgba(255,255,255,0.92)",
+        textShadow: "0 0 10px rgba(255,255,255,0.86)",
         animation: "twinkle 3s ease-in-out infinite",
         ...style,
       }}
@@ -61,19 +61,22 @@ export default function LandingHeader({
   }, []);
 
   const linkStyle = {
-    color: "#F5F7FF",
+    color: "rgba(245,247,255,0.88)",
     textDecoration: "none",
     background: "transparent",
     border: "none",
-    padding: isDesktop ? "6px 4px" : "10px 8px",
+    padding: isDesktop ? "8px 4px" : "8px 6px",
     cursor: "pointer",
-    fontSize: "12px",
-    fontWeight: 800,
-    letterSpacing: "0.08em",
+    fontFamily:
+      "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace",
+    fontSize: isDesktop ? "11px" : "13px",
+    fontWeight: 900,
+    letterSpacing: isDesktop ? "0.16em" : "0.18em",
     textTransform: "uppercase",
     textAlign: "center",
     width: isDesktop ? "auto" : "100%",
     whiteSpace: "nowrap",
+    textShadow: "0 0 16px rgba(255,255,255,0.08)",
   };
 
   const storeButtonStyle = {
@@ -82,18 +85,19 @@ export default function LandingHeader({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    gap: "8px",
-    padding: "11px 12px",
+    gap: "9px",
+    padding: isDesktop ? "12px 18px" : "12px 13px",
     borderRadius: "999px",
-    border: "1px solid rgba(174, 132, 255, 0.42)",
+    border: "1px solid rgba(174, 132, 255, 0.46)",
     background:
-      "linear-gradient(180deg, rgba(18,20,38,0.92) 0%, rgba(10,12,26,0.98) 100%)",
+      "linear-gradient(180deg, rgba(20,22,39,0.90) 0%, rgba(8,10,22,0.98) 100%)",
     color: "#FFFFFF",
     cursor: "pointer",
-    fontSize: "14px",
-    fontWeight: 700,
+    fontFamily: "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    fontSize: isDesktop ? "14px" : "15px",
+    fontWeight: 800,
     boxShadow:
-      "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 20px rgba(0,0,0,0.22)",
+      "inset 0 1px 0 rgba(255,255,255,0.09), 0 10px 24px rgba(0,0,0,0.26), 0 0 22px rgba(126,78,255,0.10)",
   };
 
   const dropdownStyle = {
@@ -157,26 +161,27 @@ export default function LandingHeader({
         style={{
           display: "flex",
           flexDirection: "column",
-          gap: "14px",
-          padding: "14px 0 10px",
+          gap: isDesktop ? "18px" : "16px",
+          padding: isDesktop ? "18px 0 14px" : "10px 0 12px",
           position: "relative",
           zIndex: 3,
         }}
       >
         <div
           style={{
-            display: "flex",
-            alignItems: isDesktop ? "center" : "flex-start",
-            justifyContent: "space-between",
-            gap: isDesktop ? "32px" : "12px",
+            display: "grid",
+            gridTemplateColumns: isDesktop ? "auto 1fr" : "118px 1fr",
+            alignItems: "start",
+            gap: isDesktop ? "36px" : "16px",
             width: "100%",
           }}
         >
           <div
             style={{
               position: "relative",
-              width: isDesktop ? "118px" : "96px",
+              width: isDesktop ? "124px" : "112px",
               flexShrink: 0,
+              marginTop: isDesktop ? "0" : "2px",
             }}
           >
             <img
@@ -186,21 +191,22 @@ export default function LandingHeader({
                 width: "100%",
                 height: "auto",
                 display: "block",
+                filter: "drop-shadow(0 0 16px rgba(103,242,255,0.10))",
               }}
             />
 
-            <Star style={{ top: "-4px", left: "8px" }} />
+            <Star style={{ top: "-6px", left: "6px" }} />
             <Star
               style={{
-                top: "10px",
+                top: "11px",
                 right: "4px",
                 animationDelay: "0.8s",
               }}
             />
             <Star
               style={{
-                bottom: "8px",
-                right: "-2px",
+                bottom: "5px",
+                right: "-4px",
                 animationDelay: "1.4s",
               }}
             />
@@ -210,23 +216,22 @@ export default function LandingHeader({
             style={
               isDesktop
                 ? {
-                    flex: 1,
                     minWidth: 0,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "flex-end",
-                    gap: "22px",
+                    gap: "28px",
                     flexWrap: "nowrap",
                     overflow: "visible",
                   }
                 : {
                     display: "grid",
                     gridTemplateColumns: "1fr",
-                    gap: "10px",
-                    justifyItems: "stretch",
+                    gap: "16px",
+                    justifyItems: "center",
                     alignItems: "center",
                     width: "100%",
-                    maxWidth: "300px",
+                    paddingTop: "8px",
                   }
             }
           >
@@ -276,8 +281,9 @@ export default function LandingHeader({
         <div
           style={{
             display: "flex",
-            gap: "10px",
+            gap: "18px",
             width: "100%",
+            marginTop: isDesktop ? "2px" : "6px",
           }}
         >
           <button onClick={onGooglePlay} style={storeButtonStyle}>
@@ -305,12 +311,12 @@ export default function LandingHeader({
         style={{
           height: "2px",
           width: "100%",
-          marginBottom: "12px",
+          marginBottom: "16px",
           background:
-            "linear-gradient(90deg, rgba(222,78,255,0.35) 0%, rgba(255,183,92,0.42) 45%, rgba(90,241,255,0.4) 100%)",
+            "linear-gradient(90deg, rgba(222,78,255,0.50) 0%, rgba(255,183,92,0.40) 45%, rgba(90,241,255,0.52) 100%)",
           boxShadow:
-            "0 0 14px rgba(212,82,255,0.12), 0 0 10px rgba(92,240,255,0.08)",
-          opacity: 0.72,
+            "0 0 14px rgba(212,82,255,0.16), 0 0 12px rgba(92,240,255,0.12)",
+          opacity: 0.84,
         }}
       />
     </>
