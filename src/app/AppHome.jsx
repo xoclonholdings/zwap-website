@@ -154,6 +154,10 @@ export default function AppHome({
             <div
               className="landing-feature-list"
               aria-label="ZWAP! is more than these categories"
+              style={{
+                width: "min(100%, 336px)",
+                transform: "translateX(44px)",
+              }}
             >
               {featureItems.map((item) => (
                 <div className="landing-feature-item" key={item.label}>
